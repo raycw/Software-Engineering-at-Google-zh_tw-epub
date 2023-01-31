@@ -31,31 +31,31 @@ When engineers do not focus on users of different nationalities, ethnicities, ra
 
 當工程師不關注不同國籍、民族、種族、性別、年齡、社會經濟地位、能力和信仰體系的使用者時，即使是最優秀的工程師也會在不經意間讓使用者失望。這種失敗往往是無意的；所有的人都存在一定的偏見，社會科學家在過去幾十年中已經認識到，大多數人都表現出無意識的偏見，強迫和傳播存在的刻板印象。無意識的偏見是隱藏的，往往比有意的排斥行為更難改正。即使我們想做正確的事，我們也可能意識不到自己的偏見。同樣，我們的組織也必須認識到這種偏見的存在，並努力在員工隊伍、產品開發和使用者推廣中解決這一問題。
 
-Because of bias, Google has at times failed to represent users equitably within their products, with launches over the past several years that did not focus enough on underrepresented groups. Many users attribute our lack of awareness in these cases to the fact that our engineering population is mostly male, mostly White or Asian, and certainly not representative of all the communities that use our products. The lack of representation of such users in our workforce[^1] means that we often do not have the requisite diversity to understand how the use of our products can affect underrepresented or vulnerable users.
+Because of bias, Google has at times failed to represent users equitably within their products, with launches over the past several years that did not focus enough on underrepresented groups. Many users attribute our lack of awareness in these cases to the fact that our engineering population is mostly male, mostly White or Asian, and certainly not representative of all the communities that use our products. The lack of representation of such users in our workforce[^e1] means that we often do not have the requisite diversity to understand how the use of our products can affect underrepresented or vulnerable users.
 
-由於偏見，谷歌有時未能在其產品中公平地代表使用者，在過去幾年中推出的產品沒有足夠關注代表性不足的群體。許多使用者將我們在這些情況下缺乏意識歸咎於這樣一個事實，即我們的工程人員大多數是男性，大多數是白人或亞洲人，當然不能代表所有使用我們產品的人群。這類使用者在我們的員工隊伍中缺乏代表性，這意味著我們往往不具備必要的多樣性，無法理解使用我們的產品會如何影響代表性不足或弱勢的使用者。
+由於偏見，谷歌有時未能在其產品中公平地代表使用者，在過去幾年中推出的產品沒有足夠關注代表性不足的群體。許多使用者將我們在這些情況下缺乏意識歸咎於這樣一個事實，即我們的工程人員大多數是男性，大多數是白人或亞洲人，當然不能代表所有使用我們產品的人群。這類使用者在我們的員工隊伍中缺乏代表性，[^c1]這意味著我們往往不具備必要的多樣性，無法理解使用我們的產品會如何影響代表性不足或弱勢的使用者。
 
 ------
 
 #### Case Study: Google Misses the Mark on Racial Inclusion  案例研究：谷歌在種族包容方面的失誤
 
-In 2015, software engineer Jacky Alciné pointed out[^2] that the image recognition algorithms in Google Photos were classifying his black friends as “gorillas.” Google was slow to respond to these mistakes and incomplete in addressing them.
+In 2015, software engineer Jacky Alciné pointed out[^e2] that the image recognition algorithms in Google Photos were classifying his black friends as “gorillas.” Google was slow to respond to these mistakes and incomplete in addressing them.
 
-2015年，軟體工程師Jacky Alciné指出，谷歌照片中的影象識別演算法將他的黑人朋友歸為 "大猩猩"。谷歌對這些錯誤的反應很慢，解決起來也不徹底。
+2015年，軟體工程師Jacky Alciné指出，[^c2]谷歌照片中的影象識別演算法將他的黑人朋友歸為 "大猩猩"。谷歌對這些錯誤的反應很慢，解決起來也不徹底。
 
 What caused such a monumental failure? Several things:
 - Image recognition algorithms depend on being supplied a “proper” (often meaning “complete”) dataset. The photo data fed into Google’s image recognition algorithm was clearly incomplete. In short, the data did not represent the population.
-- Google itself (and the tech industry in general) did not (and does not) have much black representation,[^3] and that affects decisions subjective in the design of such algorithms and the collection of such datasets. The unconscious bias of the organization itself likely led to a more representative product being left on the table.
+- Google itself (and the tech industry in general) did not (and does not) have much black representation,[^e3] and that affects decisions subjective in the design of such algorithms and the collection of such datasets. The unconscious bias of the organization itself likely led to a more representative product being left on the table.
 - Google’s target market for image recognition did not adequately include such underrepresented groups. Google’s tests did not catch these mistakes; as a result, our users did, which both embarrassed Google and harmed our users.
 
 是什麼導致了這樣一個巨大的失誤？有幾件事：
 - 影象識別演算法取決於是否提供了一個 "適當的"（通常意味著 "完整的"）資料集。送入谷歌影象識別演算法的照片資料顯然是不完整的。簡而言之，這些資料並不代表所有人口。
-- 谷歌本身（以及整個科技行業）過去沒有（現在也沒有）很多黑人代表，這影響了設計這種演算法和收集這種資料集的主觀決定。組織本身無意識的偏見很可能導致更具代表性的產品被擱置。
+- 谷歌本身（以及整個科技行業）過去沒有（現在也沒有）很多黑人代表，[^c3]這影響了設計這種演算法和收集這種資料集的主觀決定。組織本身無意識的偏見很可能導致更具代表性的產品被擱置。
 - 谷歌的影象識別目標市場並沒有充分包括這種代表性不足的群體。谷歌的測試沒有發現這些錯誤；結果是我們的使用者發現了，這既讓谷歌感到尷尬，也傷害了我們的使用者。
 
-As late as 2018, Google still had not adequately addressed the underlying problem.[^4]
+As late as 2018, Google still had not adequately addressed the underlying problem.[^e4]
 
-直到2018年，谷歌仍然沒有徹底地解決這些潛在的問題。
+直到2018年，谷歌仍然沒有徹底地解決這些潛在的問題。[^c4]
 
 ------
 
@@ -71,17 +71,17 @@ How could this happen? After all, Google hires technologists with impeccable edu
 
 這怎麼會發生呢？畢竟，谷歌僱用的技術專家擁有無可挑剔的教育和/或專業經驗——卓越的程式設計師，他們編寫最好的程式碼並測試他們的功能。"為每個人而建 "是谷歌的品牌宣言，但事實是，在宣稱我們做到這一點之前，我們仍有很長的路要走。解決這些問題的方法之一是幫助軟體工程組織本身變得像我們為其建造產品的人群。
 
-> [^1]:    Google’s 2019 Diversity Report.
-> 1 谷歌的2019年多樣性報告。
+> [^e1]: Google’s 2019 Diversity Report.
+> [^c1]: 谷歌的2019年多樣性報告。
 >
-> [^2]:    @jackyalcine. 2015. “Google Photos, Y’all Fucked up. My Friend’s Not a Gorilla.” Twitter, June 29, 2015.https://twitter.com/jackyalcine/status/615329515909156865.
-> 2 @jackyalcine. 2015. "谷歌照片，你們都搞砸了。我的朋友不是大猩猩"。Twitter，2015年6月29日。https://twitter.com/jackyalcine/status/615329515909156865
+> [^e2]: @jackyalcine. 2015. “Google Photos, Y’all Fucked up. My Friend’s Not a Gorilla.” Twitter, June 29, 2015.https://twitter.com/jackyalcine/status/615329515909156865.
+> [^c2]: @jackyalcine. 2015. "谷歌照片，你們都搞砸了。我的朋友不是大猩猩"。Twitter，2015年6月29日。https://twitter.com/jackyalcine/status/615329515909156865
 >
-> [^3]:    Many reports in 2018–2019 pointed to a lack of diversity across tech. Some notables include the National Center for Women & Information Technology, and Diversity in Tech./
-> 3  2018-2019年的許多報告指出，整個科技界缺乏多樣性。一些著名的報告包括國家婦女和資訊科技中心，以及科技領域的多樣性。
+> [^e3]: Many reports in 2018–2019 pointed to a lack of diversity across tech. Some notables include the National Center for Women & Information Technology, and Diversity in Tech./
+> [^c3]: 2018-2019年的許多報告指出，整個科技界缺乏多樣性。一些著名的報告包括國家婦女和資訊科技中心，以及科技領域的多樣性。
 >
-> [^4]:    Tom Simonite, “When It Comes to Gorillas, Google Photos Remains Blind,” Wired, January 11, 2018.
-> 4    Tom Simonite，"當涉及到大猩猩時，谷歌照片仍然是盲目的，"《連線》，2018年1月11日。
+> [^e4]: Tom Simonite, “When It Comes to Gorillas, Google Photos Remains Blind,” Wired, January 11, 2018.
+> [^c4]: Tom Simonite，"當涉及到大猩猩時，谷歌照片仍然是盲目的，"《連線》，2018年1月11日。
 
 ## Understanding the Need for Diversity 瞭解多樣性的必要性
 
@@ -123,18 +123,17 @@ Currently, AI-driven facial-recognition software continues to disadvantage peopl
 
 目前，人工智慧驅動的面部識別軟體仍然對有色人種或少數族裔不利。我們的研究還不夠全面，沒有包括足夠多的膚色。如果訓練資料和建立軟體的人都只代表一小部分人，我們就不能指望輸出是有效的。在這種情況下，我們應該願意推遲開發，以獲得更完整、更準確的資料，以及更全面、更包容的產品。
 
-Data science itself is challenging for humans to evaluate, however. Even when we do have representation, a training set can still be biased and produce invalid results. A study completed in 2016 found that more than 117 million American adults are in a law enforcement facial recognition database.[^5] Due to the disproportionate policing of Black communities and disparate outcomes in arrests, there could be racially biased error rates in utilizing such a database in facial recognition. Although the software is being developed and deployed at ever-increasing rates, the independent testing is not. To correct for this egregious misstep, we need to have the integrity to slow down and ensure that our inputs contain as little bias as possible. Google now offers statistical training within the context of AI to help ensure that datasets are not intrinsically biased.
+Data science itself is challenging for humans to evaluate, however. Even when we do have representation, a training set can still be biased and produce invalid results. A study completed in 2016 found that more than 117 million American adults are in a law enforcement facial recognition database.[^e5] Due to the disproportionate policing of Black communities and disparate outcomes in arrests, there could be racially biased error rates in utilizing such a database in facial recognition. Although the software is being developed and deployed at ever-increasing rates, the independent testing is not. To correct for this egregious misstep, we need to have the integrity to slow down and ensure that our inputs contain as little bias as possible. Google now offers statistical training within the context of AI to help ensure that datasets are not intrinsically biased.
 
-然而，資料科學本身對人類別的評估是具有挑戰性的。即使我們有表示，訓練集仍然可能有偏見，產生無效的結果。2016年完成的一項研究發現，執法部門的面部識別資料庫中有1.17億以上的美國成年人。由於黑人社群的警察比例過高，逮捕的結果也不盡相同，因此在面部識別中使用該資料庫可能存在種族偏見錯誤率。儘管該軟體的開發和部署速度不斷提高，但獨立測試卻並非如此。為了糾正這一令人震驚的錯誤，我們需要有誠信，放慢腳步，確保我們的輸入儘可能不包含偏見。谷歌現在在人工智慧的範圍內提供統計培訓，以幫助確保資料集沒有內在的偏見。
+然而，資料科學本身對人類別的評估是具有挑戰性的。即使我們有表示，訓練集仍然可能有偏見，產生無效的結果。2016年完成的一項研究發現，執法部門的面部識別資料庫中有1.17億以上的美國成年人。[^c5]由於黑人社群的警察比例過高，逮捕的結果也不盡相同，因此在面部識別中使用該資料庫可能存在種族偏見錯誤率。儘管該軟體的開發和部署速度不斷提高，但獨立測試卻並非如此。為了糾正這一令人震驚的錯誤，我們需要有誠信，放慢腳步，確保我們的輸入儘可能不包含偏見。谷歌現在在人工智慧的範圍內提供統計培訓，以幫助確保資料集沒有內在的偏見。
 
 Therefore, shifting the focus of your industry experience to include more comprehensive, multicultural, race and gender studies education is not only your responsibility, but also the responsibility of your employer. Technology companies must ensure that their employees are continually receiving professional development and that this development is comprehensive and multidisciplinary. The requirement is not that one individual take it upon themselves to learn about other cultures or other demographics alone. Change requires that each of us, individually or as leaders of teams, invest in continuous professional development that builds not just our software development and leadership skills, but also our capacity to understand the diverse experiences throughout humanity.
 
 因此，將你的行業經驗的重點轉移到更全面的、多文化的、種族和性別研究的教育，不僅是你的責任，也是你僱主的責任。科技公司必須確保他們的員工不斷接受專業發展，而且這種發展是全面和多學科的。要求不是個體獨自承擔起學習其他文化或其他人口統計學的任務。變革要求我們每個人，無論是個人還是團隊的領導者，都要投資於持續的專業發展，不僅要培養我們的軟體開發和領導技能，還要培養我們理解全人類不同經驗的能力。
 
-> [^5]:    Stephen Gaines and Sara Williams. “The Perpetual Lineup: Unregulated Police Face Recognition in America.”
+> [^e5]: Stephen Gaines and Sara Williams. “The Perpetual Lineup: Unregulated Police Face Recognition in America.”
 >
-> 5    斯蒂芬·蓋恩斯和莎拉·威廉姆斯。“永遠的陣容：美國不受監管的警察面孔識別。”
-喬治敦法律學院隱私與技術中心，2016年10月18日。
+> [^c5]: 斯蒂芬·蓋恩斯和莎拉·威廉姆斯。“永遠的陣容：美國不受監管的警察面孔識別。” 喬治敦法律學院隱私與技術中心，2016年10月18日。
 
 ## Making Diversity Actionable 讓多樣性成為現實
 

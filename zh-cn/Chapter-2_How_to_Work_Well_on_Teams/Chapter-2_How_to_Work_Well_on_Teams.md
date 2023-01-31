@@ -27,13 +27,13 @@ Before we get ahead of ourselves, let’s begin by observing how software engine
 
 ## Help Me Hide My Code  幫我隱藏我的程式碼
 
-For the past 20 years, my colleague Ben[^1] and I have spoken at many programming conferences. In 2006, we launched Google’s (now deprecated) open source Project Hosting service, and at first, we used to get lots of questions and requests about the product. But around mid-2008, we began to notice a trend in the sort of requests we were getting:
+For the past 20 years, my colleague Ben[^e1] and I have spoken at many programming conferences. In 2006, we launched Google’s (now deprecated) open source Project Hosting service, and at first, we used to get lots of questions and requests about the product. But around mid-2008, we began to notice a trend in the sort of requests we were getting:
     “Can you please give Subversion on Google Code the ability to hide specific branches?”
     “Can you make it possible to create open source projects that start out hidden to the world and then are revealed when they’re ready?”
     “Hi, I want to rewrite all my code from scratch, can you please wipe all the history?”
 Can you spot a common theme to these requests?
 
-在過去的20年裡，我和我的同事Ben在很多程式設計會議上演講。 在2006年，我們推出了 Google的開源專案託管服務（現已棄用），在開始時，我們收到很多關於該產品的問題和請求。但到了2008年年中左右，我們發現，我們收到的請求中很多是這樣的：
+在過去的20年裡，我和我的同事Ben[^c1]在很多程式設計會議上演講。 在2006年，我們推出了 Google的開源專案託管服務（現已棄用），在開始時，我們收到很多關於該產品的問題和請求。但到了2008年年中左右，我們發現，我們收到的請求中很多是這樣的：
 
 ​    “你能否讓Google Code上的 Subversion能夠隱藏指定分支？” 
 
@@ -47,9 +47,9 @@ The answer is insecurity. People are afraid of others seeing and judging their w
 
 答案是缺乏安全感。人們害怕別人看到和評價他們正在進行的工作。從某種意義上說，缺乏安全感是人性的一部分——沒有人喜歡被批評，尤其是那些沒有完成的事情。認識到這個主題讓我們看到了軟體開發中一個更普遍的趨勢：缺乏安全實際上是一個更大問題的徵兆。
 
-> [^1]: Ben Collins-Sussman, also an author within this book.
+> [^e1]: Ben Collins-Sussman, also an author within this book.
 >
-> 1 Ben Collins-Sussman，也是本書的作者之一。
+> [^c1]: Ben Collins-Sussman，也是本書的作者之一。
 
 ## The Genius Myth  天才的神話
 
@@ -156,21 +156,21 @@ Then, one day your neighbor pulls his bike out of his garage with a radical new 
 
 ### Early Detection 及早發現
 
-If you keep your great idea hidden from the world and refuse to show anyone anything until the implementation is polished, you’re taking a huge gamble. It’s easy to make fundamental design mistakes early on. You risk reinventing wheels.2 And you forfeit the benefits of collaboration, too: notice how much faster your neighbor moved by working with others? This is why people dip their toes in the water before jumping in the deep end: you need to make sure that you’re working on the right thing, you’re doing it correctly, and it hasn’t been done before. The chances of an early misstep are high. The more feedback you solicit early on, the more you lower this risk.3 Remember the tried-and-true mantra of “Fail early, fail fast, fail often.”
+If you keep your great idea hidden from the world and refuse to show anyone anything until the implementation is polished, you’re taking a huge gamble. It’s easy to make fundamental design mistakes early on. You risk reinventing wheels.[^e2] And you forfeit the benefits of collaboration, too: notice how much faster your neighbor moved by working with others? This is why people dip their toes in the water before jumping in the deep end: you need to make sure that you’re working on the right thing, you’re doing it correctly, and it hasn’t been done before. The chances of an early misstep are high. The more feedback you solicit early on, the more you lower this risk.[^e3] Remember the tried-and-true mantra of “Fail early, fail fast, fail often.”
 
-如果你對世界隱瞞你的厲害想法，並在未完美之前拒絕向任何人展示，那麼你就是在進行一場下注巨大的賭博。早期很容易犯基本的設計錯誤。你冒著重新發明輪子的風險。[^2]而且你也失去了協作的好處：注意到你的鄰居透過與他人合作而效率有多高？這就是人們在跳入深水區之前將腳趾浸入水中的原因：你需要確保你在做正確的事情，你在做正確的事情，而且以前從未做過。早期失誤的可能性很高。你越早徵求反饋，這種風險就越低。[^3]記住“早失敗、快失敗、經常失敗”這句經得起考驗的至理名言。
+如果你對世界隱瞞你的厲害想法，並在未完美之前拒絕向任何人展示，那麼你就是在進行一場下注巨大的賭博。早期很容易犯基本的設計錯誤。你冒著重新發明輪子的風險。[^c2]而且你也失去了協作的好處：注意到你的鄰居透過與他人合作而效率有多高？這就是人們在跳入深水區之前將腳趾浸入水中的原因：你需要確保你在做正確的事情，你在做正確的事情，而且以前從未做過。早期失誤的可能性很高。你越早徵求反饋，這種風險就越低。[^c3]記住“早失敗、快失敗、經常失敗”這句經得起考驗的至理名言。
 
 Early sharing isn’t just about preventing personal missteps and getting your ideas vetted. It’s also important to strengthen what we call the bus factor of your project.
 
 儘早分享不僅僅是為了防止個人失誤和檢驗你的想法，對於加強我們稱之為專案的巴士因子也是十分重要的。
 
-> [^2]: Literally, if you are, in fact, a bike designer.
+> [^e2]: Literally, if you are, in fact, a bike designer.
 >
-> 2  實際上，如果你是一個腳踏車設計師。
+> [^c2]: 實際上，如果你是一個腳踏車設計師。
 >
-> [^3]: I should note that sometimes it’s dangerous to get too much feedback too early in the process if you’re still unsure of your general direction or goal.
+> [^e3]: I should note that sometimes it’s dangerous to get too much feedback too early in the process if you’re still unsure of your general direction or goal.
 >
-> 3  我應該注意到，如果你仍然不確定自己的總體方向或目標，那麼在過程中過早地獲得太多反饋是很危險的。
+> [^c3]: 我應該注意到，如果你仍然不確定自己的總體方向或目標，那麼在過程中過早地獲得太多反饋是很危險的。
 
 ### The Bus Factor 巴士因子
 
@@ -203,9 +203,9 @@ Twenty-five years ago, conventional wisdom stated that for an engineer to be pro
 
 25年前，傳統觀念認為，工程師要想提高工作效率，就需要有一間自己的辦公室，還要有一扇關著的門。據說，只有這樣，他們才能有充足的時間、不受干擾的編寫程式碼。
 
-I think that it’s not only unnecessary for most engineers[^4] to be in a private office, it’s downright dangerous. Software today is written by teams, not individuals, and a high- bandwidth, readily available connection to the rest of your team is even more valuable than your internet connection. You can have all the uninterrupted time in the world, but if you’re using it to work on the wrong thing, you’re wasting your time.
+I think that it’s not only unnecessary for most engineers[^e4] to be in a private office, it’s downright dangerous. Software today is written by teams, not individuals, and a high- bandwidth, readily available connection to the rest of your team is even more valuable than your internet connection. You can have all the uninterrupted time in the world, but if you’re using it to work on the wrong thing, you’re wasting your time.
 
-我認為，對大多數工程師來說，在私人辦公室裡不僅沒有必要，而且是完全錯誤的。今天的軟體是由團隊而不是個人編寫的，與團隊其他成員的高頻寬、隨時可用的連線甚至比你使用網際網路更有價值。你可以擁有不受打擾的時間，但如果你用它來做錯誤的事情，你這是在浪費時間。
+我認為，對大多數工程師來說，[^c4]在私人辦公室裡不僅沒有必要，而且是完全錯誤的。今天的軟體是由團隊而不是個人編寫的，與團隊其他成員的高頻寬、隨時可用的連線甚至比你使用網際網路更有價值。你可以擁有不受打擾的時間，但如果你用它來做錯誤的事情，你這是在浪費時間。
 
 Unfortunately, it seems that modern-day tech companies (including Google, in some cases) have swung the pendulum to the exact opposite extreme. Walk into their offices and you’ll often find engineers clustered together in massive rooms—a hundred or more people together—with no walls whatsoever. This “open floor plan” is now a topic of huge debate and, as a result, hostility toward open offices is on the rise. The tiniest conversation becomes public, and people end up not talking for risk of annoying dozens of neighbors. This is just as bad as private offices!
 
@@ -229,9 +229,9 @@ Don’t misunderstand us—we still think engineers need uninterrupted time to f
 
 ------
 
-> [^4]:    I do, however, acknowledge that serious introverts likely need more peace, quiet, and alone time than most people and might benefit from a quieter environment, if not their own office.  
+> [^e4]: I do, however, acknowledge that serious introverts likely need more peace, quiet, and alone time than most people and might benefit from a quieter environment, if not their own office.
 >
-> 4  然而，我承認，嚴肅內向的人可能比大多數人需要更多的平靜、安靜和獨處的時間，如果不是他們自己的辦公室，他們可能會從一個更安靜的環境中受益。
+> [^c4]: 然而，我承認，嚴肅內向的人可能比大多數人需要更多的平靜、安靜和獨處的時間，如果不是他們自己的辦公室，他們可能會從一個更安靜的環境中受益。
 
 ### In Short, Don’t Hide 總之，不要隱藏
 
@@ -286,9 +286,9 @@ To reach collaborative nirvana, you first need to learn and embrace what I call 
 *Pillar 2: Respect*  
     You genuinely care about others you work with. You treat them kindly and appreciate their abilities and accomplishments.
 *Pillar 3: Trust*  
-    You believe others are competent and will do the right thing, and you’re OK with letting them drive when appropriate.[^5]
+    You believe others are competent and will do the right thing, and you’re OK with letting them drive when appropriate.[^e5]
 
-要達到協作的最佳效果，你首先需要學習並接受我所說的社交的“三大支柱”。這三個原則不僅僅是人際關係的潤滑劑，更是一切健康互動和協作的基礎：
+要達到協作的最佳效果，你首先需要學習並接受我所說的社交的“三大支柱”。這三個原則不僅僅是人際關係的潤滑劑，更是一切健康互動和協作的基礎：[^c5]
 
 *支柱1：謙遜*
     你不是宇宙的中心（你的程式碼也不是！）。你既不是全方位的，也不是絕對正確的。你願意不斷提升自我。
@@ -301,9 +301,9 @@ If you perform a root-cause analysis on almost any social conflict, you can ulti
 
 如果你對所有社會衝突進行根本原因分析，你最終可以追溯到缺乏謙遜、尊重和信任。一開始聽起來似乎不太可信，但不妨試一試。想想你生活中的一些令人尷尬或不舒服的社交場合。在最基本的層面上，每個人都適當地謙虛嗎？人們真的互相尊重嗎？有相互信任嗎？
 
-> [^5]:    This is incredibly difficult if you’ve been burned in the past by delegating to incompetent people./
+> [^e5]: This is incredibly difficult if you’ve been burned in the past by delegating to incompetent people./
 >
-> 5  如果你過去曾被委派給不稱職的人，這將是非常困難的。
+> [^c5]: 如果你過去曾被委派給不稱職的人，這將是非常困難的。
 
 ### Why Do These Pillars Matter?為什麼這些支柱很重要？
 
@@ -374,31 +374,31 @@ There’s a well-known urban legend in the business world about a manager who ma
 wants to see you in his office” call, he trudges into the CEO’s office and quietly slides a piece of paper across the desk.  
 “What’s this?” asks the CEO.  
 “My resignation,” says the executive. “I assume you called me in here to fire me.”  
-“Fire you?” responds the CEO, incredulously. “Why would I fire you? I just spent $10 million training you!”[^6]  
+“Fire you?” responds the CEO, incredulously. “Why would I fire you? I just spent $10 million training you!”[^e6]
 
 商界有一個著名的城市傳奇，說的是一位經理犯了一個錯誤，損失了令人印象深刻的1000萬美元。第二天，他沮喪地走進辦公室，開始收拾桌子。當他接到不可抗拒的“CEO讓你去他辦公室”電話時，他蹣跚地走進CEO辦公室，悄悄地把一張紙遞上桌子。  
 "這是什麼？"CEO問道。  
 "我的辭呈，"這位經理說。"我想你叫我來是要解僱我。"  
-"解僱你？"執行長難以置信地回答道。"我為什麼要解僱你？我剛剛花了1000萬美元培訓你！"
+"解僱你？"執行長難以置信地回答道。"我為什麼要解僱你？我剛剛花了1000萬美元培訓你！"[^c6]
 
 It’s an extreme story, to be sure, but the CEO in this story understands that firing the executive wouldn’t undo the $10 million loss, and it would compound it by losing a valuable executive who he can be very sure won’t make that kind of mistake again.
 
 的確，這是一個極端的故事，但在這個故事中，執行長明白解僱這名高管並不能挽回這1000萬美元的損失，而且會因為失去一位有價值的高管，讓事情變得更糟糕，他非常確定，這位高管不會再犯類似錯誤。
 
-At Google, one of our favorite mottos is that “Failure is an option.” It’s widely recognized that if you’re not failing now and then, you’re not being innovative enough or taking enough risks. Failure is viewed as a golden opportunity to learn and improve for the next go-around.[^7] In fact, Thomas Edison is often quoted as saying, “If I find 10,000 ways something won’t work, I haven’t failed. I am not discouraged, because every wrong attempt discarded is another step forward.”
+At Google, one of our favorite mottos is that “Failure is an option.” It’s widely recognized that if you’re not failing now and then, you’re not being innovative enough or taking enough risks. Failure is viewed as a golden opportunity to learn and improve for the next go-around.[^e7] In fact, Thomas Edison is often quoted as saying, “If I find 10,000 ways something won’t work, I haven’t failed. I am not discouraged, because every wrong attempt discarded is another step forward.”
 
-在谷歌，我們最喜歡的格言之一是“失敗也是一種選擇”。我們普遍認為，如果你沒有遭遇過失敗，你就沒有足夠的創新或承擔足夠的風險的能力。失敗被視為一個黃金機會，可以在下一次嘗試中學習和改進。事實上，人們經常參考托馬斯·愛迪生的話說：“如果我發現有一萬種方法不能成功，我就沒有失敗。我並不氣餒，因為每一個被拋棄的錯誤嘗試都是向前邁出的另一步”
+在谷歌，我們最喜歡的格言之一是“失敗也是一種選擇”。我們普遍認為，如果你沒有遭遇過失敗，你就沒有足夠的創新或承擔足夠的風險的能力。失敗被視為一個黃金機會，可以在下一次嘗試中學習和改進。[^c7]事實上，人們經常參考托馬斯·愛迪生的話說：“如果我發現有一萬種方法不能成功，我就沒有失敗。我並不氣餒，因為每一個被拋棄的錯誤嘗試都是向前邁出的另一步”
 
 Over in Google X—the division that works on “moonshots” like self-driving cars and internet access delivered by balloons—failure is deliberately built into its incentive system. People come up with outlandish ideas and coworkers are actively encouraged to shoot them down as fast as possible. Individuals are rewarded (and even compete) to see how many ideas they can disprove or invalidate in a fixed period of time. Only when a concept truly cannot be debunked at a whiteboard by all peers does it proceed to early prototype.
 
 在谷歌X部門——該部門負責研究自動駕駛汽車和透過熱氣球提供網際網路接入等 "登月計劃"——故意將失敗次數納入其激勵系統。人們會想出一些稀奇古怪的想法，同事們也會受到積極的鼓勵儘快實現它們。每個人都會得到獎勵（甚至是競爭），看看他們能在一段固定的時間內反駁或否定多少觀點。只有當一個概念真的不能在白板上被所有同行揭穿時，它才能進入早期原型。
 
-> [^6]:    You can find a dozen variants of this legend on the web, attributed to different famous managers.
+> [^e6]: You can find a dozen variants of this legend on the web, attributed to different famous managers.
 >
-> 6  你可以在網上找到這一傳說的十幾種變體，它們都是由不同的著名經理人創造的。
+> [^c6]: 你可以在網上找到這一傳說的十幾種變體，它們都是由不同的著名經理人創造的。
 >
-> [^7]:    By the same token, if you do the same thing over and over and keep failing, it’s not failure, it’s incompetence.
-> 7  同樣的道理，如果你一次又一次地做同樣的事情，卻不斷失敗，那不是失敗，而是無能。
+> [^e7]: By the same token, if you do the same thing over and over and keep failing, it’s not failure, it’s incompetence.
+> [^c7]: 同樣的道理，如果你一次又一次地做同樣的事情，卻不斷失敗，那不是失敗，而是無能。
 
 ### Blameless Post-Mortem Culture 無責的事後文化
 

@@ -53,16 +53,16 @@ Mary遇到的問題不是她的錯，而且她也沒有辦法避免這些問題�
 
 ## Preventing Brittle Tests  預防脆性測試
 
-As just defined, a brittle test is one that fails in the face of an unrelated change to production code that does not introduce any real bugs.[^1] Such tests must be diagnosed and fixed by engineers as part of their work. In small codebases with only a few engineers, having to tweak a few tests for every change might not be a big problem. But if a team regularly writes brittle tests, test maintenance will inevitably consume a larger and larger proportion of the team’s time as they are forced to comb through an increasing number of failures in an ever-growing test suite. If a set of tests needs to be manually tweaked by engineers for each change, calling it an “automated test suite” is a bit of a stretch!
+As just defined, a brittle test is one that fails in the face of an unrelated change to production code that does not introduce any real bugs.[^e1] Such tests must be diagnosed and fixed by engineers as part of their work. In small codebases with only a few engineers, having to tweak a few tests for every change might not be a big problem. But if a team regularly writes brittle tests, test maintenance will inevitably consume a larger and larger proportion of the team’s time as they are forced to comb through an increasing number of failures in an ever-growing test suite. If a set of tests needs to be manually tweaked by engineers for each change, calling it an “automated test suite” is a bit of a stretch!
 
-正如剛才所定義的，脆性測試是指在面對不相關的程式程式碼變化時失敗的測試，這些變化不會引入任何真正的錯誤。在只有幾個工程師的小型程式碼庫中，每次修改都要調整一些測試，這可能不是一個大問題。但是，如果一個團隊經常寫脆弱測試，測試維護將不可避免地消耗團隊越來越多的時間，因為他們不得不在不斷增長的測試套件中梳理越來越多的失敗。如果一套測試需要工程師為每一個變化進行手動調整，稱其為 "自動化測試套件"就有點牽強了！
+正如剛才所定義的，脆性測試是指在面對不相關的程式程式碼變化時失敗的測試，這些變化不會引入任何真正的錯誤。[^c1]在只有幾個工程師的小型程式碼庫中，每次修改都要調整一些測試，這可能不是一個大問題。但是，如果一個團隊經常寫脆弱測試，測試維護將不可避免地消耗團隊越來越多的時間，因為他們不得不在不斷增長的測試套件中梳理越來越多的失敗。如果一套測試需要工程師為每一個變化進行手動調整，稱其為 "自動化測試套件"就有點牽強了！
 
 Brittle tests cause pain in codebases of any size, but they become particularly acute at Google’s scale. An individual engineer might easily run thousands of tests in a single day during the course of their work, and a single large-scale change (see [Chapter 22](#_bookmark1935)) can trigger hundreds of thousands of tests. At this scale, spurious breakages that affect even a small percentage of tests can waste huge amounts of engineering time. Teams at Google vary quite a bit in terms of how brittle their test suites are, but we’ve identified a few practices and patterns that tend to make tests more robust to change.
 
 脆弱測試在任何規模的程式碼庫中都會造成痛苦，但在谷歌的規模中，它們變得尤為嚴重。一個單獨的工程師在工作過程中，可能在一天內就會輕易地執行數千個測試，而一個大規模的變化（見第22章）可能會引發數十萬個測試。在這種規模下，即使是影響一小部分測試的誤報故障也會浪費大量的工程時間。谷歌的團隊在測試套件的脆弱性方面存在很大差異，但我們已經確定了一些實踐和模式，這些實踐和模式傾向於使測試變得更健壯，更易於更改。
 
-> [^1]: Note that this is slightly different from a flaky test, which fails nondeterministically without any change to production code./
-> 1  注意，這與不穩定測試略有不同，不穩定測試是在不改變生產程式碼的情況下非確定性地失敗。
+> [^e1]: Note that this is slightly different from a flaky test, which fails nondeterministically without any change to production code./
+> [^c1]: 注意，這與不穩定測試略有不同，不穩定測試是在不改變生產程式碼的情況下非確定性地失敗。
 
 ### Strive for Unchanging Tests  力求穩定的測試
 
@@ -159,9 +159,9 @@ This test interacts with the transaction processor in a much different way than 
 
 此測試與交易處理器的互動方式與其實際使用者的互動方式大不相同：它窺視系統的內部狀態並呼叫系統API中未公開的方法。因此，測試是脆弱的，幾乎任何對被測系統的重構（例如重新命名其方法、將其分解為輔助類或更改序列化格式）都會導致測試中斷，即使此類更改對類別的實際使用者是不可見的。
 
-Instead, the same test coverage can be achieved by testing only against the class’s public API, as shown in Example 12-3.[^2]
+Instead, the same test coverage can be achieved by testing only against the class’s public API, as shown in Example 12-3.[^e2]
 
-相反，同樣的測試覆蓋率可以透過只測試類別的公共 API 來實現，如例 12-3.2 所示。
+相反，同樣的測試覆蓋率可以透過只測試類別的公共 API 來實現，如例 12-3.2 所示。[^c2]
 
 *Example 12-3. Testing the public API*  *例12-3. 測試公共API*
 
@@ -190,9 +190,9 @@ Tests using only public APIs are, by definition, accessing the system under test
 
 根據定義，僅使用公共API的測試是以與使用者相同的方式存取被測系統。這樣的測試更現實，也不那麼脆弱，因為它們形成了明確的契約：如果這樣的測試失敗，它意味著系統的現有使用者也將失敗。只測試這些契約意味著你可以自由地對系統進行任何內部重構，而不必擔心對測試進行繁瑣的更改。
 
-> [^2]:	This is sometimes called the "Use the front door first principle.”
+> [^e2]: This is sometimes called the "Use the front door first principle.”
 >
-> 2   這有時被稱為“使用前門優先原則”
+> [^c2]: 這有時被稱為“使用前門優先原則”
 
 It’s not always clear what constitutes a “public API,” and the question really gets to the heart of what a “unit” is in unit testing. Units can be as small as an individual function or as broad as a set of several related packages/modules. When we say “public API” in this context, we’re really talking about the API exposed by that unit to third parties outside of the team that owns the code. This doesn’t always align with the notion of visibility provided by some programming languages; for example, classes in Java might define themselves as “public” to be accessible by other packages in the same unit but are not intended for use by other parties outside of the unit. Some languages like Python have no built-in notion of visibility (often relying on conventions like prefixing private method names with underscores), and build systems like Bazel can further restrict who is allowed to depend on APIs declared public by the programming language.
 
@@ -271,13 +271,13 @@ The most common reason for problematic interaction tests is an over reliance on 
 ## Writing Clear Tests  編寫清晰的測試
 
 Sooner or later, even if we’ve completely avoided brittleness, our tests will fail. Failure is a good thing—test failures provide useful signals to engineers, and are one of the main ways that a unit test provides value.
-Test failures happen for one of two reasons:[^3]
+Test failures happen for one of two reasons:[^e3]
 
 - The system under test has a problem or is incomplete. This result is exactly what tests are designed for: alerting you to bugs so that you can fix them.
 - The test itself is flawed. In this case, nothing is wrong with the system under test, but the test was specified incorrectly. If this was an existing test rather than one that you just wrote, this means that the test is brittle. The previous section discussed how to avoid brittle tests, but it’s rarely possible to eliminate them entirely.
 
 總有一天，即使我們已經完全避免了脆弱性，我們的測試也會失敗。失敗是一件好事——測試失敗為工程師提供了有用的訊號，也是單元測試提供價值的主要方式之一。
-測試失敗有兩個原因：
+測試失敗有兩個原因：[^c3]
 
 - 被測系統有問題或不完整。這個結果正是測試的設計目的：提醒你注意bug，以便你能修復它們。
 - 測試本身是有缺陷的。在這種情況下，被測系統沒有任何問題，但測試的指定是不正確的。如果這是一個現有的測試，而不是你剛寫的測試，這意味著測試是脆弱的。上一節討論瞭如何避免脆性測試，但很少有可能完全消除它們。
@@ -298,9 +298,9 @@ For a test suite to scale and be useful over time, it’s important that each in
 
 為了使測試套件能夠隨時間擴充並變得有用，套件中的每個測試都儘可能清晰是很重要的。本節探討了為實現清晰性而考慮測試的技術和方法。
 
-> [^3]: These are also the same two reasons that a test can be “flaky.” Either the system under test has a nondeterministic fault, or the test is flawed such that it sometimes fails when it should pass.
+> [^e3]: These are also the same two reasons that a test can be “flaky.” Either the system under test has a nondeterministic fault, or the test is flawed such that it sometimes fails when it should pass.
 >
-> 3   這也是測試可能“不穩定”的兩個原因。要麼被測系統存在不確定性故障，要麼測試存在缺陷，以至於在透過測試時有時會失敗。
+> [^c3]: 這也是測試可能“不穩定”的兩個原因。要麼被測系統存在不確定性故障，要麼測試存在缺陷，以至於在透過測試時有時會失敗。
 
 ### Make Your Tests Complete and Concise  確保你的測試完整和簡明
 
@@ -374,9 +374,9 @@ With such tests, it’s likely that the test started out covering only the first
 
 對於這樣的測試，很可能一開始測試只包括第一個方法。後來，當第二條資訊被新增進來時，工程師擴充了測試（違反了我們前面討論的穩定的測試理念）。這種修改開創了一個不好的先例：隨著被測方法變得越來越複雜，實現的功能越來越多，其單元測試也會變得越來越複雜，越來越難以使用。
 
-The problem is that framing tests around methods can naturally encourage unclear tests because a single method often does a few different things under the hood and might have several tricky edge and corner cases. There’s a better way: rather than writing a test for each method, write a test for each behavior.[^4] A behavior is any guarantee that a system makes about how it will respond to a series of inputs while in a particular state.[^5] Behaviors can often be expressed using the words “given,” “when,” and “then”: “Given that a bank account is empty, when attempting to withdraw money from it, then the transaction is rejected.” The mapping between methods and behaviors is many-to-many: most nontrivial methods implement multiple behaviors, and some behaviors rely on the interaction of multiple methods. The previous example can be rewritten using behavior-driven tests, as presented in Example 12-10.
+The problem is that framing tests around methods can naturally encourage unclear tests because a single method often does a few different things under the hood and might have several tricky edge and corner cases. There’s a better way: rather than writing a test for each method, write a test for each behavior.[^e4] A behavior is any guarantee that a system makes about how it will respond to a series of inputs while in a particular state.[^e5] Behaviors can often be expressed using the words “given,” “when,” and “then”: “Given that a bank account is empty, when attempting to withdraw money from it, then the transaction is rejected.” The mapping between methods and behaviors is many-to-many: most nontrivial methods implement multiple behaviors, and some behaviors rely on the interaction of multiple methods. The previous example can be rewritten using behavior-driven tests, as presented in Example 12-10.
 
-問題是，圍繞方法測試框架自然會鼓勵不清晰測試，因為單個方法經常在背後下做一些不同的事情，可能有幾個棘手的邊緣和角落的情況。有一個更好的方法：與其為每個方法寫一個測試，不如為每個行為寫一個測試。 行為是一個系統對它在特定狀態下如何響應一系列輸入的任何保障。"鑑於一個銀行賬戶是空的，當試圖從該賬戶中取錢時，該交易被拒絕。" 方法和行為之間的對映是多對多的：大多數不重要的方法實現了多個行為，一些行為依賴於多個方法的互動。前面的例子可以用行為驅動的測試來重寫，如例12-10所介紹。
+問題是，圍繞方法測試框架自然會鼓勵不清晰測試，因為單個方法經常在背後下做一些不同的事情，可能有幾個棘手的邊緣和角落的情況。有一個更好的方法：與其為每個方法寫一個測試，不如為每個行為寫一個測試。[^c4] 行為是一個系統對它在特定狀態下如何響應一系列輸入的任何保障。[^c5]"鑑於一個銀行賬戶是空的，當試圖從該賬戶中取錢時，該交易被拒絕。" 方法和行為之間的對映是多對多的：大多數不重要的方法實現了多個行為，一些行為依賴於多個方法的互動。前面的例子可以用行為驅動的測試來重寫，如例12-10所介紹。
 
 *Example 12-10. A behavior-driven test*   *例12-10. 行為驅動的測試*
 
@@ -399,19 +399,19 @@ The extra boilerplate required to split apart the single test is more than worth
 
 拆分單個測試所需的額外範本檔案非常值得，並且最終的測試比原來測試更清晰。行為驅動測試往往比面向方法的測試更清晰，原因有幾個。首先，它們閱讀起來更像自然語言，讓人們自然地理解它們，而不需要語言繁瑣的心理分析。其次，它們更清楚地表達了因果關係，因為每個測試的範圍都更有限。最後，每個測試都很短且描述性強，這一事實使我們更容易看到已經測試了哪些功能，並鼓勵工程師新增新的簡潔測試方法，而不是堆積在現有方法上。
 
-> [^4]:	See `https://testing.googleblog.com/2014/04/testing-on-toilet-test-behaviors-not.html` and `https://dannorth.net/introducing-bdd`.
+> [^e4]: See `https://testing.googleblog.com/2014/04/testing-on-toilet-test-behaviors-not.html` and `https://dannorth.net/introducing-bdd`.
 >
-> 4 見 `https://testing.googleblog.com/2014/04/testing-on-toilet-test-behaviors-not.html` 和 `https://dannorth.net/introducing-bdd`。
+> [^c4]: 見 `https://testing.googleblog.com/2014/04/testing-on-toilet-test-behaviors-not.html` 和 `https://dannorth.net/introducing-bdd`。
 >
-> [^5]: Furthermore, a feature (in the product sense of the word) can be expressed as a collection of behaviors.
+> [^e5]: Furthermore, a feature (in the product sense of the word) can be expressed as a collection of behaviors.
 >
-> 5 此外，一個特徵（在這個詞的產品意義上）可以被表達為一組行為。
+> [^c5]: 此外，一個特徵（在這個詞的產品意義上）可以被表達為一組行為。
 
 #### Structure tests to emphasize behaviors  強調行為的結構測試
 
-Thinking about tests as being coupled to behaviors instead of methods significantly affects how they should be structured. Remember that every behavior has three parts: a “given” component that defines how the system is set up, a “when” component that defines the action to be taken on the system, and a “then” component that validates the result.[^6] Tests are clearest when this structure is explicit. Some frameworks like Cucumber and Spock directly bake in given/when/then. Other languages can use whitespace and optional comments to make the structure stand out, such as that shown in Example 12-11.
+Thinking about tests as being coupled to behaviors instead of methods significantly affects how they should be structured. Remember that every behavior has three parts: a “given” component that defines how the system is set up, a “when” component that defines the action to be taken on the system, and a “then” component that validates the result.[^e6] Tests are clearest when this structure is explicit. Some frameworks like Cucumber and Spock directly bake in given/when/then. Other languages can use whitespace and optional comments to make the structure stand out, such as that shown in Example 12-11.
 
-將測試視為與行為而非方法相耦合會顯著影響測試的結構。請記住，每個行為都有三個部分：一個是定義系統如何設定的 "given"元件，一個是定義對系統採取的行動的 "when"元件，以及一個驗證結果的 "then"元件。當此結構是顯式的時，測試是最清晰的。一些框架（如Cucumber和Spock）直接加入了given/when/then的功能支援。其他語言可以使用空格和可選註釋使結構突出，如範例12-11所示。
+將測試視為與行為而非方法相耦合會顯著影響測試的結構。請記住，每個行為都有三個部分：一個是定義系統如何設定的 "given"元件，一個是定義對系統採取的行動的 "when"元件，以及一個驗證結果的 "then"元件。[^c6]當此結構是顯式的時，測試是最清晰的。一些框架（如Cucumber和Spock）直接加入了given/when/then的功能支援。其他語言可以使用空格和可選註釋使結構突出，如範例12-11所示。
 
 *Example 12-11. A well-structured test*  *例12-11. 一個結構良好的測試*
 
@@ -480,9 +480,9 @@ When writing such tests, be careful to ensure that you’re not inadvertently te
 
 在編寫這種測試時，要注意確保你不會無意中同時測試多個行為。每個測試應該只覆蓋一個行為，絕大多數的單元測試只需要一個 "when"和一個 "then"塊。
 
-> [^6]: These components are sometimes referred to as “arrange,” “act,” and “assert.”
+> [^e6]: These components are sometimes referred to as “arrange,” “act,” and “assert.”
 >
-> 6 這些組成部分有時被稱為 "安排"、"行動 "和 "斷言"。
+> [^c6]: 這些組成部分有時被稱為 "安排"、"行動 "和 "斷言"。
 
 #### Name tests after the behavior being tested  以被測試的行為命名測試
 
@@ -814,9 +814,9 @@ Using helper methods to construct these values allows each test to create the ex
 
 使用輔助方法來建構這些值，允許每個測試建立它所需要的精確值，而不必擔心指定不相關的資訊或與其他測試衝突。
 
-> [^7]: In many cases, it can even be useful to slightly randomize the default values returned for fields that aren’t explicitly set. This helps to ensure that two different instances won’t accidentally compare as equal, and makes it more difficult for engineers to hardcode dependencies on the defaults.
+> [^e7]: In many cases, it can even be useful to slightly randomize the default values returned for fields that aren’t explicitly set. This helps to ensure that two different instances won’t accidentally compare as equal, and makes it more difficult for engineers to hardcode dependencies on the defaults.
 >
-> 7 在許多情況下，甚至可以對未顯式設定的欄位返回的預設值進行輕微的隨機化。這有助於確保兩個不同的例項不會意外地比較為相等，並使工程師更難硬編碼對預設值的依賴關係。
+> [^c7]: 在許多情況下，甚至可以對未顯式設定的欄位返回的預設值進行輕微的隨機化。這有助於確保兩個不同的例項不會意外地比較為相等，並使工程師更難硬編碼對預設值的依賴關係。
 
 ### Shared Setup  共享設定
 

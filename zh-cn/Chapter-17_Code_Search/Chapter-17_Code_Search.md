@@ -9,9 +9,9 @@
 
 **Edited by Lisa Carey**
 
-Code Search is a tool for browsing and searching code at Google that consists of a frontend UI and various backend elements. Like many of the development tools at Google, it arose directly out of a need to scale to the size of the codebase. Code Search began as a combination of a grep-type tool[^1] for internal code with the ranking and UI of external Code Search[^2]. Its place as a key tool for Google developers was cemented by the integration of Kythe/Grok[^3], which added cross-references and the ability to jump to symbol definitions.
+Code Search is a tool for browsing and searching code at Google that consists of a frontend UI and various backend elements. Like many of the development tools at Google, it arose directly out of a need to scale to the size of the codebase. Code Search began as a combination of a grep-type tool[^e1] for internal code with the ranking and UI of external Code Search[^e2]. Its place as a key tool for Google developers was cemented by the integration of Kythe/Grok[^e3], which added cross-references and the ability to jump to symbol definitions.
 
-程式碼搜尋是用於在 Google 內部瀏覽和搜尋程式碼的工具，它由一個前端 UI 頁面和各種後端元件組成。就像Google的許多開發工具一樣，它直接源於程式碼庫規模的需求。程式碼搜尋開始是類似於 grep 型別工具的組合，用於帶有排行和 UI 的內部程式碼外部程式碼搜尋。透過 Kythe/Grok 的整合，它作為 Google 開發人員的關鍵工具的地位得到鞏固，他們增加了交叉參考和跳轉到符號定義的能力。
+程式碼搜尋是用於在 Google 內部瀏覽和搜尋程式碼的工具，它由一個前端 UI 頁面和各種後端元件組成。就像Google的許多開發工具一樣，它直接源於程式碼庫規模的需求。程式碼搜尋開始是類似於 grep 型別工具[^c1]的組合，用於帶有排行和 UI 的內部程式碼外部程式碼搜尋[^c2]。透過 Kythe/Grok 的整合[^c3]，它作為 Google 開發人員的關鍵工具的地位得到鞏固，他們增加了交叉參考和跳轉到符號定義的能力。
 
 That integration changed its focus from searching to browsing code, and later development of Code Search was partly guided by a principle of “answering the next question about code in a single click.”Now such questions as “Where is this symbol defined?”, “Where is it used?”, “How do I include it?”, “When was it added to the codebase?”, and even ones like “Fleet-wide, how many CPU cycles does it consume?” are all answerable with one or two clicks.
 
@@ -25,17 +25,17 @@ In this chapter, we’ll look at Code Search in more detail, including how Googl
 
 在本章中，我們將更詳細地瞭解程式碼搜尋，包括 Google 員工如何將其作為開發人員工作流程的一部分，為什麼我們選擇開發一個單獨的網路工具來進行程式碼搜尋，並研究它如何在 Google 儲存庫規模下解決搜尋和瀏覽程式碼問題。
 
-> [^1]: GSearch originally ran on Jeff Dean’s personal computer, which once caused company-wide distress when he went on vacation and it was shut down!
+> [^e1]: GSearch originally ran on Jeff Dean’s personal computer, which once caused company-wide distress when he went on vacation and it was shut down!
 >
-> 1 GSearch最初在Jeff Dean的個人電腦上執行，當他去度假時，曾經引起全公司的困擾。他去度假時，這臺電腦就被關閉了！這曾經造成了整個公司的困擾。
+> [^c1]: GSearch最初在Jeff Dean的個人電腦上執行，他去度假時，這臺電腦就被關閉了！這曾經造成了整個公司的困擾。
 >
-> [^2]: Shut down in 2013; see `https://en.wikipedia.org/wiki/Google_Code_Search`.
+> [^e2]: Shut down in 2013; see `https://en.wikipedia.org/wiki/Google_Code_Search`.
 >
-> 2 在2013年關閉；見`https://en.wikipedia.org/wiki/Google_Code_Search`。
+> [^c2]: 在2013年關閉；見`https://en.wikipedia.org/wiki/Google_Code_Search`。
 >
-> [^3]: Now known as Kythe, a service that provides cross-references (among other things): the uses of a particular code symbol—for example, a function—using the full build information to disambiguate it from other ones with the same name.
+> [^e3]: Now known as Kythe, a service that provides cross-references (among other things): the uses of a particular code symbol—for example, a function—using the full build information to disambiguate it from other ones with the same name.
 >
-> 3 現在被稱為Kythe，一個提供交叉參考的服務（除其他外）：一個特定的程式碼符號的用途--例如，一個函式--使用完整的建構資訊，將其與其他同名的符號區分開來。
+> [^c3]: 現在被稱為Kythe，一個提供交叉參考的服務（除其他外）：一個特定的程式碼符號的用途--例如，一個函式--使用完整的建構資訊，將其與其他同名的符號區分開來。
 
 ## The Code Search UI 程式碼搜尋使用者介面
 
@@ -55,17 +55,17 @@ Code Search also shows the history of a file, via its integration with Piper (se
 
 ## How Do Googlers Use Code Search? Google 員工如何使用程式碼搜尋？
 
-Although similar functionality is available in other tools, Googlers still make heavy use of the Code Search UI for searching and file viewing and ultimately for understanding code.[^4] The tasks engineers try to complete with Code Search can be thought of answering questions about code, and recurring intents become visible.[^5]
+Although similar functionality is available in other tools, Googlers still make heavy use of the Code Search UI for searching and file viewing and ultimately for understanding code.[^e4] The tasks engineers try to complete with Code Search can be thought of answering questions about code, and recurring intents become visible.[^e5]
 
-儘管其他工具中也有類似的功能，但 Google 員工仍然大量使用程式碼搜尋 UI 進行搜尋和檔案檢視，並最終用於理解程式碼。工程師嘗試使用程式碼搜尋完成任務被認為是回答有關程式碼的問題，以及重複的意圖變得可見。
+儘管其他工具中也有類似的功能，但 Google 員工仍然大量使用程式碼搜尋 UI 進行搜尋和檔案檢視，並最終用於理解程式碼。[^c4]工程師嘗試使用程式碼搜尋完成任務被認為是回答有關程式碼的問題，以及重複的意圖變得可見。[^c5]
 
-> [^4]: There is an interesting virtuous cycle that a ubiquitous code browser encourages: writing code that is easy to browse. This can mean things like not nesting hierarchies too deep, which requires many clicks to move from call sites to actual implementation, and using named types rather than generic things like strings or integers, because it’s then easy to find all usages.
+> [^e4]: There is an interesting virtuous cycle that a ubiquitous code browser encourages: writing code that is easy to browse. This can mean things like not nesting hierarchies too deep, which requires many clicks to move from call sites to actual implementation, and using named types rather than generic things like strings or integers, because it’s then easy to find all usages.
 >
-> 4 無處不在的程式碼瀏覽器鼓勵一個有趣的良性迴圈：編寫易於瀏覽的程式碼。這可能意味著不要把層次巢狀(Nesting)得太深，因為這需要多次點選才能從呼叫站點轉移到實際的實現；使用命名的型別而不是像字串或整數這樣的通用型別，因為這樣就很容易找到所有的用法。
+> [^c4]:  無處不在的程式碼瀏覽器鼓勵一個有趣的良性迴圈：編寫易於瀏覽的程式碼。這可能意味著不要把層次巢狀(Nesting)得太深，因為這需要多次點選才能從呼叫站點轉移到實際的實現；使用命名的型別而不是像字串或整數這樣的通用型別，因為這樣就很容易找到所有的用法。
 >
-> [^5]: Sadowski, Caitlin, Kathryn T. Stolee, and Sebastian Elbaum. “How Developers Search for Code: A Case Study” In Proceedings of the 2015 10th Joint Meeting on Foundations of Software Engineering (ESEC/FSE 2015). `https://doi.org/10.1145/2786805.2786855`.
+> [^e5]: Sadowski, Caitlin, Kathryn T. Stolee, and Sebastian Elbaum. “How Developers Search for Code: A Case Study” In Proceedings of the 2015 10th Joint Meeting on Foundations of Software Engineering (ESEC/FSE 2015). `https://doi.org/10.1145/2786805.2786855`.
 >
-> 5 Sadowski, Caitlin, Kathryn T. Stolee, and Sebastian Elbaum. "開發者如何搜尋程式碼。A Case Study" In Proceedings of the 2015 10th Joint Meeting on Foundations of Software Engineering (ESEC/FSE 2015). `https://doi.org/10.1145/2786805.2786855`.
+> [^c5]: Sadowski, Caitlin, Kathryn T. Stolee, and Sebastian Elbaum. "開發者如何搜尋程式碼。A Case Study" In Proceedings of the 2015 10th Joint Meeting on Foundations of Software Engineering (ESEC/FSE 2015). `https://doi.org/10.1145/2786805.2786855`.
 
 ### Where?
 
@@ -111,13 +111,13 @@ An important capability here is being able to search and explore the exact state
 
 ### Who and When? 誰？什麼時候？
 
-About 8% of Code Searches try to answer questions around who or when someone introduced a certain piece of code, interacting with the version control system. For example, it’s possible to see when a particular line was introduced (like Git’s “blame”) and jump to the relevant code review. This history panel can also be very useful in finding the best person to ask about the code, or to review a change to it.[^6]
+About 8% of Code Searches try to answer questions around who or when someone introduced a certain piece of code, interacting with the version control system. For example, it’s possible to see when a particular line was introduced (like Git’s “blame”) and jump to the relevant code review. This history panel can also be very useful in finding the best person to ask about the code, or to review a change to it.[^e6]
 
-大約 8% 的程式碼搜尋試圖回答有關誰或何時引入某段程式碼的問題，並與版本控制系統進行互動。例如，可以檢視何時引入了特定行（如 Git 的“blame”）並跳轉到相關的程式碼審查。這個歷史面板對於尋找最好的人來詢問程式碼或審查對它的更改也非常有用。
+大約 8% 的程式碼搜尋試圖回答有關誰或何時引入某段程式碼的問題，並與版本控制系統進行互動。例如，可以檢視何時引入了特定行（如 Git 的“blame”）並跳轉到相關的程式碼審查。這個歷史面板對於尋找最好的人來詢問程式碼或審查對它的更改也非常有用。[^c6]
 
-> [^6]: That said, given the rate of commits for machine-generated changes, naive “blame” tracking has less value than it does in more change-averse ecosystems.
+> [^e6]: That said, given the rate of commits for machine-generated changes, naive “blame” tracking has less value than it does in more change-averse ecosystems.
 >
-> 6也就是說，考慮到機器產生的更改的提交率，天真的“指責”追蹤比在更厭惡更改的生態系統中的價值要小。
+> [^c6]: 也就是說，考慮到機器產生的更改的提交率，天真的“指責”追蹤比在更厭惡更改的生態系統中的價值要小。
 
 ## Why a Separate Web Tool? 為什麼要使用單獨的 Web 工具？
 
@@ -127,25 +127,25 @@ Outside Google, most of the aforementioned investigations are done within a loca
 
 ### Scale 規模
 
-The first answer is that the Google codebase is so large that a local copy of the full codebase—a prerequisite for most IDEs—simply doesn’t fit on a single machine. Even before this fundamental barrier is hit, there is a cost to building local search and cross-reference indices for each developer, a cost often paid at IDE startup, slowing developer velocity. Or, without an index, one-off searches (e.g., with grep) can become painfully slow. A centralized search index means doing this work once,  upfront, and means investments in the process benefit everyone. For example, the Code Search index is incrementally updated with every submitted change, enabling index construction with linear cost.[^7]
+The first answer is that the Google codebase is so large that a local copy of the full codebase—a prerequisite for most IDEs—simply doesn’t fit on a single machine. Even before this fundamental barrier is hit, there is a cost to building local search and cross-reference indices for each developer, a cost often paid at IDE startup, slowing developer velocity. Or, without an index, one-off searches (e.g., with grep) can become painfully slow. A centralized search index means doing this work once,  upfront, and means investments in the process benefit everyone. For example, the Code Search index is incrementally updated with every submitted change, enabling index construction with linear cost.[^e7]
 
-第一個答案是 Google 程式碼庫規模太大，以至於完整程式碼庫的本地副本（大多數 IDE 的先決條件）根本不適合單臺機器。即使在這個基本障礙之前，為每個開發人員建構本地搜尋和交叉參考索引也是有成本的，這通常在 IDE 啟動時降低了開發人員的效率。如果沒有索引，一次性搜尋（例如，使用 grep）可能會變得非常緩慢。集中式搜尋索引意味著一次性完成這項工作，並且意味著對流程的投資使每個人都受益。例如，程式碼搜尋索引會隨著每次提交的更改而增量更新，從而能夠以線性成本建構索引。
+第一個答案是 Google 程式碼庫規模太大，以至於完整程式碼庫的本地副本（大多數 IDE 的先決條件）根本不適合單臺機器。即使在這個基本障礙之前，為每個開發人員建構本地搜尋和交叉參考索引也是有成本的，這通常在 IDE 啟動時降低了開發人員的效率。如果沒有索引，一次性搜尋（例如，使用 grep）可能會變得非常緩慢。集中式搜尋索引意味著一次性完成這項工作，並且意味著對流程的投資使每個人都受益。例如，程式碼搜尋索引會隨著每次提交的更改而增量更新，從而能夠以線性成本建構索引。[^c7]
 
 In normal web search, fast-changing current events are mixed with more slowly changing items, such as stable Wikipedia pages. The same technique can be extended to searching code, making indexing incremental, which reduces its cost and allows changes to the codebase to be visible to everyone instantly. When a code change is submitted, only the actual files touched need to be reindexed, which allows parallel and independent updates to the global index. 
 
 在正常的網路搜尋中，快速變化的當前事件與變化較慢的專案混合在一起，例如穩定的維基百科頁面。同樣的技術可以擴充到搜尋程式碼，使索引增加，從而降低成本，並允許對程式碼庫的更改立即對所有人可見。提交程式碼更改時，只需要對實際觸及的檔案進行重新索引，這允許對全域索引進行並行和獨立的更新。
 
-Unfortunately, the cross-reference index cannot be instantly updated in the same way. Incrementality isn’t possible for it, as any code change can potentially influence the entire codebase, and in practice often does affect thousands of files. Many (nearly all of Google’s) full binaries need to be built[^8] (or at least analyzed) to determine the full semantic structure. It uses a ton of compute resources to produce the index daily (the current frequency). The discrepancy between the instant search index and the daily  cross-reference index is a source of rare but recurring issues for users.
+Unfortunately, the cross-reference index cannot be instantly updated in the same way. Incrementality isn’t possible for it, as any code change can potentially influence the entire codebase, and in practice often does affect thousands of files. Many (nearly all of Google’s) full binaries need to be built[^e8] (or at least analyzed) to determine the full semantic structure. It uses a ton of compute resources to produce the index daily (the current frequency). The discrepancy between the instant search index and the daily  cross-reference index is a source of rare but recurring issues for users.
 
-不幸的是，交叉參考索引不能以相同的方式立即更新。增量是不可能的，因為任何程式碼更改都可能影響整個程式碼庫，實際上經常會影響數千個檔案。需要建構（或至少分析）許多（幾乎所有 Google 的）完整二進位制檔案以確定完整的語義結構。它每天使用大量計算資源（當前頻率）產生索引。即時搜尋索引和每日交叉參考索引之間的差異是使用者罕見但反覆出現的問題的根源。
+不幸的是，交叉參考索引不能以相同的方式立即更新。增量是不可能的，因為任何程式碼更改都可能影響整個程式碼庫，實際上經常會影響數千個檔案。需要建構[^c8]（或至少分析）許多（幾乎所有 Google 的）完整二進位制檔案以確定完整的語義結構。它每天使用大量計算資源（當前頻率）產生索引。即時搜尋索引和每日交叉參考索引之間的差異是使用者罕見但反覆出現的問題的根源。
 
-> [^7]: For comparison, the model of “every developer has their own IDE on their own workspace do the indexing calculation” scales roughly quadratically: developers produce a roughly constant amount of code per unit time, so the codebase scales linearly (even with a fixed number of developers). A linear number of IDEs do linearly more work each time—this is not a recipe for good scaling.
+> [^e7]: For comparison, the model of “every developer has their own IDE on their own workspace do the indexing calculation” scales roughly quadratically: developers produce a roughly constant amount of code per unit time, so the codebase scales linearly (even with a fixed number of developers). A linear number of IDEs do linearly more work each time—this is not a recipe for good scaling.
 >
-> 7  相比之下，“每個開發人員在自己的工作空間中都有自己的IDE，並進行索引計算”的模型大致按二次方進行擴充：開發人員每單位時間產生的程式碼量大致恆定，因此程式碼庫可以線性擴充（即使有固定數量的開發人員）。線性數量的IDE每次都會做線性更多的工作，但這並不是實現良好擴充的秘訣。
+> [^c7]:  相比之下，“每個開發人員在自己的工作空間中都有自己的IDE，並進行索引計算”的模型大致按二次方進行擴充：開發人員每單位時間產生的程式碼量大致恆定，因此程式碼庫可以線性擴充（即使有固定數量的開發人員）。線性數量的IDE每次都會做線性更多的工作，但這並不是實現良好擴充的秘訣。
 >
-> [^8]: Kythe instruments the build workflow to extract semantic nodes and edges from source code. This extraction process collects partial cross-reference graphs for each individual build rule. In a subsequent phase, these partial graphs are merged into one global graph and its representation is optimized for the most common queries (go-to-definition, find all usages, fetch all decorations for a file). Each phase—extraction and post processing—is roughly as expensive as a full build; for example, in case of Chromium, the construction of the Kythe index is done in about six hours in a distributed setup and therefore too costly to be constructed by every developer on their own workstation. This computational cost is the why the Kythe index is computed only once per day.
+> [^e8]: Kythe instruments the build workflow to extract semantic nodes and edges from source code. This extraction process collects partial cross-reference graphs for each individual build rule. In a subsequent phase, these partial graphs are merged into one global graph and its representation is optimized for the most common queries (go-to-definition, find all usages, fetch all decorations for a file). Each phase—extraction and post processing—is roughly as expensive as a full build; for example, in case of Chromium, the construction of the Kythe index is done in about six hours in a distributed setup and therefore too costly to be constructed by every developer on their own workstation. This computational cost is the why the Kythe index is computed only once per day.
 >
-> 8 Kyth使用建構工作流從原始碼中提取語義節點和邊緣。這個提取過程為每個單獨的產生規則收集部分交叉參考圖。在隨後的階段中，這些區域性圖合併為一個全域圖，並針對最常見的查詢對其表示進行最佳化（轉到定義，查詢所有用法，獲取檔案的所有修飾）。每個階段的提取和後處理成本大致與完整建構一樣高；例如，對於Chromium，Kythe索引的建構在分散式設定中大約需要六個小時，因此每個開發人員都無法在自己的工作站上建構，成本太高。這就是為什麼Kythe指數每天只計算一次的原因。
+> [^c8]:  Kyth使用建構工作流從原始碼中提取語義節點和邊緣。這個提取過程為每個單獨的產生規則收集部分交叉參考圖。在隨後的階段中，這些區域性圖合併為一個全域圖，並針對最常見的查詢對其表示進行最佳化（轉到定義，查詢所有用法，獲取檔案的所有修飾）。每個階段的提取和後處理成本大致與完整建構一樣高；例如，對於Chromium，Kythe索引的建構在分散式設定中大約需要六個小時，因此每個開發人員都無法在自己的工作站上建構，成本太高。這就是為什麼Kythe指數每天只計算一次的原因。
 
 ### Zero Setup Global Code View  零設定全域程式碼檢視
 
@@ -199,13 +199,13 @@ In the previous section, we looked at various aspects of the Code Search UI and 
 
 在上一節中，我們研究了程式碼搜尋 UI 的各個方面，以及為什麼需要擁有一個單獨的工具來瀏覽程式碼。在接下來的部分中，我們會稍微瞭解一下程式碼搜尋實現的幕後情況。我們首先討論了主要挑戰——擴充——然後討論了幾種大規模複雜化建構搜尋和瀏覽程式碼好產品的方式。之後，我們詳細介紹了我們如何應對其中的一些挑戰，以及在建構程式碼搜尋時做出了哪些權衡。
 
-The biggest[^9] scaling challenge for searching code is the corpus size. For a small repository of a couple megabytes, a brute-force search with grep search will do. When hundreds of megabytes need to be searched, a simple local index can speed up search by an order of magnitude or more. When gigabytes or terabytes of source code need to be searched, a cloud-hosted solution with multiple machines can keep search times reasonable. The utility of a central solution increases with the number of developers using it and the size of the code space.
+The biggest[^e9] scaling challenge for searching code is the corpus size. For a small repository of a couple megabytes, a brute-force search with grep search will do. When hundreds of megabytes need to be searched, a simple local index can speed up search by an order of magnitude or more. When gigabytes or terabytes of source code need to be searched, a cloud-hosted solution with multiple machines can keep search times reasonable. The utility of a central solution increases with the number of developers using it and the size of the code space.
 
-搜尋程式碼的最大挑戰是語料庫大小。對於幾兆位元組的小型儲存庫，使用 grep 搜尋的蠻力搜尋就可以了。當需要搜尋數百兆位元組時，一個簡單的本地索引可以將搜尋速度提高一個數量級或更多。當需要搜尋千兆位元組或千兆位元組的原始碼時，具有多臺機器的雲託管解決方案可以使搜尋時間保持合理。中央解決方案的實用性隨著使用它的開發人員的數量和程式碼空間的大小而增加。
+搜尋程式碼的最大[^c9]挑戰是語料庫大小。對於幾兆位元組的小型儲存庫，使用 grep 搜尋的蠻力搜尋就可以了。當需要搜尋數百兆位元組時，一個簡單的本地索引可以將搜尋速度提高一個數量級或更多。當需要搜尋千兆位元組或千兆位元組的原始碼時，具有多臺機器的雲託管解決方案可以使搜尋時間保持合理。中央解決方案的實用性隨著使用它的開發人員的數量和程式碼空間的大小而增加。
 
-> [^9]: Because queries are independent, more users can be addressed by having more servers.
+> [^e9]: Because queries are independent, more users can be addressed by having more servers.
 >
-> 9 因為查詢是獨立的，所以可以透過擁有更多的伺服器來解決更多的使用者。
+> [^c9]: 因為查詢是獨立的，所以可以透過擁有更多的伺服器來解決更多的使用者。
 
 ### Search Query Latency 搜尋查詢延遲
 
@@ -221,17 +221,17 @@ A large number of Code Search queries are performed in order to navigate the cod
 
 執行大量程式碼搜尋查詢來導航程式碼庫。理想情況下，“下一個”檔案只需單擊一下即可（例如，對於包含的檔案或符號定義），但對於一般導航，不需要使用經典檔案樹，簡單地搜尋所需的檔案或符號會快得多，理想情況下不需要完全指定它，會為部分文字提供聯想查詢。隨著程式碼庫（和檔案樹）的增長，這變得越來越正確。
 
-Normal navigation to a specific file in another folder or project requires several user interactions. With search, just a couple of keystrokes can be sufficient to get to the relevant file. To make search this effective, additional information about the search context (e.g., the currently viewed file) can be provided to the search backend. The context can restrict the search to files of a specific project, or influence ranking by preferring files that are in proximity to other files or directories. In the Code Search UI,[^10] the user can predefine multiple contexts and quickly switch between them as needed. In editors, the open or edited files are implicitly used as context to prioritize search results in their proximity.
+Normal navigation to a specific file in another folder or project requires several user interactions. With search, just a couple of keystrokes can be sufficient to get to the relevant file. To make search this effective, additional information about the search context (e.g., the currently viewed file) can be provided to the search backend. The context can restrict the search to files of a specific project, or influence ranking by preferring files that are in proximity to other files or directories. In the Code Search UI,[^e10] the user can predefine multiple contexts and quickly switch between them as needed. In editors, the open or edited files are implicitly used as context to prioritize search results in their proximity.
 
-正常導航到另一個資料夾或專案中的特定檔案需要多次使用者互動。使用搜索，只需幾次點選即可存取相關檔案。為了使搜尋有效，可以將有關搜尋上下文的附加資訊（例如，當前檢視的檔案）提供給搜尋後端。上下文可以將搜尋限制為特定專案的檔案，或者透過優先選擇靠近其他檔案或目錄的檔案來影響排行。在程式碼搜尋 UI 中， 使用者可以預定義多個上下文並根據需要在它們之間快速切換。在編輯器中，開啟或編輯的檔案被隱含用作上下文，以優先考慮搜尋結果的接近程度。
+正常導航到另一個資料夾或專案中的特定檔案需要多次使用者互動。使用搜索，只需幾次點選即可存取相關檔案。為了使搜尋有效，可以將有關搜尋上下文的附加資訊（例如，當前檢視的檔案）提供給搜尋後端。上下文可以將搜尋限制為特定專案的檔案，或者透過優先選擇靠近其他檔案或目錄的檔案來影響排行。在程式碼搜尋 UI 中，[^c10] 使用者可以預定義多個上下文並根據需要在它們之間快速切換。在編輯器中，開啟或編輯的檔案被隱含用作上下文，以優先考慮搜尋結果的接近程度。
 
 One could consider the power of the search query language (e.g., specifying files,using regular expressions) as another criteria; we discuss this in the trade-offs section a little later in the chapter.
 
 可以將搜尋查詢語言的功能（例如，指定檔案、使用正則表示式）視為另一個標準；我們將在本章稍後的權衡部分討論這個問題。
 
-> [^10]: The Code Search UI does also have a classical file tree, so navigating this way is also possible.
+> [^e10]: The Code Search UI does also have a classical file tree, so navigating this way is also possible.
 >
-> 10 程式碼搜尋使用者介面也有一個經典的檔案樹，所以用這種方式導航也是可以的。
+> [^c10]: 程式碼搜尋使用者介面也有一個經典的檔案樹，所以用這種方式導航也是可以的。
 
 ### Index Latency 索引延遲
 
@@ -263,9 +263,9 @@ Google’s codebase is a special challenge for Code Search due to its sheer size
 
 由於其龐大的規模，Google 的程式碼庫對程式碼搜尋來說是一個特殊的挑戰。在早期，採用了基於三元組的方法。 Russ Cox 隨後開源了一個簡化版本。目前，程式碼搜尋索引大約有1.5 TB 的內容，每秒處理大約 200 個查詢，伺服器端搜尋延遲的中位數小於 50 毫秒，索引延遲的中位數（程式碼提交和索引可見性之間的時間）小於 10秒。
 
-Let’s roughly estimate the resource requirements to achieve this performance with a grep-based bruteforce solution. The RE2 library we use for regular expression matching processes about 100 MB/sec for data in RAM. Given a time window of 50 ms, 300,000 cores would be needed to crunch through the 1.5 TB of data. Because in most cases simple substring searches are sufficient, one could replace the regular expression matching with a special substring search that can process about 1 GB/sec[^11] under certain conditions, reducing the number of cores by 10 times. So far, we have looked at just the resource requirements for processing a single query within 50 ms. If we’re getting 200 requests per second, 10 of those will be simultaneously active in that 50 ms window, bringing us back to 300,000 cores just for substring search.
+Let’s roughly estimate the resource requirements to achieve this performance with a grep-based bruteforce solution. The RE2 library we use for regular expression matching processes about 100 MB/sec for data in RAM. Given a time window of 50 ms, 300,000 cores would be needed to crunch through the 1.5 TB of data. Because in most cases simple substring searches are sufficient, one could replace the regular expression matching with a special substring search that can process about 1 GB/sec[^e11] under certain conditions, reducing the number of cores by 10 times. So far, we have looked at just the resource requirements for processing a single query within 50 ms. If we’re getting 200 requests per second, 10 of those will be simultaneously active in that 50 ms window, bringing us back to 300,000 cores just for substring search.
 
-讓我們粗略估計一下使用基於 grep 的蠻力解決方案實現此效能所需的資源。我們用於正則表示式匹配的 RE2 庫以大約 100 MB/秒的速度處理 RAM 中的資料。給定 50 毫秒的時間視窗，需要 300,000 個核心來處理 1.5 TB 的資料。因為在大多數情況下，簡單的子字串搜尋就足夠了，可以將正則表示式匹配替換為特殊的子字串搜尋，在某些條件下可以處理大約 1 GB/秒，從而將核心數減少 10 倍。到目前為止，我們只研究了在 50 毫秒內處理單個查詢的資源需求。如果我們每秒收到 200 個請求，其中 10 個將在 50 毫秒的視窗中同時處於活動狀態，這使我們回到 300,000 個核心僅用於子字串搜尋。
+讓我們粗略估計一下使用基於 grep 的蠻力解決方案實現此效能所需的資源。我們用於正則表示式匹配的 RE2 庫以大約 100 MB/秒的速度處理 RAM 中的資料。給定 50 毫秒的時間視窗，需要 300,000 個核心來處理 1.5 TB 的資料。因為在大多數情況下，簡單的子字串搜尋就足夠了，可以將正則表示式匹配替換為特殊的子字串搜尋，在某些條件下可以處理大約 1 GB/秒，[^c11]從而將核心數減少 10 倍。到目前為止，我們只研究了在 50 毫秒內處理單個查詢的資源需求。如果我們每秒收到 200 個請求，其中 10 個將在 50 毫秒的視窗中同時處於活動狀態，這使我們回到 300,000 個核心僅用於子字串搜尋。
 
 Although this estimate ignores that the search can stop once a certain number of results are found or that file restrictions can be evaluated much more effectively than content searches, it doesn’t take communication overhead, ranking, or the fan out to tens of thousands of machines into account either. But it shows quite well the scale involved and why Google’s Code Search team continuously invests into improving indexing. Over the years, our index changed from the original trigram-based solution, through a custom suffix array–based solution, to the current sparse ngram solution. This latest solution is more than 500 times more efficient than the brute-force solution while being capable of also answering regular expression searches at blazing speed.
 
@@ -287,30 +287,30 @@ To support local workspaces (which have a small delta from the global repository
 
 為了支援本地工作空間（與全域儲存庫有一個小的增量），我們有多臺機器進行簡單的暴力搜尋。工作區資料在第一次請求時載入，然後透過偵聽檔案更改來保持同步。當記憶體不足時，我們會從機器中刪除最近的工作區。使用我們的歷史索引搜尋未更改的文件。因此，搜尋被隱含限制為工作空間同步到的儲存庫狀態。
 
-> [^11]: See https://blog.scalyr.com/2014/05/searching-20-gbsec-systems-engineering-before-algorithms and http://volnitsky.com/project/str_search./
-> 11 查閱blog.scalyr.com/2014/05/searching-20-gbsec-systems-engineering-before-algorithms 和tp://volnitsky.com/project/str_search.
+> [^e11]: See https://blog.scalyr.com/2014/05/searching-20-gbsec-systems-engineering-before-algorithms and http://volnitsky.com/project/str_search./
+> [^c11]: 查閱 https://blog.scalyr.com/2014/05/searching-20-gbsec-systems-engineering-before-algorithms 和 http://volnitsky.com/project/str_search.
 
 ### Ranking
 
 ### 排行
 
-For a very small codebase, ranking doesn’t provide much benefit, because there aren’t many results anyway. But the larger the codebase becomes, the more results will be found and the more important ranking becomes. In Google’s codebase, any short substring will occur thousands, if not millions, of times. Without ranking, the user either must check all of those results in order to find the correct one, or must refine the query[^12] er until the result set is reduced to just a handful of files. Both options waste the developer’s time.
+For a very small codebase, ranking doesn’t provide much benefit, because there aren’t many results anyway. But the larger the codebase becomes, the more results will be found and the more important ranking becomes. In Google’s codebase, any short substring will occur thousands, if not millions, of times. Without ranking, the user either must check all of those results in order to find the correct one, or must refine the query[^e12] until the result set is reduced to just a handful of files. Both options waste the developer’s time.
 
-對於非常小的程式碼庫，排行並沒有帶來太多好處，因為無論如何也沒有很多結果。但是程式碼庫越大，找到的結果就越多，排行也就越重要。在 Google 的程式碼庫中，任何短子字串都會出現數千次，甚至數百萬次。如果沒有排行，使用者要麼必須檢查所有這些結果才能找到正確的結果，要麼必須進一步細化查詢，直到結果集減少到幾個檔案。這兩種選擇都浪費了開發人員的時間。
+對於非常小的程式碼庫，排行並沒有帶來太多好處，因為無論如何也沒有很多結果。但是程式碼庫越大，找到的結果就越多，排行也就越重要。在 Google 的程式碼庫中，任何短子字串都會出現數千次，甚至數百萬次。如果沒有排行，使用者要麼必須檢查所有這些結果才能找到正確的結果，要麼必須進一步細化查詢，[^c12]直到結果集減少到幾個檔案。這兩種選擇都浪費了開發人員的時間。
 
 Ranking typically starts with a scoring function, which maps a set of features of each file (“signals”) to some number: the higher the score, the better the result. The goal of the search is then to find the top N results as efficiently as possible. Typically, one distinguishes between two types of signals: those that depend only on the document (“query independent”) and those that depend on the search query and how it matches the document (“query dependent”). The filename length or the programming language of a file would be examples of query independent signals, whereas whether a match is a function definition or a string literal is a query dependent signal.
 
 排行通常從評分函式開始，它將每個檔案的一組特徵（“訊號”）對映到某個數字：分數越高，結果越好。搜尋的目標是儘可能高效地找到前 N 個結果。通常，人們區分兩種型別的訊號：僅依賴於文件的訊號（“查詢無關”）和依賴於搜尋查詢以及它如何匹配文件的訊號（“查詢依賴”）。檔名長度或檔案的程式語言將是查詢獨立訊號的範例，而匹配是函式定義還是字串文字是查詢相關訊號。
 
-> [^12]: ontrast to web search, adding more characters to a Code Search query always reduces the result set (apart rom a few rare exceptions via regular expression terms).
+> [^e12]: ontrast to web search, adding more characters to a Code Search query always reduces the result set (apart rom a few rare exceptions via regular expression terms).
 >
-> 12 與網路搜尋相比，在程式碼搜尋查詢中新增更多的字元總是會減少結果集（除了少數透過正則表示式術語的罕見例外）。
+> [^c12]: 與網路搜尋相比，在程式碼搜尋查詢中新增更多的字元總是會減少結果集（除了少數透過正則表示式術語的罕見例外）。
 
 #### Query independent signals 查詢獨立訊號
 
-Some of the most important query independent signals are the number of file views and the amount of references to a file. File views are important because they indicate which files developers consider important and are therefore more likely to want to find. For instance, utility functions in base libraries have a high view count. It doesn’t matter whether the library is already stable and isn’t changed anymore or whether the library is being actively developed. The biggest downside of this signal is the feedback loop it creates. By scoring frequently viewed documents higher, the chance increases that developers will look at them and decreases the chance of other documents to make it into the top N. This problem is known as exploitation versus exploration, for which various solutions exist (e.g., advanced A/B search experiments or curation of training data). In practice, it doesn’t seem harmful to somewhat over-show highscoring items: they are simply ignored when irrelevant and taken if a generic example is needed. However, it is a problem for new files, which don’t yet have enough information for a good signal.[^13]
+Some of the most important query independent signals are the number of file views and the amount of references to a file. File views are important because they indicate which files developers consider important and are therefore more likely to want to find. For instance, utility functions in base libraries have a high view count. It doesn’t matter whether the library is already stable and isn’t changed anymore or whether the library is being actively developed. The biggest downside of this signal is the feedback loop it creates. By scoring frequently viewed documents higher, the chance increases that developers will look at them and decreases the chance of other documents to make it into the top N. This problem is known as exploitation versus exploration, for which various solutions exist (e.g., advanced A/B search experiments or curation of training data). In practice, it doesn’t seem harmful to somewhat over-show highscoring items: they are simply ignored when irrelevant and taken if a generic example is needed. However, it is a problem for new files, which don’t yet have enough information for a good signal.[^e13]
 
-一些最重要的獨立於查詢的訊號是檔案檢視的數量和對檔案的參考量。檔案檢視很重要，因為它們表明開發人員認為哪些檔案很重要，因此更有可能想要找到。例如，基礎庫中的實用程式函式具有很高的檢視次數。函式庫是否已經穩定並且不再更改或者函式庫是否正在積極開發都無關緊要。該訊號的最大缺點是它建立的反饋迴路。透過對經常檢視的文件進行更高的評分，開發人員檢視它們的機會增加，並降低了其他文件進入前 N 的機會。這個問題被稱為利用與探索，存在各種解決方案（例如，高階 A /B 搜尋實驗或訓練資料管理）。在實踐中，過度展示高分專案似乎並沒有什麼害處：它們在不相關時被忽略，如果需要通用範例則採用。但是，對於新檔案來說，這是一個問題，它們還沒有足夠的資訊來獲得良好的訊號。
+一些最重要的獨立於查詢的訊號是檔案檢視的數量和對檔案的參考量。檔案檢視很重要，因為它們表明開發人員認為哪些檔案很重要，因此更有可能想要找到。例如，基礎庫中的實用程式函式具有很高的檢視次數。函式庫是否已經穩定並且不再更改或者函式庫是否正在積極開發都無關緊要。該訊號的最大缺點是它建立的反饋迴路。透過對經常檢視的文件進行更高的評分，開發人員檢視它們的機會增加，並降低了其他文件進入前 N 的機會。這個問題被稱為利用與探索，存在各種解決方案（例如，高階 A /B 搜尋實驗或訓練資料管理）。在實踐中，過度展示高分專案似乎並沒有什麼害處：它們在不相關時被忽略，如果需要通用範例則採用。但是，對於新檔案來說，這是一個問題，它們還沒有足夠的資訊來獲得良好的訊號。[^c13]
 
 We also use the number of references to a file, which parallels the original page rank algorithm, by replacing web links as references with the various kinds of “include/import” statements present in most languages. We can extend the concept up to build dependencies (library/module level references) and down to functions and classes. This global relevance is often referred to as the document’s “priority.”
 
@@ -324,9 +324,9 @@ Large-scale refactorings, such as open sourcing core libraries, present a second
 
 大規模重構，例如開源核心函式庫，是第二個挑戰。此類更改不會在單個程式碼更新中自動發生；相反，它們需要分多個階段推出。通常，引入間接方式，例如隱藏檔案的使用移動。這些型別間接降低了移動檔案的頁面排行，並使開發人員更難發現新位置。此外，移動檔案時檔案檢視通常會丟失，從而使情況變得更糟。因為程式碼庫的這種全域重組比較少見（大多數介面很少移動），最簡單的解決方案是在這種過渡期間手動提升檔案。 （或者等到遷移完成並等待自然過程在其新位置對檔案進行升級。）
 
-> [^13]: This could likely be somewhat corrected by using recency in some form as a signal, perhaps doing something imilar to web search dealing with new pages, but we don’t yet do so.
+> [^e13]: This could likely be somewhat corrected by using recency in some form as a signal, perhaps doing something imilar to web search dealing with new pages, but we don’t yet do so.
 >
-> 13 這很可能透過使用某種形式的事件作為訊號而得到一定程度的修正，也許可以做一些類似於網路搜尋處理新頁面的事情，但我們還沒有這樣做。
+> [^c13]: 這很可能透過使用某種形式的事件作為訊號而得到一定程度的修正，也許可以做一些類似於網路搜尋處理新頁面的事情，但我們還沒有這樣做。
 
 #### Query dependent signals 查詢相關訊號
 
@@ -338,13 +338,13 @@ Unlike web search, we don’t just match on tokens. However, if there are clean 
 
 與網路搜尋不同，我們不僅僅匹配令牌。但是，如果存在乾淨的標記匹配（即，搜尋詞與帶有某種形式的中斷（例如空格）的內容匹配），則會應用進一步的提升並考慮區分大小寫。這意味著，例如，搜尋“Point”將針對“Point *p”的得分高於針對“被任命為理事會成員”的得分。
 
-For convenience, a default search matches filename and qualified symbols[^14] ion to the actual file content. A user can specify the particular kind of match, but they don’t need to. The scoring boosts symbol and filename matches over normal content matches to reflect the inferred intent of the developer. Just as with web searches, developers can add more terms to the search to make queries more specific.It’s very common for a query to be “qualified” with hints about the filename (e.g.,“base” or “myproject”). Scoring leverages this by boosting results where much of the query occurs in the full path of the potential result, putting such results ahead of those that contain only the words in random places in their content.
+For convenience, a default search matches filename and qualified symbols[^e14] in addition to the actual file content. A user can specify the particular kind of match, but they don’t need to. The scoring boosts symbol and filename matches over normal content matches to reflect the inferred intent of the developer. Just as with web searches, developers can add more terms to the search to make queries more specific.It’s very common for a query to be “qualified” with hints about the filename (e.g.,“base” or “myproject”). Scoring leverages this by boosting results where much of the query occurs in the full path of the potential result, putting such results ahead of those that contain only the words in random places in their content.
 
-為方便起見，除了實際檔案內容外，預設搜尋還匹配檔名和限定符號。使用者可以指定特定型別的匹配，但他們不需要。與正常的內容匹配相比，該評分提高了符號和檔名匹配，以反映開發人員的推斷意圖。與 Web 搜尋一樣，開發人員可以在搜尋中新增更多術語以使查詢更加具體。透過檔名提示“限定”查詢是很常見的（例如，“基礎”或“我的專案”）。評分透過提升大部分查詢出現在潛在結果的完整路徑中的結果來利用這一點，將此類結果置於僅包含其內容中隨機位置的單詞的結果之前。
+為方便起見，除了實際檔案內容外，預設搜尋還匹配檔名和限定符號。[^c14]使用者可以指定特定型別的匹配，但他們不需要。與正常的內容匹配相比，該評分提高了符號和檔名匹配，以反映開發人員的推斷意圖。與 Web 搜尋一樣，開發人員可以在搜尋中新增更多術語以使查詢更加具體。透過檔名提示“限定”查詢是很常見的（例如，“基礎”或“我的專案”）。評分透過提升大部分查詢出現在潛在結果的完整路徑中的結果來利用這一點，將此類結果置於僅包含其內容中隨機位置的單詞的結果之前。
 
-> [^14]: In programming languages, a symbol such as a function “Alert” often is defined in a particular scope, such as  class (“Monitor”) or namespace (“absl”). The qualified name might then be absl::Monitor::Alert, and this is indable, even if it doesn’t occur in the actual text.
+> [^e14]: In programming languages, a symbol such as a function “Alert” often is defined in a particular scope, such as  class (“Monitor”) or namespace (“absl”). The qualified name might then be absl::Monitor::Alert, and this is indable, even if it doesn’t occur in the actual text.
 >
-> 14 在程式語言中，像函式 "Alert "這樣的符號經常被定義在一個特定的範圍內，例如類（"Monitor"）或名稱空間（"absl"）。因此，限定的名稱可能是absl::Monitor::Alert，這是可以理解的，即使它沒有出現在實際文字中。
+> [^c14]: 在程式語言中，像函式 "Alert "這樣的符號經常被定義在一個特定的範圍內，例如類（"Monitor"）或名稱空間（"absl"）。因此，限定的名稱可能是absl::Monitor::Alert，這是可以理解的，即使它沒有出現在實際文字中。
 
 #### Retrieval 恢復
 
@@ -392,25 +392,25 @@ Normal search sacrifices completeness for speed, essentially gambling that ranki
 
 正常搜尋會犧牲完整性來換取速度，本質上是在賭排行會確保靠前的結果包含所有所需的結果。事實上，對於程式碼搜尋，排行搜尋是更常見的情況，例如使用者正在尋找一個特定的東西，函式定義，可能在數百萬個匹配項中。但是，有時開發人員想要所有結果；例如，查詢特定符號的所有地方以進行重構。分析、工具或重構（例如全域搜尋和替換）通常需要所有結果。提供所有結果的需求是與 Web 搜尋之間的根本區別，其中可以採用許多捷徑，例如只考慮排行較高的專案。
 
-Being able to deliver all results for very large result sets has high cost, but we felt it was required for tooling, and for developers to trust the results. However, because for most queries only a few results are relevant (either there are only a few matches[^15] or only a few are interesting), we didn’t want to sacrifice average speed for potential completeness.
+Being able to deliver all results for very large result sets has high cost, but we felt it was required for tooling, and for developers to trust the results. However, because for most queries only a few results are relevant (either there are only a few matches[^e15] or only a few are interesting), we didn’t want to sacrifice average speed for potential completeness.
 
-能夠為非常大的結果集交付所有結果的成本很高，但我們認為這是工具所必需的，並且開發人員需要信任結果。然而，因為對於大多數查詢，只有少數結果是相關的（或者只有少數匹配或只有少數是有用的），我們不想為了潛在的完整性而犧牲平均速度。
+能夠為非常大的結果集交付所有結果的成本很高，但我們認為這是工具所必需的，並且開發人員需要信任結果。然而，因為對於大多數查詢，只有少數結果是相關的（或者只有少數匹配[^c15]或只有少數是有用的），我們不想為了潛在的完整性而犧牲平均速度。
 
-To achieve both goals with one architecture, we split the codebase into shards with files ordered by their priority. Then, we usually need to consider only the matches to high priority files from each chunk. This is similar to how web search works. However, if requested, Code Search can fetch all results from each chunk, to guarantee finding all results.[^16] This lets us address both use cases, without typical searches being slowed down by the less frequently used capability of returning large, complete results sets. Results can also then be delivered in alphabetical order, rather than ranked, which is useful for some tools.
+To achieve both goals with one architecture, we split the codebase into shards with files ordered by their priority. Then, we usually need to consider only the matches to high priority files from each chunk. This is similar to how web search works. However, if requested, Code Search can fetch all results from each chunk, to guarantee finding all results.[^e16] This lets us address both use cases, without typical searches being slowed down by the less frequently used capability of returning large, complete results sets. Results can also then be delivered in alphabetical order, rather than ranked, which is useful for some tools.
 
-為了透過一種架構實現這兩個目標，我們將程式碼庫拆分為分片，檔案按優先順序排行。然後，我們通常只需要考慮每個塊中與高優先順序檔案的匹配。這類似於網路搜尋的工作方式。但是，如果需要，程式碼搜尋可以從每個塊中獲取所有結果，以保證找到所有結果。這讓我們能夠解決這兩個使用案例，而不會因為不常用的返回大型完整結果集的功能而減慢典型搜尋速度。結果也可以按字母順序而不是排行，這對某些工具很有用。
+為了透過一種架構實現這兩個目標，我們將程式碼庫拆分為分片，檔案按優先順序排行。然後，我們通常只需要考慮每個塊中與高優先順序檔案的匹配。這類似於網路搜尋的工作方式。但是，如果需要，程式碼搜尋可以從每個塊中獲取所有結果，以保證找到所有結果。[^c16]這讓我們能夠解決這兩個使用案例，而不會因為不常用的返回大型完整結果集的功能而減慢典型搜尋速度。結果也可以按字母順序而不是排行，這對某些工具很有用。
 
 So, here the trade-off was a more complex implementation and API versus greater capabilities, rather than the more obvious latency versus completeness.
 
 因此，這裡權衡的是更復雜的實現和 API 與更強大的功能，而不是更明顯的延遲與完整性。
 
-> [^15]: An analysis of queries showed that about one-third of user searches have fewer than 20 results.
+> [^e15]: An analysis of queries showed that about one-third of user searches have fewer than 20 results.
 >
-> 15 對查詢的分析表明，大約三分之一的使用者搜尋結果少於20個。
+> [^c15]: 對查詢的分析表明，大約三分之一的使用者搜尋結果少於20個。
 >
-> [^16]: In practice, even more happens behind the scenes so that responses don’t become painfully huge and developers don’t bring down the whole system by making searches that match nearly everything (imagine searching for the letter “i” or a single space).
+> [^e16]: In practice, even more happens behind the scenes so that responses don’t become painfully huge and developers don’t bring down the whole system by making searches that match nearly everything (imagine searching for the letter “i” or a single space).
 >
-> 16在實踐中，更多的事情發生在幕後，因此響應不會變得例外巨大，開發人員也不會透過搜尋幾乎所有內容來破壞整個系統（想象一下搜尋字母“i”或單個空格）
+> [^c16]: 在實踐中，更多的事情發生在幕後，因此響應不會變得例外巨大，開發人員也不會透過搜尋幾乎所有內容來破壞整個系統（想象一下搜尋字母“i”或單個空格）
 
 ### Completeness: Head Versus Branches Versus All History Versus Workspaces 完整性：Head vs 分支 vs 所有歷史 vs 工作區
 
@@ -462,21 +462,21 @@ Tokenization also typically doesn’t care about the case of letters (“r” ve
 
 標記化通常也不關心字母的大小寫（“r”與“R”），並且經常會模糊單詞；例如，將“searching”和“searched”簡化為相同的詞幹標記搜尋。在搜尋程式碼時，缺乏精確性是一個嚴重的問題。最後，標記化使搜尋空格或其他單詞分隔符（逗號、括號）成為不可能，即使這在程式碼中可能非常重要。
 
-A next step up[^17] in searching power is full substring search in which any sequence of characters can be searched for. One fairly efficient way to provide this is via a trigram-based index. [^18] In its simplest form, the resulting index size is still much smaller than the original source code size. However, the small size comes at the cost of relatively low recall accuracy compared to other substring indices. This means slower queries because the nonmatches need to be filtered out of the result set. This is where a good compromise between index size, search latency, and resource consumption must be found that depends heavily on codebase size, resource availability, and searches per second.
+A next step up[^e17] in searching power is full substring search in which any sequence of characters can be searched for. One fairly efficient way to provide this is via a trigram-based index. [^e18] In its simplest form, the resulting index size is still much smaller than the original source code size. However, the small size comes at the cost of relatively low recall accuracy compared to other substring indices. This means slower queries because the nonmatches need to be filtered out of the result set. This is where a good compromise between index size, search latency, and resource consumption must be found that depends heavily on codebase size, resource availability, and searches per second.
 
-搜尋能力的下一步是完整的子字串搜尋，其中可以搜尋任何字元序列。提供此功能的一種相當有效的方法是透過基於三元組的索引。在最簡單的形式中，產生的索引大小仍然比原始碼大小小得多。然而，與其他子字串索引相比，小尺寸的代價是召回準確率相對較低。這意味著查詢速度較慢，因為不匹配項需要從結果集中過濾掉。這是必須在索引大小、搜尋延遲和資源消耗之間找到良好折衷的地方，這在很大程度上取決於程式碼庫大小、資源可用性和每秒搜尋量。
+搜尋能力的下一步[^c17]是完整的子字串搜尋，其中可以搜尋任何字元序列。[^c18]提供此功能的一種相當有效的方法是透過基於三元組的索引。在最簡單的形式中，產生的索引大小仍然比原始碼大小小得多。然而，與其他子字串索引相比，小尺寸的代價是召回準確率相對較低。這意味著查詢速度較慢，因為不匹配項需要從結果集中過濾掉。這是必須在索引大小、搜尋延遲和資源消耗之間找到良好折衷的地方，這在很大程度上取決於程式碼庫大小、資源可用性和每秒搜尋量。
 
 If a substring index is available, it’s easy to extend it to allow regular expression searches. The basic idea is to convert the regular expression automaton into a set of substring searches. This conversion is straightforward for a trigram index and can be generalized to other substring indices. Because there is no perfect regular expression index, it will always be possible to construct queries that result in a brute-force search. However, given that only a small fraction of user queries are complex regular expressions, in practice, the approximation via substring indices works very well.
 
 如果子字串索引可用，很容易擴充它以允許正則表示式搜尋。基本思想是將正則表示式自動機轉換為一組子字串搜尋。這種轉換對於三元索引很簡單，並且可以推廣到其他子字串索引。因為沒有完美的正則表示式索引，所以總是可以建構導致暴力搜尋的查詢。然而，鑑於只有一小部分使用者查詢是複雜的正則表示式，在實踐中，透過子字串索引的近似效果非常好。
 
-> [^17]: There are other intermediate varieties, such as building a prefix/suffix index, but generally they provide less expressiveness in search queries while still having high complexity and indexing costs.
+> [^e17]: There are other intermediate varieties, such as building a prefix/suffix index, but generally they provide less expressiveness in search queries while still having high complexity and indexing costs.
 >
-> 17 還有其他的類似方式，如建立字首/字尾索引，但一般來說，它們在搜尋查詢中提供的表達能力較低，同時仍有較高的複雜性和索引成本。
-> 
-[^18]: Russ Cox, “Regular Expression Matching with a Trigram Index or How Google Code Search Worked.”
+> [^c17]: 還有其他的類似方式，如建立字首/字尾索引，但一般來說，它們在搜尋查詢中提供的表達能力較低，同時仍有較高的複雜性和索引成本。
 >
-> 18 Russ Cox，"用三元索引進行正則表示式匹配或谷歌程式碼搜尋的工作原理"。
+> [^18]: Russ Cox, “Regular Expression Matching with a Trigram Index or How Google Code Search Worked.”
+>
+> [^c18]: Russ Cox，"用三元索引進行正則表示式匹配或谷歌程式碼搜尋的工作原理"。
 
 ## Conclusion 結論
 

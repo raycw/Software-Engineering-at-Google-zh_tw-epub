@@ -23,23 +23,23 @@ In this chapter, we’ll talk about the techniques, both social and technical, t
 
 ## What Is a Large-Scale Change? 什麼是大規模的變更？
 
-Before going much further, we should dig into what qualifies as a large-scale change (LSC). In our experience, an LSC is any set of changes that are logically related but cannot practically be submitted as a single atomic unit. This might be because it touches so many files that the underlying tooling can’t commit them all at once, or it might be because the change is so large that it would always have merge conflicts. In many cases, an LSC is dictated by your repository topology: if your organization uses a collection of distributed or federated repositories,[^1] making atomic changes across them might not even be technically possible.[^2] We’ll look at potential barriers to atomic changes in more detail later in this chapter.
+Before going much further, we should dig into what qualifies as a large-scale change (LSC). In our experience, an LSC is any set of changes that are logically related but cannot practically be submitted as a single atomic unit. This might be because it touches so many files that the underlying tooling can’t commit them all at once, or it might be because the change is so large that it would always have merge conflicts. In many cases, an LSC is dictated by your repository topology: if your organization uses a collection of distributed or federated repositories,[^e1] making atomic changes across them might not even be technically possible.[^e2] We’ll look at potential barriers to atomic changes in more detail later in this chapter.
 
-在進一步討論之前，我們應該探討一下什麼是大規模變更（LSC）。根據我們的經驗，LSC是指任何一組邏輯上相關但實際上不能作為一個單一的原子單元提交的變更。這可能是因為它涉及到檔案太多，以至於底層工具無法一次性提交所有檔案，也可能是因為變化太大，總是會有合併衝突。在很多情況下，LSC是由你的版本庫拓撲結構決定的：如果你的組織使用分散式或聯邦版本庫集合，在它們之間進行原子修改在技術上可能是不可能的。我們將在本章後面詳細討論原子變更的潛在障礙。
+在進一步討論之前，我們應該探討一下什麼是大規模變更（LSC）。根據我們的經驗，LSC是指任何一組邏輯上相關但實際上不能作為一個單一的原子單元提交的變更。這可能是因為它涉及到檔案太多，以至於底層工具無法一次性提交所有檔案，也可能是因為變化太大，總是會有合併衝突。在很多情況下，LSC是由你的版本庫拓撲結構決定的：如果你的組織使用分散式或聯邦版本庫集合，[^c1]在它們之間進行原子修改在技術上可能是不可能的。[^c2]我們將在本章後面詳細討論原子變更的潛在障礙。
 
 LSCs at Google are almost always generated using automated tooling. Reasons for making an LSC vary, but the changes themselves generally fall into a few basic categories:
 
 - Cleaning up common antipatterns using codebase-wide analysis tooling
 - Replacing uses of deprecated library features
 - Enabling low-level infrastructure improvements, such as compiler upgrades
-- Moving users from an old system to a newer one[^3]
+- Moving users from an old system to a newer one[^e3]
 
 谷歌的LSC幾乎都是使用自動工具產生的。製作LSC的原因各不相同，但修改本身通常分為幾個基本類別：
 
 - 使用程式碼庫範圍內的分析工具來清理常見的反模式
 - 替換已廢棄的函式庫特性的使用
 - 實現底層基礎架構改進，如編譯器升級
-- 將使用者從舊系統轉移到新系統
+- 將使用者從舊系統轉移到新系統[^c3]
 
 The number of engineers working on these specific tasks in a given organization might be low, but it is useful for their customers to have insight into the LSC tools and process. By their very nature, LSCs will affect a large number of customers, and the LSC tools easily scale down to teams making only a few dozen related changes.
 
@@ -53,17 +53,17 @@ In all of these cases, on a codebase the size of Google’s, infrastructure team
 
 在所有這些情況下，在像谷歌這樣規模的程式碼庫中，基礎設施團隊可能經常需要改變數十萬個對舊模式或符號的單獨參考。在迄今為止最大的案例中，我們已經觸及了數百萬個參考，而且我們希望這個過程能夠繼續良好地擴充。一般來說，我們發現儘早且經常投資於工具，以便為許多從事基礎設施工作的團隊啟用LSC是一種優勢。我們還發現，高效的工具也有助於工程師進行更小的更改。同樣的工具可以有效地更改數千個檔案，也可以很好地擴充到數十個檔案。
 
-> [^1]:  For some ideas about why, see Chapter 16.
+> [^e1]: For some ideas about why, see Chapter 16.
 >
-> 1 關於原因的一些想法，見第16章。
+> [^c1]: 關於原因的一些想法，見第16章。
 >
-> [^2]:  It’s possible in this federated world to say “we’ll just commit to each repo as fast as possible to keep the duration of the build break small!” But that approach really doesn’t scale as the number of federated repositories grows.
+> [^e2]: It’s possible in this federated world to say “we’ll just commit to each repo as fast as possible to keep the duration of the build break small!” But that approach really doesn’t scale as the number of federated repositories grows.
 >
-> 2 在這個聯合的世界裡，我們可以說 "我們將盡可能快地提交到每個 repo，以保持較小的建構中斷時間！" 但這種方法實際上不能隨著聯合程式碼庫數量的增長而擴充。
+> [^c2]: 在這個聯合的世界裡，我們可以說 "我們將盡可能快地提交到每個 repo，以保持較小的建構中斷時間！" 但這種方法實際上不能隨著聯合程式碼庫數量的增長而擴充。
 >
-> [^3]: For a further discussion about this practice, see Chapter 15.
+> [^e3]: For a further discussion about this practice, see Chapter 15.
 >
-> 3 關於這種做法的進一步討論，見第15章。
+> [^c3]: 關於這種做法的進一步討論，見第15章。
 
 ## Who Deals with LSCs? 誰負責處理LSC？
 
@@ -79,17 +79,17 @@ Consider the amount of time it takes to do the first of a series of semi-mechani
 
 考慮一下做一系列你不理解的半自動化變更中的第一次所需的時間。你可能會花一些時間來閱讀關於更改的動機和性質，找到一個簡單的例子，嘗試遵循所提供的建議，然後嘗試將其應用於你的原生代碼。對組織中的每個團隊重複此操作會大大增加執行的總體成本。透過只讓幾個集中的團隊負責LSC，谷歌將這些成本內部化，並透過使變革更有效地發生來降低成本。
 
-Second, nobody likes unfunded mandates.[^4] Even though a new system might be categorically better than the one it replaces, those benefits are often diffused across an organization and thus unlikely to matter enough for individual teams to want to update on their own initiative. If the new system is important enough to migrate to, the costs of migration will be borne somewhere in the organization. Centralizing the migration and accounting for its costs is almost always faster and cheaper than depending on individual teams to organically migrate.
+Second, nobody likes unfunded mandates.[^e4] Even though a new system might be categorically better than the one it replaces, those benefits are often diffused across an organization and thus unlikely to matter enough for individual teams to want to update on their own initiative. If the new system is important enough to migrate to, the costs of migration will be borne somewhere in the organization. Centralizing the migration and accounting for its costs is almost always faster and cheaper than depending on individual teams to organically migrate.
 
-第二，沒有人喜歡沒有資金支援的任務。即使一個新的系統在本質上可能比它所取代的系統更好，這些好處往往分散在整個組織中，因此不太可能重要到讓個別團隊想要主動更新。如果新系統足夠重要，需要遷移到新系統，那麼遷移的成本將由組織的某個部門承擔。集中遷移和核算其成本，幾乎總是比依靠各個團隊的有機遷移更快、更便宜。
+第二，沒有人喜歡沒有資金支援的任務。[^c4]即使一個新的系統在本質上可能比它所取代的系統更好，這些好處往往分散在整個組織中，因此不太可能重要到讓個別團隊想要主動更新。如果新系統足夠重要，需要遷移到新系統，那麼遷移的成本將由組織的某個部門承擔。集中遷移和核算其成本，幾乎總是比依靠各個團隊的有機遷移更快、更便宜。
 
 Additionally, having teams that own the systems requiring LSCs helps align incentives to ensure the change gets done. In our experience, organic migrations are unlikely to fully succeed, in part because engineers tend to use existing code as examples when writing new code. Having a team that has a vested interest in removing the old system responsible for the migration effort helps ensure that it actually gets done. Although funding and staffing a team to run these kinds of migrations can seem like an additional cost, it is actually just internalizing the externalities that an unfunded mandate creates, with the additional benefits of economies of scale.
 
 此外，擁有需要LSC的系統的團隊有助於調整激勵機制，以確保完成更改。根據我們的經驗，有機遷移不太可能完全成功，部分原因是工程師在編寫新程式碼時傾向於使用現有程式碼作為例子。由一個對移除舊系統有既得利益的團隊負責遷移工作，有助於確保遷移工作真正完成。儘管為一個團隊提供資金和人員配置來執行這類遷移似乎是一項額外的成本，但它實際上只是將沒有資金的授權所產生的外部性內部化，並帶來規模經濟的額外好處。
 
-> [^4]:  By “unfunded mandate,” we mean “additional requirements imposed by an external entity without balancing compensation.” Sort of like when the CEO says that everybody must wear an evening gown for “formal Fridays” but doesn’t give you a corresponding raise to pay for your formal wear.
+> [^e4]: By “unfunded mandate,” we mean “additional requirements imposed by an external entity without balancing compensation.” Sort of like when the CEO says that everybody must wear an evening gown for “formal Fridays” but doesn’t give you a corresponding raise to pay for your formal wear.
 >
-> 4  我們所說的“無資金授權”是指“外部實體在不平衡薪酬的情況下強加的額外要求”。有點像CEO說每個人都必須在“正式星期五”穿晚禮服，但沒有給你相應的加薪來支付正式著裝的費用。
+> [^c4]: 我們所說的“無資金授權”是指“外部實體在不平衡薪酬的情況下強加的額外要求”。有點像CEO說每個人都必須在“正式星期五”穿晚禮服，但沒有給你相應的加薪來支付正式著裝的費用。
 
 -----
 
@@ -125,13 +125,13 @@ To begin with, most Version Control Systems (VCSs) have operations that scale li
 
 首先，大多數版本控制系統（VCS）的操作都會隨著更改的大小進行線性擴充。你的系統可能能夠很好地處理小規模提交（例如，幾十個檔案的數量），但可能沒有足夠的記憶體或處理能力來一次性提交成千上萬的檔案。在集中式VCS中，提交會阻止其他寫入程式（以及在舊系統中的讀卡器）在處理時使用系統，這意味著大型提交會使系統的其他使用者陷入停滯。
 
-In short, it might not be just “difficult” or “unwise” to make a large change atomically: it might simply be impossible with a given infrastructure. Splitting the large change into smaller, independent chunks gets around these limitations, although it makes the execution of the change more complex.[^5]
+In short, it might not be just “difficult” or “unwise” to make a large change atomically: it might simply be impossible with a given infrastructure. Splitting the large change into smaller, independent chunks gets around these limitations, although it makes the execution of the change more complex.[^e5]
 
-簡言之，以原子方式進行大規模更改可能不僅僅是“困難”或“不明智的”：對於給定的基礎設施，這可能根本不可能。將較大的更改拆分為較小的獨立塊可以繞過這些限制，儘管這會使更改的執行更加複雜。
+簡言之，以原子方式進行大規模更改可能不僅僅是“困難”或“不明智的”：對於給定的基礎設施，這可能根本不可能。將較大的更改拆分為較小的獨立塊可以繞過這些限制，儘管這會使更改的執行更加複雜。[^c5]
 
-> [^5]:  See [*https://ieeexplore.ieee.org/abstract/document/8443579*](https://ieeexplore.ieee.org/abstract/document/8443579).
+> [^e5]: See [*https://ieeexplore.ieee.org/abstract/document/8443579*](https://ieeexplore.ieee.org/abstract/document/8443579).
 >
-> 5  查閱 [*https://ieeexplore.ieee.org/abstract/document/8443579*](https://ieeexplore.ieee.org/abstract/document/8443579)。
+> [^c5]: 查閱 [*https://ieeexplore.ieee.org/abstract/document/8443579*](https://ieeexplore.ieee.org/abstract/document/8443579)。
 
 ### Merge Conflicts 合併衝突
 
@@ -181,9 +181,9 @@ We’ve decided to embrace some of this complexity, such as running presubmit te
 
 ### Testing  測試
 
-Every change should be tested (a process we’ll talk about more in just a moment), but the larger the change, the more difficult it is to actually test it appropriately. Google’s CI system will run not only the tests immediately impacted by a change, but also any tests that transitively depend on the changed files.[^6] This means a change gets broad coverage, but we’ve also observed that the farther away in the dependency graph a test is from the impacted files, the more unlikely a failure is to have been caused by the change itself.
+Every change should be tested (a process we’ll talk about more in just a moment), but the larger the change, the more difficult it is to actually test it appropriately. Google’s CI system will run not only the tests immediately impacted by a change, but also any tests that transitively depend on the changed files.[^e6] This means a change gets broad coverage, but we’ve also observed that the farther away in the dependency graph a test is from the impacted files, the more unlikely a failure is to have been caused by the change itself.
 
-每個變更都應該進行測試（稍後我們將詳細討論這個過程），但是變更越大，實際測試它就越困難。Google的CI系統不僅會執行立即受到更改影響的測試，還會執行過渡依賴於更改檔案的任何測試。這意味著更改會得到廣泛的覆蓋，但我們還觀察到，在依賴關係圖中，測試距離受影響檔案越遠，失敗越不可能是由變化本身造成的。
+每個變更都應該進行測試（稍後我們將詳細討論這個過程），但是變更越大，實際測試它就越困難。Google的CI系統不僅會執行立即受到更改影響的測試，還會執行過渡依賴於更改檔案的任何測試。[^c6]這意味著更改會得到廣泛的覆蓋，但我們還觀察到，在依賴關係圖中，測試距離受影響檔案越遠，失敗越不可能是由變化本身造成的。
 
 Small, independent changes are easier to validate, because each of them affects a smaller set of tests, but also because test failures are easier to diagnose and fix. Finding the root cause of a test failure in a change of 25 files is pretty straightforward; finding 1 in a 10,000-file change is like the proverbial needle in a haystack.
 
@@ -193,9 +193,9 @@ The trade-off in this decision is that smaller changes will cause the same tests
 
 這個決定的權衡是，較小的更改將導致相同的測試執行多次，特別是依賴於大部分程式碼庫的測試。因為工程師追蹤測試失敗所花費的時間比執行這些額外測試所需的計算時間要昂貴得多，所以我們有意識地決定，這是我們願意做出的權衡。這種權衡可能並不適用於所有組織，但值得研究的是，對於你的組織來說，什麼才是適當的平衡。
 
-> [^6]:  This probably sounds like overkill, and it likely is. We’re doing active research on the best way to determine the “right” set of tests for a given change, balancing the cost of compute time to run the tests, and the human cost of making the wrong choice.
+> [^e6]: This probably sounds like overkill, and it likely is. We’re doing active research on the best way to determine the “right” set of tests for a given change, balancing the cost of compute time to run the tests, and the human cost of making the wrong choice.
 >
-> 6 這聽起來可能是矯枉過正，而且很可能是。我們正在積極研究為一個特定的變化確定 "正確 "的測試集的最佳方法，平衡執行測試的計算時間成本和做出錯誤選擇的人力成本。
+> [^c6]: 這聽起來可能是矯枉過正，而且很可能是。我們正在積極研究為一個特定的變化確定 "正確 "的測試集的最佳方法，平衡執行測試的計算時間成本和做出錯誤選擇的人力成本。
 
 -----
 
@@ -207,9 +207,9 @@ Today it is common for a double-digit percentage (10% to 20%) of the changes in 
 
 如今，一個專案中兩位數百分比（10%到20%）的變更是LSC的結果是很常見的，這意味著大量的程式碼是由全職工作與這些專案無關的人在專案中變更的。如果沒有良好的測試，這樣的工作將是不可能的，谷歌的程式碼庫將在自身的壓力下迅速萎縮。LSC使我們能夠系統地將整個程式碼庫遷移到較新的API，棄用較舊的API，更改語言版本，並刪除流行但危險的做法。
 
-Even a simple one-line signature change becomes complicated when made in a thousand different places across hundreds of different products and services.[^7] After the change is written, you need to coordinate code reviews across dozens of teams. Lastly, after reviews are approved, you need to run as many tests as you can to be sure the change is safe.[^8] We say “as many as you can,” because a good-sized LSC could trigger a rerun of every single test at Google, and that can take a while. In fact, many LSCs have to plan time to catch downstream clients whose code backslides while the LSC makes its way through the process.
+Even a simple one-line signature change becomes complicated when made in a thousand different places across hundreds of different products and services.[^e7] After the change is written, you need to coordinate code reviews across dozens of teams. Lastly, after reviews are approved, you need to run as many tests as you can to be sure the change is safe.[^e8] We say “as many as you can,” because a good-sized LSC could trigger a rerun of every single test at Google, and that can take a while. In fact, many LSCs have to plan time to catch downstream clients whose code backslides while the LSC makes its way through the process.
 
-即使是一個簡單的單行簽名修改，如果在上百個不同的產品和服務的一千多個不同的地方進行，也會變得很複雜。修改寫完後，你需要協調幾十個團隊的程式碼審查。最後，在審查通過後，你需要執行儘可能多的測試，以確保變化是安全的。我們說 "儘可能多"，是因為一個規模不錯的LSC可能會觸發谷歌的每一個測試的重新執行，而這可能需要一段時間。事實上，許多LSC必須計劃好時間，以便在LSC進行的過程中抓住那些程式碼倒退的下游客戶。
+即使是一個簡單的單行簽名修改，如果在上百個不同的產品和服務的一千多個不同的地方進行，也會變得很複雜。[^c7]修改寫完後，你需要協調幾十個團隊的程式碼審查。最後，在審查通過後，你需要執行儘可能多的測試，以確保變化是安全的。[^c8]我們說 "儘可能多"，是因為一個規模不錯的LSC可能會觸發谷歌的每一個測試的重新執行，而這可能需要一段時間。事實上，許多LSC必須計劃好時間，以便在LSC進行的過程中抓住那些程式碼倒退的下游客戶。
 
 Testing an LSC can be a slow and frustrating process. When a change is sufficiently large, your local environment is almost guaranteed to be permanently out of sync with head as the codebase shifts like sand around your work. In such circumstances, it is easy to find yourself running and rerunning tests just to ensure your changes continue to be valid. When a project has flaky tests or is missing unit test coverage, it can require a lot of manual intervention and slow down the entire process. To help speed things up, we use a strategy called the TAP (Test Automation Platform) train.
 
@@ -231,9 +231,9 @@ TAP列車利用了兩個事實：
 - LSC往往是純粹的重構，因此範圍非常窄，保留了本地語義。
 - 單獨的修改通常比較簡單，而且受到高度審查，所以它們往往是正確的。
 
-The train model also has the advantage that it works for multiple changes at the same time and doesn’t require that each individual change ride in isolation.[^9]
+The train model also has the advantage that it works for multiple changes at the same time and doesn’t require that each individual change ride in isolation.[^e9]
 
-列車模型還有一個優點，即它同時適用於多個變化，不要求每個單獨的變化都是孤立的。
+列車模型還有一個優點，即它同時適用於多個變化，不要求每個單獨的變化都是孤立的。[^c9]
 
 The train has five steps and is started fresh every three hours:
 
@@ -253,17 +253,17 @@ The train has five steps and is started fresh every three hours:
 
 -----
 
-> [^7]: The largest series of LSCs ever executed removed more than one billion lines of code from the repository over the course of three days. This was largely to remove an obsolete part of the repository that had been migrated to a new home; but still, how confident do you have to be to delete one billion lines of code?
+> [^e7]: The largest series of LSCs ever executed removed more than one billion lines of code from the repository over the course of three days. This was largely to remove an obsolete part of the repository that had been migrated to a new home; but still, how confident do you have to be to delete one billion lines of code?
 >
-> 7 有史以來最大的一系列LSC在三天內從版本庫中刪除了超過10億行的程式碼。這主要是為了刪除版本庫中已經遷移到新儲存庫的過時部分；但是，你要有多大的信心才能刪除10億行的程式碼？
+> [^c7]: 有史以來最大的一系列LSC在三天內從版本庫中刪除了超過10億行的程式碼。這主要是為了刪除版本庫中已經遷移到新儲存庫的過時部分；但是，你要有多大的信心才能刪除10億行的程式碼？
 >  
-> [^8]: LSCs are usually supported by tools that make finding, making, and reviewing changes relatively straightforward.
+> [^e8]: LSCs are usually supported by tools that make finding, making, and reviewing changes relatively straightforward.
 >
-> 8 LSCs通常由工具支援，使查詢、製作和審查修改相對簡單。
+> [^c8]: LSCs通常由工具支援，使查詢、製作和審查修改相對簡單。
 >
-> [^9]: It is possible to ask TAP for single change “isolated” run, but these are very expensive and are performed only during off-peak hours.
+> [^e9]: It is possible to ask TAP for single change “isolated” run, but these are very expensive and are performed only during off-peak hours.
 >
-> 9 有可能要求TAP提供單次更換的 "隔離 "執行，但這是非常昂貴的，而且只在非高峰時段進行。
+> [^c9]: 有可能要求TAP提供單次更換的 "隔離 "執行，但這是非常昂貴的，而且只在非高峰時段進行。
 
 ### Code Review 程式碼審查
 
@@ -309,13 +309,13 @@ Google has invested in a significant amount of infrastructure to make LSCs possi
 
 ### Policies and Culture  策略和文化
 
-As we’ve described in Chapter 16, Google stores the bulk of its source code in a single monolithic repository (monorepo), and every engineer has visibility into almost all of this code. This high degree of openness means that any engineer can edit any file and send those edits for review to those who can approve them. However, each of those edits has costs, both to generate as well as review.[^10]
+As we’ve described in Chapter 16, Google stores the bulk of its source code in a single monolithic repository (monorepo), and every engineer has visibility into almost all of this code. This high degree of openness means that any engineer can edit any file and send those edits for review to those who can approve them. However, each of those edits has costs, both to generate as well as review.[^e10]
 
-正如我們在第16章中所描述的那樣，谷歌將其大部分原始碼儲存在單個程式碼庫（monorepo）中，每個工程師都可以看到幾乎所有這些程式碼。這種高度的開放性意味著任何工程師都可以編輯任何檔案，並將這些編輯傳送給可以批准它們的人進行審查。然而，每一個編輯都有成本，包括產生和審查。
+正如我們在第16章中所描述的那樣，谷歌將其大部分原始碼儲存在單個程式碼庫（monorepo）中，每個工程師都可以看到幾乎所有這些程式碼。這種高度的開放性意味著任何工程師都可以編輯任何檔案，並將這些編輯傳送給可以批准它們的人進行審查。然而，每一個編輯都有成本，包括產生和審查。[^c10]
 
-Historically, these costs have been somewhat symmetric, which limited the scope of changes a single engineer or team could generate. As Google’s LSC tooling improved, it became easier to generate a large number of changes very cheaply, and it became equally easy for a single engineer to impose a burden on a large number of reviewers across the company. Even though we want to encourage widespread improvements to our codebase, we want to make sure there is some oversight and thoughtfulness behind them, rather than indiscriminate tweaking.[^11]
+Historically, these costs have been somewhat symmetric, which limited the scope of changes a single engineer or team could generate. As Google’s LSC tooling improved, it became easier to generate a large number of changes very cheaply, and it became equally easy for a single engineer to impose a burden on a large number of reviewers across the company. Even though we want to encourage widespread improvements to our codebase, we want to make sure there is some oversight and thoughtfulness behind them, rather than indiscriminate tweaking.[^e11]
 
-從歷史上看，這些成本在某種程度上是對稱的，這限制了單個工程師或團隊可能產生的變更範圍。隨著谷歌LSC工具的改進，以極低的成本產生大量更改變得更加容易，而對於單個工程師來說，給公司內的大量審閱者施加負擔也變得同樣容易。儘管我們希望鼓勵對我們的程式碼庫進行廣泛的改進，但我們希望確保在這些改進背後有一些疏忽和深思熟慮，而不是隨意的調整。
+從歷史上看，這些成本在某種程度上是對稱的，這限制了單個工程師或團隊可能產生的變更範圍。隨著谷歌LSC工具的改進，以極低的成本產生大量更改變得更加容易，而對於單個工程師來說，給公司內的大量審閱者施加負擔也變得同樣容易。儘管我們希望鼓勵對我們的程式碼庫進行廣泛的改進，但我們希望確保在這些改進背後有一些疏忽和深思熟慮，而不是隨意的調整。[^c11]
 
 The end result is a lightweight approval process for teams and individuals seeking to make LSCs across Google. This process is overseen by a group of experienced engineers who are familiar with the nuances of various languages, as well as invited domain experts for the particular change in question. The goal of this process is not to prohibit LSCs, but to help change authors produce the best possible changes, which make the most use of Google’s technical and human capital. Occasionally, this group might suggest that a cleanup just isn’t worth it: for example, cleaning up a common typo without any way of preventing recurrence.
 
@@ -329,13 +329,13 @@ Occasionally, local owners question the purpose of a specific commit being made 
 
 偶爾，本地所有者會質疑作為更廣泛的LSC的一部分的特定提交的目的，而變更作者會像回應其他審查意見一樣回應這些意見。從社會角度來說，程式碼所有者瞭解發生在他們軟體上的變化是很重要的，但他們也意識到他們對更廣泛的LSC並不擁有否決權。隨著時間的推移，我們發現，一個好的FAQ和一個可靠的歷史改進記錄已經在整個谷歌產生了對LSC的廣泛認可。
 
-> [^10]:  There are obvious technical costs here in terms of compute and storage, but the human costs in time to review a change far outweigh the technical ones.
+> [^e10]: There are obvious technical costs here in terms of compute and storage, but the human costs in time to review a change far outweigh the technical ones.
 >
-> 10  在計算和儲存方面存在明顯的技術成本，但及時審查變更所需的人力成本遠遠超過技術成本。
+> [^c10]: 在計算和儲存方面存在明顯的技術成本，但及時審查變更所需的人力成本遠遠超過技術成本。
 >
-> [^11]:   For example, we do not want the resulting tools to be used as a mechanism to fight over the proper spelling of “gray” or “grey” in comments.
+> [^e11]: For example, we do not want the resulting tools to be used as a mechanism to fight over the proper spelling of “gray” or “grey” in comments.
 >
-> 11  例如，我們不希望由此產生的工具被用作一種機制來爭奪評論中“灰色”或“灰色”的正確拼寫。
+> [^c11]: 例如，我們不希望由此產生的工具被用作一種機制來爭奪評論中“灰色”或“灰色”的正確拼寫。
 
 ### Codebase Insight  程式碼庫的洞察力
 
@@ -373,9 +373,9 @@ Google’s testing strategy for LSCs differs slightly from that of normal change
 
 ### Language Support  程式語言支援
 
-LSCs at Google are typically done on a per-language basis, and some languages support them much more easily than others. We’ve found that language features such as type aliasing and forwarding functions are invaluable for allowing existing users to continue to function while we introduce new systems and migrate users to them nonatomically. For languages that lack these features, it is often difficult to migrate systems incrementally.[^12]
+LSCs at Google are typically done on a per-language basis, and some languages support them much more easily than others. We’ve found that language features such as type aliasing and forwarding functions are invaluable for allowing existing users to continue to function while we introduce new systems and migrate users to them nonatomically. For languages that lack these features, it is often difficult to migrate systems incrementally.[^e12]
 
-谷歌的LSC通常以每種程式語言為基礎，有些語言比其他語言更容易支援LSC。我們發現，在我們引入新系統並以非原子方式將使用者遷移到這些系統時，諸如類型別名和轉發功能之類別的語言功能對於允許現有使用者繼續工作是非常寶貴的。對於缺少這些功能的程式語言，通常很難增量遷移系統。
+谷歌的LSC通常以每種程式語言為基礎，有些語言比其他語言更容易支援LSC。我們發現，在我們引入新系統並以非原子方式將使用者遷移到這些系統時，諸如類型別名和轉發功能之類別的語言功能對於允許現有使用者繼續工作是非常寶貴的。對於缺少這些功能的程式語言，通常很難增量遷移系統。[^c12]
 
 We’ve also found that statically typed languages are much easier to perform large automated changes in than dynamically typed languages. Compiler-based tools along with strong static analysis provide a significant amount of information that we can use to build tools to affect LSCs and reject invalid transformations before they even get to the testing phase. The unfortunate result of this is that languages like Python, Ruby, and JavaScript that are dynamically typed are extra difficult for maintainers. Language choice is, in many respects, intimately tied to the question of code lifespan: languages that tend to be viewed as more focused on developer productivity tend to be more difficult to maintain. Although this isn’t an intrinsic design requirement, it is where the current state of the art happens to be.
 
@@ -385,9 +385,9 @@ Finally, it’s worth pointing out that automatic language formatters are a cruc
 
 最後，值得指出的是，自動語言格式化程式是LSC基礎設施的一個重要組成部分。因為我們致力於最佳化我們的程式碼的可讀性，我們希望確保任何由自動工具產生的變化對即時的審查者和未來的程式碼讀者來說都是可理解的。所有的LSC產生工具都將適合於被修改的語言的自動格式化器作為一個單獨的通道來執行，這樣，針對修改的工具就不需要關注格式化的細節了。將自動格式化，如[google-java-format](https://github.com/google/google-java-format)或[clang-format](https://clang.llvm.org/docs/ClangFormat.html)，應用到我們的程式碼庫中，意味著自動產生的變化將與人類編寫的程式碼 “合併"，減少未來的開發阻力。如果沒有自動格式化，大規模的自動修改就永遠不會成為谷歌的公認現狀。
 
-> [^12]:   In fact, Go recently introduced these kinds of language features specifically to support large-scale refactorings （ see [https://talks.golang.org/2016/refactor.article](https://talks.golang.org/2016/refactor.article) ）.
+> [^e12]: In fact, Go recently introduced these kinds of language features specifically to support large-scale refactorings （ see [https://talks.golang.org/2016/refactor.article](https://talks.golang.org/2016/refactor.article) ）.
 >
-> 12  事實上，Go最近專門引入了這些型別的語言特性來支援大規模重構（參見`https://talks.golang.org/2016/refactor.article`).
+> [^c12]: 事實上，Go最近專門引入了這些型別的語言特性來支援大規模重構（參見`https://talks.golang.org/2016/refactor.article`).
 
 -----
 
@@ -437,17 +437,17 @@ This proposal is then forwarded to an email list with about a dozen people who h
 
 然後，這個提案被轉發到一個有大約十幾個人的電子郵件列表，這些人對整個過程進行監督。經過討論，委員會就如何推進工作給出反饋。例如，委員會做出的最常見的改變之一是將一個LSC的所有程式碼審查交給一個 "全球批准人"。許多第一次做LSC的人傾向於認為當地的專案負責人應該審查所有的東西，但對於大多數自動LSC來說，讓一個專家瞭解變化的性質並圍繞著正確的審查建立自動化是比較低成本。
 
-After the change is approved, the author can move forward in getting their change submitted. Historically, the committee has been very liberal with their approval,[^13] and often gives approval not just for a specific change, but also for a broad set of related changes. Committee members can, at their discretion, fast-track obvious changes without the need for full deliberation.
+After the change is approved, the author can move forward in getting their change submitted. Historically, the committee has been very liberal with their approval,[^e13] and often gives approval not just for a specific change, but also for a broad set of related changes. Committee members can, at their discretion, fast-track obvious changes without the need for full deliberation.
 
-在修改被批准後，作者可以繼續推進他們的修改提交。從歷史上看，委員會在批准方面是非常寬鬆的，而且常常不僅批准某一特定的修改，而且批准一系列廣泛的相關修改。委員會成員可以酌情快速處理明顯的修改，而不需要進行充分的審議。
+在修改被批准後，作者可以繼續推進他們的修改提交。從歷史上看，委員會在批准方面是非常寬鬆的，[^c13]而且常常不僅批准某一特定的修改，而且批准一系列廣泛的相關修改。委員會成員可以酌情快速處理明顯的修改，而不需要進行充分的審議。
 
 The intent of this process is to provide oversight and an escalation path, without being too onerous for the LSC authors. The committee is also empowered as the escalation body for concerns or conflicts about an LSC: local owners who disagree with the change can appeal to this group who can then arbitrate any conflicts. In practice, this has rarely been needed.
 
 這個過程的目的是提供監督和升級的途徑，而不對LSC的作者過於繁瑣。該委員會還被授權作為對LSC的擔憂或衝突的升級機構：不同意改變的本地業主可以向該小組提出上訴，該小組可以對任何衝突進行仲裁。在實踐中，很少需要這樣做。
 
-> [^13]:  The only kinds of changes that the committee has outright rejected have been those that are deemed dangerous, such as converting all NULL instances to nullptr, or extremely low-value, such as changing spelling from British English to American English, or vice versa. As our experience with such changes has increased and the cost of LSCs has dropped, the threshold for approval has as well.
+> [^e13]:  The only kinds of changes that the committee has outright rejected have been those that are deemed dangerous, such as converting all NULL instances to nullptr, or extremely low-value, such as changing spelling from British English to American English, or vice versa. As our experience with such changes has increased and the cost of LSCs has dropped, the threshold for approval has as well.
 >
-> 13  委員會完全拒絕的唯一型別的更改是那些被視為危險的更改，如將所有空例項轉換為空PTR，或極低的值，如將拼寫從英式英語更改為美式英語，或反之亦然。隨著我們在此類變更方面的經驗增加，LSC的成本降低，批准門檻也隨之降低。
+> [^c13]:  委員會完全拒絕的唯一型別的更改是那些被視為危險的更改，如將所有空例項轉換為空PTR，或極低的值，如將拼寫從英式英語更改為美式英語，或反之亦然。隨著我們在此類變更方面的經驗增加，LSC的成本降低，批准門檻也隨之降低。
 
 ### Change Creation 變更建立
 
@@ -455,21 +455,21 @@ After getting the required approval, an LSC author will begin to produce the act
 
 在獲得必要的批准後，LSC作者將開始製作實際的程式碼編輯。有時，這些內容可以全面地產生一個大的全域變化，隨後將被分割成許多小的獨立部分。通常情況下，由於底層版本控制系統的技術限制，修改的規模太大，無法容納在一個全域修改中。
 
-The change generation process should be as automated as possible so that the parent change can be updated as users backslide into old uses[^14] or textual merge conflicts occur in the changed code. Occasionally, for the rare case in which technical tools aren’t able to generate the global change, we have sharded change generation across humans (see “Case Study: Operation RoseHub” on page 472). Although much more labor intensive than automatically generating changes, this allows global changes to happen much more quickly for time-sensitive applications.
+The change generation process should be as automated as possible so that the parent change can be updated as users backslide into old uses[^e14] or textual merge conflicts occur in the changed code. Occasionally, for the rare case in which technical tools aren’t able to generate the global change, we have sharded change generation across humans (see “Case Study: Operation RoseHub” on page 472). Although much more labor intensive than automatically generating changes, this allows global changes to happen much more quickly for time-sensitive applications.
 
-變更產生過程應儘可能自動化，以便在使用者退回到舊的使用方式14或在變更的程式碼中出現文字合併衝突時，可以更新父級變更。偶爾，在技術工具無法產生全域變更的罕見情況下，我們也會將變更的產生分給人工（見第472頁的 "案例研究：RoseHub行動"）。儘管這比自動產生變更要耗費更多的人力，但對於時間敏感的應用來說，這使得全域性的變更能夠更快發生。
+變更產生過程應儘可能自動化，以便在使用者退回到舊的使用方式[^c14]或在變更的程式碼中出現文字合併衝突時，可以更新父級變更。偶爾，在技術工具無法產生全域變更的罕見情況下，我們也會將變更的產生分給人工（見第472頁的 "案例研究：RoseHub行動"）。儘管這比自動產生變更要耗費更多的人力，但對於時間敏感的應用來說，這使得全域性的變更能夠更快發生。
 
-Keep in mind that we optimize for human readability of our codebase, so whatever tool generates changes, we want the resulting changes to look as much like humangenerated changes as possible. This requirement leads to the necessity of style guides and automatic formatting tools (see Chapter 8).[^15]
+Keep in mind that we optimize for human readability of our codebase, so whatever tool generates changes, we want the resulting changes to look as much like humangenerated changes as possible. This requirement leads to the necessity of style guides and automatic formatting tools (see Chapter 8).[^e15]
 
-請記住，我們對程式碼庫的可讀性進行了最佳化，所以無論什麼工具產生的變化，我們都希望產生的變化看起來儘可能的像人類產生的變更。這一要求導致了風格指南和自動格式化工具的必要性（見第8章）。
+請記住，我們對程式碼庫的可讀性進行了最佳化，所以無論什麼工具產生的變化，我們都希望產生的變化看起來儘可能的像人類產生的變更。這一要求導致了風格指南和自動格式化工具的必要性（見第8章）。[^c15]
 
-> [^14]:   This happens for many reasons: copy-and-paste from existing examples, committing changes that have been in development for some time, or simply reliance on old habits.
+> [^e14]: This happens for many reasons: copy-and-paste from existing examples, committing changes that have been in development for some time, or simply reliance on old habits.
 >
-> 14  發生這種情況的原因有很多：從現有範例複製和貼上，提交已經開發了一段時間的更改，或者僅僅依靠舊習慣。
+> [^c14]: 發生這種情況的原因有很多：從現有範例複製和貼上，提交已經開發了一段時間的更改，或者僅僅依靠舊習慣。
 >
-> [^15]:   In actuality, this is the reasoning behind the original work on clang-format for C++.
+> [^e15]: In actuality, this is the reasoning behind the original work on clang-format for C++.
 >
-> 15  實際上，這是C++ CLAN格式的原始工作背後的推理。
+> [^c15]: 實際上，這是C++ CLAN格式的原始工作背後的推理。
 
 ### Sharding and Submitting  分割槽與提交
 
@@ -565,13 +565,13 @@ With Rosie, we are able to effectively create, test, review, and submit thousand
 
 ### Cleanup  清理
 
-Different LSCs have different definitions of “done,” which can vary from completely removing an old system to migrating only high-value references and leaving old ones to organically disappear.[^16] In almost all cases, it’s important to have a system that prevents additional introductions of the symbol or system that the large-scale change worked hard to remove. At Google, we use the Tricorder framework mentioned in Chapters 20 and 19 to flag at review time when an engineer introduces a new use of a deprecated object, and this has proven an effective method to prevent backsliding. We talk more about the entire deprecation process in Chapter 15.
+Different LSCs have different definitions of “done,” which can vary from completely removing an old system to migrating only high-value references and leaving old ones to organically disappear.[^e16] In almost all cases, it’s important to have a system that prevents additional introductions of the symbol or system that the large-scale change worked hard to remove. At Google, we use the Tricorder framework mentioned in Chapters 20 and 19 to flag at review time when an engineer introduces a new use of a deprecated object, and this has proven an effective method to prevent backsliding. We talk more about the entire deprecation process in Chapter 15.
 
-不同的LSC對 "完成 "有不同的定義，從完全刪除舊系統到只遷移高價值的參考，讓舊系統有機地消失。在幾乎所有情況下，重要的是，要有一個系統，防止大規模變革努力消除的符號或系統的額外引入。在谷歌，我們使用和章節中提到的Tricorder框架，在工程師引入被廢棄物件的新用途時，在審查時進行標記，這已被證明是防止倒退的有效方法。我們在第15章中更多地討論了整個廢棄過程。
+不同的LSC對 "完成 "有不同的定義，從完全刪除舊系統到只遷移高價值的參考，讓舊系統有機地消失。[^c16]在幾乎所有情況下，重要的是，要有一個系統，防止大規模變革努力消除的符號或系統的額外引入。在谷歌，我們使用和章節中提到的Tricorder框架，在工程師引入被廢棄物件的新用途時，在審查時進行標記，這已被證明是防止倒退的有效方法。我們在第15章中更多地討論了整個廢棄過程。
 
-> [^16]: Sadly, the systems we most want to organically decompose are those that are the most resilient to doing so. They are the plastic six-pack rings of the code ecosystem.
+> [^e16]: Sadly, the systems we most want to organically decompose are those that are the most resilient to doing so. They are the plastic six-pack rings of the code ecosystem.
 >
-> 16 可悲的是，我們最想有機分解的系統是那些最能適應這種分解的系統。它們是程式碼生態系統中的可塑六合環。
+> [^c16]: 可悲的是，我們最想有機分解的系統是那些最能適應這種分解的系統。它們是程式碼生態系統中的可塑六合環。
 
 ## Conclusion  總結
 

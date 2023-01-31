@@ -8,25 +8,25 @@
 
 **Edited by Lisa Carey**
 
-Static analysis refers to programs analyzing source code to find potential issues such as bugs, antipatterns, and other issues that can be diagnosed *without executing the* *program*. The “static” part specifically refers to analyzing the source code instead of a running program (referred to as “dynamic” analysis). Static analysis can find bugs in programs early, before they are checked in as production code. For example, static analysis can identify constant expressions that overflow, tests that are never run, or invalid format strings in logging statements that would crash when executed.[^1] However, static analysis is useful for more than just finding bugs. Through static analysis at Google, we codify best practices, help keep code current to modern API versions, and prevent or reduce technical debt. Examples of these analyses include verifying that naming conventions are upheld, flagging the use of deprecated APIs, or pointing out simpler but equivalent expressions that make code easier to read. Static analysis is also an integral tool in the API deprecation process, where it can prevent backsliding during migration of the codebase to a new API (see Chapter 22). We have also found evidence that static analysis checks can educate developers and actually prevent antipatterns from entering the codebase.[^2]
+Static analysis refers to programs analyzing source code to find potential issues such as bugs, antipatterns, and other issues that can be diagnosed *without executing the* *program*. The “static” part specifically refers to analyzing the source code instead of a running program (referred to as “dynamic” analysis). Static analysis can find bugs in programs early, before they are checked in as production code. For example, static analysis can identify constant expressions that overflow, tests that are never run, or invalid format strings in logging statements that would crash when executed.[^e1] However, static analysis is useful for more than just finding bugs. Through static analysis at Google, we codify best practices, help keep code current to modern API versions, and prevent or reduce technical debt. Examples of these analyses include verifying that naming conventions are upheld, flagging the use of deprecated APIs, or pointing out simpler but equivalent expressions that make code easier to read. Static analysis is also an integral tool in the API deprecation process, where it can prevent backsliding during migration of the codebase to a new API (see Chapter 22). We have also found evidence that static analysis checks can educate developers and actually prevent antipatterns from entering the codebase.[^e2]
 
-靜態分析是指透過程式分析原始碼來發現潛在的問題，例如bug、反模式和其他無需執行程式就能發現的問題。“靜態”具體是指分析原始碼，而不是執行中的程式（即“動態”分析）。它可以在程式碼被合入生產環境前發現bug，例如，可以識別溢位的常量表達式、永遠不會執行的測試使用案例或日誌字串的無效格式化導致執行崩潰的問題。但靜態分析的作用不只是查詢bug。透過對Google程式碼的靜態分析，我們編寫了最佳實踐，幫助推進程式碼使用最新介面和減少技術債，這些分析的例子包括：校驗是否遵循命名規範；標記已棄用但仍然使用的介面；簡化表示式以提高程式碼可讀性。靜態分析也是棄用某個介面時不可或缺的工具，它可以防止將程式碼庫遷移到新介面時出現“倒退”現象（參見第22章，指被呼叫系統不斷遷移舊介面到新介面，而其他系統不斷的呼叫棄用介面而不呼叫新介面）。我們還發現靜態分析檢查可以對開發人員起到啟發和約束作用，可以防止開發人員寫出反模式的程式碼。
+靜態分析是指透過程式分析原始碼來發現潛在的問題，例如bug、反模式和其他無需執行程式就能發現的問題。“靜態”具體是指分析原始碼，而不是執行中的程式（即“動態”分析）。它可以在程式碼被合入生產環境前發現bug，例如，可以識別溢位的常量表達式、永遠不會執行的測試使用案例或日誌字串的無效格式化導致執行崩潰的問題。[^c1]但靜態分析的作用不只是查詢bug。透過對Google程式碼的靜態分析，我們編寫了最佳實踐，幫助推進程式碼使用最新介面和減少技術債，這些分析的例子包括：校驗是否遵循命名規範；標記已棄用但仍然使用的介面；簡化表示式以提高程式碼可讀性。靜態分析也是棄用某個介面時不可或缺的工具，它可以防止將程式碼庫遷移到新介面時出現“倒退”現象（參見第22章，指被呼叫系統不斷遷移舊介面到新介面，而其他系統不斷的呼叫棄用介面而不呼叫新介面）。我們還發現靜態分析檢查可以對開發人員起到啟發和約束作用，可以防止開發人員寫出反模式的程式碼。[^c2]
 
-In this chapter, we’ll look at what makes effective static analysis, some of the lessons we at Google have learned about making static analysis work, and how we implemented these best practices in our static analysis tooling and processes.[^3]
+In this chapter, we’ll look at what makes effective static analysis, some of the lessons we at Google have learned about making static analysis work, and how we implemented these best practices in our static analysis tooling and processes.[^e3]
 
-本章我們將介紹如何進行有效的靜態分析，包含我們在 Google 瞭解到的一些關於靜態分析工作的經驗和我們在靜態分析工具和流程中的最佳實踐。
+本章我們將介紹如何進行有效的靜態分析，包含我們在 Google 瞭解到的一些關於靜態分析工作的經驗和我們在靜態分析工具和流程中的最佳實踐。[^c3]
 
-> [^1]: See `http://errorprone.info/bugpatterns`.
+> [^e1]: See `http://errorprone.info/bugpatterns`.
 >
-> 1 查閱 `http://errorprone.info/bugpatterns`。
+> [^c1]: 查閱 `http://errorprone.info/bugpatterns`。
 >
-> [^2]: Caitlin Sadowski et al. Tricorder: Building a Program Analysis Ecosystem, International Conference on Software Engineering (ICSE), May 2015.
+> [^e2]: Caitlin Sadowski et al. Tricorder: Building a Program Analysis Ecosystem, International Conference on Software Engineering (ICSE), May 2015.
 >
-> 2 Caitlin Sadowski等人，Tricorder。建構一個程式分析生態系統，國際軟體工程會議（ICSE），2015年5月。
+> [^c2]: Caitlin Sadowski等人，Tricorder。建構一個程式分析生態系統，國際軟體工程會議（ICSE），2015年5月。
 >
-> [^3]: A good academic reference for static analysis theory is: Flemming Nielson et al. Principles of Program Analysis (Gernamy: Springer, 2004)
+> [^e3]: A good academic reference for static analysis theory is: Flemming Nielson et al. Principles of Program Analysis (Gernamy: Springer, 2004)
 >
-> 3 關於靜態分析理論，一個很好的學術參考資料是。Flemming Nielson等人，《程式分析原理》(Gernamy: Springer, 2004)
+> [^c3]: 關於靜態分析理論，一個很好的學術參考資料是。Flemming Nielson等人，《程式分析原理》(Gernamy: Springer, 2004)
 
 ## 有效靜態分析的特點
 
@@ -70,27 +70,27 @@ We mentioned some of the ways in which we try to save developer time and reduce 
 
 我們提到了一些試圖節省開發人員時間並降低與靜態分析工具互動成本的方法，我們還追蹤分析工具的效能。如果你不衡量這點，你就無法解決問題。我們只部署誤報率較低的分析工具（稍後將詳細介紹）。我們還*積極徵求開發人員對靜態分析結果的即時反饋並採取行動*，在靜態分析工具使用者和開發人員之間形成反饋閉環，創造一個良性迴圈，建立了使用者信任，藉此改進我們的工具。使用者信任對於靜態分析工具的成功至關重要。
 
-For static analysis, a “false negative” is when a piece of code contains an issue that the analysis tool was designed to find, but the tool misses it. A “false positive” occurs when a tool incorrectly flags code as having the issue. Research about static analysis tools traditionally focused on reducing false negatives; in practice, low false-positive rates are often critical for developers to actually want to use a tool—who wants to wade through hundreds of false reports in search of a few true ones?[^4]
+For static analysis, a “false negative” is when a piece of code contains an issue that the analysis tool was designed to find, but the tool misses it. A “false positive” occurs when a tool incorrectly flags code as having the issue. Research about static analysis tools traditionally focused on reducing false negatives; in practice, low false-positive rates are often critical for developers to actually want to use a tool—who wants to wade through hundreds of false reports in search of a few true ones?[^e4]
 
-對於靜態分析，“漏報（false negative）”是指一段程式碼包含分析工具找到的問題，但該工具忽略了該問題，“誤報（false positive）”是指工具錯誤地將程式碼標記為存在問題。一般來說，靜態分析工具的研究側重於減少誤判；實踐中，開發者是否真正想要使用工具取決於誤報率是否很低——誰願意在數百個虛假報告中費力尋找一些真實的報告？
+對於靜態分析，“漏報（false negative）”是指一段程式碼包含分析工具找到的問題，但該工具忽略了該問題，“誤報（false positive）”是指工具錯誤地將程式碼標記為存在問題。一般來說，靜態分析工具的研究側重於減少誤判；實踐中，開發者是否真正想要使用工具取決於誤報率是否很低——誰願意在數百個虛假報告中費力尋找一些真實的報告？[^c4]
 
 Furthermore, perception is a key aspect of the false-positive rate. If a static analysis tool is producing warnings that are technically correct but misinterpreted by users as false positives (e.g., due to confusing messages), users will react the same as if those warnings were in fact false positives. Similarly, warnings that are technically correct but unimportant in the grand scheme of things provoke the same reaction. We call the user-perceived false-positive rate the “effective false positive” rate. An issue is an “effective false positive” if developers did not take some positive action after seeing the issue. This means that if an analysis incorrectly reports an issue, yet the developer happily makes the fix anyway to improve code readability or maintainability, that is not an effective false positive. For example, we have a Java analysis that flags cases in which a developer calls the contains method on a hash table (which is equivalent to containsValue) when they actually meant to call containsKey—even if the developer correctly meant to check for the value, calling containsValue instead is clearer. Similarly, if an analysis reports an actual fault, yet the developer did not understand the fault and therefore took no action, that is an effective false positive.
 
 此外，使用者感知是誤報率的一個關鍵方面。如果靜態分析工具產生的警告在技術上是正確的，但被使用者誤解為誤報（例如，由於告警訊息混亂），使用者的反應將與這些警告實際上是誤報一樣。類似地，技術上正確但在大局中不重要的警告也會引發同樣的反應。我們將使用者感知的誤報率稱為“有效誤報率”。如果開發者在看到問題後沒有采取積極的行動，那麼問題就是“有效的誤報（effective false positive）”，這意味著，如果一個分析錯誤地報告了一個問題，但開發人員仍然樂於進行修復，以提高程式碼的可讀性或可維護性，那麼這就不是一個有效的誤報。例如，我們有一個Java分析，它標記了這樣一種情況：當開發人員實際上打算呼叫containsKey時，開發人員在雜湊表（相當於containsValue）上呼叫contains方法，即使開發人員正確地打算檢查值，呼叫containsValue反而更清晰。同樣，如果分析報告了一個實際的故障，但開發人員不瞭解故障，因此沒有采取任何行動，這就是一個有效的誤報。
 
-> [^4]: Note that there are some specific analyses for which reviewers might be willing to tolerate a much higher false-positive rate: one example is security analyses that identify critical problems.
+> [^e4]: Note that there are some specific analyses for which reviewers might be willing to tolerate a much higher false-positive rate: one example is security analyses that identify critical problems.
 >
-> 4 請注意，有一些特定的分析，審查員可能願意容忍更高的誤報率：一個例子是識別關鍵問題的安全分析。
+> [^c4]: 請注意，有一些特定的分析，審查員可能願意容忍更高的誤報率：一個例子是識別關鍵問題的安全分析。
 
 ### Make Static Analysis a Part of the Core Developer Workflow  使靜態分析成為核心開發人員工作流程的一部分
 
-At Google, we integrate static analysis into the core workflow via integration with code review tooling. Essentially all code committed at Google is reviewed before being committed; because developers are already in a change mindset when they send code for review, improvements suggested by static analysis tools can be made without too much disruption. There are other benefits to code review integration. Developers typically context switch after sending code for review, and are blocked on reviewers— there is time for analyses to run, even if they take several minutes to do so. There is also peer pressure from reviewers to address static analysis warnings. Furthermore, static analysis can save reviewer time by highlighting common issues automatically; static analysis tools help the code review process (and the reviewers) scale. Code review is a sweet spot for analysis results.[^5]
+At Google, we integrate static analysis into the core workflow via integration with code review tooling. Essentially all code committed at Google is reviewed before being committed; because developers are already in a change mindset when they send code for review, improvements suggested by static analysis tools can be made without too much disruption. There are other benefits to code review integration. Developers typically context switch after sending code for review, and are blocked on reviewers— there is time for analyses to run, even if they take several minutes to do so. There is also peer pressure from reviewers to address static analysis warnings. Furthermore, static analysis can save reviewer time by highlighting common issues automatically; static analysis tools help the code review process (and the reviewers) scale. Code review is a sweet spot for analysis results.[^e5]
 
-在 Google ，我們透過與程式碼審查工具整合，將靜態分析整合到核心工作流中。基本上 Google 提交的所有程式碼在提交之前都會經過審查，因為開發人員在傳送程式碼供審查時已經改變了心態，所以靜態分析工具建議的改進可以在沒有太多幹擾的情況下進行。程式碼審查整合還有其他好處，開發人員通常在傳送程式碼進行審查後切換上下文，並且在審查員面前被阻止——即使需要幾分鐘的時間來執行分析。來自審查員的同行壓力也要求解決靜態分析警告問題，此外，靜態分析可以自動突出常見問題，從而節省審閱者的時間，這有助於程式碼評審過程（以及審查員）的規模化。程式碼評審是分析結果的最佳選擇。
+在 Google ，我們透過與程式碼審查工具整合，將靜態分析整合到核心工作流中。基本上 Google 提交的所有程式碼在提交之前都會經過審查，因為開發人員在傳送程式碼供審查時已經改變了心態，所以靜態分析工具建議的改進可以在沒有太多幹擾的情況下進行。程式碼審查整合還有其他好處，開發人員通常在傳送程式碼進行審查後切換上下文，並且在審查員面前被阻止——即使需要幾分鐘的時間來執行分析。來自審查員的同行壓力也要求解決靜態分析警告問題，此外，靜態分析可以自動突出常見問題，從而節省審閱者的時間，這有助於程式碼評審過程（以及審查員）的規模化。程式碼評審是分析結果的最佳選擇。[^c5]
 
-> [^5]: See later in this chapter for more information on additional integration points when editing and browsing code.
+> [^e5]: See later in this chapter for more information on additional integration points when editing and browsing code.
 >
-> 5 關於編輯和瀏覽程式碼時的額外整合點的更多資訊，請參見本章後面的內容。
+> [^c5]: 關於編輯和瀏覽程式碼時的額外整合點的更多資訊，請參見本章後面的內容。
 
 ### Empower Users to Contribute  允許使用者做出貢獻
 
@@ -98,19 +98,19 @@ There are many domain experts at Google whose knowledge could improve code produ
 
 Google有許多領域專家，他們的知識可以改進產生的程式碼。靜態分析創造了一個利用他們的專業知識並大規模應用的機會，即利用領域專家編寫新的分析工具或在工具中進行單獨檢查。
 
-For example, experts who know the context for a particular kind of configuration file can write an analyzer that checks properties of those files. In addition to domain experts, analyses are contributed by developers who discover a bug and would like to prevent the same kind of bug from reappearing anywhere else in the codebase. We focus on building a static analysis ecosystem that is easy to plug into instead of integrating a small set of existing tools. We have focused on developing simple APIs that can be used by engineers throughout Google—not just analysis or language experts— to create analyses; for example, Refaster[^6] enables writing an analyzer by specifying pre- and post-code snippets demonstrating what transformations are expected by that analyzer.
+For example, experts who know the context for a particular kind of configuration file can write an analyzer that checks properties of those files. In addition to domain experts, analyses are contributed by developers who discover a bug and would like to prevent the same kind of bug from reappearing anywhere else in the codebase. We focus on building a static analysis ecosystem that is easy to plug into instead of integrating a small set of existing tools. We have focused on developing simple APIs that can be used by engineers throughout Google—not just analysis or language experts— to create analyses; for example, Refaster[^e6] enables writing an analyzer by specifying pre- and post-code snippets demonstrating what transformations are expected by that analyzer.
 
-例如，瞭解特定型別配置檔案上下文的專家可以編寫一個分析器來檢查這些檔案的屬性。除了領域專家之外，發現bug並希望防止同類bug在程式碼庫中的任何其他地方再次出現的開發人員也可以提供貢獻。我們專注於建構一個易於插入的靜態分析生態系統，而不是整合一小部分現有工具。我們專注於開發簡單的API，可供整個 Google 的工程師（不僅僅是分析或語言專家）用來建立分析；例如，重構可以透過指定前後程式碼片段來編寫分析器，來達到該分析器期望的效果。
+例如，瞭解特定型別配置檔案上下文的專家可以編寫一個分析器來檢查這些檔案的屬性。除了領域專家之外，發現bug並希望防止同類bug在程式碼庫中的任何其他地方再次出現的開發人員也可以提供貢獻。我們專注於建構一個易於插入的靜態分析生態系統，而不是整合一小部分現有工具。我們專注於開發簡單的API，可供整個 Google 的工程師（不僅僅是分析或語言專家）用來建立分析；例如，重構[^c6]可以透過指定前後程式碼片段來編寫分析器，來達到該分析器期望的效果。
 
-> [^6]: Louis Wasserman, “Scalable, Example-Based Refactorings with Refaster.” Workshop on Refactoring Tools, 2013.
+> [^e6]: Louis Wasserman, “Scalable, Example-Based Refactorings with Refaster.” Workshop on Refactoring Tools, 2013.
 >
-> 6 Louis Wasserman，"用Refaster進行可擴充的、基於例項的重構"。重構工具研討會，2013年。
+> [^c6]: Louis Wasserman，"用Refaster進行可擴充的、基於例項的重構"。重構工具研討會，2013年。
 
 ## Tricorder: Google’s Static Analysis Platform  Tricorder： Google 的靜態分析平台
 
-Tricorder, our static analysis platform, is a core part of static analysis at Google.[^7] Tricorder came out of several failed attempts to integrate static analysis with the developer workflow at Google;[^8] the key difference between Tricorder and previous attempts was our relentless focus on having Tricorder deliver only valuable results to its users. Tricorder is integrated with the main code review tool at Google, Critique. Tricorder warnings show up on Critique’s diff viewer as gray comment boxes, as demonstrated in Figure 20-1.
+Tricorder, our static analysis platform, is a core part of static analysis at Google.[^e7] Tricorder came out of several failed attempts to integrate static analysis with the developer workflow at Google;[^e8] the key difference between Tricorder and previous attempts was our relentless focus on having Tricorder deliver only valuable results to its users. Tricorder is integrated with the main code review tool at Google, Critique. Tricorder warnings show up on Critique’s diff viewer as gray comment boxes, as demonstrated in Figure 20-1.
 
-我們的靜態分析平台 Tricorder是Google靜態分析的核心部分。Tricorder是在Google多次嘗試將靜態分析與開發人員工作流整合的失敗嘗試中誕生的，與之前嘗試的主要區別在於我們堅持不懈地致力於讓Tricorder只為使用者提供有價值的結果。Tricorder與 Google 的主要程式碼審查工具Critique整合在一起。 Tricorder警告在Critique的差異檢視器上顯示為灰色的註釋框，如圖 20-1 所示。
+我們的靜態分析平台 Tricorder是Google靜態分析的核心部分。[^c7]Tricorder是在Google多次嘗試將靜態分析與開發人員工作流整合的失敗嘗試中誕生的，[^c8]與之前嘗試的主要區別在於我們堅持不懈地致力於讓Tricorder只為使用者提供有價值的結果。Tricorder與 Google 的主要程式碼審查工具Critique整合在一起。 Tricorder警告在Critique的差異檢視器上顯示為灰色的註釋框，如圖 20-1 所示。
 
 ![Figure 20-1](./images/Figure%2020-1.png)
 
@@ -146,13 +146,13 @@ Tricorder analyzers report results for more than 30 languages and support a vari
 
 Tricorder分析儀報告支援30種語言，並支援多種分析型別。Tricorder包括100多個分析器，其中大部分來自Tricorder團隊外部。 其中七個分析器本身就是外掛系統，具有數百項額外檢查，由 Google 的開發人員提供，總體有效的誤報率略低於 5%。
 
-> [^7]: Caitlin Sadowski, Jeffrey van Gogh, Ciera Jaspan, Emma Söderberg, and Collin Winter, Tricorder: Building a Program Analysis Ecosystem, International Conference on Software Engineering (ICSE), May 2015.
+> [^e7]: Caitlin Sadowski, Jeffrey van Gogh, Ciera Jaspan, Emma Söderberg, and Collin Winter, Tricorder: Building a Program Analysis Ecosystem, International Conference on Software Engineering (ICSE), May 2015.
 >
-> 7  Caitlin Sadowski, Jeffrey van Gogh, Ciera Jaspan, Emma Söderberg, and Collin Winter, Tricorder: 建構一個程式分析生態系統，國際軟體工程會議（ICSE），2015年5月。
+> [^c7]: Caitlin Sadowski, Jeffrey van Gogh, Ciera Jaspan, Emma Söderberg, and Collin Winter, Tricorder: 建構一個程式分析生態系統，國際軟體工程會議（ICSE），2015年5月。
 >
-> [^8]: Caitlin Sadowski, Edward Aftandilian, Alex Eagle, Liam Miller-Cushon, and Ciera Jaspan, “Lessons from Building Static Analysis Tools at Google”, Communications of the ACM, 61 No. 4 (April 2018): 58–66, `https://cacm.acm.org/magazines/2018/4/226371-lessons-from-building-static-analysis-tools-at-google/fulltext`.
+> [^e8]: Caitlin Sadowski, Edward Aftandilian, Alex Eagle, Liam Miller-Cushon, and Ciera Jaspan, “Lessons from Building Static Analysis Tools at Google”, Communications of the ACM, 61 No. 4 (April 2018): 58–66, `https://cacm.acm.org/magazines/2018/4/226371-lessons-from-building-static-analysis-tools-at-google/fulltext`.
 >
-> 8 Caitlin Sadowski, Edward Aftandilian, Alex Eagle, Liam Miller-Cushon, and Ciera Jaspan, “Lessons from Building Static Analysis Tools at Google”, ACM通訊期刊, 61 No. 4 (April 2018): 58–66, `https:// cacm.acm.org/magazines/2018/4/226371-lessons-from-building-static-analysis-tools-at-google/fulltext`.
+> [^c8]: Caitlin Sadowski, Edward Aftandilian, Alex Eagle, Liam Miller-Cushon, and Ciera Jaspan, “Lessons from Building Static Analysis Tools at Google”, ACM通訊期刊, 61 No. 4 (April 2018): 58–66, `https:// cacm.acm.org/magazines/2018/4/226371-lessons-from-building-static-analysis-tools-at-google/fulltext`.
 
 ### Integrated Tools  整合工具
 

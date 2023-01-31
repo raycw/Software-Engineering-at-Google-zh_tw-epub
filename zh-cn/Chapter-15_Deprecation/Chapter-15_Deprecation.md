@@ -95,9 +95,9 @@ Like many engineering activities, deprecation of a software system can be planne
 
 與許多工程活動一樣，軟體系統的“棄用”可以在這些系統首次設計時便進行規劃。程式語言、軟體架構、團隊組成， 甚至公司策略和文化的選擇都會影響系統在使用壽命結束後最終將其“棄用”的難易程度。
 
-The concept of designing systems so that they can eventually be deprecated might be radical in software engineering, but it is common in other engineering disciplines. Consider the example of a nuclear power plant, which is an extremely complex piece of engineering. As part of the design of a nuclear power station, its eventual decommissioning after a lifetime of productive service must be taken into account, even going so far as to allocate funds for this purpose.[^1] Many of the design choices in building a nuclear power plant are affected when engineers know that it will eventually need to be decommissioned.
+The concept of designing systems so that they can eventually be deprecated might be radical in software engineering, but it is common in other engineering disciplines. Consider the example of a nuclear power plant, which is an extremely complex piece of engineering. As part of the design of a nuclear power station, its eventual decommissioning after a lifetime of productive service must be taken into account, even going so far as to allocate funds for this purpose.[^e1] Many of the design choices in building a nuclear power plant are affected when engineers know that it will eventually need to be decommissioned.
 
-設計系統以使其最終可以被“棄用”的概念在軟體工程中可能是激進的，但它在其他工程學科中很常見。以核電站為例，這是一項極其複雜的工程。作為核電站設計的一部分，必須考慮到其在服務壽命到期後最終退役，甚至為此分配資金。當工程師知道它最終需要退役時，核電站建設中的許多設計,將會隨之改變。
+設計系統以使其最終可以被“棄用”的概念在軟體工程中可能是激進的，但它在其他工程學科中很常見。以核電站為例，這是一項極其複雜的工程。作為核電站設計的一部分，必須考慮到其在服務壽命到期後最終退役，甚至為此分配資金。[^c1]當工程師知道它最終需要退役時，核電站建設中的許多設計,將會隨之改變。
 
 Unfortunately, software systems are rarely so thoughtfully designed. Many software engineers are attracted to the task of building and launching new systems, not maintaining existing ones. The corporate culture of many companies, including Google, emphasizes building and shipping new products quickly, which often provides a disincentive for designing with deprecation in mind from the beginning. And in spite of the popular notion of software engineers as data-driven automata, it can be psychologically difficult to plan for the eventual demise of the creations we are working so hard to build.
 
@@ -125,9 +125,9 @@ In short, don’t start projects that your organization isn’t committed to sup
 
 簡而言之，如果你的公司不打算長期支援某個專案，那麼輕易不要啟動這個專案。即使公司選擇“棄用”專案，仍然會有成本，但可以透過規劃和投資工具和策略來降低成本。
 
-> [^1]: “Design and Construction of Nuclear Power Plants to Facilitate Decommissioning,” Technical Reports Series No. 382, IAEA, Vienna (1997).
+> [^e1]: “Design and Construction of Nuclear Power Plants to Facilitate Decommissioning,” Technical Reports Series No. 382, IAEA, Vienna (1997).
 >
-> 1 "設計和建造核電站便捷退役"，技術報告系列第382號，IAEA，維也納（1997年）。
+> [^c1]: "設計和建造核電站便捷退役"，技術報告系列第382號，IAEA，維也納（1997年）。
 
 ## Types of Deprecation  “棄用”的型別
 
@@ -193,9 +193,9 @@ What usually happens in practice is that these warnings accumulate over time. If
 
 在實踐中通常會發生這些警告隨著時間的推移而累積。如果它們在傳遞上下文中使用（例如，庫 A 依賴於庫 B， 而庫 B 又依賴於庫 C，而 C 發出警告，並在建構 A 時顯示），則這些警告很快就會使系統使用者不知所措 他們完全忽略它們的點。在醫療保健領域，這種現象被稱為“警覺疲勞”。
 
-Any deprecation warning issued to a user needs to have two properties: actionability and relevance. A warning is actionable if the user can use the warning to actually perform some relevant action, not just in theory, but in practical terms, given the expertise in that problem area that we expect for an average engineer. For example, a tool might warn that a call to a given function should be replaced with a call to its updated counterpart, or an email might outline the steps required to move data from an old system to a new one. In each case, the warning provided the next steps that an engineer can perform to no longer depend on the deprecated system.[^2]
+Any deprecation warning issued to a user needs to have two properties: actionability and relevance. A warning is actionable if the user can use the warning to actually perform some relevant action, not just in theory, but in practical terms, given the expertise in that problem area that we expect for an average engineer. For example, a tool might warn that a call to a given function should be replaced with a call to its updated counterpart, or an email might outline the steps required to move data from an old system to a new one. In each case, the warning provided the next steps that an engineer can perform to no longer depend on the deprecated system.[^e2]
 
-向用戶發出的任何“棄用”警告都需要具有兩個屬性：可操作性和相關性。如果使用者可以使用警告來實際執行某些相關操作，則警告是可操作的，不僅在理論上，而且在實踐中，即要提供可操作的遷移步驟，而不僅僅是一個警告。
+向用戶發出的任何“棄用”警告都需要具有兩個屬性：可操作性和相關性。如果使用者可以使用警告來實際執行某些相關操作，則警告是可操作的，不僅在理論上，而且在實踐中，即要提供可操作的遷移步驟，而不僅僅是一個警告。[^c2]
 
 A warning can be actionable, but still be annoying. To be useful, a deprecation warning should also be relevant. A warning is relevant if it surfaces at a time when a user actually performs the indicated action. Warning about the use of a deprecated function is best done while the engineer is writing code that uses that function, not after it has been checked into the repository for several weeks. Likewise, an email for data migration is best sent several months before the old system is removed rather than as an afterthought a weekend before the removal occurs.
 
@@ -205,9 +205,9 @@ It’s important to resist the urge to put deprecation warnings on everything po
 
 警告不是越多越好。警告本身並不壞，但不成熟的工具通常會產生大量警告訊息，這些訊息可能會讓工程師不知所措。在 Google 內部，我們會將舊功能標記為已“棄用”，但會利用 ErrorProne 或 clang-tidy 等工具來確保以有針對性的方式顯示警告。正如第 20 章中所討論的，我們將這些警告限制在新更改的行中，以警告人們有關已 “棄用”符號的新用法。更具侵入性的警告，例如依賴圖中已“棄用”的警告，僅針對強制“棄用”新增，並且團隊正在積極地將使用者移走。在任何一種情況下，工具都在適當的時間向適當的人提供適當的資訊方面發揮著重要作用，允許新增更多警告而不會使使用者感到疲倦。
 
-> [^2] See `https://abseil.io/docs/cpp/tools/api-upgrades` for an example.
+> [^e2]: See `https://abseil.io/docs/cpp/tools/api-upgrades` for an example.
 >
-> 2 查閱`https://abseil.io/docs/cpp/tools/api-upgrades` 例子。
+> [^c2]: 查閱`https://abseil.io/docs/cpp/tools/api-upgrades` 例子。
 
 ## Managing the Deprecation Process  管理“棄用”的流程
 

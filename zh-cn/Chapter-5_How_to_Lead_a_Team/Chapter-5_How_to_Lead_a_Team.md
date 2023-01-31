@@ -99,13 +99,13 @@ Aside from the general sense of malaise that most people feel when they hear the
 
 除了大多數人聽到“經理”這個詞時普遍感到的不安之外，大多數人不想成為經理的原因有很多。在軟體開發領域，你會聽到的最大的原因是你花在編寫程式碼上的時間要少得多。無論你是成為TL還是工程經理，這都是事實，我將在本章後面更多地討論這一點，但首先，讓我們討論一下更多的原因，為什麼我們大多數人都逃避成為經理。
 
-If you’ve spent the majority of your career writing code, you typically end a day with something you can point to—whether it’s code, a design document, or a pile of bugs you just closed—and say, “That’s what I did today.” But at the end of a busy day of “management,” you’ll usually find yourself thinking, “I didn’t do a damned thing today.” It’s the equivalent of spending years counting the number of apples you picked each day and changing to a job growing bananas, only to say to yourself at the end of each day, “I didn’t pick any apples,” happily ignoring the flourishing banana trees sitting next to you. Quantifying management work is more difficult than counting widgets you turned out, but just making it possible for your team to be happy and productive is a big measure of your job. Just don’t fall into the trap of counting apples when you’re growing bananas.[^1]
+If you’ve spent the majority of your career writing code, you typically end a day with something you can point to—whether it’s code, a design document, or a pile of bugs you just closed—and say, “That’s what I did today.” But at the end of a busy day of “management,” you’ll usually find yourself thinking, “I didn’t do a damned thing today.” It’s the equivalent of spending years counting the number of apples you picked each day and changing to a job growing bananas, only to say to yourself at the end of each day, “I didn’t pick any apples,” happily ignoring the flourishing banana trees sitting next to you. Quantifying management work is more difficult than counting widgets you turned out, but just making it possible for your team to be happy and productive is a big measure of your job. Just don’t fall into the trap of counting apples when you’re growing bananas.[^e1]
 
-如果你的職業生涯大部分時間都在寫程式碼，你通常會在結束一天的工作時，指著一些東西——無論是程式碼、設計文件，還是你剛剛關閉的一堆bug——說："這就是我今天做的事情。" 但在忙碌的 "管理 "一天結束時，你通常會發現自己在想，"我今天一件該死的事也沒做"。這相當於花上幾年的時間數數你每天摘的蘋果的數量，然後換了份種植香蕉的工作，每天結束時都對自己說，“我沒有摘蘋果”，忽略了你身旁茂盛的香蕉樹。量化管理工作比計算你生產的小元件要困難得多，但讓你的團隊能夠快樂且高效是你工作的一個重要指標。只是在你種植香蕉時不要落入數蘋果的陷阱。
+如果你的職業生涯大部分時間都在寫程式碼，你通常會在結束一天的工作時，指著一些東西——無論是程式碼、設計文件，還是你剛剛關閉的一堆bug——說："這就是我今天做的事情。" 但在忙碌的 "管理 "一天結束時，你通常會發現自己在想，"我今天一件該死的事也沒做"。這相當於花上幾年的時間數數你每天摘的蘋果的數量，然後換了份種植香蕉的工作，每天結束時都對自己說，“我沒有摘蘋果”，忽略了你身旁茂盛的香蕉樹。量化管理工作比計算你生產的小元件要困難得多，但讓你的團隊能夠快樂且高效是你工作的一個重要指標。只是在你種植香蕉時不要落入數蘋果的陷阱。[^c1]
 
-Another big reason for not becoming a manager is often unspoken but rooted in the famous “Peter Principle,” which states that “In a hierarchy every employee tends to rise to his level of incompetence.” Google generally avoids this by requiring that a person perform the job *above* their current level for a period of time (i.e., to “exceeds expectations” at their current level) before being promoted to that level. Most people have had a manager who was incapable of doing their job or was just really bad at managing people,[^2] and we know some people who have worked only for bad managers. If you’ve been exposed only to crappy managers for your entire career, why would you *ever* want to be a manager? Why would you want to be promoted to a role that you don’t feel able to do?
+Another big reason for not becoming a manager is often unspoken but rooted in the famous “Peter Principle,” which states that “In a hierarchy every employee tends to rise to his level of incompetence.” Google generally avoids this by requiring that a person perform the job *above* their current level for a period of time (i.e., to “exceeds expectations” at their current level) before being promoted to that level. Most people have had a manager who was incapable of doing their job or was just really bad at managing people,[^e2] and we know some people who have worked only for bad managers. If you’ve been exposed only to crappy managers for your entire career, why would you *ever* want to be a manager? Why would you want to be promoted to a role that you don’t feel able to do?
 
-不成為經理的另一個重要原因往往是不言而喻的，但卻源於著名的 "彼得原理"，即 "在等級制度中，每個職工趨向於上升到他所不能勝任的職位"。谷歌通常透過要求一個人在晉升到該級別之前，必須在其目前的級別上完成高於當前水平的工作一段時間（即達到 "超出預期 "的目前級別）來避免這種情況。大多數人都有過一個不能勝任工作的經理，或者只是非常不善於管理人，而我們知道有些人只為糟糕的經理工作。如果你在整個職業生涯中只接觸過糟糕的經理，你為什麼**想成為一名經理**？你為什麼要被提拔到一個你覺得無法勝任的角色？
+不成為經理的另一個重要原因往往是不言而喻的，但卻源於著名的 "彼得原理"，即 "在等級制度中，每個職工趨向於上升到他所不能勝任的職位"。谷歌通常透過要求一個人在晉升到該級別之前，必須在其目前的級別上完成高於當前水平的工作一段時間（即達到 "超出預期 "的目前級別）來避免這種情況。大多數人都有過一個不能勝任工作的經理，或者只是非常不善於管理人，[^c2]而我們知道有些人只為糟糕的經理工作。如果你在整個職業生涯中只接觸過糟糕的經理，你為什麼*想成為一名經理*？你為什麼要被提拔到一個你覺得無法勝任的角色？
 
 > 彼得原理推導：每一個職位最終都將被一個不能勝任其工作的職工所佔據。層級組織的工作任務多半是由尚未達到勝任階層的員工完成的。
 
@@ -113,13 +113,13 @@ There are, however, great reasons to consider becoming a TL or manager. First, i
 
 然而，有很好的理由考慮成為一名TL或經理。首先，這是一種擴充自己的方式。即使你很擅長寫程式碼，你能寫的程式碼量還是有上限的。想象一下，在你的領導下，一個由優秀工程師組成的團隊可以寫多少程式碼？第二，你可能真的很擅長寫程式碼——許多人發現自己被吸進了專案的領導真空中，發現自己在提供團隊或公司所需的指導、幫助和故障處理方面非常熟練。總得有人來領導，那麼為什麼不是你呢？
 
-> [^1]:	Another difference that takes getting used to is that the things we do as managers typically pay off over a longer timeline.
+> [^e1]: Another difference that takes getting used to is that the things we do as managers typically pay off over a longer timeline.
 >
-> 1 另一個需要適應的差異是，我們作為管理者所做的事情通常會在更長的時間後才得到回報。
+> [^c1]: 另一個需要適應的差異是，我們作為管理者所做的事情通常會在更長的時間後才得到回報。
 > 
-> [^2]:	Yet another reason companies shouldn’t force people into management as part of a career path: if an engineer is able to write reams of great code and has no desire at all to manage people or lead a team, by forcing them into a management or TL role, you’re losing a great engineer and gaining a crappy manager. This is not only a bad idea, but it’s actively harmful.
+> [^e2]: Yet another reason companies shouldn’t force people into management as part of a career path: if an engineer is able to write reams of great code and has no desire at all to manage people or lead a team, by forcing them into a management or TL role, you’re losing a great engineer and gaining a crappy manager. This is not only a bad idea, but it’s actively harmful.
 >
-> 2 然而，另一個原因是，公司不應該強迫人們把管理作為職業道路的一部分：如果一個工程師能夠寫出大量的優秀程式碼，卻完全沒有管理人或領導團隊的願望，強迫他們進入管理層或TL的角色，你就會失去一個偉大的工程師，得到一個糟糕的經理。這不僅是一個糟糕的主意，而且是積極有害的方式。
+> [^c2]: 然而，另一個原因是，公司不應該強迫人們把管理作為職業道路的一部分：如果一個工程師能夠寫出大量的優秀程式碼，卻完全沒有管理人或領導團隊的願望，強迫他們進入管理層或TL的角色，你就會失去一個偉大的工程師，得到一個糟糕的經理。這不僅是一個糟糕的主意，而且是積極有害的方式。
 
 ### Servant Leadership  服務型領導
 
@@ -143,34 +143,34 @@ Before talking about the core responsibilities of an engineering manager at Goog
 
 在談論谷歌工程經理的核心職責之前，讓我們回顧一下經理的歷史。今天的頂尖經理的概念部分是延續下來的，首先是來自軍隊的等級制度，後來被工業革命所採用——一百多年前！工廠開始到處湧現，他們需要（通常是不熟練的）工人來維持機器運轉。因此，這些工人需要主管人員來管理他們，由於很容易用其他急於找工作的人取代這些工人，主管人員沒有什麼動力來善待他們的僱員或改善他們的條件。無論人道與否，這種方法在許多年裡都很有效，當時員工除了完成死記硬背的任務外沒有其他事情可做。
 
-Managers frequently treated employees in the same way that cart drivers would treat their mules: they motivated them by alternately leading them forward with a carrot, and, when that didn’t work, whipping them with a stick. This carrot-and-stick method of management survived the transition from the factory[^3] to the modern office, where the stereotype of the tough-as-nails manager-as-mule-driver flourished in the middle part of the twentieth century when employees would work at the same job for years and years.
+Managers frequently treated employees in the same way that cart drivers would treat their mules: they motivated them by alternately leading them forward with a carrot, and, when that didn’t work, whipping them with a stick. This carrot-and-stick method of management survived the transition from the factory[^e3] to the modern office, where the stereotype of the tough-as-nails manager-as-mule-driver flourished in the middle part of the twentieth century when employees would work at the same job for years and years.
 
-經理們經常用趕車人對待騾子的方式來對待員工：他們用胡蘿蔔來激勵他們，當胡蘿蔔不起作用的時候，就用棍子來鞭打他們。這種胡蘿蔔加大棒的管理方法在從工廠過渡到現代辦公室的過渡中倖存下來，在二十世紀中葉，當員工在同一工作崗位上工作多年後，強硬的經理人作為騾子趕車人的刻板印象在辦公室裡盛行。
+經理們經常用趕車人對待騾子的方式來對待員工：他們用胡蘿蔔來激勵他們，當胡蘿蔔不起作用的時候，就用棍子來鞭打他們。這種胡蘿蔔加大棒的管理方法在從工廠[^c3]過渡到現代辦公室的過渡中倖存下來，在二十世紀中葉，當員工在同一工作崗位上工作多年後，強硬的經理人作為騾子趕車人的刻板印象在辦公室裡盛行。
 
 This continues today in some industries—even in industries that require creative thinking and problem solving—despite numerous studies suggesting that the anachronistic carrot and stick is ineffective and harmful to the productivity of creative people. Whereas the assembly-line worker of years past could be trained in days and replaced at will, software engineers working on large codebases can take months to get up to speed on a new team. Unlike the replaceable assembly-line worker, these people need nurturing, time, and space to think and create.
 
 儘管許多研究表明，不合時宜的胡蘿蔔和大棒是無效的，而且對有創造力的人的生產效率有害，但這種情況今天在一些行業仍然存在——甚至在那些需要創造力思維和解決問題的行業。過去幾年的裝配線工人可以在幾天內接受培訓並被隨意替換，而從事大型程式碼庫工作的軟體工程師可能需要幾個月的時間才能在一個新的團隊中適應。與可替換的裝配線工人不同，這些人需要培養、時間和空間來思考和創造。
 
 
-> [^3]:	For more fascinating information on optimizing the movements of factory workers, read up on Scientific Management or Taylorism, especially its effects on worker morale./
-> 3   有關優化工廠工人流動的更多有趣資訊，請閱讀科學管理或泰勒主義，尤其是其對工人士氣的影響。
+> [^e3]: For more fascinating information on optimizing the movements of factory workers, read up on Scientific Management or Taylorism, especially its effects on worker morale./
+> [^c3]: 有關優化工廠工人流動的更多有趣資訊，請閱讀科學管理或泰勒主義，尤其是其對工人士氣的影響。
 
 
 ### Today’s Engineering Manager  當今的工程經理
 
-Most people still use the title “manager” despite the fact that it’s often an anachronism. The title itself often encourages new managers to *manage* their reports. Managers can wind up acting like parents,[^4] and consequently employees react like children. To frame this in the context of humility, respect, and trust: if a manager makes it obvious that they trust their employee, the employee feels positive pressure to live up to that trust. It’s that simple. A good manager forges the way for a team, looking out for their safety and well-being, all while making sure their needs are met. If there’s one thing you remember from this chapter, make it this:
+Most people still use the title “manager” despite the fact that it’s often an anachronism. The title itself often encourages new managers to *manage* their reports. Managers can wind up acting like parents,[^e4] and consequently employees react like children. To frame this in the context of humility, respect, and trust: if a manager makes it obvious that they trust their employee, the employee feels positive pressure to live up to that trust. It’s that simple. A good manager forges the way for a team, looking out for their safety and well-being, all while making sure their needs are met. If there’s one thing you remember from this chapter, make it this:
     Traditional managers worry about how to get things done, whereas great managers worry about what things get done (and trust their team to figure out how to do it).
 
-大多數人仍然使用 "經理 "這個頭銜，儘管它往往是一個不合時宜的頭銜。這個頭銜本身經常鼓勵新經理撰寫報告。經理們可能會表現得像父母一樣，因此員工的反應也像孩子。從謙遜、尊重和信任的角度來看：如果經理明顯地表示他們信任員工，那麼員工就會感到有積極的壓力，不辜負這種信任。就是這麼簡單。好的經理為團隊開闢道路，關注他們的安全和福祉，同時確保他們的需求得到滿足。如果你在本章中記住了一件事，那就是這個：
+大多數人仍然使用 "經理 "這個頭銜，儘管它往往是一個不合時宜的頭銜。這個頭銜本身經常鼓勵新經理撰寫報告。經理們可能會表現得像父母一樣，[^c4]因此員工的反應也像孩子。從謙遜、尊重和信任的角度來看：如果經理明顯地表示他們信任員工，那麼員工就會感到有積極的壓力，不辜負這種信任。就是這麼簡單。好的經理為團隊開闢道路，關注他們的安全和福祉，同時確保他們的需求得到滿足。如果你在本章中記住了一件事，那就是這個：
     傳統的經理擔心的是如何把事情做好，而優秀的經理擔心的是把什麼事情做好（並相信他們的團隊能想出辦法來）。
 
 A new engineer, Jerry, joined my team a few years ago. Jerry’s last manager (at a different company) was adamant that he be at his desk from 9:00 to 5:00 every day, and assumed that if he wasn’t there, he wasn’t working enough (which is, of course, a ridiculous assumption). On his first day working with me, Jerry came to me at 4:40p.m. and stammered out an apology that he had to leave 15 minutes early because he had an appointment that he had been unable to reschedule. I looked at him, smiled, and told him flat out, “Look, as long as you get your job done, I don’t care what time you leave the office.” Jerry stared blankly at me for a few seconds, nodded, and went on his way. I treated Jerry like an adult; he always got his work done, and I never had to worry about him being at his desk, because he didn’t need a babysitter to get his work done. If your employees are so uninterested in their job that they actually need traditional-manager babysitting to be convinced to work, *that* is your real problem.
 
 幾年前，一位名叫傑瑞的工程師新加入了我的團隊。傑瑞的上一任經理（在另一家公司）堅決要求他每天從早上9點到下午5點都在辦公桌前，並認為如果他不在那裡，就說明他工作得不夠努力（當然，這是一個可笑的假設）。在他和我一起工作的第一天，傑瑞在下午4點40分來找我，結結巴巴地道歉，說他不得不提前15分鐘離開，因為他有一個約會，但他沒法重新安排。我看著他，笑了笑，直截了當地告訴他："聽著，只要你完成了你的工作，我不在乎你什麼時候離開辦公室。" 傑瑞茫然地盯著我看了幾秒鐘，點了點頭，然後上路了。我對待傑瑞就像對待成年人一樣，他總是能完成工作，我從來沒有擔心過他是否在辦公桌前，因為他不需要保姆一樣的來完成工作。如果你的員工對他們的工作如此不感興趣，以至於他們實際上需要傳統的經理保姆式來監督他們工作，這才是你真正的問題。
 
-> [^4]: If you have kids, the odds are good that you can remember with startling clarity the first time you said something to your child that made you stop and exclaim (perhaps even aloud), “Holy crap, I’ve become my mother.”
+> [^e4]: If you have kids, the odds are good that you can remember with startling clarity the first time you said something to your child that made you stop and exclaim (perhaps even aloud), “Holy crap, I’ve become my mother.”
 >
-> 4 如果你有孩子，你很有可能清楚地記得你第一次對你的孩子說了什麼，讓你停下來並感嘆（也許甚至是大聲地感嘆）："我的媽呀，我已經變成我的母親了。"
+> [^c4]: 如果你有孩子，你很有可能清楚地記得你第一次對你的孩子說了什麼，讓你停下來並感嘆（也許甚至是大聲地感嘆）："我的媽呀，我已經變成我的母親了。"
 -----
 
 #### Failure Is an Option  失敗也是一種選擇
@@ -183,15 +183,15 @@ So, let’s get that out of the way: it’s OK to fail. In fact, we like to thin
 
 所以，讓我們先把話說清楚：失敗是允許的。事實上，我們喜歡把失敗看作是一種快速學習的方式（只要你不是在同一件事上反覆犯錯）。此外，重要的是把失敗看作是一個學習的機會，而不是指責或推責。快速失敗是好的，因為沒有太多的風險。緩慢的失敗也能給人以寶貴的教訓，但它更痛苦，因為風險更大，可能損失更多（通常是工程時間）。以影響客戶的方式失敗可能是我們遇到的最不可取的失敗，但這也是我們從失敗中學習的最大方式。如前所述，每次谷歌出現重大生產故障時，我們都會進行事後分析。這一過程是記錄失敗的一種方式導致實際失敗的事件，並制定一系列措施防止未來發生。這既不是一個指責的機會，也不是為了引入不必要的官僚檢查；相反，目標是強烈關注問題的核心，並一勞永逸地解決它。這非常困難，但相當有效（和宣洩）。
 
-Individual successes and failures are a bit different. It’s one thing to laud individual successes, but looking to assign individual blame in the case of failure is a great way to divide a team and discourage risk taking across the board. It’s alright to fail, but fail as a team and learn from your failures. If an individual succeeds, praise them in front of the team. If an individual fails, give constructive criticism in private.[^5] Whatever the case, take advantage of the opportunity and apply a liberal helping of humility, respect, and trust to help your team learn from its failures.
+Individual successes and failures are a bit different. It’s one thing to laud individual successes, but looking to assign individual blame in the case of failure is a great way to divide a team and discourage risk taking across the board. It’s alright to fail, but fail as a team and learn from your failures. If an individual succeeds, praise them in front of the team. If an individual fails, give constructive criticism in private.[^e5] Whatever the case, take advantage of the opportunity and apply a liberal helping of humility, respect, and trust to help your team learn from its failures.
 
-個人的成功和失敗是有點不同的。讚揚個人的成功是一回事，但在失敗的情況下尋找個人的責任是分裂團隊的方式，並阻礙整個團隊的風險承擔。失敗是正常的，但作為一個團隊，要從失敗中學習。如果一個人成功了，在團隊面前表揚他們。如果一個人失敗了，私下給予建設性的指導。無論是什麼情況，都要利用這個機會，運用謙遜、尊重和信任的慷慨幫助，幫助你的團隊從失敗中吸取教訓。
+個人的成功和失敗是有點不同的。讚揚個人的成功是一回事，但在失敗的情況下尋找個人的責任是分裂團隊的方式，並阻礙整個團隊的風險承擔。失敗是正常的，但作為一個團隊，要從失敗中學習。如果一個人成功了，在團隊面前表揚他們。如果一個人失敗了，私下給予建設性的指導。[^c5]無論是什麼情況，都要利用這個機會，運用謙遜、尊重和信任的慷慨幫助，幫助你的團隊從失敗中吸取教訓。
 
 ------
 
-> [^5]: Public criticism of an individual is not only ineffective (it puts people on the defense), but rarely necessary, and most often is just mean or cruel. You can be sure the rest of the team already knows when an individual has failed, so there’s no need to rub it in.  
+> [^e5]: Public criticism of an individual is not only ineffective (it puts people on the defense), but rarely necessary, and most often is just mean or cruel. You can be sure the rest of the team already knows when an individual has failed, so there’s no need to rub it in.  
 >
-> 5 對一個人的公開批評不僅沒有效果（它使人們處於防禦狀態），而且很少有必要，大多數時候只是刻薄或殘酷。你可以肯定，團隊的其他成員已經知道一個人什麼時候失敗了，所以沒有必要重複。
+> [^c5]: 對一個人的公開批評不僅沒有效果（它使人們處於防禦狀態），而且很少有必要，大多數時候只是刻薄或殘酷。你可以肯定，團隊的其他成員已經知道一個人什麼時候失敗了，所以沒有必要重複。
 
 ## Antipatterns  反模式
 
@@ -337,13 +337,13 @@ One of the early managers at Google, Bill Coughran, a VP of engineering, had tru
 
 谷歌的早期經理之一，工程部副部長比爾·考夫蘭，真正掌握了在任何時候都保持冷靜的能力。無論發生什麼事情，無論發生什麼瘋狂的事情，無論發生多大的風波，比爾都不會驚慌。大多數時候，他會把一隻手放在胸前，用手託著下巴，對問題進行提問，通常是向完全驚慌失措的工程師提問。這樣做的效果是讓他們平靜下來，幫助他們專注於解決問題，而不是像一隻被砍了頭的雞一樣到處亂跑。我們中的一些人曾經開玩笑說，如果有人進來告訴比爾，公司的19個辦公室被太空外星人襲擊了，比爾的反應會是："知道為什麼他們沒有襲擊20個？"。
 
-This brings us to another Zen management trick: asking questions. When a team member asks you for advice, it’s usually pretty exciting because you’re finally getting the chance to fix something. That’s exactly what you did for years before moving into a leadership position, so you usually go leaping into solution mode, but that is the last place you should be. The person asking for advice typically doesn’t want *you* to solve their problem, but rather to help them solve it, and the easiest way to do this is to ask this person questions. This isn’t to say that you should replace yourself with a Magic 8 Ball, which would be maddening and unhelpful. Instead, you can apply some humility, respect, and trust and try to help the person solve the problem on their own by trying to refine and explore the problem. This will usually lead the employee to the answer,[^6] and it will be that person’s answer, which leads back to the ownership and responsibility we went over earlier in this chapter. Whether or not you have the answer, using this technique will almost always leave the employee with the impression that you did. Tricky, eh? Socrates would be proud of you.
+This brings us to another Zen management trick: asking questions. When a team member asks you for advice, it’s usually pretty exciting because you’re finally getting the chance to fix something. That’s exactly what you did for years before moving into a leadership position, so you usually go leaping into solution mode, but that is the last place you should be. The person asking for advice typically doesn’t want *you* to solve their problem, but rather to help them solve it, and the easiest way to do this is to ask this person questions. This isn’t to say that you should replace yourself with a Magic 8 Ball, which would be maddening and unhelpful. Instead, you can apply some humility, respect, and trust and try to help the person solve the problem on their own by trying to refine and explore the problem. This will usually lead the employee to the answer,[^e6] and it will be that person’s answer, which leads back to the ownership and responsibility we went over earlier in this chapter. Whether or not you have the answer, using this technique will almost always leave the employee with the impression that you did. Tricky, eh? Socrates would be proud of you.
 
-這給我們帶來了另一個管理自我技巧：問問題。當一個團隊成員向你徵求意見時，這通常是非常令人興奮的，因為你終於有機會解決一些問題了。這正是你在進入領導崗位之前多年所做的事情，所以你通常會立即進入解決方案模式，但這是你最不應該做的。尋求建議的人通常不希望*你*解決他們的問題，而是希望你能幫助他們解決問題，而最簡單的方法就是向這個人提問。這並不是說你應該用 "魔力8球 "來代替你自己，那樣做會讓人發瘋，而且沒有幫助。相反，你可以運用一些謙遜、尊重和信任，透過嘗試完善和探索問題，嘗試幫助這個人自己解決這個問題。這通常會引導員工找到答案，而且這將是這個人的答案，這又回到了我們在本章前面所講的所有權和責任。無論你是否有答案，使用這種技巧幾乎總是會給員工留下你有答案的印象。很狡猾，是嗎？蘇格拉底會為你感到驕傲的。
+這給我們帶來了另一個管理自我技巧：問問題。當一個團隊成員向你徵求意見時，這通常是非常令人興奮的，因為你終於有機會解決一些問題了。這正是你在進入領導崗位之前多年所做的事情，所以你通常會立即進入解決方案模式，但這是你最不應該做的。尋求建議的人通常不希望*你*解決他們的問題，而是希望你能幫助他們解決問題，而最簡單的方法就是向這個人提問。這並不是說你應該用 "魔力8球 "來代替你自己，那樣做會讓人發瘋，而且沒有幫助。相反，你可以運用一些謙遜、尊重和信任，透過嘗試完善和探索問題，嘗試幫助這個人自己解決這個問題。這通常會引導員工找到答案，[^c6]而且這將是這個人的答案，這又回到了我們在本章前面所講的所有權和責任。無論你是否有答案，使用這種技巧幾乎總是會給員工留下你有答案的印象。很狡猾，是嗎？蘇格拉底會為你感到驕傲的。
 
-> [^6]: See also “Rubber duck debugging.”
+> [^e6]: See also “Rubber duck debugging.”
 >
-> 6   另請參見“橡皮鴨除錯”
+> [^c6]: 另請參見“橡皮鴨除錯”
 
 ### Be a Catalyst  成為催化劑
 
@@ -351,12 +351,12 @@ In chemistry, a catalyst is something that accelerates a chemical reaction, but 
 
 在化學中，催化劑是加速化學反應的東西，但它本身在反應中不被消耗。催化劑（如酶）發揮作用的方式之一是使反應物接近：反應物不是在溶液中隨機地跳動，而是在催化劑的幫助下更有可能彼此有利地互動。這是你作為一個領導者經常需要扮演的角色，你可以透過多種方式來實現這一目標。
 
-One of the most common things a team leader does is to build consensus. This might mean that you drive the process from start to finish, or you just give it a gentle push in the right direction to speed it up. Working to build team consensus is a leadership skill that is often used by unofficial leaders because it’s one way you can lead without any actual authority. If you have the authority, you can direct and dictate direction, but that’s less effective overall than building consensus.[^7] If your team is looking to move quickly, sometimes it will voluntarily concede authority and direction to one or more team leads. Even though this might look like a dictatorship or oligarchy, when it’s done voluntarily, it’s a form of consensus.
+One of the most common things a team leader does is to build consensus. This might mean that you drive the process from start to finish, or you just give it a gentle push in the right direction to speed it up. Working to build team consensus is a leadership skill that is often used by unofficial leaders because it’s one way you can lead without any actual authority. If you have the authority, you can direct and dictate direction, but that’s less effective overall than building consensus.[^e7] If your team is looking to move quickly, sometimes it will voluntarily concede authority and direction to one or more team leads. Even though this might look like a dictatorship or oligarchy, when it’s done voluntarily, it’s a form of consensus.
 
-團隊領導最常做的事情之一是建立共識。這可能意味著你從頭到尾推動這個過程，或者你只是在正確的方向上輕輕地推動它以加速它。努力建立團隊共識是一種領導技能，經常被非官方領導人使用，因為這是你可以在沒有任何實際權力的情況下進行領導的一種方式。如果你有權力，你可以指揮和發號施令，但這在整體上不如建立共識有效。如果你的團隊希望快速行動，有時會自願將權力和方向讓給一個或多個團隊領導。儘管這可能看起來像獨裁或寡頭政治，但當它是自願做的時候，它是一種共識的形式。
+團隊領導最常做的事情之一是建立共識。這可能意味著你從頭到尾推動這個過程，或者你只是在正確的方向上輕輕地推動它以加速它。努力建立團隊共識是一種領導技能，經常被非官方領導人使用，因為這是你可以在沒有任何實際權力的情況下進行領導的一種方式。如果你有權力，你可以指揮和發號施令，但這在整體上不如建立共識有效。[^c7]如果你的團隊希望快速行動，有時會自願將權力和方向讓給一個或多個團隊領導。儘管這可能看起來像獨裁或寡頭政治，但當它是自願做的時候，它是一種共識的形式。
 
-> [^7]:	Attempting to achieve 100% consensus can also be harmful. You need to be able to decide to proceed even if not everyone is on the same page or there is still some uncertainty.  
-> 7 試圖達成100%的共識也可能是有害的。你需要能夠決定繼續進行，即使不是每個人都在同一起跑線上，或者仍有一些不確定性。
+> [^e7]: Attempting to achieve 100% consensus can also be harmful. You need to be able to decide to proceed even if not everyone is on the same page or there is still some uncertainty.  
+> [^c7]: 試圖達成100%的共識也可能是有害的。你需要能夠決定繼續進行，即使不是每個人都在同一起跑線上，或者仍有一些不確定性。
 
 ### Remove Roadblocks  消除障礙
 
@@ -439,13 +439,13 @@ As a leader, one way you can make your team more productive (and less likely to 
 
 作為一名領導者，從長遠來看，你可以讓你的團隊更有效率（也不太可能離開）的一種方法是花一些時間來衡量他們的幸福感。我們合作過的最好的領導都是業餘的心理學家，他們時常關注團隊成員的福利，確保他們的工作得到認可，並努力確保他們對工作感到滿意。我們認識的一位TLM將所有需要完成的煩人、吃力不討好的任務製成電子表格，並確保這些任務在團隊中平均分配。另一位TLM觀察他的團隊的工作時間，並利用補償時間和有趣的團隊外出活動來避免倦怠和疲憊。還有一個人開始與他的團隊成員進行一對一的會談，處理他們的技術問題，以此來打破僵局，然後花一些時間來確保每個工程師擁有完成工作所需的一切。在他們熱身之後，他與工程師交談了一會兒，談論他們如何享受工作，以及他們接下來期待的事情。
 
-A good simple way to track your team’s happiness[^8] is to ask the team member at the end of each one-on-one meeting, “What do you need?” This simple question is a great way to wrap up and make sure each team member has what they need to be productive and happy, although you might need to carefully probe a bit to get details. If you ask this every time you have a one-on-one, you’ll find that eventually your team will remember this and sometimes even come to you with a laundry list of things it needs to make everyone’s job better.
+A good simple way to track your team’s happiness[^e8] is to ask the team member at the end of each one-on-one meeting, “What do you need?” This simple question is a great way to wrap up and make sure each team member has what they need to be productive and happy, although you might need to carefully probe a bit to get details. If you ask this every time you have a one-on-one, you’ll find that eventually your team will remember this and sometimes even come to you with a laundry list of things it needs to make everyone’s job better.
 
-追蹤你的團隊幸福感的一個好的簡單方法是在每次一對一的會議結束時問團隊成員："你需要什麼？" 這個簡單的問題是一個很好的總結方式，確保每個團隊成員都有他們需要的東西，以提高工作效率和幸福感，儘管你可能需要仔細探究一下以獲得細節。如果你在每次一對一會談時都這樣問，你會發現最終你的團隊會記住這一點，有時甚至會帶著一長串需要的東西來找你，以使每個人的工作變得更好。
+追蹤你的團隊幸福感[^c8]的一個好的簡單方法是在每次一對一的會議結束時問團隊成員："你需要什麼？" 這個簡單的問題是一個很好的總結方式，確保每個團隊成員都有他們需要的東西，以提高工作效率和幸福感，儘管你可能需要仔細探究一下以獲得細節。如果你在每次一對一會談時都這樣問，你會發現最終你的團隊會記住這一點，有時甚至會帶著一長串需要的東西來找你，以使每個人的工作變得更好。
 
-> [^8]:	Google also runs an annual employee survey called “Googlegeist” that rates employee happiness across many dimensions. This provides good feedback but isn’t what we would call “simple.”
+> [^e8]: Google also runs an annual employee survey called “Googlegeist” that rates employee happiness across many dimensions. This provides good feedback but isn’t what we would call “simple.”
 >
-> 8 谷歌還開展了一項名為 "Googlegeist "的年度員工調查，從多個方面對員工的幸福感進行評價。這提供了良好的反饋，但並不是我們所說的 "簡單"。
+> [^c8]: 谷歌還開展了一項名為 "Googlegeist "的年度員工調查，從多個方面對員工的幸福感進行評價。這提供了良好的反饋，但並不是我們所說的 "簡單"。
 
 ## The Unexpected Question  意想不到的問題
 
@@ -510,16 +510,16 @@ Following are other miscellaneous tips and tricks that we at Google recommend wh
 Lastly, here’s something the best leaders know and use often when they have adventurous team members who want to try new things:
 
 *It’s easy to say “yes” to something that’s easy to undo*  
-    If you have a team member who wants to take a day or two to try using a new tool or library[^9] that could speed up your product (and you’re not on a tight deadline), it’s easy to say, “Sure, give it a shot.” If, on the other hand, they want to do something like launch a product that you’re going to have to support for the next 10 years, you’ll likely want to give it a bit more thought. Really good leaders have a good sense for when something can be undone, but more things are undoable than you think (and this applies to both technical and nontechnical decisions).
+    If you have a team member who wants to take a day or two to try using a new tool or library[^e9] that could speed up your product (and you’re not on a tight deadline), it’s easy to say, “Sure, give it a shot.” If, on the other hand, they want to do something like launch a product that you’re going to have to support for the next 10 years, you’ll likely want to give it a bit more thought. Really good leaders have a good sense for when something can be undone, but more things are undoable than you think (and this applies to both technical and nontechnical decisions).
 
 最後，這裡有一些最好的領導者知道的東西，當他們有想嘗試新事物的富有冒險精神的團隊成員時，他們經常使用：
 
 *很容易對容易撤銷的事情說 "是 "*  
-    如果你有一個團隊成員想花一兩天時間嘗試使用一個新的工具或庫，可以加速你的產品（而且你沒有緊迫的期限），你很容易說："當然，給它一個機會。" 另一方面，如果他們想做一些事情，比如推出一個你必須在未來10年內支援的產品，你可能會想多考慮一下。真正好的領導對什麼時候可以撤銷的事情有很好的感覺，但更多的事情是可以撤銷的，而不是你想象的那樣（這適用於技術和非技術的決定）。
+    如果你有一個團隊成員想花一兩天時間嘗試使用一個新的工具或庫，[^c9]可以加速你的產品（而且你沒有緊迫的期限），你很容易說："當然，給它一個機會。" 另一方面，如果他們想做一些事情，比如推出一個你必須在未來10年內支援的產品，你可能會想多考慮一下。真正好的領導對什麼時候可以撤銷的事情有很好的感覺，但更多的事情是可以撤銷的，而不是你想象的那樣（這適用於技術和非技術的決定）。
 
-> [^9]: To gain a better understanding of just how “undoable” technical changes can be, see Chapter 22.  
+> [^e9]: To gain a better understanding of just how “undoable” technical changes can be, see Chapter 22.  
 >
-> 9 要想更好地瞭解技術變革是如何 "不可逆轉 "的，見第22章。
+> [^c9]: 要想更好地瞭解技術變革是如何 "不可逆轉 "的，見第22章。
 
 ## People Are Like Plants  人如植物
 
@@ -541,41 +541,41 @@ Giving direction is fairly straightforward—it requires a basic understanding o
 
 ### Intrinsic Versus Extrinsic Motivation  內在動機與外在動機的關係
 
-There are two types of motivation: *extrinsic*, which originates from outside forces (such as monetary compensation), and *intrinsic*, which comes from within. In his book *Drive*,[^10] Dan Pink explains that the way to make people the happiest and most productive isn’t to motivate them extrinsically (e.g., throw piles of cash at them); rather, you need to work to increase their intrinsic motivation. Dan claims you can increase intrinsic motivation by giving people three things: autonomy, mastery, and purpose.[^11]
+There are two types of motivation: *extrinsic*, which originates from outside forces (such as monetary compensation), and *intrinsic*, which comes from within. In his book *Drive*,[^e10] Dan Pink explains that the way to make people the happiest and most productive isn’t to motivate them extrinsically (e.g., throw piles of cash at them); rather, you need to work to increase their intrinsic motivation. Dan claims you can increase intrinsic motivation by giving people three things: autonomy, mastery, and purpose.[^e11]
 
-有兩種型別的動機：*外部動機*，來源於外部力量（如金錢補償），和*內部動機*，來源於內部。丹-平克在他的書《驅動》中解釋說，讓人們成為最快樂、最有效率的人的方法不是外在地激勵他們（例如，向他們扔大量現金）；相反，你需要努力提高他們的內在動機。丹聲稱，你可以透過給人們三樣東西來增加內在動機：自主性、掌控力和目標。
+有兩種型別的動機：*外部動機*，來源於外部力量（如金錢補償），和*內部動機*，[^c10]來源於內部。丹-平克在他的書《驅動》中解釋說，讓人們成為最快樂、最有效率的人的方法不是外在地激勵他們（例如，向他們扔大量現金）；相反，你需要努力提高他們的內在動機。丹聲稱，你可以透過給人們三樣東西來增加內在動機：自主性、掌控力和目標。[^c11]
 
-A person has autonomy when they have the ability to act on their own without someone micromanaging them.[^12] With autonomous employees (and Google strives to hire mostly autonomous engineers), you might give them the general direction in which they need to take the product but leave it up to them to decide how to get there. This helps with motivation not only because they have a closer relationship with the product (and likely know better than you how to build it), but also because it gives them a much greater sense of ownership of the product. The bigger their stake is in the success of the product, the greater their interest is in seeing it succeed.
+A person has autonomy when they have the ability to act on their own without someone micromanaging them.[^e12] With autonomous employees (and Google strives to hire mostly autonomous engineers), you might give them the general direction in which they need to take the product but leave it up to them to decide how to get there. This helps with motivation not only because they have a closer relationship with the product (and likely know better than you how to build it), but also because it gives them a much greater sense of ownership of the product. The bigger their stake is in the success of the product, the greater their interest is in seeing it succeed.
 
-當一個人能夠獨立行動而不受任何人的微觀管理時，他就擁有了自主權。有了自主員工（谷歌努力僱傭的大多是自主工程師），你可能會給他們提供他們需要的產品的大方向，但讓他們自己決定如何去做。這有助於激勵，不僅因為他們與產品的關係更密切（而且可能比你更瞭解如何建構產品），而且還因為這讓他們對產品有更大的主人翁意識。他們對產品的成功所持的股份越大，他們對看到產品成功的興趣就越大。
+當一個人能夠獨立行動而不受任何人的微觀管理時，他就擁有了自主權。[^c12]有了自主員工（谷歌努力僱傭的大多是自主工程師），你可能會給他們提供他們需要的產品的大方向，但讓他們自己決定如何去做。這有助於激勵，不僅因為他們與產品的關係更密切（而且可能比你更瞭解如何建構產品），而且還因為這讓他們對產品有更大的主人翁意識。他們對產品的成功所持的股份越大，他們對看到產品成功的興趣就越大。
 
-Mastery in its basest form simply means that you need to give someone the opportunity to improve existing skills and learn new ones. Giving ample opportunities for mastery not only helps to motivate people, it also makes them better over time, which makes for stronger teams.[^13] An employee’s skills are like the blade of a knife: you can spend tens of thousands of dollars to find people with the sharpest skills for your team, but if you use that knife for years without sharpening it, you will wind up with a dull knife that is inefficient, and in some cases useless. Google gives ample opportunities for engineers to learn new things and master their craft so as to keep them sharp, efficient, and effective.
+Mastery in its basest form simply means that you need to give someone the opportunity to improve existing skills and learn new ones. Giving ample opportunities for mastery not only helps to motivate people, it also makes them better over time, which makes for stronger teams.[^e13] An employee’s skills are like the blade of a knife: you can spend tens of thousands of dollars to find people with the sharpest skills for your team, but if you use that knife for years without sharpening it, you will wind up with a dull knife that is inefficient, and in some cases useless. Google gives ample opportunities for engineers to learn new things and master their craft so as to keep them sharp, efficient, and effective.
 
-掌握最基本的方式只意味著你需要給某人機會來提高現有技能並學習新技能。提供充分的掌握技能的機會不僅有助於激勵員工，而且隨著時間的推移，他們也會變得更好，從而形成更強大的團隊。員工的技能就像刀鋒：你可以花數萬美元為團隊找到最有技能的人，但是，如果你使用這把刀多年而沒有磨快它，你會得到一把鈍刀，這是低效的，在某些情況下是無用的。谷歌為工程師提供了大量學習新事物和掌握技能的機會，從而使他們保持敏銳、高效和有效。
+掌握最基本的方式只意味著你需要給某人機會來提高現有技能並學習新技能。提供充分的掌握技能的機會不僅有助於激勵員工，而且隨著時間的推移，他們也會變得更好，從而形成更強大的團隊。[^c13]員工的技能就像刀鋒：你可以花數萬美元為團隊找到最有技能的人，但是，如果你使用這把刀多年而沒有磨快它，你會得到一把鈍刀，這是低效的，在某些情況下是無用的。谷歌為工程師提供了大量學習新事物和掌握技能的機會，從而使他們保持敏銳、高效和有效。
 
-Of course, all the autonomy and mastery in the world isn’t going to help motivate someone if they’re doing work for no reason at all, which is why you need to give their work purpose. Many people work on products that have great significance, but they’re kept at arm’s length from the positive effects their products might have on their company, their customers, or even the world. Even for cases in which the product might have a much smaller impact, you can motivate your team by seeking the reason for their efforts and making this reason clear to them. If you can help them to see this purpose in their work, you’ll see a tremendous increase in their motivation and productivity.[14](#_bookmark464) One manager we know keeps a close eye on the email feedback that Google gets for its product (one of the “smaller-impact” products), and whenever she sees a message from a customer talking about how the company’s product has helped them personally or helped their business, she immediately forwards it to the engineering team. This not only motivates the team, but also frequently inspires team members to think about ways in which they can make their product even better.
+Of course, all the autonomy and mastery in the world isn’t going to help motivate someone if they’re doing work for no reason at all, which is why you need to give their work purpose. Many people work on products that have great significance, but they’re kept at arm’s length from the positive effects their products might have on their company, their customers, or even the world. Even for cases in which the product might have a much smaller impact, you can motivate your team by seeking the reason for their efforts and making this reason clear to them. If you can help them to see this purpose in their work, you’ll see a tremendous increase in their motivation and productivity.[^e14] One manager we know keeps a close eye on the email feedback that Google gets for its product (one of the “smaller-impact” products), and whenever she sees a message from a customer talking about how the company’s product has helped them personally or helped their business, she immediately forwards it to the engineering team. This not only motivates the team, but also frequently inspires team members to think about ways in which they can make their product even better.
 
-當然，如果某人無緣無故地工作，那麼世界上所有的自主性和掌握性都無助於激勵他們，這就是為什麼你需要給他們工作的目的。許多人從事具有重大意義的產品，但他們與產品可能對公司、客戶甚至世界產生的積極影響保持一定距離。即使在產品的影響可能小得多的情況下，你也可以透過尋找他們努力的原因並向他們說明原因來激勵團隊。如果你能幫助他們在工作中看到這一目標，你會看到他們的積極性和生產效率有了巨大的提高。我們認識的一位經理密切關注谷歌為其產品（一種“影響較小”的產品）收到的電子郵件反饋，每當她看到客戶在談論公司的產品如何幫助他們個人或幫助他們的業務時，她會立即將其轉發給工程團隊。這不僅激勵了團隊，也經常激勵團隊成員思考如何讓他們的產品變得更好。
+當然，如果某人無緣無故地工作，那麼世界上所有的自主性和掌握性都無助於激勵他們，這就是為什麼你需要給他們工作的目的。許多人從事具有重大意義的產品，但他們與產品可能對公司、客戶甚至世界產生的積極影響保持一定距離。即使在產品的影響可能小得多的情況下，你也可以透過尋找他們努力的原因並向他們說明原因來激勵團隊。如果你能幫助他們在工作中看到這一目標，你會看到他們的積極性和生產效率有了巨大的提高。[^c14]我們認識的一位經理密切關注谷歌為其產品（一種“影響較小”的產品）收到的電子郵件反饋，每當她看到客戶在談論公司的產品如何幫助他們個人或幫助他們的業務時，她會立即將其轉發給工程團隊。這不僅激勵了團隊，也經常激勵團隊成員思考如何讓他們的產品變得更好。
 
-> [^10]: See Dan’s fantastic TED talk on this subject.
+> [^e10]: See Dan’s fantastic TED talk on this subject.
 >
-> 10  看丹關於這個話題的精彩TED演講。
+> [^c10]:  看丹關於這個話題的精彩TED演講。
 >
-> [^11]: This assumes that the people in question are being paid well enough that income is not a source of stress.
+> [^e11]: This assumes that the people in question are being paid well enough that income is not a source of stress.
 >
-> 11  這是假設相關人員的薪酬足夠高，收入不是壓力來源。
+> [^c11]: 這是假設相關人員的薪酬足夠高，收入不是壓力來源。
 >
-> [^12]: This assumes that you have people on your team who don’t need micromanagement.
+> [^e12]: This assumes that you have people on your team who don’t need micromanagement.
 >
-> 12  這假設您的團隊中有不需要微觀管理的人員。
+> [^c12]: 這假設您的團隊中有不需要微觀管理的人員。
 >
-> [^13]:Of course, it also means they’re more valuable and marketable employees, so it’s easier for them to pick up and leave you if they’re not enjoying their work. See the pattern in “Track Happiness” on page 99.
+> [^e13]: Of course, it also means they’re more valuable and marketable employees, so it’s easier for them to pick up and leave you if they’re not enjoying their work. See the pattern in “Track Happiness” on page 99.
 >
-> 13  當然，這也意味著他們是更有價值、更有市場價值的員工，因此，如果他們不喜歡自己的工作，他們會更容易接你離開。請參見第99頁“追蹤幸福感”中的模式。
+> [^c13]: 當然，這也意味著他們是更有價值、更有市場價值的員工，因此，如果他們不喜歡自己的工作，他們會更容易接你離開。請參見第99頁“追蹤幸福感”中的模式。
 >
-> [^14]: Adam M. Grant, “The Significance of Task Significance: Job Performance Effects, Relational Mechanisms, and Boundary Conditions,” Journal of Applied Psychology, 93, No. 1 (2018), http://bit.ly/task_significance.
+> [^e14]: Adam M. Grant, “The Significance of Task Significance: Job Performance Effects, Relational Mechanisms, and Boundary Conditions,” Journal of Applied Psychology, 93, No. 1 (2018), http://bit.ly/task_significance.
 >
-> 14  Adam M.Grant，“任務重要性的重要性：工作績效影響、關係機制和邊界條件”，《應用心理學雜誌》，第93期，第1期（2018年），http://bit.ly/task_significance.
+> [^c14]: Adam M.Grant，“任務重要性的重要性：工作績效影響、關係機制和邊界條件”，《應用心理學雜誌》，第93期，第1期（2018年），http://bit.ly/task_significance.
 
 ## Conclusion  總結
 

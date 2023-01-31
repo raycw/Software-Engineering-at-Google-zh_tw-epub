@@ -9,17 +9,17 @@
 
 **Edited by Lisa Carey**
 
-If you ask Google engineers what they like most about working at Google (besides the free food and cool products), you might hear something surprising: engineers love the build system.[^1] Google has spent a tremendous amount of engineering effort over its lifetime in creating its own build system from the ground up, with the goal of ensuring that our engineers are able to quickly and reliably build code. The effort has been so successful that Blaze, the main component of the build system, has been reimplemented several different times by ex-Googlers who have left the company.[^2] In 2015, Google finally open sourced an implementation of Blaze named Bazel.
+If you ask Google engineers what they like most about working at Google (besides the free food and cool products), you might hear something surprising: engineers love the build system.[^e1] Google has spent a tremendous amount of engineering effort over its lifetime in creating its own build system from the ground up, with the goal of ensuring that our engineers are able to quickly and reliably build code. The effort has been so successful that Blaze, the main component of the build system, has been reimplemented several different times by ex-Googlers who have left the company.[^e2] In 2015, Google finally open sourced an implementation of Blaze named Bazel.
 
-如果你問谷歌的工程師，他們最喜歡在谷歌工作的原因（除了免費的食物和黑科技產品），你還會聽到一些令人驚訝的事情：工程師們喜歡建構系統。谷歌一直在花費了巨大的努力，從零開始建立自己的建構系統，目的是確保工程師們能夠快速、可靠地建構程式碼。這一努力是成功的，建構系統的主要元件Blaze，已經被已離開公司的前谷歌員工重新實現了好幾次。2015年，谷歌終於公開了Blaze的一個實現，名為Bazel。
+如果你問谷歌的工程師，他們最喜歡在谷歌工作的原因（除了免費的食物和黑科技產品），你還會聽到一些令人驚訝的事情：工程師們喜歡建構系統。[^c1]谷歌一直在花費了巨大的努力，從零開始建立自己的建構系統，目的是確保工程師們能夠快速、可靠地建構程式碼。這一努力是成功的，建構系統的主要元件Blaze，已經被已離開公司的前谷歌員工重新實現了好幾次。[^c2]2015年，谷歌終於公開了Blaze的一個實現，名為Bazel。
 
-> [^1]: In an internal survey, 83% of Googlers reported being satisfied with the build system, making it the fourth most satisfying tool of the 19 surveyed. The average tool had a satisfaction rating of 69%.
+> [^e1]: In an internal survey, 83% of Googlers reported being satisfied with the build system, making it the fourth most satisfying tool of the 19 surveyed. The average tool had a satisfaction rating of 69%.
 >
-> 1  在一項內部調查中，83%的谷歌使用者表示對建構系統感到滿意，這使它成為19項調查中第四個最令人滿意的工具。平均工具的滿意度為69%。
+> [^c1]: 在一項內部調查中，83%的谷歌使用者表示對建構系統感到滿意，這使它成為19項調查中第四個最令人滿意的工具。平均工具的滿意度為69%。
 >
-> [^2]: See `https://buck.build/` and `https://www.pantsbuild.org/index.html`.
+> [^e2]: See `https://buck.build/` and `https://www.pantsbuild.org/index.html`.
 >
-> 2 查閱 `https://buck.build/` and `https://www.pantsbuild.org/index.html`
+> [^c2]: 查閱 `https://buck.build/` and `https://www.pantsbuild.org/index.html`
 
 ## Purpose of a Build System 建構系統的目的
 
@@ -184,9 +184,9 @@ simple example build file
 </project>
 ```
 
-The buildfile is written in XML and defines some simple metadata about the build along with a list of tasks (the `<target>` tags in the XML[^3]). Each task executes a list of possible commands defined by Ant, which here include creating and deleting directories, running javac, and creating a JAR file. This set of commands can be extended by user-provided plug-ins to cover any sort of logic. Each task can also define the tasks it depends on via the depends attribute. These dependencies form an acyclic graph (see Figure 18-1).
+The buildfile is written in XML and defines some simple metadata about the build along with a list of tasks (the `<target>` tags in the XML[^e3]). Each task executes a list of possible commands defined by Ant, which here include creating and deleting directories, running javac, and creating a JAR file. This set of commands can be extended by user-provided plug-ins to cover any sort of logic. Each task can also define the tasks it depends on via the depends attribute. These dependencies form an acyclic graph (see Figure 18-1).
 
-建構檔案是用XML編寫的，定義了一些關於建構的簡單元資料以及任務列表（XML中的`<target>`標籤）。每個任務都執行Ant定義的一系列可能的命令，其中包括建立和刪除目錄、執行javac和建立JAR檔案。這組命令可以由使用者提供的外掛擴充，以涵蓋任何型別的邏輯。每個任務還可以透過依賴屬性定義它所依賴的任務。這些依賴關係形成一個無環圖（見圖18-1）。
+建構檔案是用XML編寫的，定義了一些關於建構的簡單元資料以及任務列表（XML中的`<target>`標籤[^c3]）。每個任務都執行Ant定義的一系列可能的命令，其中包括建立和刪除目錄、執行javac和建立JAR檔案。這組命令可以由使用者提供的外掛擴充，以涵蓋任何型別的邏輯。每個任務還可以透過依賴屬性定義它所依賴的任務。這些依賴關係形成一個無環圖（見圖18-1）。
 
 Figure 18-1. An acyclic graph showing dependencies 顯示依賴關係的無環圖
 
@@ -232,9 +232,9 @@ Ant is a very old piece of software, originally released in 2000—not what many
 
 Ant是一個非常古老的軟體，最初發佈於2000年--而不是很多人今天會考慮的“現代”建構系統！其他工具，如Maven和Gradle，在這幾年中對Ant進行了改進，基本上取代了它，新增諸如自動管理外部依賴項和不使用任何XML的更乾淨語法等功能。但這些新系統的本質仍然是一樣的：它們允許工程師以有原則的模組化方式編寫建構指令碼作為任務，並提供工具來執行這些任務和管理它們之間的依賴關係。
 
-> [^3]:  Ant uses the word “target” to represent what we call a “task” in this chapter, and it uses the word “task” to refer to what we call “commands.”
+> [^e3]:  Ant uses the word “target” to represent what we call a “task” in this chapter, and it uses the word “task” to refer to what we call “commands.”
 >
-> 3 ant用 "目標 "這個詞來表示我們在本章中所說的 "任務"，它用 "任務 "這個詞來指代我們所說的 "命令"/。
+> [^c3]: Ant 用 "目標 "這個詞來表示我們在本章中所說的 "任務"，它用 "任務 "這個詞來指代我們所說的 "命令"。
 
 #### The dark side of task-based build systems 基於任務的建構系統的缺陷
 
@@ -380,25 +380,25 @@ The system isn’t foolproof given that there’s no way to stop an action devel
 
 **使外部依賴性具有確定性**。還有一個問題：建構系統經常需要從外部下載依賴項（無論是工具還是庫），而不是直接建構它們。這可以透過@com_google_common_guava_guava//jar依賴項在範例中看到，該依賴項從Maven下載jar檔案。
 
-Depending on files outside of the current workspace is risky. Those files could change at any time, potentially requiring the build system to constantly check whether they’re fresh. If a remote file changes without a corresponding change in the workspace source code, it can also lead to unreproducible builds—a build might work one day and fail the next for no obvious reason due to an unnoticed dependency change. Finally, an external dependency can introduce a huge security risk when it is owned by a third party:[^4]  if an attacker is able to infiltrate that third-party server, they can replace the dependency file with something of their own design, potentially giving them full control over your build environment and its output.
+Depending on files outside of the current workspace is risky. Those files could change at any time, potentially requiring the build system to constantly check whether they’re fresh. If a remote file changes without a corresponding change in the workspace source code, it can also lead to unreproducible builds—a build might work one day and fail the next for no obvious reason due to an unnoticed dependency change. Finally, an external dependency can introduce a huge security risk when it is owned by a third party:[^e4]  if an attacker is able to infiltrate that third-party server, they can replace the dependency file with something of their own design, potentially giving them full control over your build environment and its output.
 
-依靠當前工作區以外的檔案是有風險的。這些檔案可能隨時更改，這可能需要產生系統不斷檢查它們是否是最新的。如果一個遠端檔案發生了變化，而工作區的原始碼卻沒有相應的變化，這也會導致建構的不可重複性--由於一個未被注意到的依賴性變化，建構可能在某一天成功，而在第二天卻沒有明顯的原因而失敗。最後，當外部依賴項屬於第三方時，可能會帶來巨大的安全風險：如果攻擊者能夠滲透到第三方伺服器，他們可以用自己設計的內容替換依賴項檔案，從而有可能讓他們完全控制伺服器建構環境及其輸出。
+依靠當前工作區以外的檔案是有風險的。這些檔案可能隨時更改，這可能需要產生系統不斷檢查它們是否是最新的。如果一個遠端檔案發生了變化，而工作區的原始碼卻沒有相應的變化，這也會導致建構的不可重複性--由於一個未被注意到的依賴性變化，建構可能在某一天成功，而在第二天卻沒有明顯的原因而失敗。最後，當外部依賴項屬於第三方時，可能會帶來巨大的安全風險：[^c4]如果攻擊者能夠滲透到第三方伺服器，他們可以用自己設計的內容替換依賴項檔案，從而有可能讓他們完全控制伺服器建構環境及其輸出。
 
 The fundamental problem is that we want the build system to be aware of these files without having to check them into source control. Updating a dependency should be a conscious choice, but that choice should be made once in a central place rather than managed by individual engineers or automatically by the system. This is because even with a “Live at Head” model, we still want builds to be deterministic, which implies that if you check out a commit from last week, you should see your dependencies as they were then rather than as they are now.
 
 根本的問題是，我們希望建構系統知道這些檔案，而不必將它們放入原始碼管理。更新一個依賴關係應該是一個有意識的選擇，但這個選擇應該在一箇中心位置做出，而不是由個別工程師管理或由系統自動管理。這是因為即使是 "Live at Head "模式，我們仍然希望建構是確定性的，這意味著如果你檢查出上週的提交，你應該看到你的依賴關係是當時的，而不是現在的。
 
-Bazel and some other build systems address this problem by requiring a workspace- wide manifest file that lists a cryptographic hash for every external dependency in the workspace.[^5]  The hash is a concise way to uniquely represent the file without checking the entire file into source control. Whenever a new external dependency is referenced from a workspace, that dependency’s hash is added to the manifest, either manually or automatically. When Bazel runs a build, it checks the actual hash of its cached dependency against the expected hash defined in the manifest and redownloads the file only if the hash differs.
+Bazel and some other build systems address this problem by requiring a workspace-wide manifest file that lists a cryptographic hash for every external dependency in the workspace.[^e5] The hash is a concise way to uniquely represent the file without checking the entire file into source control. Whenever a new external dependency is referenced from a workspace, that dependency’s hash is added to the manifest, either manually or automatically. When Bazel runs a build, it checks the actual hash of its cached dependency against the expected hash defined in the manifest and redownloads the file only if the hash differs.
 
-Bazel和其他一些建構系統透過要求一個工作區範圍的清單檔案來解決這個問題，該檔案列出了工作區中每個外部依賴項的加密雜湊。每當從工作區參考一個新的外部依賴關係時，該依賴關係的雜湊值就會被手動或自動新增到清單中。Bazel 執行建構時，會將其快取的依賴關係的實際雜湊值與清單中定義的預期雜湊值進行對比，只有在雜湊值不同時才會重新下載檔案。
+Bazel和其他一些建構系統透過要求一個工作區範圍的清單檔案來解決這個問題，[^c5]該檔案列出了工作區中每個外部依賴項的加密雜湊。每當從工作區參考一個新的外部依賴關係時，該依賴關係的雜湊值就會被手動或自動新增到清單中。Bazel 執行建構時，會將其快取的依賴關係的實際雜湊值與清單中定義的預期雜湊值進行對比，只有在雜湊值不同時才會重新下載檔案。
 
-> [^4]: Such "software supply chain" attacks are becoming more common.
+> [^e4]: Such "software supply chain" attacks are becoming more common.
 >
-> 4   這種“軟體供應鏈”攻擊越來越普遍。
+> [^c4]: 這種“軟體供應鏈”攻擊越來越普遍。
 >
-> [^5]: Go recently added preliminary support for modules using the exact same system.
+> [^e5]: Go recently added preliminary support for modules using the exact same system.
 >
-> 5   Go最近增加了對使用完全相同系統的模組的初步支援。
+> [^c5]: Go最近增加了對使用完全相同系統的模組的初步支援。
 
 If the artifact we download has a different hash than the one declared in the manifest, the build will fail unless the hash in the manifest is updated. This can be done automatically, but that change must be approved and checked into source control before the build will accept the new dependency. This means that there’s always a record of when a dependency was updated, and an external dependency can’t change without a corresponding change in the workspace source. It also means that, when checking out an older version of the source code, the build is guaranteed to use the same dependencies that it was using at the point when that version was checked in (or else it will fail if those dependencies are no longer available).
 
@@ -558,17 +558,17 @@ As far as the underlying tools are concerned, there’s no problem with this; bo
 
 就底層工具而言，這沒有問題；B和C在建構目標A時都會連結到目標A中，因此C中定義的任何符號都會被A知道。Blaze允許這一點很多年了，但隨著谷歌的發展，我們開始發現問題。假設B被重構，不再需要依賴C。如果B對C的依賴關係被刪除，A和透過對B的依賴關係使用C的任何其他目標都將中斷。實際上，一個目標的依賴關係成為其公共契約的一部分，永遠無法安全地更改。這意味著依賴性會隨著時間的推移而積累，谷歌的建構速度開始變慢。
 
-Google eventually solved this issue by introducing a “strict transitive dependency mode” in Blaze. In this mode, Blaze detects whether a target tries to reference a symbol without depending on it directly and, if so, fails with an error and a shell command that can be used to automatically insert the dependency. Rolling this change out across Google’s entire codebase and refactoring every one of our millions of build targets to explicitly list their dependencies was a multiyear effort, but it was well worth it. Our builds are now much faster given that targets have fewer unnecessary dependencies,[^6] and engineers are empowered to remove dependencies they don’t need without worrying about breaking targets that depend on them.
+Google eventually solved this issue by introducing a “strict transitive dependency mode” in Blaze. In this mode, Blaze detects whether a target tries to reference a symbol without depending on it directly and, if so, fails with an error and a shell command that can be used to automatically insert the dependency. Rolling this change out across Google’s entire codebase and refactoring every one of our millions of build targets to explicitly list their dependencies was a multiyear effort, but it was well worth it. Our builds are now much faster given that targets have fewer unnecessary dependencies,[^e6] and engineers are empowered to remove dependencies they don’t need without worrying about breaking targets that depend on them.
 
-谷歌最終解決了這個問題，在Blaze中引入了一個 "嚴格傳遞依賴模式"。在這種模式下，Blaze檢測目標是否嘗試參考符號而不直接依賴它，如果是，則失敗，並顯示錯誤和可用於自動插入依賴項的shell命令。在谷歌的整個程式碼庫中推廣這一變化，並重構我們數百萬個建構目標中的每一個，以以明確列出它們的依賴關係，這是一項多年的努力，但這是非常值得的。現在我們的建構速度快多了，因為目標的不必要的依賴性減少了，工程師有權刪除他們不需要的依賴關係，而不用擔心破壞依賴它們的目標。
+谷歌最終解決了這個問題，在Blaze中引入了一個 "嚴格傳遞依賴模式"。在這種模式下，Blaze檢測目標是否嘗試參考符號而不直接依賴它，如果是，則失敗，並顯示錯誤和可用於自動插入依賴項的shell命令。在谷歌的整個程式碼庫中推廣這一變化，並重構我們數百萬個建構目標中的每一個，以以明確列出它們的依賴關係，這是一項多年的努力，但這是非常值得的。現在我們的建構速度快多了，因為目標的不必要的依賴性減少了，[^c6]工程師有權刪除他們不需要的依賴關係，而不用擔心破壞依賴它們的目標。
 
 As usual, enforcing strict transitive dependencies involved a trade-off. It made build files more verbose, as frequently used libraries now need to be listed explicitly in many places rather than pulled in incidentally, and engineers needed to spend more effort adding dependencies to *BUILD* files. We’ve since developed tools that reduce this toil by automatically detecting many missing dependencies and adding them to a *BUILD* files without any developer intervention. But even without such tools, we’ve found the trade-off to be well worth it as the codebase scales: explicitly adding a dependency to *BUILD* file is a one-time cost, but dealing with implicit transitive dependencies can cause ongoing problems as long as the build target exists. [Bazel enforces strict transitive dependencies](https://oreil.ly/Z-CqD)on Java code by default.
 
 像往常一樣，強制執行嚴格的可傳遞依賴關係需要權衡。它使建構檔案更加冗長，因為現在需要在許多地方明確列出常用的函式庫，而不是附帶地將其拉入，而且工程師需要花更多的精力將依賴關係新增到*BUILD*檔案中。我們後來開發了一些工具，透過自動檢測許多缺失的依賴關係並將其新增到*BUILD*檔案中，而不需要任何開發人員的干預，從而減少了這項工作。但即使沒有這樣的工具，我們也發現，隨著程式碼庫的擴充，這樣的權衡是非常值得的：明確地在*BUILD*檔案中新增一個依賴關係是一次性的成本，但是隻要建構目標存在，處理隱含傳遞依賴項就可能導致持續的問題。Bazel對Java程式碼強制執行嚴格的可傳遞依賴項。
 
-> [^6]: Of course, actually removing these dependencies was a whole separate process. But requiring each target to explicitly declare what it used was a critical first step. See Chapter 22 for more information about how Google makes large-scale changes like this.
+> [^e6]: Of course, actually removing these dependencies was a whole separate process. But requiring each target to explicitly declare what it used was a critical first step. See Chapter 22 for more information about how Google makes large-scale changes like this.
 >
-> 6   當然，實際上刪除這些依賴項是一個完全獨立的過程。但要求每個目標明確宣告它使用了什麼是關鍵的第一步。請參閱第22章，瞭解更多關於谷歌如何做出如此大規模改變的資訊。
+> [^c6]: 當然，實際上刪除這些依賴項是一個完全獨立的過程。但要求每個目標明確宣告它使用了什麼是關鍵的第一步。請參閱第22章，瞭解更多關於谷歌如何做出如此大規模改變的資訊。
 
 ### External dependencies 外部依賴
 

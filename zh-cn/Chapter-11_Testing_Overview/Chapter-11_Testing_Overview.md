@@ -14,9 +14,9 @@ Testing has always been a part of programming. In fact, the first time you wrote
 
 測試一直是程式設計的一部分。事實上，當你第一次編寫計算機程式時，你幾乎肯定向它丟擲一些樣本資料，看看它是否按照你的預期執行。在很長一段時間裡，軟體測試的技術水平類似於一個非常相近的過程，主要是手動且容易出錯的。然而，自21世紀初以來，軟體行業的測試方法已經發生了巨大的變化，以應對現代軟體系統的規模和複雜性。這種演進的核心是開發人員驅動的自動化測試實踐。
 
-Automated testing can prevent bugs from escaping into the wild and affecting your users. The later in the development cycle a bug is caught, the more expensive it is; exponentially so in many cases.[^1] However, “catching bugs” is only part of the motivation. An equally important reason why you want to test your software is to support the ability to change. Whether you’re adding new features, doing a refactoring focused on code health, or undertaking a larger redesign, automated testing can quickly catch mistakes, and this makes it possible to change software with confidence.
+Automated testing can prevent bugs from escaping into the wild and affecting your users. The later in the development cycle a bug is caught, the more expensive it is; exponentially so in many cases.[^e1] However, “catching bugs” is only part of the motivation. An equally important reason why you want to test your software is to support the ability to change. Whether you’re adding new features, doing a refactoring focused on code health, or undertaking a larger redesign, automated testing can quickly catch mistakes, and this makes it possible to change software with confidence.
 
-自動化測試可以防止bug外逃並影響使用者。開發週期越晚發現bug，成本就越高；在許多情況下都是指數級的高。然而，“捕捉bug”只是動機的一部分。你希望測試軟體的一個同樣重要的原因是支援更改的能力。無論你是在新增新功能、進行以程式碼健康為重點的重構，還是進行更大規模的重新設計，自動化測試都可以快速發現錯誤，這使得有信心地更改軟體成為可能。
+自動化測試可以防止bug外逃並影響使用者。開發週期越晚發現bug，成本就越高；在許多情況下都是指數級的高。[^c1]然而，“捕捉bug”只是動機的一部分。你希望測試軟體的一個同樣重要的原因是支援更改的能力。無論你是在新增新功能、進行以程式碼健康為重點的重構，還是進行更大規模的重新設計，自動化測試都可以快速發現錯誤，這使得有信心地更改軟體成為可能。
 
 Companies that can iterate faster can adapt more rapidly to changing technologies, market conditions, and customer tastes. If you have a robust testing practice, you needn’t fear change—you can embrace it as an essential quality of developing software. The more and faster you want to change your systems, the more you need a fast way to test them.
 
@@ -30,9 +30,9 @@ Much ink has been spilled about the subject of testing software, and for good re
 
 關於測試軟體的話題，人們已經傾注了大量的筆墨，這是有充分理由的：對於如此重要的實踐，對許多人來說，把它做好似乎仍然是一門神秘的技藝。在谷歌，雖然我們已經取得了長足的進步，但我們仍然面臨著讓流程在整個公司內可靠擴充的難題。在本章中，我們將分享我們所學到的有助於進一步對話的知識。
 
-> [^1]: See “Defect Prevention: Reducing Costs and Enhancing Quality.”
+> [^e1]: See “Defect Prevention: Reducing Costs and Enhancing Quality.”
 >
-> 1  請參閱“缺陷預防：降低成本和提高品質”
+> [^c1]: 請參閱“缺陷預防：降低成本和提高品質”
 
 ## Why Do We Write Tests?  為什麼我們要編寫測試？
 
@@ -62,17 +62,17 @@ Creating and maintaining a healthy test suite takes real effort. As a codebase g
 
 建立和維護一個健康的測試套件需要付出艱辛的努力。隨著程式碼庫的增長，測試套件也會增長。它將開始面臨諸如不穩定和執行緩慢的挑戰。如果不能解決這些問題，測試套件將被削弱。請記住，測試的價值來自工程師對測試的信任。如果測試成為生產力的短板，不斷地帶來辛勞和不確定性，工程師將失去信任並開始尋找解決辦法。一個糟糕的測試套件可能比根本沒有測試套件更糟糕。
 
-In addition to empowering companies to build great products quickly, testing is becoming critical to ensuring the safety of important products and services in our lives. Software is more involved in our lives than ever before, and defects can cause  more than a little annoyance: they can cost massive amounts of money, loss of property, or, worst of all, loss of life.[^2]
+In addition to empowering companies to build great products quickly, testing is becoming critical to ensuring the safety of important products and services in our lives. Software is more involved in our lives than ever before, and defects can cause  more than a little annoyance: they can cost massive amounts of money, loss of property, or, worst of all, loss of life.[^e2]
 
-除了使公司能夠快速生產出優秀的產品外，測試對於確保我們生活中重要產品和服務的安全也變得至關重要。軟體比以往任何時候都更多地參與到我們的生活中，而缺陷可能會造成更多的煩惱：它們可能會造成大量的金錢損失，財產損失，或者最糟糕的是，生命損失。
+除了使公司能夠快速生產出優秀的產品外，測試對於確保我們生活中重要產品和服務的安全也變得至關重要。軟體比以往任何時候都更多地參與到我們的生活中，而缺陷可能會造成更多的煩惱：它們可能會造成大量的金錢損失，財產損失，或者最糟糕的是，生命損失。[^c2]
 
 At Google, we have determined that testing cannot be an afterthought. Focusing on quality and testing is part of how we do our jobs. We have learned, sometimes painfully, that failing to build quality into our products and services inevitably leads to bad outcomes. As a result, we have built testing into the heart of our engineering culture.
 
 在谷歌，我們已經確定測試不能是事後諸葛亮。關注品質和測試是我們工作的一部分。我們已經瞭解到，有時是痛苦地認識到，未能將品質融入我們的產品和服務不可避免地會導致糟糕的結果。因此，我們將測試融入了我們工程文化的核心。
 
-> [^2]: See “Failure at Dhahran.”
+> [^e2]: See “Failure at Dhahran.”
 >
-> 2   參見“達蘭的失敗”
+> [^c2]: 參見“達蘭的失敗”
 
 ### The Story of Google Web Server  谷歌網路伺服器的故事
 
@@ -150,9 +150,9 @@ Writing tests is only the first step in the process of automated testing. After 
 
 編寫測試只是自動化測試過程中的第一步。編寫測試後，需要執行它們。頻繁地自動化測試的核心是一遍又一遍地重複相同的操作，只有在出現故障時才需要人的注意。我們將在第23章討論這種持續整合（CI）和測試。透過將測試表達為程式碼，而不是手動的一系列步驟，我們可以在每次程式碼改變時執行它們——每天很容易地執行數千次。與人工測試人員不同，機器從不感到疲勞或無聊。
 
-Another benefit of having tests expressed as code is that it is easy to modularize them for execution in various environments. Testing the behavior of Gmail in Firefox requires no more effort than doing so in Chrome, provided you have configurations for both of these systems.^3 Running tests for a user interface (UI) in Japanese or German can be done using the same test code as for English.
+Another benefit of having tests expressed as code is that it is easy to modularize them for execution in various environments. Testing the behavior of Gmail in Firefox requires no more effort than doing so in Chrome, provided you have configurations for both of these systems.[^e3] Running tests for a user interface (UI) in Japanese or German can be done using the same test code as for English.
 
-將測試轉變為程式碼的另一個好處是，很容易將它們模組化，以便在各種環境中執行。在Firefox中測試Gmail的行為並不需要比在Chrome中測試更多的努力，只要你有這兩個系統的配置。可以使用與英語相同的測試程式碼對日語或德語使用者介面（UI）進行測試。
+將測試轉變為程式碼的另一個好處是，很容易將它們模組化，以便在各種環境中執行。在Firefox中測試Gmail的行為並不需要比在Chrome中測試更多的努力，只要你有這兩個系統的配置。[^c3]可以使用與英語相同的測試程式碼對日語或德語使用者介面（UI）進行測試。
 
 Products and services under active development will inevitably experience test failures. What really makes a testing process effective is how it addresses test failures. Allowing failing tests to pile up quickly defeats any value they were providing, so it is imperative not to let that happen. Teams that prioritize fixing a broken test within minutes of a failure are able to keep confidence high and failure isolation fast, and therefore derive more value out of their tests.
 
@@ -162,9 +162,9 @@ In summary, a healthy automated testing culture encourages everyone to share the
 
 總之，一個健康的自動化測試文化鼓勵每個人分享編寫測試的工作。這種文化也確保了測試的定期執行。最後，也許也是最重要的，它強調快速修復損壞的測試，以保持對測試過程的高度信心。
 
-> [^3]: Getting the behavior right across different browsers and languages is a different story! But, ideally, the end- user experience should be the same for everyone.
+> [^e3]: Getting the behavior right across different browsers and languages is a different story! But, ideally, the end- user experience should be the same for everyone.
 >
-> 3 在不同的瀏覽器和語言中獲得正確的行為是一個不同的說法! 但是，理想情況下，終端使用者的體驗對每個人來說都應該是一樣的。
+> [^c3]: 在不同的瀏覽器和語言中獲得正確的行為是一個不同的說法! 但是，理想情況下，終端使用者的體驗對每個人來說都應該是一樣的。
 
 ### Benefits of Testing Code  測試程式碼的好處
 
@@ -224,9 +224,9 @@ This led to a lot of discussion around the company about the exact meaning of �
 
 ### Test Size  測試規模
 
-At Google, we classify every one of our tests into a size and encourage engineers to always write the smallest possible test for a given piece of functionality. A test’s size is determined not by its number of lines of code, but by how it runs, what it is allowed to do, and how many resources it consumes. In fact, in some cases, our definitions of small, medium, and large are actually encoded as constraints the testing infrastructure can enforce on a test. We go into the details in a moment, but in brief, *small tests* run in a single process, *medium tests* run on a single machine, and *large tests* run wherever they want, as demonstrated in [Figure 11-2](#_bookmark872).[^4](#_bookmark873)
+At Google, we classify every one of our tests into a size and encourage engineers to always write the smallest possible test for a given piece of functionality. A test’s size is determined not by its number of lines of code, but by how it runs, what it is allowed to do, and how many resources it consumes. In fact, in some cases, our definitions of small, medium, and large are actually encoded as constraints the testing infrastructure can enforce on a test. We go into the details in a moment, but in brief, *small tests* run in a single process, *medium tests* run on a single machine, and *large tests* run wherever they want, as demonstrated in [Figure 11-2](#_bookmark872).[^e4]
 
-在谷歌，我們把每一個測試都歸為一個規模，並鼓勵工程師總是為一個給定的功能編寫儘可能小的測試。一個測試的規模大小不是由它的程式碼行數決定的，而是由它的執行方式、它被允許做什麼以及它消耗多少資源決定的。事實上，在某些情況下，我們對小、中、大的定義實際上被編碼為測試基礎設施可以在測試上執行的約束。我們稍後會討論細節，但簡單地說，*小型測試*在一個處理序中執行，*中型測試*在一臺機器上執行，而*大型測試*在任何地方執行，如圖11-2所展示。
+在谷歌，我們把每一個測試都歸為一個規模，並鼓勵工程師總是為一個給定的功能編寫儘可能小的測試。一個測試的規模大小不是由它的程式碼行數決定的，而是由它的執行方式、它被允許做什麼以及它消耗多少資源決定的。事實上，在某些情況下，我們對小、中、大的定義實際上被編碼為測試基礎設施可以在測試上執行的約束。我們稍後會討論細節，但簡單地說，*小型測試*在一個處理序中執行，*中型測試*在一臺機器上執行，而*大型測試*在任何地方執行，如圖11-2所展示。[^c4]
 
 ![Figure 11-2](./images/image-20220407200232089.png)
 
@@ -236,9 +236,9 @@ We make this distinction, as opposed to the more traditional “unit” or “in
 
 我們做出這樣的區分，而不是更傳統的 "單元 "或 "整合"，因為我們希望從我們的測試套件中得到的最重要的品質是速度和確定性，無論測試的範圍如何。小型測試，無論範圍如何，幾乎總是比涉及更多基礎設施或消耗更多資源的測試更快、更有確定性。對小型測試施加限制，使速度和確定性更容易實現。隨著測試規模的增長，許多限制都被放鬆了。中型測試有更多的靈活性，但也有更多的非確定性的風險。大型測試只儲存在最複雜和困難的測試場景中。讓我們仔細看看每一種測試的確切約束條件。
 
-> [^4]:	Technically, we have four sizes of test at Google: small, medium, large, and enormous. The internal difference between large and enormous is actually subtle and historical; so, in this book, most descriptions of large actually apply to our notion of enormous.
+> [^e4]: Technically, we have four sizes of test at Google: small, medium, large, and enormous. The internal difference between large and enormous is actually subtle and historical; so, in this book, most descriptions of large actually apply to our notion of enormous.
 >
-> 4 從技術上講，我們在谷歌有四種規模的測試：小型、中型、大型和超大型。大型和超大型之間的內部差異實際上是微妙的和歷史性的；因此，在本書中，大多數關於大型的描述實際上適用於我們的超大型概念。
+> [^c4]: 從技術上講，我們在谷歌有四種規模的測試：小型、中型、大型和超大型。大型和超大型之間的內部差異實際上是微妙的和歷史性的；因此，在本書中，大多數關於大型的描述實際上適用於我們的超大型概念。
 
 #### Small tests  小型測試
 
@@ -246,9 +246,9 @@ Small tests are the most constrained of the three test sizes. The primary constr
 
 小型測試是三種測試規模中最受限制的。主要的限制是，小測試必須在一個處理序中執行。在許多語言中，我們甚至進一步限制，說它們必須在一個單執行緒上執行。這意味著執行測試的程式碼必須與被測試的程式碼在同一處理序中執行。你不能執行一個伺服器，而讓一個單獨的測試處理序連線到它。這也意味著你不能執行第三方程式，如資料庫作為你測試的一部分。
 
-The other important constraints on small tests are that they aren’t allowed to sleep, perform I/O operations,[^5] or make any other blocking calls. This means that small tests aren’t allowed to access the network or disk. Testing code that relies on these sorts of operations requires the use of test doubles (see Chapter 13) to replace the heavyweight dependency with a lightweight, in-process dependency.
+The other important constraints on small tests are that they aren’t allowed to sleep, perform I/O operations,[^e5] or make any other blocking calls. This means that small tests aren’t allowed to access the network or disk. Testing code that relies on these sorts of operations requires the use of test doubles (see Chapter 13) to replace the heavyweight dependency with a lightweight, in-process dependency.
 
-對小測試的其他重要限制是，它們不允許休眠，執行I/O操作，或進行任何其他阻塞呼叫。這意味著，小測試不允許存取網路或磁碟。測試依賴於這類操作的程式碼需要使用測試替代（見第13章)），用輕量級的處理序內依賴取代重量級依賴。
+對小測試的其他重要限制是，它們不允許休眠，執行I/O操作，[^c5]或進行任何其他阻塞呼叫。這意味著，小測試不允許存取網路或磁碟。測試依賴於這類操作的程式碼需要使用測試替代（見第13章)），用輕量級的處理序內依賴取代重量級依賴。
 
 The purpose of these restrictions is to ensure that small tests don’t have access to the main sources of test slowness or nondeterminism. A test that runs on a single process and never makes blocking calls can effectively run as fast as the CPU can handle. It’s difficult (but certainly not impossible) to accidentally make such a test slow or nondeterministic. The constraints on small tests provide a sandbox that prevents engineers from shooting themselves in the foot.
 
@@ -263,9 +263,9 @@ At Google, we encourage engineers to try to write small tests whenever possible,
 
 在谷歌，我們鼓勵工程師儘可能地編寫小型測試，而不管測試的範圍如何，因為這樣可以使整個測試套件快速可靠地執行。有關小測試與單元測試的更多討論，請參閱第12章。
 
-> [^5]: There is a little wiggle room in this policy. Tests are allowed to access a filesystem if they use a hermetic, in- memory implementation.
+> [^e5]: There is a little wiggle room in this policy. Tests are allowed to access a filesystem if they use a hermetic, in- memory implementation.
 >
-> 5 這個策略有一點回旋餘地。如果測試使用的是密封的、記憶體中的實現，則允許存取檔案系統。
+> [^c5]: 這個策略有一點回旋餘地。如果測試使用的是密封的、記憶體中的實現，則允許存取檔案系統。
 
 #### Medium tests  中型測試
 
@@ -351,7 +351,7 @@ Just as we encourage tests of smaller size, at Google, we also encourage enginee
 
 ![image-20220407200917862](./images/image-20220407200917862.png)
 
-*Figure 11-3. Google’s version of Mike Cohn’s test pyramid;*[^6] *percentages are by test case count, and every team’s mix will be a little different*   *圖11-3. 谷歌對Mike Cohn的測試金字塔的版本百分比是按測試案例來計算的，每個團隊的組合都會有一些不同*
+*Figure 11-3. Google’s version of Mike Cohn’s test pyramid;*[^e6] *percentages are by test case count, and every team’s mix will be a little different*   *圖11-3. 谷歌對Mike Cohn的測試金字塔的版本百分比是按測試案例來計算的，[^c6]每個團隊的組合都會有一些不同*
 
 Unit tests form an excellent base because they are fast, stable, and dramatically narrow the scope and reduce the cognitive load required to identify all the possible behaviors a class or function has. Additionally, they make failure diagnosis quick and painless. Two antipatterns to be aware of are the “ice cream cone” and the “hourglass,” as illustrated in [Figure 11-4](#_bookmark897).
 
@@ -377,9 +377,9 @@ When considering your own mix, you might want a different balance. If you emphas
 
 當考慮你自己的組合時，你可能想要一個不同的平衡。如果你強調整合測試，你可能會發現你的測試套件需要更長的時間來執行，但在元件之間捕獲更多的問題。當你強調單元測試時，你的測試套件可以很快完成，而且你會捕捉到許多常見的邏輯錯誤。但是，單元測試無法驗證元件之間的互動，就像由不同團隊開發的兩個系統之間的契約一樣。一個好的測試套件包含不同的測試規模和範圍的混合，適合本地架構和組織的實際情況。
 
-> [^6]: Mike Cohn, Succeeding with Agile: Software Development Using Scrum (New York: Addison-Wesley Professional, 2009).
+> [^e6]: Mike Cohn, Succeeding with Agile: Software Development Using Scrum (New York: Addison-Wesley Professional, 2009).
 >
-> 6   Mike Cohn，《敏捷的成功：使用Scrum的軟體開發》（紐約：Addison-Wesley Professio-nal，2009）。
+> [^c6]: Mike Cohn，《敏捷的成功：使用Scrum的軟體開發》（紐約：Addison-Wesley Professio-nal，2009）。
 
 ### The Beyoncé Rule  碧昂斯規則
 
@@ -403,9 +403,9 @@ One of the most important situations a system must account for is failure. Failu
 
 ### A Note on Code Coverage  關於程式碼覆蓋率的注意事項
 
-Code coverage is a measure of which lines of feature code are exercised by which tests. If you have 100 lines of code and your tests execute 90 of them, you have 90% code coverage.[^7] Code coverage is often held up as the gold standard metric for understanding test quality, and that is somewhat unfortunate. It is possible to exercise a lot of lines of code with a few tests, never checking that each line is doing anything useful. That’s because code coverage only measures that a line was invoked, not what happened as a result. (We recommend only measuring coverage from small tests to avoid coverage inflation that occurs when executing larger tests.)
+Code coverage is a measure of which lines of feature code are exercised by which tests. If you have 100 lines of code and your tests execute 90 of them, you have 90% code coverage.[^e7] Code coverage is often held up as the gold standard metric for understanding test quality, and that is somewhat unfortunate. It is possible to exercise a lot of lines of code with a few tests, never checking that each line is doing anything useful. That’s because code coverage only measures that a line was invoked, not what happened as a result. (We recommend only measuring coverage from small tests to avoid coverage inflation that occurs when executing larger tests.)
 
-程式碼覆蓋率是衡量哪些特徵程式碼行被哪些測試所執行的標準。如果你有100行程式碼，你的測試執行了其中的90行，你就有90%的程式碼覆蓋率。 程式碼覆蓋率經常被認為是理解測試品質的黃金標準，這是很不幸的。有可能用幾個測試來驗證大量的程式碼行，但從未檢查過每一行是否在做任何有用的事情。這是因為程式碼覆蓋率只衡量一行被呼叫的情況，而不是結果。(我們建議只測量小型測試的覆蓋率，以避免執行大型測試時出現覆蓋率膨脹）。
+程式碼覆蓋率是衡量哪些特徵程式碼行被哪些測試所執行的標準。如果你有100行程式碼，你的測試執行了其中的90行，你就有90%的程式碼覆蓋率。[^c7] 程式碼覆蓋率經常被認為是理解測試品質的黃金標準，這是很不幸的。有可能用幾個測試來驗證大量的程式碼行，但從未檢查過每一行是否在做任何有用的事情。這是因為程式碼覆蓋率只衡量一行被呼叫的情況，而不是結果。(我們建議只測量小型測試的覆蓋率，以避免執行大型測試時出現覆蓋率膨脹）。
 
 An even more insidious problem with code coverage is that, like other metrics, it quickly becomes a goal unto itself. It is common for teams to establish a bar for expected code coverage—for instance, 80%. At first, that sounds eminently reasonable; surely you want to have at least that much coverage. In practice, what happens is that instead of treating 80% like a floor, engineers treat it like a ceiling. Soon, changes begin landing with no more than 80% coverage. After all, why do more work than the metric requires?
 
@@ -415,9 +415,9 @@ A better way to approach the quality of your test suite is to think about the be
 
 評估測試套件品質的更好方法是考慮測試的行為。你有信心你的客戶所期望的一切都能正常工作嗎？你是否有信心能抓住你的依賴關係中的突發變化？你的測試是否穩定和可靠？像這樣的問題是思考測試套件的一種更全面的方式。每個產品和團隊都是不同的；有些會有難以測試的與硬體的互動，有些涉及到大量的資料集。試圖用一個獨立的數字來回答 "我們有足夠的測試嗎？"忽略了很多背景，不太可能是有用的。程式碼覆蓋率可以提供一些對未測試程式碼的洞察力，但它不能替代對系統測試情況的批判性思考。
 
-> [^7]: Keep in mind that there are different kinds of coverage (line, path, branch, etc.), and each says something different about which code has been tested. In this simple example, line coverage is being used.
+> [^e7]: Keep in mind that there are different kinds of coverage (line, path, branch, etc.), and each says something different about which code has been tested. In this simple example, line coverage is being used.
 >
-> 7 請記住，有不同種類的覆蓋率（行、路徑、分支等），每一種都說明了不同的程式碼被測試的情況。在這個簡單的例子中，我們使用的是行覆蓋。
+> [^c7]: 請記住，有不同種類的覆蓋率（行、路徑、分支等），每一種都說明了不同的程式碼被測試的情況。在這個簡單的例子中，我們使用的是行覆蓋。
 
 ## Testing at Google Scale  以谷歌的規模進行測試
 
@@ -475,13 +475,13 @@ The secret to living with a large test suite is to treat it with respect. Incent
 
 使用大型測試套件的秘訣是尊重它。激勵工程師關心他們的測試；獎勵他們擁有堅如磐石的測試，就像獎勵他們推出一個偉大的功能一樣。設定適當的效能目標，重構漸進或邊緣測試。基本上，把你的測試當作生產程式碼。當簡單的修改開始花費大量的時間時，要花精力讓你的測試不那麼脆弱。
 
-In addition to developing the proper culture, invest in your testing infrastructure by developing linters, documentation, or other assistance that makes it more difficult to write bad tests. Reduce the number of frameworks and tools you need to support to increase the efficiency of the time you invest to improve things.[^8] If you don’t invest in making it easy to manage your tests, eventually engineers will decide it isn’t worth having them at all.
+In addition to developing the proper culture, invest in your testing infrastructure by developing linters, documentation, or other assistance that makes it more difficult to write bad tests. Reduce the number of frameworks and tools you need to support to increase the efficiency of the time you invest to improve things.[^e8] If you don’t invest in making it easy to manage your tests, eventually engineers will decide it isn’t worth having them at all.
 
-除了發展適當的文化，透過開發工具、文件或其他援助，投資於你的測試基礎設施，這些幫助會使其更難寫出糟糕的測試。減少你需要支援的框架和工具的數量，以提高改進工作的時間效率。如果不投資於簡化測試管理，工程師最終會認為根本不值得擁有它們。
+除了發展適當的文化，透過開發工具、文件或其他援助，投資於你的測試基礎設施，這些幫助會使其更難寫出糟糕的測試。減少你需要支援的框架和工具的數量，以提高改進工作的時間效率。[^c8]如果不投資於簡化測試管理，工程師最終會認為根本不值得擁有它們。
 
-> [^8]: Each supported language at Google has one standard test framework and one standard mocking/stubbing library. One set of infrastructure runs most tests in all languages across the entire codebase.
+> [^e8]: Each supported language at Google has one standard test framework and one standard mocking/stubbing library. One set of infrastructure runs most tests in all languages across the entire codebase.
 >
-> 8 谷歌支援的每種語言都有一個標準的測試框架和一個標準的模擬/打樁庫。一套基礎設施在整個程式碼庫中執行所有語言的大多數測試。
+> [^c8]: 谷歌支援的每種語言都有一個標準的測試框架和一個標準的模擬/打樁庫。一套基礎設施在整個程式碼庫中執行所有語言的大多數測試。
 
 ## History of Testing at Google  谷歌的測試歷史
 
@@ -503,9 +503,9 @@ Even though much of the early engineering staff at Google eschewed testing, the 
 
 儘管谷歌早期的工程人員大多回避測試，但Google自動化測試的工程師們知道，按照公司的發展速度，新加入的工程師會很快超過現有的團隊成員。如果他們能接觸到公司所有的新員工，這可能是一個引入文化變革的極其有效的途徑。幸運的是，所有新的工程人員都要經歷一個節點：入職培訓。
 
-Most of Google’s early orientation program concerned things like medical benefits and how Google Search worked, but starting in 2005 it also began including an hour- long discussion of the value of automated testing.[^9] The class covered the various benefits of testing, such as increased productivity, better documentation, and support for refactoring. It also covered how to write a good test. For many Nooglers (new Googlers) at the time, such a class was their first exposure to this material. Most important, all of these ideas were presented as though they were standard practice at the company. The new hires had no idea that they were being used as trojan horses to sneak this idea into their unsuspecting teams.
+Most of Google’s early orientation program concerned things like medical benefits and how Google Search worked, but starting in 2005 it also began including an hour- long discussion of the value of automated testing.[^e9] The class covered the various benefits of testing, such as increased productivity, better documentation, and support for refactoring. It also covered how to write a good test. For many Nooglers (new Googlers) at the time, such a class was their first exposure to this material. Most important, all of these ideas were presented as though they were standard practice at the company. The new hires had no idea that they were being used as trojan horses to sneak this idea into their unsuspecting teams.
 
-谷歌早期的新人培訓大多涉及諸如醫療福利和谷歌搜尋如何工作，但從2005年開始，它也開始包括一個長達一小時的關於自動化測試價值的討論。該課程涵蓋了測試的各種好處，如提高生產力，更好的文件，以及對重構的支援。它還包括如何寫一個好的測試。對於當時的許多Nooglers（新的Googlers）來說，這樣的課程是他們第一次接觸到這種材料。最重要的是，所有這些想法都是作為公司的標準做法來介紹的。新員工們不知道他們被當作特洛伊木馬，把這種想法偷偷帶入他們毫無戒心的團隊。
+谷歌早期的新人培訓大多涉及諸如醫療福利和谷歌搜尋如何工作，但從2005年開始，它也開始包括一個長達一小時的關於自動化測試價值的討論。[^c9]該課程涵蓋了測試的各種好處，如提高生產力，更好的文件，以及對重構的支援。它還包括如何寫一個好的測試。對於當時的許多Nooglers（新的Googlers）來說，這樣的課程是他們第一次接觸到這種材料。最重要的是，所有這些想法都是作為公司的標準做法來介紹的。新員工們不知道他們被當作特洛伊木馬，把這種想法偷偷帶入他們毫無戒心的團隊。
 
 As Nooglers joined their teams following orientation, they began writing tests and questioning those on the team who didn’t. Within only a year or two, the population of engineers who had been taught testing outnumbered the pretesting culture engineers. As a result, many new projects started off on the right foot.
 
@@ -515,9 +515,9 @@ Testing has now become more widely practiced in the industry, so most new hires 
 
 現在，測試已經在行業中得到了更廣泛的應用，所以大多數新員工來到這裡時，對自動化測試的期望已經很高了。儘管如此，迎新課程仍然要設定對測試的期望，並將Nooglers在谷歌以外的測試知識與在我們非常大和非常複雜的程式碼庫中進行測試的挑戰聯絡起來。
 
->[^9]: This class was so successful that an updated version is still taught today. In fact, it is one of the longest- running orientation classes in the company’s history.
+> [^e9]: This class was so successful that an updated version is still taught today. In fact, it is one of the longest- running orientation classes in the company’s history.
 >
-> 9 這門課非常成功，以至於今天仍在教授更新的版本。事實上，它是公司歷史上執行時間最長的定向課程之一。
+> [^c9]: 這門課非常成功，以至於今天仍在教授更新的版本。事實上，它是公司歷史上執行時間最長的定向課程之一。
 
 ### Test Certified  測試認證
 

@@ -33,13 +33,13 @@ Quality documentation has tremendous benefits for an engineering organization. C
 
 高品質的文件對一個工程組織有巨大的好處。程式碼和API變得更容易理解，減少了錯誤。當專案團隊的設計目標和團隊目標明確時，他們會更加專注。當步驟被清楚地列出時，手動流程更容易被遵循。如果流程有明確的文件記錄，那麼將新成員加入團隊或程式碼庫所需的工作量要小得多。
 
-But because documentation’s benefits are all necessarily downstream, they generally don’t reap immediate benefits to the author. Unlike testing, which (as we’ll see) quickly provides benefits to a programmer, documentation generally requires more effort up front and doesn’t provide clear benefits to an author until later. But, like investments in testing, the investment made in documentation will pay for itself over time. After all, you might write a document only once,[^1] but it will be read hundreds, perhaps thousands of times afterward; its initial cost is amortized across all the future readers. Not only does documentation scale over time, but it is critical for the rest of the organization to scale as well. It helps answer questions like these:
+But because documentation’s benefits are all necessarily downstream, they generally don’t reap immediate benefits to the author. Unlike testing, which (as we’ll see) quickly provides benefits to a programmer, documentation generally requires more effort up front and doesn’t provide clear benefits to an author until later. But, like investments in testing, the investment made in documentation will pay for itself over time. After all, you might write a document only once,[^e1] but it will be read hundreds, perhaps thousands of times afterward; its initial cost is amortized across all the future readers. Not only does documentation scale over time, but it is critical for the rest of the organization to scale as well. It helps answer questions like these:
 
 - Why were these design decisions made?
 - Why did we implement this code in this manner?
 - Why did I implement this code in this manner, if you’re looking at your own code two years later?
 
-但是，由於文件的好處都必然是延後的，它們通常不會給作者帶來直接的好處。與測試不同，測試（正如我們將看到的）很快就能給程式設計師帶來好處，而文件編寫通常需要更多的前期工作，直到後來才會給作者帶來明確的好處。但是，就像對測試的投入一樣，對文件的投入會隨著時間的推移而得到回報。畢竟，你可能只寫了一次文件，但之後會被閱讀數百次，甚至數千次；其最初的成本會在所有未來的讀者中攤銷。文件不僅可以隨著時間的推移而擴充，而且對於組織的其他部分也是至關重要的。它有助於回答這樣的問題：
+但是，由於文件的好處都必然是延後的，它們通常不會給作者帶來直接的好處。與測試不同，測試（正如我們將看到的）很快就能給程式設計師帶來好處，而文件編寫通常需要更多的前期工作，直到後來才會給作者帶來明確的好處。但是，就像對測試的投入一樣，對文件的投入會隨著時間的推移而得到回報。畢竟，你可能只寫了一次文件，[^c1]但之後會被閱讀數百次，甚至數千次；其最初的成本會在所有未來的讀者中攤銷。文件不僅可以隨著時間的推移而擴充，而且對於組織的其他部分也是至關重要的。它有助於回答這樣的問題：
 
 - 為什麼做出這些設計決策？
 - 為什麼我們要以這種方式實現這段程式碼？
@@ -48,24 +48,24 @@ But because documentation’s benefits are all necessarily downstream, they gene
 If documentation conveys all these benefits, why is it generally considered “poor” by engineers? One reason, as we’ve mentioned, is that the benefits aren’t immediate, especially to the writer. But there are several other reasons:
 
 - Engineers often view writing as a separate skill than that of programming. (We’ll try to illustrate that this isn’t quite the case, and even where it is, it isn’t necessarily a separate skill from that of software engineering.)
-- Some engineers don’t feel like they are capable writers. But you don’t need a robust command of English[^2] to produce workable documentation. You just need to step outside yourself a bit and see things from the audience’s perspective.
+- Some engineers don’t feel like they are capable writers. But you don’t need a robust command of English[^e2] to produce workable documentation. You just need to step outside yourself a bit and see things from the audience’s perspective.
 - Writing documentation is often more difficult because of limited tools support or integration into the developer workflow.
 - Documentation is viewed as an extra burden—something else to maintain— rather than something that will make maintenance of their existing code easier.
 
 如果文件能傳達這麼多的好處，為什麼工程師們普遍認為它 "很糟糕"？正如我們所提到的，其中一個原因是，這些好處並不直接，尤其是對作者而言。但還有其他幾個原因：
 
 - 工程師們通常認為寫作是一種獨立於程式設計的技能。(我們將試圖說明，事實並非如此，即使是這樣，它也不一定是與軟體工程不同的技能。)
-- 有些工程師覺得他們不是有寫作能力的人。但是，你不需要精通英語，就能寫出可行的文件。你只需要跳出自己視角，從聽眾的角度看問題。
+- 有些工程師覺得他們不是有寫作能力的人。但是，你不需要精通英語，[^c2]就能寫出可行的文件。你只需要跳出自己視角，從聽眾的角度看問題。
 - 由於有限的工具支援或整合到開發人員的工作流程中，編寫文件往往更加困難。
 - 文件被看作是一個額外的負擔——需要維護的其他東西——而不是能使他們現有的程式碼維護更容易的東西。
 
-> [^1]: OK, you will need to maintain it and revise it occasionally.
+> [^e1]: OK, you will need to maintain it and revise it occasionally.
 >
-> 1   好的，你將需要維護它並偶爾修改它。
+> [^c1]: 好的，你將需要維護它並偶爾修改它。
 >
-> [^2]: English is still the primary language for most programmers, and most technical documentation for programmers relies on an understanding of English.
+> [^e2]: English is still the primary language for most programmers, and most technical documentation for programmers relies on an understanding of English.
 >
-> 2   英語仍然是大多數程式設計師的主要語言，大多數程式設計師的技術文件都依賴於對英語的理解。
+> [^c2]: 英語仍然是大多數程式設計師的主要語言，大多數程式設計師的技術文件都依賴於對英語的理解。
 
 Not every engineering team needs a technical writer (and even if that were the case, there aren’t enough of them). This means that engineers will, by and large, write most of the documentation themselves. So, instead of forcing engineers to become technical writers, we should instead think about how to make writing documentation easier for engineers. Deciding how much effort to devote to documentation is a decision your organization will need to make at some point.
 
@@ -139,9 +139,9 @@ When Google was much smaller and leaner, it had few technical writers. The easie
 
 當谷歌規模更小、更精簡時，幾乎沒有技術作家。分享資訊的最簡單方法是透過我們自己的內部維基（GooWiki）。起初，這似乎是一個合理的方法；所有工程師共享一個文件集，可以根據需要進行更新。
 
-But as Google scaled, problems with a wiki-style approach became apparent. Because there were no true owners for documents, many became obsolete.[^3] Because no process was put in place for adding new documents, duplicate documents and document sets began appearing. GooWiki had a flat namespace, and people were not good at applying any hierarchy to the documentation sets. At one point, there were 7 to 10 documents (depending on how you counted them) on setting up Borg, our production compute environment, only a few of which seemed to be maintained, and most were specific to certain teams with certain permissions and assumptions.
+But as Google scaled, problems with a wiki-style approach became apparent. Because there were no true owners for documents, many became obsolete.[^e3] Because no process was put in place for adding new documents, duplicate documents and document sets began appearing. GooWiki had a flat namespace, and people were not good at applying any hierarchy to the documentation sets. At one point, there were 7 to 10 documents (depending on how you counted them) on setting up Borg, our production compute environment, only a few of which seemed to be maintained, and most were specific to certain teams with certain permissions and assumptions.
 
-但隨著谷歌規模的擴大，維基風格方法的問題變得明顯。因為沒有真正的文件所有者，許多文件變得過時了。因為沒有建立新增新文件的流程，重複的文件和文件集開始出現了。GooWiki有一個扁平的名稱空間，人們不擅長將任何層次結構應用於文件集。在某些點上，有7到10個文件（取決於你如何計算）用於設定我們的生產計算環境Borg，其中只有少數文件似乎得到了維護，大多數文件都是特定於具有特定許可權和設定的特指定團隊的。
+但隨著谷歌規模的擴大，維基風格方法的問題變得明顯。因為沒有真正的文件所有者，許多文件變得過時了。[^c3]因為沒有建立新增新文件的流程，重複的文件和文件集開始出現了。GooWiki有一個扁平的名稱空間，人們不擅長將任何層次結構應用於文件集。在某些點上，有7到10個文件（取決於你如何計算）用於設定我們的生產計算環境Borg，其中只有少數文件似乎得到了維護，大多數文件都是特定於具有特定許可權和設定的特指定團隊的。
 
 Another problem with GooWiki became apparent over time: the people who could fix the documents were not the people who used them. New users discovering bad documents either couldn’t confirm that the documents were wrong or didn’t have an easy way to report errors. They knew something was wrong (because the document didn’t work), but they couldn’t “fix” it. Conversely, the people best able to fix the documents often didn’t need to consult them after they were written. The documentation became so poor as Google grew that the quality of documentation became Google’s number one developer complaint on our annual developer surveys.
 
@@ -167,9 +167,9 @@ The key difference was that maintaining documentation became a similar experienc
 
 ------
 
-> [^3]: When we deprecated GooWiki, we found that around 90% of the documents had no views or updates in the previous few months.
+> [^e3]: When we deprecated GooWiki, we found that around 90% of the documents had no views or updates in the previous few months.
 >
-> 3   當我們棄用GooWiki時，我們發現大約90%的文件在前幾個月沒有檢視或更新。
+> [^c3]: 當我們棄用GooWiki時，我們發現大約90%的文件在前幾個月沒有檢視或更新。
 
 ## Know Your Audience 瞭解你的受眾
 

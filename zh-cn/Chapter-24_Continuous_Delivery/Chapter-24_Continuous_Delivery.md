@@ -129,9 +129,9 @@ What were the trade-offs we made to get predictability in our release cycle? The
 
 ### No Binary Is Perfect 沒有完美的二進位制包
 
-The first is that *no binary is perfect*, especially for builds that are incorporating the work of tens or hundreds of developers independently developing dozens of major features. Even though it’s impossible to fix every bug, we constantly need to weigh questions such as: If a line has been moved two pixels to the left, will it affect an ad display and potential revenue? What if the shade of a box has been altered slightly? Will it make it difficult for visually impaired users to read the text? The rest of this book is arguably about minimizing the set of unintended outcomes for a release, but in the end we must admit that software is fundamentally complex. There is no perfect binary—decisions and trade-offs have to be made every time a new change is released into production. Key performance indicator metrics with clear thresholds allow features to launch even if they aren’t perfect[^1] and can also create clarity in otherwise contentious launch decisions.
+The first is that *no binary is perfect*, especially for builds that are incorporating the work of tens or hundreds of developers independently developing dozens of major features. Even though it’s impossible to fix every bug, we constantly need to weigh questions such as: If a line has been moved two pixels to the left, will it affect an ad display and potential revenue? What if the shade of a box has been altered slightly? Will it make it difficult for visually impaired users to read the text? The rest of this book is arguably about minimizing the set of unintended outcomes for a release, but in the end we must admit that software is fundamentally complex. There is no perfect binary—decisions and trade-offs have to be made every time a new change is released into production. Key performance indicator metrics with clear thresholds allow features to launch even if they aren’t perfect[^e1] and can also create clarity in otherwise contentious launch decisions.
 
-首先，*沒有一個二進位制包是完美的*，，尤其是對於包含數十個或數百個獨立開發幾十個主要功能的開發人員的工作的建構。儘管不可能修復每個bug，但我們需要不斷權衡這樣的問題：如果一條線向左移動了兩個畫素，它會影響廣告顯示和潛在收入嗎？如果盒子的顏色稍微改變了怎麼辦？這是否會讓視障使用者難以閱讀文字？本書的其餘部分可以說是關於最小化釋出的一系列意外結果，但最終我們必須承認軟體從根本上來說是複雜的。沒有完美的二進位制包--每當有新的變化釋出到生產中時，就必須做出決定和權衡。具有明確閾值的關鍵效能指標允許功能在不完美的情況下推出，也可以在其他有爭議的釋出決策中創造清晰的思路。
+首先，*沒有一個二進位制包是完美的*，，尤其是對於包含數十個或數百個獨立開發幾十個主要功能的開發人員的工作的建構。儘管不可能修復每個bug，但我們需要不斷權衡這樣的問題：如果一條線向左移動了兩個畫素，它會影響廣告顯示和潛在收入嗎？如果盒子的顏色稍微改變了怎麼辦？這是否會讓視障使用者難以閱讀文字？本書的其餘部分可以說是關於最小化釋出的一系列意外結果，但最終我們必須承認軟體從根本上來說是複雜的。沒有完美的二進位制包--每當有新的變化釋出到生產中時，就必須做出決定和權衡。具有明確閾值的關鍵效能指標允許功能在不完美的情況下推出，[^c1]也可以在其他有爭議的釋出決策中創造清晰的思路。
 
 One bug involved a rare dialect spoken on only one island in the Philippines. If a user asked a search question in this dialect, instead of an answer to their question, they would get a blank web page. We had to determine whether the cost of fixing this bug was worth delaying the release of a major new feature.
 
@@ -141,9 +141,9 @@ We ran from office to office trying to determine how many people actually spoke 
 
 我們從一個辦公室跑到另一個辦公室，試圖確定究竟有多少人講這種語言，是否每次使用者用這種語言搜尋時都會出現這種情況，以及這些人是否經常使用谷歌。每個與我們交談的品質工程師都把我們推給更高級別的人。最後，資料在手，我們把問題交給了搜尋部的高階副總裁。我們是否應該推遲一個重要的版本來修復一個隻影響到菲律賓一個很小的島嶼的錯誤？事實證明，無論你的島有多小，你都應該得到可靠和準確的搜尋結果：我們推遲了釋出，並修復了這個錯誤。
 
-> [^1]:  Remember the SRE “error-budget” formulation: perfection is rarely the best goal. Understand how much room for error is acceptable and how much of that budget has been spent recently and use that to adjust the trade-off between velocity and stability.
+> [^e1]: Remember the SRE “error-budget” formulation: perfection is rarely the best goal. Understand how much room for error is acceptable and how much of that budget has been spent recently and use that to adjust the trade-off between velocity and stability.
 >
-> 1 記住SRE的 "錯誤預算 "表述：完美很少是最佳目標。瞭解多少誤差空間是可以接受的，以及該預算最近花了多少，並利用這一點來調整速度和穩定性之間的權衡。
+> [^c1]: 記住SRE的 "錯誤預算 "表述：完美很少是最佳目標。瞭解多少誤差空間是可以接受的，以及該預算最近花了多少，並利用這一點來調整速度和穩定性之間的權衡。
 
 ### Meet Your Release Deadline 滿足您的釋出期限
 
@@ -207,17 +207,17 @@ One issue we noticed when doing deployments to Android was that we could expect 
 
 我們在Android部署時注意到的一個問題是，僅僅透過推送更新，我們就可以預期使用者指標會發生統計上的顯著變化。這意味著，即使我們沒有對產品進行任何更改，推動更新也可能以難以預測的方式影響裝置和使用者行為。因此，儘管對一小部分使用者流量進行更新可以為我們提供關於崩潰或穩定性問題的良好資訊，但它幾乎沒有告訴我們更新版本的應用程式是否比舊版本更好。
 
-Dan Siroker and Pete Koomen have already discussed the value of A/B testing[^2] your features, but at Google, some of our larger apps also A/B test their *deployments*. This means sending out two versions of the product: one that is the desired update, with the baseline being a placebo (your old version just gets shipped again). As the two versions roll out simultaneously to a large enough base of similar users, you can compare one release against the other to see whether the latest version of your software is in fact an improvement over the previous one. With a large enough userbase, you should be able to get statistically significant results within days, or even hours. An automated metrics pipeline can enable the fastest possible release by pushing forward a release to more traffic as soon as there is enough data to know that the guardrail metrics will not be affected.
+Dan Siroker and Pete Koomen have already discussed the value of A/B testing[^e2] your features, but at Google, some of our larger apps also A/B test their *deployments*. This means sending out two versions of the product: one that is the desired update, with the baseline being a placebo (your old version just gets shipped again). As the two versions roll out simultaneously to a large enough base of similar users, you can compare one release against the other to see whether the latest version of your software is in fact an improvement over the previous one. With a large enough userbase, you should be able to get statistically significant results within days, or even hours. An automated metrics pipeline can enable the fastest possible release by pushing forward a release to more traffic as soon as there is enough data to know that the guardrail metrics will not be affected.
 
-Dan Siroker和Pete Koomen已經討論了A/B測試的價值，但在Google，我們的一些大型應用也對其*部署*進行A/B測試。這意味著傳送兩個版本的產品：一個是所需的更新，基線是一個安慰劑（你的舊版本只是被再次傳送）。當這兩個版本同時向足夠多的類似使用者推出時，你可以將一個版本與另一個版本進行比較，看看你的軟體的最新版本是否真的比以前的版本有所改進。有了足夠大的使用者群，你應該能夠在幾天內，甚至幾小時內得到統計學上的顯著結果。一個自動化的指標管道可以實現最快的釋出，只要有足夠的資料知道護欄指標不會受到影響，就可以將一個版本推到更多的流量。
+Dan Siroker和Pete Koomen已經討論了A/B測試[^c2]的價值，但在Google，我們的一些大型應用也對其*部署*進行A/B測試。這意味著傳送兩個版本的產品：一個是所需的更新，基線是一個安慰劑（你的舊版本只是被再次傳送）。當這兩個版本同時向足夠多的類似使用者推出時，你可以將一個版本與另一個版本進行比較，看看你的軟體的最新版本是否真的比以前的版本有所改進。有了足夠大的使用者群，你應該能夠在幾天內，甚至幾小時內得到統計學上的顯著結果。一個自動化的指標管道可以實現最快的釋出，只要有足夠的資料知道護欄指標不會受到影響，就可以將一個版本推到更多的流量。
 
 Obviously, this method does not apply to every app and can be a lot of overhead when you don’t have a large enough userbase. In these cases, the recommended best practice is to aim for change-neutral releases. All new features are flag guarded so that the only change being tested during a rollout is the stability of the deployment itself.
 
 顯然，這種方法並不適用於每個應用程式，當你沒有足夠大的使用者群時，可能會有很多開銷。在這種情況下，推薦的最佳做法是以變化中立的釋出為目標。所有的新功能都有標誌保護，這樣在釋出過程中測試的唯一變化就是部署本身的穩定性。 
 
-> [^2]:  Dan Siroker and Pete Koomen, *A/B Testing: The Most Powerful Way to Turn Clicks Into Customers* (Hoboken: Wiley, 2013).
+> [^e2]: Dan Siroker and Pete Koomen, *A/B Testing: The Most Powerful Way to Turn Clicks Into Customers* (Hoboken: Wiley, 2013).
 >
-> 2   Dan Siroker和Pete Koomen，《A/B測試：將點選轉化為客戶的最有效方式》（Hoboken:Wiley，2013）。
+> [^c2]: Dan Siroker和Pete Koomen，《A/B測試：將點選轉化為客戶的最有效方式》（Hoboken:Wiley，2013）。
 
 ## Changing Team Culture: Building Discipline into Deployment 改變團隊文化：在部署中建立規則
 

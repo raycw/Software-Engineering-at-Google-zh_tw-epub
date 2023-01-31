@@ -21,9 +21,9 @@ Dependency management adds additional complexity in both time and scale. In a tr
 
 依賴管理在時間和規模上都增加了額外的複雜性。在一個基於主幹的原始碼控制問題中，當你做一個改變時，你需要執行測試並且不破壞現有的程式碼，這是相當清楚的。這是基於這樣的想法：你在一個共享的程式碼庫中工作，能夠了解事物的使用方式，並且能夠觸發建構和執行測試的想法。依賴管理關注的是在你的組織之外進行改變時出現的問題，沒有完全的存取許可權或可見性。因為你的上游依賴不能與你的私有程式碼協調，它們更有可能破壞你的建構，導致你的測試失敗。我們如何管理這個問題？我們不應該接受外部依賴嗎？我們是否應該要求外部依賴的版本之間更加一致？我們什麼時候更新到一個新的版本？
 
-Scale makes all of these questions more complex, with the realization that we aren’t really talking about single dependency imports, and in the general case that we’re depending on an entire network of external dependencies. When we begin dealing with a network, it is easy to construct scenarios in which your organization’s use of two dependencies becomes unsatisfiable at some point in time. Generally, this happens because one dependency stops working without some requirement,[^1] whereas the other is incompatible with the same requirement. Simple solutions about how to manage a single outside dependency usually fail to account for the realities of managing a large network. We’ll spend much of this chapter discussing various forms of these conflicting requirement problems.
+Scale makes all of these questions more complex, with the realization that we aren’t really talking about single dependency imports, and in the general case that we’re depending on an entire network of external dependencies. When we begin dealing with a network, it is easy to construct scenarios in which your organization’s use of two dependencies becomes unsatisfiable at some point in time. Generally, this happens because one dependency stops working without some requirement,[^e1] whereas the other is incompatible with the same requirement. Simple solutions about how to manage a single outside dependency usually fail to account for the realities of managing a large network. We’ll spend much of this chapter discussing various forms of these conflicting requirement problems.
 
-規模使所有這些問題變得更加複雜，因為我們意識到我們實際上並不是在討論單個依賴項匯入，而且在一般情況下，我們依賴於整個外部依賴網路。當我們開始處理網路時，很容易建構這樣的場景：你的組織對兩個依賴項的使用在某個時間點變得不能滿足。通常，這是因為一個依賴項在無法滿足某些要求停止工作，而另一個依賴項與相同的要求不相容。關於如何管理單個外部依賴關係的簡單解決方案通常沒有考慮到管理大型網路的現實情況。本章的大部分時間我們將討論這些相互衝突的需求問題的各種形式。
+規模使所有這些問題變得更加複雜，因為我們意識到我們實際上並不是在討論單個依賴項匯入，而且在一般情況下，我們依賴於整個外部依賴網路。當我們開始處理網路時，很容易建構這樣的場景：你的組織對兩個依賴項的使用在某個時間點變得不能滿足。通常，這是因為一個依賴項在無法滿足某些要求停止工作，[^c1]而另一個依賴項與相同的要求不相容。關於如何管理單個外部依賴關係的簡單解決方案通常沒有考慮到管理大型網路的現實情況。本章的大部分時間我們將討論這些相互衝突的需求問題的各種形式。
 
 Source control and dependency management are related issues separated by the question: “Does our organization control the development/update/management of this subproject?” For example, if every team in your company has separate repositories, goals, and development practices, the interaction and management of code produced by those teams is going to have more to do with dependency management than source control. On the other hand, a large organization with a (virtual?) single repository (monorepo) can scale up significantly farther with source control policies—this is Google’s approach. Separate open source projects certainly count as separate organizations: interdependencies between unknown and not-necessarily-collaborating projects are a dependency management problem. Perhaps our strongest single piece of advice on this topic is this: *All else being equal, prefer source control problems over dependency-management problems.* If you have the option to redefine “organization” more broadly (your entire company rather than just one team), that’s very often a good trade-off. Source control problems are a lot easier to think about and a lot cheaper to deal with than dependency-management ones.
 
@@ -37,15 +37,15 @@ In this chapter, we’ll look at the particular challenges of dependency managem
 
 在本章中，我們將介紹依賴管理的特殊挑戰，探索解決方案（常見的和新穎的）及其侷限性，並介紹使用依賴關係的現實情況，包括我們在 Google 中處理事情的方式。在所有這些之前，我們必須承認：我們在這個問題上投入了大量的精力，並且在重構和維護問題上擁有豐富的經驗這表明了現有方法的實際缺陷。我們沒有第一手證據表明解決方案能夠在大規模的組織中很好地工作。在某種程度上，本章總結了我們所知道的不起作用（或者至少在更大範圍內可能不起作用）以及我們認為有可能產生更好結果的地方。我們絕對不能聲稱這裡有所有的答案；如果可以，我們就不會把這稱為軟體工程中最重要的問題之一。
 
-> [^1]: This could be any of language version, version of a lower-level library, hardware version, operating system, compiler flag, compiler version, and so on.
+> [^e1]: This could be any of language version, version of a lower-level library, hardware version, operating system, compiler flag, compiler version, and so on.
 >
-> 1 這可以是任何語言版本、較低級別庫的版本、硬體版本、作業系統、編譯器標誌、編譯器版本等。
+> [^c1]: 這可以是任何語言版本、較低級別庫的版本、硬體版本、作業系統、編譯器標誌、編譯器版本等。
 
 ## Why Is Dependency Management So Difficult?  為什麼依賴管理如此困難？
 
-Even defining the dependency-management problem presents some unusual challenges. Many half-baked solutions in this space focus on a too-narrow problem formulation: “How do we import a package that our locally developed code can depend upon?” This is a necessary-but-not-sufficient formulation. The trick isn’t just finding a way to manage one dependency—the trick is how to manage a *network* of dependencies and their changes over time. Some subset of this network is directly necessary for your first-party code, some of it is only pulled in by transitive dependencies. Over a long enough period, all of the nodes in that dependency network will have new versions, and some of those updates will be important.[^2] How do we manage the resulting cascade of upgrades for the rest of the dependency network? Or, specifically, how do we make it easy to find mutually compatible versions of all of our dependencies given that we do not control those dependencies? How do we analyze our dependency network? How do we manage that network, especially in the face of an ever-growing graph of dependencies?
+Even defining the dependency-management problem presents some unusual challenges. Many half-baked solutions in this space focus on a too-narrow problem formulation: “How do we import a package that our locally developed code can depend upon?” This is a necessary-but-not-sufficient formulation. The trick isn’t just finding a way to manage one dependency—the trick is how to manage a *network* of dependencies and their changes over time. Some subset of this network is directly necessary for your first-party code, some of it is only pulled in by transitive dependencies. Over a long enough period, all of the nodes in that dependency network will have new versions, and some of those updates will be important.[^e2] How do we manage the resulting cascade of upgrades for the rest of the dependency network? Or, specifically, how do we make it easy to find mutually compatible versions of all of our dependencies given that we do not control those dependencies? How do we analyze our dependency network? How do we manage that network, especially in the face of an ever-growing graph of dependencies?
 
-即使是定義依賴管理問題也會帶來一些不尋常的挑戰。這個領域的許多半生不熟的解決方案都集中在一個狹義的問題上。"我們如何匯入一個我們本地開發的程式碼可以依賴的套件？" 這是一個必要但並不充分的表述。訣竅不只是找到一種方法來管理一個依賴關係——訣竅是如何管理一個依賴關係的網路以及它們隨時間的變化。這個網路中的一些子集對於你的第一方程式碼來說是直接必要的，其中一些只是由傳遞依賴拉進來的。在一個足夠長的時期內，這個依賴網路中的所有節點都會有新的版本，其中一些更新會很重要。或者，具體來說，鑑於我們並不控制這些依賴關係，我們如何使其容易找到所有依賴關係的相互相容的版本？我們如何分析我們的依賴網路？我們如何管理這個網路，尤其是在面對不斷增長的依賴關係的時候？
+即使是定義依賴管理問題也會帶來一些不尋常的挑戰。這個領域的許多半生不熟的解決方案都集中在一個狹義的問題上。"我們如何匯入一個我們本地開發的程式碼可以依賴的套件？" 這是一個必要但並不充分的表述。訣竅不只是找到一種方法來管理一個依賴關係——訣竅是如何管理一個依賴關係的網路以及它們隨時間的變化。這個網路中的一些子集對於你的第一方程式碼來說是直接必要的，其中一些只是由傳遞依賴拉進來的。在一個足夠長的時期內，這個依賴網路中的所有節點都會有新的版本，其中一些更新會很重要。[^c2]或者，具體來說，鑑於我們並不控制這些依賴關係，我們如何使其容易找到所有依賴關係的相互相容的版本？我們如何分析我們的依賴網路？我們如何管理這個網路，尤其是在面對不斷增長的依賴關係的時候？
 
 ### Conflicting Requirements and Diamond Dependencies  衝突的需求和菱形依賴
 
@@ -65,9 +65,9 @@ In this simplified model, libbase is used by both liba and libb, and liba and li
 
 在這個簡化模型中，liba和libb都使用libbase，而liba和libb都由更高級別的元件libuser使用。如果libbase引入了一個不相容的變更，那麼作為獨立組織的產品，liba和libb可能不會同時更新。如果liba依賴於新的libbase版本，而libb依賴於舊版本，那麼libuser（也就是你的程式碼）沒有通用的方法來組合所有內容。這個菱形依賴可以在任何規模形成：在依賴關係的整個網路中，如果有一個低階節點需要同時處於兩個不相容的版本中（由於從某個高階節點到這兩個版本有兩條路徑），那麼就會出現問題。
 
-Different programming languages tolerate the diamond dependency problem to different degrees. For some languages, it is possible to embed multiple (isolated) versions of a dependency within a build: a call into libbase from liba might call a different version of the same API as a call into libbase from libb. For example, Java provides fairly well-established mechanisms to rename the symbols provided by such a dependency.[^3] Meanwhile, C++ has nearly zero tolerance for diamond dependencies in a normal build, and they are very likely to trigger arbitrary bugs and undefined behavior (UB) as a result of a clear violation of C++’s [One Definition Rule](https://oreil.ly/VTZe5). You can at best use a similar idea as Java’s shading to hide some symbols in a dynamic-link library (DLL) or in cases in which you’re building and linking separately. However, in all programming languages that we’re aware of, these workarounds are partial solutions at best: embedding multiple versions can be made to work by tweaking the names of *functions*, but if there are *types* that are passed around between dependencies, all bets are off. For example, there is simply no way for a map defined in libbase v1 to be passed through some libraries to an API provided by libbase v2 in a semantically consistent fashion. Language-specific hacks to hide or rename entities in separately compiled libraries can provide some cushion for diamond dependency problems, but are not a solution in the general case.
+Different programming languages tolerate the diamond dependency problem to different degrees. For some languages, it is possible to embed multiple (isolated) versions of a dependency within a build: a call into libbase from liba might call a different version of the same API as a call into libbase from libb. For example, Java provides fairly well-established mechanisms to rename the symbols provided by such a dependency.[^e3] Meanwhile, C++ has nearly zero tolerance for diamond dependencies in a normal build, and they are very likely to trigger arbitrary bugs and undefined behavior (UB) as a result of a clear violation of C++’s [One Definition Rule](https://oreil.ly/VTZe5). You can at best use a similar idea as Java’s shading to hide some symbols in a dynamic-link library (DLL) or in cases in which you’re building and linking separately. However, in all programming languages that we’re aware of, these workarounds are partial solutions at best: embedding multiple versions can be made to work by tweaking the names of *functions*, but if there are *types* that are passed around between dependencies, all bets are off. For example, there is simply no way for a map defined in libbase v1 to be passed through some libraries to an API provided by libbase v2 in a semantically consistent fashion. Language-specific hacks to hide or rename entities in separately compiled libraries can provide some cushion for diamond dependency problems, but are not a solution in the general case.
 
-不同的程式語言對菱形依賴問題的容忍程度不同。對於某些語言來說，可以在建構過程中嵌入一個依賴關係的多個（孤立的）版本：從liba呼叫libbase可能與從libb呼叫libbase呼叫相同API的不同版本。例如，Java 提供了相當完善的機制來重新命名這種依賴關係所提供的符號。 同時，C++ 對正常建構中的菱形依賴關係的容忍度幾乎為零，由於明顯違反了 C++ 的 [One Definition Rule](https://oreil.ly/VTZe5) ，它們非常可能引發明顯 bug 和未定義行為（UB）。在動態連結庫（DLL）中或者在單獨建構和連結的情況下，你最多可以使用與Java的shading思想來隱藏一些符號。然而，在我們所知道的所有程式語言中，這些變通方法充其量只是部分解決方案：透過調整*函式*的名稱，可以使嵌入的多個版本發揮作用，但如果有*型別*在依賴關係之間傳遞，所有的下注都會無效。例如，libbase v1中定義的`map`型別根本不可能以語義一致的方式透過一些函式庫傳遞給libbase v2提供的API。在單獨編譯的函式庫中隱藏或重新命名實體的特定語言黑科技可以為菱形依賴問題提供一些緩衝，但在一般情況下並不是一個解決方案。
+不同的程式語言對菱形依賴問題的容忍程度不同。對於某些語言來說，可以在建構過程中嵌入一個依賴關係的多個（孤立的）版本：從liba呼叫libbase可能與從libb呼叫libbase呼叫相同API的不同版本。例如，Java 提供了相當完善的機制來重新命名這種依賴關係所提供的符號。[^c3] 同時，C++ 對正常建構中的菱形依賴關係的容忍度幾乎為零，由於明顯違反了 C++ 的 [One Definition Rule](https://oreil.ly/VTZe5) ，它們非常可能引發明顯 bug 和未定義行為（UB）。在動態連結庫（DLL）中或者在單獨建構和連結的情況下，你最多可以使用與Java的shading思想來隱藏一些符號。然而，在我們所知道的所有程式語言中，這些變通方法充其量只是部分解決方案：透過調整*函式*的名稱，可以使嵌入的多個版本發揮作用，但如果有*型別*在依賴關係之間傳遞，所有的下注都會無效。例如，libbase v1中定義的`map`型別根本不可能以語義一致的方式透過一些函式庫傳遞給libbase v2提供的API。在單獨編譯的函式庫中隱藏或重新命名實體的特定語言黑科技可以為菱形依賴問題提供一些緩衝，但在一般情況下並不是一個解決方案。
 
 If you encounter a conflicting requirement problem, the only easy answer is to skip forward or backward in versions for those dependencies to find something compatible. When that isn’t possible, we must resort to locally patching the dependencies in question, which is particularly challenging because the cause of the incompatibility in both provider and consumer is probably not known to the engineer that first discovers the incompatibility. This is inherent: liba developers are still working in a compatible fashion with libbase v1, and libb devs have already upgraded to v2. Only a dev who is pulling in both of those projects has the chance to discover the issue, and it’s certainly not guaranteed that they are familiar enough with libbase and liba to work through the upgrade. The easier answer is to downgrade libbase and libb, although that is not an option if the upgrade was originally forced because of security issues.
 
@@ -77,13 +77,13 @@ Systems of policy and technology for dependency management largely boil down to 
 
 依賴管理的策略和技術體系在很大程度上歸結為一個問題："我們如何避免衝突的需求，同時仍然允許非協調組之間的變化？" 如果你有一個菱形依賴問題的一般形式的解決方案，允許在網路的各個層面不斷變化的需求（包括依賴和平台需求）的現實，你已經描述了依賴管理解決方案的有趣部分。
 
-> [^2]: For instance, security bugs, deprecations, being in the dependency set of a higher-level dependency that has a security bug, and so on.
+> [^e2]: For instance, security bugs, deprecations, being in the dependency set of a higher-level dependency that has a security bug, and so on.
 >
-> 2 例如，安全缺陷、棄用、處於具有安全缺陷的更高級別依賴項的依賴項集中，等等。
+> [^c2]: 例如，安全缺陷、棄用、處於具有安全缺陷的更高級別依賴項的依賴項集中，等等。
 >
-> [^3]: This is called shading or versioning.
+> [^e3]: This is called shading or versioning.
 >
-> 3 這稱為著色或版本控制。
+> [^c3]: 這稱為著色或版本控制。
 
 ## Importing Dependencies 匯入依賴
 
@@ -121,9 +121,9 @@ Google’s Abseil project is much like Go, with an important caveat about time. 
 
 #### Boost
 
-By comparison, the Boost C++ library makes no promises of [compatibility between](https://www.boost.org/users/faq.html) [versions](https://www.boost.org/users/faq.html). Most code doesn’t change, of course, but “many of the Boost libraries are actively maintained and improved, so backward compatibility with prior version isn’t always possible.” Users are advised to upgrade only at a period in their project life cycle in which some change will not cause problems. The goal for Boost is fundamentally different than the standard library or Abseil: Boost is an experimental proving ground. A particular release from the Boost stream is probably perfectly stable and appropriate for use in many projects, but Boost’s project goals do not prioritize compatibility between versions—other long-lived projects might experience some friction keeping up to date. The Boost developers are every bit as expert as the developers for the standard library[^4]—none of this is about technical expertise: this is purely a matter of what a project does or does not promise and prioritize.
+By comparison, the Boost C++ library makes no promises of [compatibility between](https://www.boost.org/users/faq.html) [versions](https://www.boost.org/users/faq.html). Most code doesn’t change, of course, but “many of the Boost libraries are actively maintained and improved, so backward compatibility with prior version isn’t always possible.” Users are advised to upgrade only at a period in their project life cycle in which some change will not cause problems. The goal for Boost is fundamentally different than the standard library or Abseil: Boost is an experimental proving ground. A particular release from the Boost stream is probably perfectly stable and appropriate for use in many projects, but Boost’s project goals do not prioritize compatibility between versions—other long-lived projects might experience some friction keeping up to date. The Boost developers are every bit as expert as the developers for the standard library[^e4]—none of this is about technical expertise: this is purely a matter of what a project does or does not promise and prioritize.
 
-相比之下，Boost C++庫沒有承諾[不同版本](https://www.boost.org/users/faq.html)的相容性。當然，大多數程式碼不會改變，但 "許多Boost庫都在積極維護和改進，所以向後相容以前的版本並不總是可能的"。我們建議使用者只在專案生命週期的某個階段進行升級，因為在這個階段，一些變化不會造成問題。Boost的目標與標準庫或Abseil有根本的不同：Boost是一個實驗驗證場。Boost的某個版本可能非常穩定，適合在許多專案中使用，但是Boost的專案目標並不優先考慮版本之間的相容性——其他長期專案可能會遇到一些與最新版本保持同步的阻力。Boost的開發者和標準庫的開發者一樣都是專家——這與技術專長無關：這純粹是一個專案是否承諾和優先考慮的問題。
+相比之下，Boost C++庫沒有承諾[不同版本](https://www.boost.org/users/faq.html)的相容性。當然，大多數程式碼不會改變，但 "許多Boost庫都在積極維護和改進，所以向後相容以前的版本並不總是可能的"。我們建議使用者只在專案生命週期的某個階段進行升級，因為在這個階段，一些變化不會造成問題。Boost的目標與標準庫或Abseil有根本的不同：Boost是一個實驗驗證場。Boost的某個版本可能非常穩定，適合在許多專案中使用，但是Boost的專案目標並不優先考慮版本之間的相容性——其他長期專案可能會遇到一些與最新版本保持同步的阻力。Boost的開發者和標準庫的開發者一樣都是專家[^c4]——這與技術專長無關：這純粹是一個專案是否承諾和優先考慮的問題。
 
 Looking at the libraries in this discussion, it’s important to recognize that these compatibility issues are *software engineering* issues, not *programming* issues. You can download something like Boost with no compatibility promise and embed it deeply in the most critical, long-lived systems in your organization; it will *work* just fine. All of the concerns here are about how those dependencies will change over time, keeping up with updates, and the difficulty of getting developers to worry about maintenance instead of just getting features working. Within Google, there is a constant stream of guidance directed to our engineers to help them consider this difference between “I got it to work” and “this is working in a supported fashion.” That’s unsurprising: it’s basic application of Hyrum’s Law, after all.
 
@@ -134,9 +134,9 @@ Put more broadly: it is important to realize that dependency management has a wh
 更廣泛地說：重要的是要意識到，依賴管理在程式設計任務和軟體工程任務中具有完全不同的性質。如果你所處的問題空間與隨時間的維護相關，則依賴關係管理很困難。如果你只是為今天開發一個解決方案，而不需要更新任何東西，那麼你完全可以隨心所欲地抓取許多現成的依賴關係，而不考慮如何負責任地使用它們或為升級做計劃。透過違反SD-8中的所有規定，並依靠Boost和Abseil的二進位制相容性，使你的程式今天就能執行......只要你不升級標準庫、Boost或Abseil，也不升級任何依賴你的東西，就可以了。
 
 
-> [^4]: In many cases, there is significant overlap in those populations.
+> [^e4]: In many cases, there is significant overlap in those populations.
 >
-> 4 在許多情況下，這些人群中存在著明顯的重疊。
+> [^c4]: 在許多情況下，這些人群中存在著明顯的重疊。
 
 ### Considerations When Importing  匯入依賴的注意事項
 
@@ -207,9 +207,9 @@ From this point on, the package is usually available to other Google teams to us
 
 從這時起，該軟體包通常可以供其他谷歌團隊在他們自己的專案中使用。新增額外的依賴關係的行為對Alice和Bob來說是完全透明的：他們可能完全沒有意識到他們下載並承諾維護的軟體包已經變得很流行。微妙的是，即使他們在監測他們的軟體套件的新的直接使用情況，他們也不一定會注意到他們的軟體套件的*間接*使用的增長。如果他們把它用於示範，而Charlie為我們的搜尋基礎設施的內部增加了一個依賴，那麼這個包就會突然從相當無害的地方變成谷歌重要系統的關鍵基礎設施。然而，當Charlie考慮是否要新增這個依賴時，我們沒有任何特別的訊號提示給他。
 
-Now, it’s possible that this scenario is perfectly fine. Perhaps that dependency is well written, has no security bugs, and isn’t depended upon by other OSS projects. It might be *possible* for it to go quite a few years without being updated. It’s not necessarily *wise* for that to happen: changes externally might have optimized it or added important new functionality, or cleaned up security holes before CVEs[^5] were discovered. The longer that the package exists, the more dependencies (direct and indirect) are likely to accrue. The more that the package remains stable, the more that we are likely to accrete Hyrum’s Law reliance on the particulars of the version that is checked into *third_party*.
+Now, it’s possible that this scenario is perfectly fine. Perhaps that dependency is well written, has no security bugs, and isn’t depended upon by other OSS projects. It might be *possible* for it to go quite a few years without being updated. It’s not necessarily *wise* for that to happen: changes externally might have optimized it or added important new functionality, or cleaned up security holes before CVEs[^e5] were discovered. The longer that the package exists, the more dependencies (direct and indirect) are likely to accrue. The more that the package remains stable, the more that we are likely to accrete Hyrum’s Law reliance on the particulars of the version that is checked into *third_party*.
 
-現在，這種情況有可能是完美的。也許這個依賴項寫得很好，沒有安全漏洞，也沒有被其他OSS專案所依賴。這可能是*有可能的*，因為它可以在相當長的時間內不被更新。但這並不一定是明智之舉：外部的變化可能已經優化了它，或者增加了重要的新功能，或者在CVE被發現之前清理了安全漏洞。軟體包存在的時間越長，依賴（直接和間接）就越多。軟體包越是保持穩定，我們就越有可能增加海勒姆定律對被檢查到*第三方*的版本的特定依賴。
+現在，這種情況有可能是完美的。也許這個依賴項寫得很好，沒有安全漏洞，也沒有被其他OSS專案所依賴。這可能是*有可能的*，因為它可以在相當長的時間內不被更新。但這並不一定是明智之舉：外部的變化可能已經優化了它，或者增加了重要的新功能，或者在CVE[^c5]被發現之前清理了安全漏洞。軟體包存在的時間越長，依賴（直接和間接）就越多。軟體包越是保持穩定，我們就越有可能增加海勒姆定律對被檢查到*第三方*的版本的特定依賴。
 
 One day, Alice and Bob are informed that an upgrade is critical. It could be the disclosure of a security vulnerability in the package itself or in an OSS project that depends upon it that forces an upgrade. Bob has transitioned to management and hasn’t touched the codebase in a while. Alice has moved to another team since the demo and hasn’t used this package again. Nobody changed the OWNERS file. Thousands of projects depend on this indirectly—we can’t just delete it without breaking the build for Search and a dozen other big teams. Nobody has any experience with the implementation details of this package. Alice isn’t necessarily on a team that has a lot of experience undoing Hyrum’s Law subtleties that have accrued over time.
 
@@ -224,9 +224,9 @@ Our *third_party* policies don’t work for these unfortunately common scenarios
 我們的*第三方包*策略不適用於這些不幸的常見情況。我們大致明白，我們需要一個更高的所有權標準，我們需要讓定期更新更容易（和更多的回報），讓*第三方包*更難成為孤島，同時也更重要。困難在於，程式碼庫維護者和*第三方包*領導很難說："不，你不能使用這個能完美解決你的開發問題的東西，因為我們沒有資源不斷為大家更新新版本"。那些流行的、沒有相容性承諾的專案（比如Boost）尤其有風險：我們的開發者可能非常熟悉使用這種依賴關係來解決谷歌以外的程式設計問題，但允許它根植於我們的程式碼庫結構中是一個很大的風險。在這一點上，我們的程式碼庫有幾十年的預期壽命：上游專案如果沒有明確地優先考慮穩定性，就是一種風險。
 
 
-> [^5]:	Common Vulnerabilities and Exposures.
+> [^e5]: Common Vulnerabilities and Exposures.
 >
-> 5  常見漏洞和暴露
+> [^c5]: 常見漏洞和暴露
 
 ## Dependency Management, In Theory  理論上的依賴管理
 
@@ -262,17 +262,17 @@ In this model, version selection is simple: there are no decisions to be made, b
 
 ### Semantic Versioning  語義版本管理
 
-The de facto standard for “how do we manage a network of dependencies today?” is semantic versioning (SemVer).[^6] SemVer is the nearly ubiquitous practice of representing a version number for some dependency (especially libraries) using three decimal-separated integers, such as 2.4.72 or 1.1.4. In the most common convention, the three component numbers represent major, minor, and patch versions, with the implication that a changed major number indicates a change to an existing API that can break existing usage, a changed minor number indicates purely added functionality that should not break existing usage, and a changed patch version is reserved for non-API-impacting implementation details and bug fixes that are viewed as particularly low risk.
+The de facto standard for “how do we manage a network of dependencies today?” is semantic versioning (SemVer).[^e6] SemVer is the nearly ubiquitous practice of representing a version number for some dependency (especially libraries) using three decimal-separated integers, such as 2.4.72 or 1.1.4. In the most common convention, the three component numbers represent major, minor, and patch versions, with the implication that a changed major number indicates a change to an existing API that can break existing usage, a changed minor number indicates purely added functionality that should not break existing usage, and a changed patch version is reserved for non-API-impacting implementation details and bug fixes that are viewed as particularly low risk.
 
-"我們今天如何管理依賴關係網路？"事實上的標準是語義版本管理（SemVer）。SemVer是一種幾乎無處不在的做法，即用三個十進位制分隔的整數來表示某些依賴關係（尤其是庫）的版本號，例如2.4.72或1.1.4。在最常見的慣例中，三個組成部分的數字代表主要、次要和補丁版本，其含義是：改變主要數字表示對現有API的改變，可能會破壞現有的使用，改變次要數字表示純粹增加的功能，不應該破壞現有的使用，而改變補丁版本是保留給非API影響的實施細節和被視為特別低風險的bug修復。
+"我們今天如何管理依賴關係網路？"事實上的標準是語義版本管理（SemVer）。[^c6]SemVer是一種幾乎無處不在的做法，即用三個十進位制分隔的整數來表示某些依賴關係（尤其是庫）的版本號，例如2.4.72或1.1.4。在最常見的慣例中，三個組成部分的數字代表主要、次要和補丁版本，其含義是：改變主要數字表示對現有API的改變，可能會破壞現有的使用，改變次要數字表示純粹增加的功能，不應該破壞現有的使用，而改變補丁版本是保留給非API影響的實施細節和被視為特別低風險的bug修復。
 
 With the SemVer separation of major/minor/patch versions, the assumption is that a version requirement can generally be expressed as “anything newer than,” barring API-incompatible changes (major version changes). Commonly, we’ll see “Requires libbase ≥ 1.5,” that requirement would be compatible with any libbase in 1.5, including 1.5.1, and anything in 1.6 onward, but not libbase 1.4.9 (missing the API introduced in 1.5) or 2.x (some APIs in libbase were changed incompatibly). Major version changes are a significant incompatibility: because an existing piece of functionality has changed (or been removed), there are potential incompatibilities for all dependents. Version requirements exist (explicitly or implicitly) whenever one dependency uses another: we might see “liba requires libbase ≥ 1.5” and “libb requires libbase ≥ 1.4.7.”
 
 由於SemVer將主要/次要/補丁版本分離，假設版本需求通常可以表示為“任何更新的”，除非API不相容的更改（主版本更改）。通常，我們會看到 "Requires libbase ≥ 1.5"，這個需求會與1.5中的任何libbase相容，包括1.5.1，以及1.6以後的任何東西，但不包括libbase 1.4.9（缺少1.5中引入的API）或2.x（libbase中的一些API被不相容地更改）。主要的版本變化是一種重要的不相容：由於現有功能已更改（或已刪除），因此所有依賴項都存在潛在的不相容性。只要一個依賴關係使用另一個依賴關係，就會存在版本要求（明確地或隱含地）：我們可能看到 "liba requires libbase ≥ 1.5" 和 "libb requires libbase ≥ 1.4.7"。
 
-If we formalize these requirements, we can conceptualize a dependency network as a collection of software components (nodes) and the requirements between them (edges). Edge labels in this network change as a function of the version of the source node, either as dependencies are added (or removed) or as the SemVer requirement is updated because of a change in the source node (requiring a newly added feature in a dependency, for instance). Because this whole network is changing asynchronously over time, the process of finding a mutually compatible set of dependencies that satisfy all the transitive requirements of your application can be challenging.[^7] Version- satisfiability solvers for SemVer are very much akin to SAT-solvers in logic and algorithms research: given a set of constraints (version requirements on dependency edges), can we find a set of versions for the nodes in question that satisfies all constraints? Most package management ecosystems are built on top of these sorts of graphs, governed by their SemVer SAT-solvers.
+If we formalize these requirements, we can conceptualize a dependency network as a collection of software components (nodes) and the requirements between them (edges). Edge labels in this network change as a function of the version of the source node, either as dependencies are added (or removed) or as the SemVer requirement is updated because of a change in the source node (requiring a newly added feature in a dependency, for instance). Because this whole network is changing asynchronously over time, the process of finding a mutually compatible set of dependencies that satisfy all the transitive requirements of your application can be challenging.[^e7] Version- satisfiability solvers for SemVer are very much akin to SAT-solvers in logic and algorithms research: given a set of constraints (version requirements on dependency edges), can we find a set of versions for the nodes in question that satisfies all constraints? Most package management ecosystems are built on top of these sorts of graphs, governed by their SemVer SAT-solvers.
 
-如果我們將這些要求標準化，我們可以將依賴網路概念化為軟體元件（節點）和它們之間的要求（邊緣）的集合。這個網路中的邊緣標籤作為源節點版本的函式而變化，要麼是由於依賴關係被新增（或刪除），要麼是由於源節點的變化而更新SemVer需求（例如，要求在依賴關係中新增新的功能）。由於整個依賴網路是隨著時間的推移而非同步變化的，因此，找到一組相互相容的依賴關係，以滿足應用程式的所有可傳遞需求的過程可能是一個具有挑戰性的過程。SemVer的版本滿足求解器非常類似於邏輯和演算法研究中的SAT求解器：給定一組約束（依賴邊的版本要求），我們能否為有關節點找到一組滿足所有約束的版本？大多數軟體包管理生態系統都是建立在這類圖之上的，由其SemVer SAT求解器管理。
+如果我們將這些要求標準化，我們可以將依賴網路概念化為軟體元件（節點）和它們之間的要求（邊緣）的集合。這個網路中的邊緣標籤作為源節點版本的函式而變化，要麼是由於依賴關係被新增（或刪除），要麼是由於源節點的變化而更新SemVer需求（例如，要求在依賴關係中新增新的功能）。由於整個依賴網路是隨著時間的推移而非同步變化的，因此，找到一組相互相容的依賴關係，以滿足應用程式的所有可傳遞需求的過程可能是一個具有挑戰性的過程。[^c7]SemVer的版本滿足求解器非常類似於邏輯和演算法研究中的SAT求解器：給定一組約束（依賴邊的版本要求），我們能否為有關節點找到一組滿足所有約束的版本？大多數軟體包管理生態系統都是建立在這類圖之上的，由其SemVer SAT求解器管理。
 
 SemVer and its SAT-solvers aren’t in any way promising that there *exists* a solution to a given set of dependency constraints. Situations in which dependency constraints cannot be satisfied are created constantly, as we’ve already seen: if a lower-level component (libbase) makes a major-number bump, and some (but not all) of the libraries that depend on it (libb but not liba) have upgraded, we will encounter the diamond dependency issue.
 
@@ -286,13 +286,13 @@ We’ll look at some of the limitations of SemVer in more detail later in this c
 
 我們將在本章後面詳細介紹SemVer的一些限制。
 
-> [^6]: Strictly speaking, SemVer refers only to the emerging practice of applying semantics to major/minor/patch version numbers, not the application of compatible version requirements among dependencies numbered in that fashion. There are numerous minor variations on those requirements among different ecosystems, but in general, the version-number-plus-constraints system described here as SemVer is representative of the practice at large.
+> [^e6]: Strictly speaking, SemVer refers only to the emerging practice of applying semantics to major/minor/patch version numbers, not the application of compatible version requirements among dependencies numbered in that fashion. There are numerous minor variations on those requirements among different ecosystems, but in general, the version-number-plus-constraints system described here as SemVer is representative of the practice at large.
 >
-> 6 嚴格來說，SemVer只是指對主要/次要/補丁版本號應用語義的新興做法，而不是在以這種方式編號的依賴關係中應用相容的版本要求。在不同的生態系統中，這些要求有許多細微的變化，但總的來說，這裡描述的SemVer的版本號加約束系統是對整個實踐的代表。
+> [^c6]:  嚴格來說，SemVer只是指對主要/次要/補丁版本號應用語義的新興做法，而不是在以這種方式編號的依賴關係中應用相容的版本要求。在不同的生態系統中，這些要求有許多細微的變化，但總的來說，這裡描述的SemVer的版本號加約束系統是對整個實踐的代表。
 >
-> [^7]:  In fact, it has been proven that SemVer constraints applied to a dependency network are NP-complete.
+> [^e7]: In fact, it has been proven that SemVer constraints applied to a dependency network are NP-complete.
 >
-> 7 事實上，已經證明SemVer約束應用於依賴網路是NP-C(NP-完備)。
+> [^c7]: 事實上，已經證明SemVer約束應用於依賴網路是NP-C(NP-完備)。
 
 ### Bundled Distribution Models  捆綁分銷模式
 
@@ -314,9 +314,9 @@ In the bundled distribution approach, version selection is handled by dedicated 
 
 ### Live at Head  直接使用最新版本
 
-The model that some of us at Google[^8] have been pushing for is theoretically sound, but places new and costly burdens on participants in a dependency network. It’s wholly unlike the models that exist in OSS ecosystems today, and it is not clear how to get from here to there as an industry. Within the boundaries of an organization like Google, it is costly but effective, and we feel that it places most of the costs and incentives into the correct places. We call this model “Live at Head.” It is viewable as the dependency-management extension of trunk-based development: where trunk- based development talks about source control policies, we’re extending that model to apply to upstream dependencies as well.
+The model that some of us at Google[^e8] have been pushing for is theoretically sound, but places new and costly burdens on participants in a dependency network. It’s wholly unlike the models that exist in OSS ecosystems today, and it is not clear how to get from here to there as an industry. Within the boundaries of an organization like Google, it is costly but effective, and we feel that it places most of the costs and incentives into the correct places. We call this model “Live at Head.” It is viewable as the dependency-management extension of trunk-based development: where trunk- based development talks about source control policies, we’re extending that model to apply to upstream dependencies as well.
 
-我們谷歌的一些人一直在推動的模式在理論上是合理的，但給依賴網路的參與者帶來了新的、沉重的負擔。它完全不同於今天存在於開放原始碼軟體生態系統中的模式，而且不清楚作為一個行業如何從這裡走到那裡。在像谷歌這樣的組織的範圍內，它的成本很高，但很有效，我們覺得它把大部分的成本和激勵放到了正確的地方。我們稱這種模式為 "Live at Head"。它可以被看作是基於主幹的開發的依賴管理的延伸：基於主幹的開發討論原始碼控制策略時，我們將該模型擴充到應用於上游依賴關係。
+我們谷歌[^c8]的一些人一直在推動的模式在理論上是合理的，但給依賴網路的參與者帶來了新的、沉重的負擔。它完全不同於今天存在於開放原始碼軟體生態系統中的模式，而且不清楚作為一個行業如何從這裡走到那裡。在像谷歌這樣的組織的範圍內，它的成本很高，但很有效，我們覺得它把大部分的成本和激勵放到了正確的地方。我們稱這種模式為 "Live at Head"。它可以被看作是基於主幹的開發的依賴管理的延伸：基於主幹的開發討論原始碼控制策略時，我們將該模型擴充到應用於上游依賴關係。
 
 Live at Head presupposes that we can unpin dependencies, drop SemVer, and rely on dependency providers to test changes against the entire ecosystem before committing. Live at Head is an explicit attempt to take time and choice out of the issue of dependency management: always depend on the current version of everything, and never change anything in a way in which it would be difficult for your dependents to adapt. A change that (unintentionally) alters API or behavior will in general be caught by CI on downstream dependencies, and thus should not be committed. For cases in which such a change *must* happen (i.e., for security reasons), such a break should be made only after either the downstream dependencies are updated or an automated tool is provided to perform the update in place. (This tooling is essential for closed- source downstream consumers: the goal is to allow any user the ability to update use of a changing API without expert knowledge of the use or the API. That property significantly mitigates the “mostly bystanders” costs of breaking changes.) This philosophical shift in responsibility in the open source ecosystem is difficult to motivate initially: putting the burden on an API provider to test against and change all of its downstream customers is a significant revision to the responsibilities of an API provider.
 
@@ -334,9 +334,9 @@ In the Live at Head approach, version selection is handled by asking “What is 
 
 在Live at Head方法中，透過詢問“哪個是最新的穩定版本？”來處理版本選擇。如果提供者能夠負責任地做出更改，則所有更改都將順利進行。
 
-> [^8]: Especially the author and others in the Google C++ community.
+> [^e8]: Especially the author and others in the Google C++ community.
 >
-> 8 特別是作者和其他在谷歌C++社群。
+> [^c8]: 特別是作者和其他在谷歌C++社群。
 
 
 ## The Limitations of SemVer  SemVer （語義版本管理）的侷限性
@@ -345,9 +345,9 @@ The Live at Head approach may build on recognized practices for version control 
 
 Live at Head方法可能建立在公認的版本控制實踐（基於主幹的開發）的基礎之上，但在規模上基本沒有得到驗證。SemVer是當今依賴性管理的事實標準，但正如我們所建議的，它並非沒有侷限性。因為這是一種非常流行的方法，所以值得更詳細地研究它，並強調我們認為可能存在的陷阱。
 
-There’s a lot to unpack in the SemVer definition of what a dotted-triple version number really means. Is this a promise? Or is the version number chosen for a release an estimate? That is, when the maintainers of libbase cut a new release and choose whether this is a major, minor, or patch release, what are they saying? Is it provable that an upgrade from 1.1.4 to 1.2.0 is safe and easy, because there were only API additions and bug fixes? Of course not. There’s a host of things that ill-behaved users of libbase could have done that could cause build breaks or behavioral changes in the face of a “simple” API addition.[^9] Fundamentally, you can’t *prove* anything about compatibility when only considering the source API; you have to know *with which* things you are asking about compatibility.
+There’s a lot to unpack in the SemVer definition of what a dotted-triple version number really means. Is this a promise? Or is the version number chosen for a release an estimate? That is, when the maintainers of libbase cut a new release and choose whether this is a major, minor, or patch release, what are they saying? Is it provable that an upgrade from 1.1.4 to 1.2.0 is safe and easy, because there were only API additions and bug fixes? Of course not. There’s a host of things that ill-behaved users of libbase could have done that could cause build breaks or behavioral changes in the face of a “simple” API addition.[^e9] Fundamentally, you can’t *prove* anything about compatibility when only considering the source API; you have to know *with which* things you are asking about compatibility.
 
-在SemVer的定義中，有很多東西需要解讀，虛線三重版本號到底意味著什麼。這是一個承諾嗎？還是為一個版本選擇的版本號是一種估計值？也就是說，當 libbase 的維護者釋出一個新版本，並選擇這是一個大版本、小版本還是補丁版本時，他們在說什麼？是否可以證明從 1.1.4 升級到 1.2.0 是安全且容易的，因為只有 API 的增加和錯誤的修正？當然不是。在 "簡單的 "API增加的情況下，libbase的不守規矩的使用者可能會做很多事情，導致建構中斷或行為改變。從根本上說，當只考慮源API時，你不能*證明*任何關於相容性的事情；你必須知道你在問*哪些*相容性的問題。
+在SemVer的定義中，有很多東西需要解讀，虛線三重版本號到底意味著什麼。這是一個承諾嗎？還是為一個版本選擇的版本號是一種估計值？也就是說，當 libbase 的維護者釋出一個新版本，並選擇這是一個大版本、小版本還是補丁版本時，他們在說什麼？是否可以證明從 1.1.4 升級到 1.2.0 是安全且容易的，因為只有 API 的增加和錯誤的修正？當然不是。在 "簡單的 "API增加的情況下，libbase的不守規矩的使用者可能會做很多事情，導致建構中斷或行為改變。[^c9]從根本上說，當只考慮源API時，你不能*證明*任何關於相容性的事情；你必須知道你在問*哪些*相容性的問題。
 
 However, this idea of “estimating” compatibility begins to weaken when we talk about networks of dependencies and SAT-solvers applied to those networks. The fundamental problem in this formulation is the difference between node values in traditional SAT and version values in a SemVer dependency graph. A node in a three-SAT graph *is* either True or False. A version value (1.1.14) in a dependency graph is provided by the maintainer as an *estimate* of how compatible the new version is, given code that used the previous version. We’re building all of our version-satisfaction logic on top of a shaky foundation, treating estimates and self-attestation as absolute. As we’ll see, even if that works OK in limited cases, in the aggregate, it doesn’t necessarily have enough fidelity to underpin a healthy ecosystem.
 
@@ -357,29 +357,29 @@ If we acknowledge that SemVer is a lossy estimate and represents only a subset o
 
 如果我們承認SemVer是一個有損失的預估，並且只代表可能的變化範圍的一個子集，我們就可以開始把它看作是一個鈍器。在理論上，它作為一種速記工具是很好的。在實踐中，尤其是當我們在它上面建構SAT求解器時，SemVer可能（也確實）會因為過度約束和保護不足而讓我們失敗。
 
-> [^9]: For example: a poorly implemented polyfill that adds the new libbase API ahead of time, causing a conflicting definition. Or, use of language reflection APIs to depend upon the precise number of APIs provided by libbase, introducing crashes if that number changes. These shouldn’t happen and are certainly rare even if they do happen by accident—the point is that the libbase providers can’t prove compatibility.
+> [^e9]: For example: a poorly implemented polyfill that adds the new libbase API ahead of time, causing a conflicting definition. Or, use of language reflection APIs to depend upon the precise number of APIs provided by libbase, introducing crashes if that number changes. These shouldn’t happen and are certainly rare even if they do happen by accident—the point is that the libbase providers can’t prove compatibility.
 >
-> 9  例如：一個實現不佳的 polyfill，提前添加了新的 libbase API，導致定義衝突。或者，使用語言反射 API 來依賴 libbase 提供的精確數量的 API，如果這個數量發生變化，就會引入崩潰。這些都不應該發生，而且即使是意外發生，也肯定很罕見--關鍵是 libbase 提供者無法證明相容性。
+> [^c9]: 例如：一個實現不佳的 polyfill，提前添加了新的 libbase API，導致定義衝突。或者，使用語言反射 API 來依賴 libbase 提供的精確數量的 API，如果這個數量發生變化，就會引入崩潰。這些都不應該發生，而且即使是意外發生，也肯定很罕見--關鍵是 libbase 提供者無法證明相容性。
 
 ### SemVer Might Overconstrain  SemVer可能會過度限制
 
-Consider what happens when libbase is recognized to be more than a single monolith: there are almost always independent interfaces within a library. Even if there are only two functions, we can see situations in which SemVer overconstrains us. Imagine that libbase is indeed composed of only two functions, Foo and Bar. Our mid-level dependencies liba and libb use only Foo. If the maintainer of libbase makes a breaking change to Bar, it is incumbent on them to bump the major version of lib base in a SemVer world. liba and libb are known to depend on libbase 1.x— SemVer dependency solvers won’t accept a 2.x version of that dependency. However, in reality these libraries would work together perfectly: only Bar changed, and that was unused. The compression inherent in “I made a breaking change; I must bump the major version number” is lossy when it doesn’t apply at the granularity of an individual atomic API unit. Although some dependencies might be fine grained enough for that to be accurate,[^10] that is not the norm for a SemVer ecosystem.
+Consider what happens when libbase is recognized to be more than a single monolith: there are almost always independent interfaces within a library. Even if there are only two functions, we can see situations in which SemVer overconstrains us. Imagine that libbase is indeed composed of only two functions, Foo and Bar. Our mid-level dependencies liba and libb use only Foo. If the maintainer of libbase makes a breaking change to Bar, it is incumbent on them to bump the major version of lib base in a SemVer world. liba and libb are known to depend on libbase 1.x— SemVer dependency solvers won’t accept a 2.x version of that dependency. However, in reality these libraries would work together perfectly: only Bar changed, and that was unused. The compression inherent in “I made a breaking change; I must bump the major version number” is lossy when it doesn’t apply at the granularity of an individual atomic API unit. Although some dependencies might be fine grained enough for that to be accurate,[^e10] that is not the norm for a SemVer ecosystem.
 
-考慮一下當libbase被認定為不只是一個單體時會發生什麼：一個函式庫內幾乎都有獨立的介面。即使只有兩個函式，我們也可以看到 SemVer 對我們過度約束的情況。想象一下，libbase確實只由Foo和Bar這兩個函式組成。我們的中層依賴關係 liba 和 libb 只使用 Foo。如果 libbase 的維護者對 Bar 進行了破壞性的修改，那麼在 SemVer 世界中，他們就有責任提升 libbase 的主要版本。已知 liba 和 libb 依賴於 libbase 1.x——SemVer 依賴解決器不會接受這種依賴的 2.x 版本。然而，在現實中，這些庫可以完美地協同工作：只有Bar改變了，而且是未使用的。當 "我做了一個突破性的改變；我必須提高主要版本號"的固有壓縮不適用單個原子API單元的粒度時，它是有損的。雖然有些依賴關係可能足夠精細，所以這是很準確的，這不是SemVer生態系統的標準。
+考慮一下當libbase被認定為不只是一個單體時會發生什麼：一個函式庫內幾乎都有獨立的介面。即使只有兩個函式，我們也可以看到 SemVer 對我們過度約束的情況。想象一下，libbase確實只由Foo和Bar這兩個函式組成。我們的中層依賴關係 liba 和 libb 只使用 Foo。如果 libbase 的維護者對 Bar 進行了破壞性的修改，那麼在 SemVer 世界中，他們就有責任提升 libbase 的主要版本。已知 liba 和 libb 依賴於 libbase 1.x——SemVer 依賴解決器不會接受這種依賴的 2.x 版本。然而，在現實中，這些庫可以完美地協同工作：只有Bar改變了，而且是未使用的。當 "我做了一個突破性的改變；我必須提高主要版本號"的固有壓縮不適用單個原子API單元的粒度時，它是有損的。雖然有些依賴關係可能足夠精細，[^c10]所以這是很準確的，這不是SemVer生態系統的標準。
 
 If SemVer overconstrains, either because of an unnecessarily severe version bump or insufficiently fine-grained application of SemVer numbers, automated package managers and SAT-solvers will report that your dependencies cannot be updated or installed, even if everything would work together flawlessly by ignoring the SemVer checks. Anyone who has ever been exposed to dependency hell during an upgrade might find this particularly infuriating: some large fraction of that effort was a complete waste of time.
 
 如果SemVer過度約束，無論是由於不必要的嚴重的版本升級，還是由於對SemVer數字的應用不夠精細，自動軟體包管理器和SAT求解器將報告你的依賴關係不能被更新或安裝，即使忽略SemVer檢查，一切都能完美地協同工作。任何曾經在升級過程中被暴露在依賴地獄中的人都會發現這一點特別令人生氣：其中很大一部分工作完全是浪費時間。
 
-> [^10]: The Node ecosystem has noteworthy examples of dependencies that provide exactly one API.
+> [^e10]: The Node ecosystem has noteworthy examples of dependencies that provide exactly one API.
 >
-> 10  節點生態系統有值得注意的依賴關係範例，這些依賴關係只提供一個API。
+> [^c10]: 節點生態系統有值得注意的依賴關係範例，這些依賴關係只提供一個API。
 
 ### SemVer Might Overpromise  SemVer可能過度承諾
 
-On the flip side, the application of SemVer makes the explicit assumption that an API provider’s estimate of compatibility can be fully predictive and that changes fall into three buckets: breaking (by modification or removal), strictly additive, or non-API- impacting. If SemVer is a perfectly faithful representation of the risk of a change by classifying syntactic and semantic changes, how do we characterize a change that adds a one-millisecond delay to a time-sensitive API? Or, more plausibly: how do we characterize a change that alters the format of our logging output? Or that alters the order that we import external dependencies? Or that alters the order that results are returned in an “unordered” stream? Is it reasonable to assume that those changes are “safe” merely because those aren’t part of the syntax or contract of the API in question? What if the documentation said “This may change in the future”? Or the API was named “ForInternalUseByLibBaseOnlyDoNotTouchThisIReallyMeanIt?”[^11]
+On the flip side, the application of SemVer makes the explicit assumption that an API provider’s estimate of compatibility can be fully predictive and that changes fall into three buckets: breaking (by modification or removal), strictly additive, or non-API- impacting. If SemVer is a perfectly faithful representation of the risk of a change by classifying syntactic and semantic changes, how do we characterize a change that adds a one-millisecond delay to a time-sensitive API? Or, more plausibly: how do we characterize a change that alters the format of our logging output? Or that alters the order that we import external dependencies? Or that alters the order that results are returned in an “unordered” stream? Is it reasonable to assume that those changes are “safe” merely because those aren’t part of the syntax or contract of the API in question? What if the documentation said “This may change in the future”? Or the API was named “ForInternalUseByLibBaseOnlyDoNotTouchThisIReallyMeanIt?”[^e11]
 
-另一方面，SemVer的應用做出了明確的假設，即API提供者對相容性的預估可以完全預測，並且更改分為三個類：破壞（透過修改或刪除）、嚴格的新增或不影響API。如果SemVer透過對語法和語義變化進行分類，完全忠實地表示了變化的風險，那麼我們如何描述為時間敏感API增加一毫秒延遲的更改？或者，更合理的說法是：我們如何描述改變日誌輸出格式的更改？或者改變了我們匯入外部依賴關係的順序？或者改變了在 "無序"流中返回結果的順序？僅僅因為這些變更不屬於問題中API的語法或契約的一部分，就認為這些變更是“安全的”是合理的嗎？如果文件中說"這在未來可能會發生變化"呢？或者API被命名為 "ForInternalUseByLibBaseOnlyDoNotTouchThisIReallyMeanIt？"
+另一方面，SemVer的應用做出了明確的假設，即API提供者對相容性的預估可以完全預測，並且更改分為三個類：破壞（透過修改或刪除）、嚴格的新增或不影響API。如果SemVer透過對語法和語義變化進行分類，完全忠實地表示了變化的風險，那麼我們如何描述為時間敏感API增加一毫秒延遲的更改？或者，更合理的說法是：我們如何描述改變日誌輸出格式的更改？或者改變了我們匯入外部依賴關係的順序？或者改變了在 "無序"流中返回結果的順序？僅僅因為這些變更不屬於問題中API的語法或契約的一部分，就認為這些變更是“安全的”是合理的嗎？如果文件中說"這在未來可能會發生變化"呢？或者API被命名為 "ForInternalUseByLibBaseOnlyDoNotTouchThisIReallyMeanIt？"[^c11]
 
 The idea that SemVer patch versions, which in theory are only changing implementation details, are “safe” changes absolutely runs afoul of Google’s experience with Hyrum’s Law—“With a sufficient number of users, every observable behavior of your system will be depended upon by someone.” Changing the order that dependencies are imported, or changing the output order for an “unordered” producer will, at scale, invariably break assumptions that some consumer was (perhaps incorrectly) relying upon. The very term “breaking change” is misleading: there are changes that are theoretically breaking but safe in practice (removing an unused API). There are also changes that are theoretically safe but break client code in practice (any of our earlier Hyrum’s Law examples). We can see this in any SemVer/dependency-management system for which the version-number requirement system allows for restrictions on the patch number: if you can say liba requires libbase >1.1.14 rather than liba requires libbase 1.1, that’s clearly an admission that there are observable differences in patch versions.
 
@@ -393,9 +393,9 @@ Because of this, a SemVer constraint solver might report that your dependencies 
 
 正因為如此，SemVer約束求解器可能會報告說，你的依賴關係可以一起工作，但它們卻不能一起工作，這可能是因為錯誤地應用了一個坑點，或者是因為你的依賴網路中的某些東西與不被認為是可觀察API表面的一部分的東西存在Hyrum定律依賴。在這些情況下，你可能會有建構錯誤或執行時錯誤，其嚴重性在理論上沒有上限。
 
-> [^11]: It’s worth noting: in our experience, naming like this doesn’t fully solve the problem of users reaching in to access private APIs. Prefer languages that have good control over public/private access to APIs of all forms.
+> [^e11]: It’s worth noting: in our experience, naming like this doesn’t fully solve the problem of users reaching in to access private APIs. Prefer languages that have good control over public/private access to APIs of all forms.
 >
-> 11  值得注意的是：根據我們的經驗，這樣命名並不能完全解決使用者存取私有API的問題。首選對所有形式的API的公共/私人存取有良好控制的語言。
+> [^c11]: 值得注意的是：根據我們的經驗，這樣命名並不能完全解決使用者存取私有API的問題。首選對所有形式的API的公共/私人存取有良好控制的語言。
 
 ### Motivations  動機
 
@@ -411,17 +411,17 @@ All of which combines to suggest that no matter how many users will be inconveni
 
 [Go](https://research.swtch.com/vgo-import)和[Clojure](https://oreil.ly/Iq9f_)都很好地處理了這個問題：在他們的標準包管理生態系統中，相當於一個主要版本的升級被認為是一個完全新的套件。這有一定的正義感：如果你願意為你的包打破向後的相容性，為什麼我們要假裝這是同一套API？重新打套件和重新命名一切似乎是一個合理的工作量，期望從提供者那裡得到，以換取他們接受核選項並拋棄向後相容性。
 
-Finally, there’s the human fallibility of the process. In general, SemVer version bumps should be applied to *semantic* changes just as much as syntactic ones; changing the behavior of an API matters just as much as changing its structure. Although it’s plausible that tooling could be developed to evaluate whether any particular release involves syntactic changes to a set of public APIs, discerning whether there are meaningful and intentional semantic changes is computationally infeasible.[^12] Practically speaking, even the potential tools for identifying syntactic changes are limited. In almost all cases, it is up to the human judgement of the API provider whether to bump major, minor, or patch versions for any given change. If you’re relying on only a handful of professionally maintained dependencies, your expected exposure to this form of SemVer clerical error is probably low.[^13] If you have a network of thousands of dependencies underneath your product, you should be prepared for some amount of chaos simply from human error.
+Finally, there’s the human fallibility of the process. In general, SemVer version bumps should be applied to *semantic* changes just as much as syntactic ones; changing the behavior of an API matters just as much as changing its structure. Although it’s plausible that tooling could be developed to evaluate whether any particular release involves syntactic changes to a set of public APIs, discerning whether there are meaningful and intentional semantic changes is computationally infeasible.[^e12] Practically speaking, even the potential tools for identifying syntactic changes are limited. In almost all cases, it is up to the human judgement of the API provider whether to bump major, minor, or patch versions for any given change. If you’re relying on only a handful of professionally maintained dependencies, your expected exposure to this form of SemVer clerical error is probably low.[^e13] If you have a network of thousands of dependencies underneath your product, you should be prepared for some amount of chaos simply from human error.
 
-最後，還有過程中的人為失誤。一般來說，SemVer版本升級應該和語法變化一樣適用於*語義*變化；改變API的行為和改變其結構一樣重要。雖然開發工具來評估任何特定的版本是否涉及一組公共API的語法變化是可行的，但是要辨別是否存在有意義的、有意的語義變化在計算上是不可行的。實際上，即使是識別語法變化的潛在工具也是有限的。在幾乎所有的情況下，對於任何給定的變化，是否要碰撞主要版本、次要版本或補丁版本，都取決於API提供者的人為判斷。如果你只依賴少數幾個專業維護的依賴關係，那麼你對這種形式的SemVer文書錯誤的預期暴露可能很低。如果你的產品下面有成千上萬的依賴關係網路，你應該準備好接受某種程度的混亂，僅僅是因為人為錯誤。
+最後，還有過程中的人為失誤。一般來說，SemVer版本升級應該和語法變化一樣適用於*語義*變化；改變API的行為和改變其結構一樣重要。雖然開發工具來評估任何特定的版本是否涉及一組公共API的語法變化是可行的，但是要辨別是否存在有意義的、有意的語義變化在計算上是不可行的。[^c12]實際上，即使是識別語法變化的潛在工具也是有限的。在幾乎所有的情況下，對於任何給定的變化，是否要碰撞主要版本、次要版本或補丁版本，都取決於API提供者的人為判斷。如果你只依賴少數幾個專業維護的依賴關係，那麼你對這種形式的SemVer文書錯誤的預期暴露可能很低。[^c13]如果你的產品下面有成千上萬的依賴關係網路，你應該準備好接受某種程度的混亂，僅僅是因為人為錯誤。
 
-> [^12]: In a world of ubiquitous unit tests, we could identify changes that required a change in test behavior, but it would still be difficult to algorithmically separate “This is a behavioral change” from “This is a bug fix to a behavior that wasn’t intended/promised.”
+> [^e12]: In a world of ubiquitous unit tests, we could identify changes that required a change in test behavior, but it would still be difficult to algorithmically separate “This is a behavioral change” from “This is a bug fix to a behavior that wasn’t intended/promised.”
 >
-> 12  在一個無處不在的單元測試的世界裡，我們可以識別需要改變測試行為的變化，但仍然很難在演算法上將 "這是一個行為上的變化 "與 "這是一個對不打算/承諾的行為的錯誤修復 "分開。
+> [^c12]: 在一個無處不在的單元測試的世界裡，我們可以識別需要改變測試行為的變化，但仍然很難在演算法上將 "這是一個行為上的變化 "與 "這是一個對不打算/承諾的行為的錯誤修復 "分開。
 >
-> [^13]: So, when it matters in the long term, choose well-maintained dependencies.
+> [^e13]: So, when it matters in the long term, choose well-maintained dependencies.
 >
-> 13  所以，當長期重要時，選擇維護良好的依賴關係。
+> [^c13]: 所以，當長期重要時，選擇維護良好的依賴關係。
 
 ### Minimum Version Selection  最小版本選擇
 
@@ -429,9 +429,9 @@ In 2018, as part of an essay series on building a package management system for 
 
 2018年，作為為Go程式語言建構軟體包管理系統的系列文章的一部分，谷歌自己的Russ Cox描述了SemVer依賴性管理的一個有趣變化。[最小版本選擇](https://research.swtch.com/vgo-mvs)（MVS）。當更新依賴網路中某個節點的版本時，它的依賴關係有可能需要更新到較新的版本，以滿足更新的SemVer需求——這可能會觸發進一步的變化。在大多數約束滿足/版本選擇公式中，這些下游依賴關係的最新版本被選中：畢竟，你最終需要更新到這些新版本，對嗎？
 
-MVS makes the opposite choice: when liba’s specification requires libbase ≥1.7, we’ll try libbase 1.7 directly, even if a 1.8 is available. This “produces high-fidelity builds in which the dependencies a user builds are as close as possible to the ones the author developed against.”[^14] There is a critically important truth revealed in this point: when liba says it requires libbase ≥1.7, that almost certainly means that the developer of liba had libbase 1.7 installed. Assuming that the maintainer performed even basic testing before publishing,[^15] we have at least anecdotal evidence of interoperability testing for that version of liba and version 1.7 of libbase. It’s not CI or proof that everything has been unit tested together, but it’s something.
+MVS makes the opposite choice: when liba’s specification requires libbase ≥1.7, we’ll try libbase 1.7 directly, even if a 1.8 is available. This “produces high-fidelity builds in which the dependencies a user builds are as close as possible to the ones the author developed against.”[^e14] There is a critically important truth revealed in this point: when liba says it requires libbase ≥1.7, that almost certainly means that the developer of liba had libbase 1.7 installed. Assuming that the maintainer performed even basic testing before publishing,[^e15] we have at least anecdotal evidence of interoperability testing for that version of liba and version 1.7 of libbase. It’s not CI or proof that everything has been unit tested together, but it’s something.
 
-MVS做出了相反的選擇：當liba的規範要求libbase≥1.7時，我們會直接嘗試libbase 1.7，即使有1.8的版本。這 "產生了高模擬的建構，其中使用者建構的依賴關係儘可能地接近作者開發的依賴關係。"在這一點上揭示了一個極其重要的事實：當liba說它需要libbase≥1.7時，這幾乎肯定意味著liba的開發者安裝了libbase 1.7。假設維護者在釋出之前進行了哪怕是基本的測試，我們至少有關於該版本的liba和libbase版本1.7的互操作性測試的軼事證據。這不是CI，也不能證明所有的東西都一起進行了單元測試，但它是有意義的。
+MVS做出了相反的選擇：當liba的規範要求libbase≥1.7時，我們會直接嘗試libbase 1.7，即使有1.8的版本。這 "產生了高模擬的建構，其中使用者建構的依賴關係儘可能地接近作者開發的依賴關係。"[^c14]在這一點上揭示了一個極其重要的事實：當liba說它需要libbase≥1.7時，這幾乎肯定意味著liba的開發者安裝了libbase 1.7。假設維護者在釋出之前進行了哪怕是基本的測試，[^c15]我們至少有關於該版本的liba和libbase版本1.7的互操作性測試的軼事證據。這不是CI，也不能證明所有的東西都一起進行了單元測試，但它是有意義的。
 
 Absent accurate input constraints derived from 100% accurate prediction of the future, it’s best to make the smallest jump forward possible. Just as it’s usually safer to commit an hour of work to your project instead of dumping a year of work all at once, smaller steps forward in your dependency updates are safer. MVS just walks forward each affected dependency only as far as is required and says, “OK, I’ve walked forward far enough to get what you asked for (and not farther). Why don’t you run some tests and see if things are good?”
 
@@ -441,13 +441,13 @@ Inherent in the idea of MVS is the admission that a newer version might introduc
 
 在MVS的理念中，承認較新的版本在實踐中可能會帶來不相容，即使版本號在*理論上*說不相容。這就是認識到SemVer的核心問題，無論是否使用MVS：在將軟體更改壓縮為版本號的過程中，模擬度有所損失。MVS提供了一些額外的實際模擬度，試圖產生最接近那些可能已經被一起測試過的版本的選定版本。這可能是一個足夠的推動力，使更大的依賴網路正常運作。不幸的是，我們還沒有找到一個很好的方法來經驗性地驗證這個想法。MVS是否能在不解決該方法的基本理論和激勵問題的情況下使SemVer“足夠好”還沒有定論，但我們仍然認為，它代表了SemVer約束應用的一個明顯改進，正如今天所使用的那樣。
 
-> [^14]: Russ Cox, “Minimal Version Selection,” February 21, 2018, https://research.swtch.com/vgo-mvs.
+> [^e14]: Russ Cox, “Minimal Version Selection,” February 21, 2018, https://research.swtch.com/vgo-mvs.
 >
-> 14 Russ Cox，"最小的版本選擇"，2018年2月21日，https://research.swtch.com/vgo-mvs。
+> [^c14]: Russ Cox，"最小的版本選擇"，2018年2月21日，https://research.swtch.com/vgo-mvs。
 > 
-> [^15]: If that assumption doesn’t hold, you should really stop depending on liba.
+> [^e15]:If that assumption doesn’t hold, you should really stop depending on liba.
 >
-> 15 如果這個假設不成立，你真的應該停止對liba的依賴。
+> [^c15]: 如果這個假設不成立，你真的應該停止對liba的依賴。
 
 ### So, Does SemVer Work? 那麼，SemVer是否有效？
 
@@ -499,17 +499,17 @@ In either of those cases, significant information about downstream usage is *ava
 
 在這兩種情況下，關於下游使用情況的重要資訊是*可用的*，目前還沒有暴露或採取行動。也就是說，SemVer的有效主導地位的部分原因是我們選擇忽略了理論上我們可以獲得的資訊。如果我們能夠獲得更多的計算資源，並且依賴性資訊能夠很容易地浮出水面，社群可能會發現它的用途。
 
-Although an OSS package can have innumerable closed-source dependents, the common case is that popular OSS packages are popular both publicly and privately. Dependency networks don’t (can’t) aggressively mix public and private dependencies: generally, there is a public subset and a separate private subgraph.[^16]
+Although an OSS package can have innumerable closed-source dependents, the common case is that popular OSS packages are popular both publicly and privately. Dependency networks don’t (can’t) aggressively mix public and private dependencies: generally, there is a public subset and a separate private subgraph.[^e16]
 
-雖然一個開放原始碼軟體套件可以有無數的閉源依賴，但常見的情況是，受歡迎的開放原始碼軟體包在公開和私下裡都很受歡迎。依賴網路不會（不能）積極地混合公共和私人依賴關係：通常，有一個公共子集和一個單獨的私有子集。
+雖然一個開放原始碼軟體套件可以有無數的閉源依賴，但常見的情況是，受歡迎的開放原始碼軟體包在公開和私下裡都很受歡迎。依賴網路不會（不能）積極地混合公共和私人依賴關係：通常，有一個公共子集和一個單獨的私有子集。[^c16]
 
 Next, we must remember the *intent* of SemVer: “In my estimation, this change will be easy (or not) to adopt.” Is there a better way of conveying that information? Yes, in the form of practical experience demonstrating that the change is easy to adopt. How do we get such experience? If most (or at least a representative sample) of our dependencies are publicly visible, we run the tests for those dependencies with every proposed change. With a sufficiently large number of such tests, we have at least a statistical argument that the change is safe in the practical Hyrum’s-Law sense. The tests still pass, the change is good—it doesn’t matter whether this is API impacting, bug fixing, or anything in between; there’s no need to classify or estimate.
 
 接下來，我們必須記住SemVer的*意圖*："據我估計，這種變化將很容易（或不容易）被採納。" 是否有更好的方式來傳達這一資訊？是的，以實踐經驗的形式，證明該變化是容易採用的。我們如何獲得這種經驗呢？如果我們大部分（或者至少是有代表性的樣本）的依賴關係是公開的，那麼我們就在每一個提議的改變中對這些依賴關係進行測試。有了足夠多的這樣的測試，我們至少有了一個統計學上的論據，即從實際的Hyrum定律意義上來說，這個變化是安全的。測試仍然透過，變化就是好的——這與影響API、修復bug或介於兩者之間的事情無關；沒有必要進行分類或評估。
 
-Imagine, then, that the OSS ecosystem moved to a world in which changes were accompanied with *evidence* of whether they are safe. If we pull compute costs out of the equation, the *truth*[^17] of “how safe is this” comes from running affected tests in downstream dependencies.
+Imagine, then, that the OSS ecosystem moved to a world in which changes were accompanied with *evidence* of whether they are safe. If we pull compute costs out of the equation, the *truth*[^e17] of “how safe is this” comes from running affected tests in downstream dependencies.
 
-想象一下，開放原始碼軟體的生態系統轉向一個變化伴隨著*證據*的世界，即它們是否安全。如果我們把計算成本排除在外，那麼 "這有多安全 "的*真相*來自於在下游依賴關係中執行受影響的測試。
+想象一下，開放原始碼軟體的生態系統轉向一個變化伴隨著*證據*[^c17]的世界，即它們是否安全。如果我們把計算成本排除在外，那麼 "這有多安全 "的*真相*來自於在下游依賴關係中執行受影響的測試。
 
 Even without formal CI applied to the entire OSS ecosystem, we can of course use such a dependency graph and other secondary signals to do a more targeted presubmit analysis. Prioritize tests in dependencies that are heavily used. Prioritize tests in dependencies that are well maintained. Prioritize tests in dependencies that have a history of providing good signal and high-quality test results. Beyond just prioritizing tests based on the projects that are likely to give us the most information about experimental change quality, we might be able to use information from the change authors to help estimate risk and select an appropriate testing strategy. Running “all affected” tests is theoretically necessary if the goal is “nothing that anyone relies upon is change in a breaking fashion.” If we consider the goal to be more in line with “risk mitigation,” a statistical argument becomes a more appealing (and cost-effective) approach.
 
@@ -539,13 +539,13 @@ Inherent in this is a scale question: against which versions of each dependency 
 
 這裡面有一個規模問題：你要針對網路中每個依賴關係的哪些版本來測試預提交的變化？如果我們針對所有歷史版本的完整組合進行測試，我們將消耗大量的計算資源，即使按照谷歌的能力。這個版本選擇策略最明顯的簡化似乎是 "測試當前的穩定版本"（畢竟，基於主幹的開發是目標）。因此，在資源無限的情況下，依賴管理的模式實際上就是 "Live at Head"的模式。懸而未決的問題是，該模型是否可以有效地適用於更實際的資源可用性，以及API提供者是否願意承擔更大的責任來測試其變化的實際安全性。認識到我們現有的低成本設施是對我們正在尋找的難以計算的真相的過度簡化，仍然是一項有益的工作。
 
-> [^16]: Because the public OSS dependency network can’t generally depend on a bunch of private nodes, graphics firmware notwithstanding.
+> [^e16]: Because the public OSS dependency network can’t generally depend on a bunch of private nodes, graphics firmware notwithstanding.
 >
-> 16 因為公共開放原始碼軟體的依賴網路一般不能依賴一堆私人節點，儘管有圖形固定。
+> [^c16]: 因為公共開放原始碼軟體的依賴網路一般不能依賴一堆私人節點，儘管有圖形固定。
 
-> [^17]: Or something very close to it.
+> [^e17]: Or something very close to it.
 >
-> 17 或者是非常接近於此的東西。
+> [^c17]: 或者是非常接近於此的東西。
 
 ### Exporting Dependencies  匯出依賴
 
@@ -579,29 +579,29 @@ Further, like most organizations, our priorities have shifted and changed over t
 
 此外，像大多陣列織一樣，我們的優先事項隨著時間的推移而發生了改變。在最初發布flags庫的時候，我們對傳統領域（網路應用、搜尋）以外的產品感興趣，包括像谷歌地球這樣的產品，它有一個更傳統的釋出機制：為各種平台預編譯的二進位制檔案。在21世紀末，在我們的monorepo中的一個函式庫，特別是像flags這樣的低階的東西，被用在各種平臺上，這是不正常的，但也不是沒有。隨著時間的推移和谷歌的成長，我們的關注點逐漸縮小，除了我們內部配置的工具鏈之外，很少有任何函式庫是用其他東西建構的，然後部署到我們的生產機群。對於正確支援像flags這樣的開放原始碼軟體專案來說，"可移植性"問題幾乎是不可能維持的：我們的內部工具根本沒有對這些平台的支援，而我們的普通開發人員也不需要與外部工具進行互動。為了保持可移植性，這是一場持久戰。
 
-As the original authors and OSS supporters moved on to new companies or new teams, it eventually became clear that nobody internally was really supporting our OSS flags project—nobody could tie that support back to the priorities for any particular team. Given that it was no specific team’s job, and nobody could say why it was important, it isn’t surprising that we basically let that project rot externally.[^18] The internal and external versions diverged slowly over time, and eventually some external developers took the external version and forked it, giving it some proper attention.
+As the original authors and OSS supporters moved on to new companies or new teams, it eventually became clear that nobody internally was really supporting our OSS flags project—nobody could tie that support back to the priorities for any particular team. Given that it was no specific team’s job, and nobody could say why it was important, it isn’t surprising that we basically let that project rot externally.[^e18] The internal and external versions diverged slowly over time, and eventually some external developers took the external version and forked it, giving it some proper attention.
 
-隨著最初的作者和開放原始碼軟體支持者轉到新的公司或新的團隊，最終很明顯，內部沒有人真正支援我們的開放原始碼軟體flags專案——沒有人能夠將這種支援與任何特定團隊的優先事項聯絡起來。考慮到這不是特定團隊的工作，也沒人能說清楚為什麼它很重要，我們基本上讓這個專案在外部爛掉也就不奇怪了。隨著時間的推移，內部和外部的版本慢慢發生了分歧，最終一些外部開發者把外部的版本拆分，給了它一些適當的關注。
+隨著最初的作者和開放原始碼軟體支持者轉到新的公司或新的團隊，最終很明顯，內部沒有人真正支援我們的開放原始碼軟體flags專案——沒有人能夠將這種支援與任何特定團隊的優先事項聯絡起來。考慮到這不是特定團隊的工作，也沒人能說清楚為什麼它很重要，我們基本上讓這個專案在外部爛掉也就不奇怪了。[^c18]隨著時間的推移，內部和外部的版本慢慢發生了分歧，最終一些外部開發者把外部的版本拆分，給了它一些適當的關注。
 
 Other than the initial “Oh look, Google contributed something to the open source world,” no part of that made us look good, and yet every little piece of it made sense given the priorities of our engineering organization. Those of us who have been close to it have learned, “Don’t release things without a plan (and a mandate) to support it for the long term.” Whether the whole of Google engineering has learned that or not remains to be seen. It’s a big organization.
 
 除了最初的“哦，看，谷歌為開源世界做出了一些貢獻”之外，沒有任何一部分能讓我們看起來很好，但考慮到我們工程組織的優先事項，它的每一個小部分都是有意義的。我們這些與它關係密切的人已經瞭解到，“在沒有長期支援它的計劃（和授權）的情況下，不要釋出任何東西。”整個谷歌工程部門是否已經瞭解到這一點還有待觀察。這是一個大組織。
 
-Above and beyond the nebulous “We look bad,” there are also parts of this story that illustrate how we can be subject to technical problems stemming from poorly released/poorly maintained external dependencies. Although the flags library was shared but ignored, there were still some Google-backed open source projects, or projects that needed to be shareable outside of our monorepo ecosystem. Unsurprisingly, the authors of those other projects were able to identify[^19] the common API subset between the internal and external forks of that library. Because that common subset stayed fairly stable between the two versions for a long period, it silently became “the way to do this” for the rare teams that had unusual portability requirements between roughly 2008 and 2017. Their code could build in both internal and external ecosystems, switching out forked versions of the flags library depending on environment.
+Above and beyond the nebulous “We look bad,” there are also parts of this story that illustrate how we can be subject to technical problems stemming from poorly released/poorly maintained external dependencies. Although the flags library was shared but ignored, there were still some Google-backed open source projects, or projects that needed to be shareable outside of our monorepo ecosystem. Unsurprisingly, the authors of those other projects were able to identify[^e19] the common API subset between the internal and external forks of that library. Because that common subset stayed fairly stable between the two versions for a long period, it silently became “the way to do this” for the rare teams that had unusual portability requirements between roughly 2008 and 2017. Their code could build in both internal and external ecosystems, switching out forked versions of the flags library depending on environment.
 
-除了模糊的“我們看起來很糟糕”之外，這個故事中還有一些部分說明了我們如何受到由於釋出/維護不當的外部依賴關係而產生的技術問題的影響。雖然flags函式庫是共享的，但被忽略了，但仍然有一些由Google支援的開源專案，或者需要在monorepo生態系統之外共享的專案。毫不奇怪，這些其他專案的作者能夠識別該庫內部和外部分支之間的公共API子集。由於該通用子集在兩個版本之間保持了相當長的一段時間的穩定，因此它悄悄地成為了在2008年到2017年間具有不同尋常的可移植性需求的少數團隊的“實現方法”。他們的程式碼可以在內部和外部生態系統中建構，根據環境的不同，可以切換出flags庫的分支版本。
+除了模糊的“我們看起來很糟糕”之外，這個故事中還有一些部分說明了我們如何受到由於釋出/維護不當的外部依賴關係而產生的技術問題的影響。雖然flags函式庫是共享的，但被忽略了，但仍然有一些由Google支援的開源專案，或者需要在monorepo生態系統之外共享的專案。毫不奇怪，這些其他專案的作者能夠識別[^c19]該庫內部和外部分支之間的公共API子集。由於該通用子集在兩個版本之間保持了相當長的一段時間的穩定，因此它悄悄地成為了在2008年到2017年間具有不同尋常的可移植性需求的少數團隊的“實現方法”。他們的程式碼可以在內部和外部生態系統中建構，根據環境的不同，可以切換出flags庫的分支版本。
 
 Then, for unrelated reasons, C++ library teams began tweaking observable-but-not- documented pieces of the internal flag implementation. At that point, everyone who was depending on the stability and equivalence of an unsupported external fork started screaming that their builds and releases were suddenly broken. An optimization opportunity worth some thousands of aggregate CPUs across Google’s fleet was significantly delayed, not because it was difficult to update the API that 250 million lines of code depended upon, but because a tiny handful of projects were relying on unpromised and unexpected things. Once again, Hyrum’s Law affects software changes, in this case even for forked APIs maintained by separate organizations.
 
 然後，由於不相關的原因，C++庫團隊開始調整內部標誌實現中可觀察到但沒有記錄的部分。在這一點上，所有依賴於不支援的外部分支的穩定性和等效性的人都開始尖叫，他們的建構和釋出突然被破壞。一個值得在谷歌叢集中使用數千個CPU的最佳化機會被大大推遲了，不是因為難以更新2.5億行程式碼所依賴的API，而是因為極少數專案依賴於未經預測和意外的東西。Hyrum定律再一次影響了軟體的變化，在這種情況下，甚至是由不同組織維護的分叉API。
 
-> [^18]: That isn’t to say it’s right or wise, just that as an organization we let some things slip through the cracks.
+> [^e18]: That isn’t to say it’s right or wise, just that as an organization we let some things slip through the cracks.
 >
-> 18  這並不是說這是對的或明智的，只是作為一個組織，我們讓一些事情從縫隙中溜走。
+> [^c18]: 這並不是說這是對的或明智的，只是作為一個組織，我們讓一些事情從縫隙中溜走。
 > 
-> [^19]: Often through trial and error.
+> [^e19]: Often through trial and error.
 >
-> 19 往往是透過試驗和錯誤。
+> [^c19]: 往往是透過試驗和錯誤。
 
 ----
 #### Case Study: AppEngine  案例研究：AppEngine

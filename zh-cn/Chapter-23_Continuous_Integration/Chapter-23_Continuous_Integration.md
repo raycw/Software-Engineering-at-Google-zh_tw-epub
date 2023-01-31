@@ -7,9 +7,9 @@
 **Written by Rachel Tannenbaum**
 **Edited by Lisa Carey**
 
-*Continuous Integration*, or CI, is generally defined as “a software development practice where members of a team integrate their work frequently [...] Each integration is verified by an automated build (including test) to detect integration errors as quickly as possible.”[^1] Simply put, the fundamental goal of CI is to automatically catch problematic changes as early as possible.
+*Continuous Integration*, or CI, is generally defined as “a software development practice where members of a team integrate their work frequently [...] Each integration is verified by an automated build (including test) to detect integration errors as quickly as possible.”[^e1] Simply put, the fundamental goal of CI is to automatically catch problematic changes as early as possible.
 
-*持續整合*，或CI，通常被定義為 "一種軟體開發實踐，團隊成員經常整合他們的工作[......]每個整合都由自動建構（包括測試）來驗證，以儘快發現整合錯誤。"簡單地說，CI的基本目標是儘可能早地自動捕獲有問題的變化。
+*持續整合*，或CI，通常被定義為 "一種軟體開發實踐，團隊成員經常整合他們的工作[......]每個整合都由自動建構（包括測試）來驗證，以儘快發現整合錯誤。"[^c1]簡單地說，CI的基本目標是儘可能早地自動捕獲有問題的變化。
 
 In practice, what does “integrating work frequently” mean for the modern, distributed application? Today’s systems have many moving pieces beyond just the latest versioned code in the repository. In fact, with the recent trend toward microservices, the changes that break an application are less likely to live inside the project’s immediate codebase and more likely to be in loosely coupled microservices on the other side of a network call. Whereas a traditional continuous build tests changes in your binary, an extension of this might test changes to upstream microservices. The dependency is just shifted from your function call stack to an HTTP request or Remote Procedure Calls (RPC).
 
@@ -19,7 +19,9 @@ Even further from code dependencies, an application might periodically ingest da
 
 甚至在程式碼依賴關係之外，應用程式可能會定期接收資料或更新機器學習模型。它可能在不斷髮展的作業系統、執行時、雲託管服務和裝置上執行。它可能是位於不斷增長的平台之上的功能，也可能是必須適應不斷增長的功能基礎的平台。所有這些都應該被視為依賴關係，我們也應該致力於“持續整合”它們的變化。更復雜的是，這些變化的元件通常由我們團隊、組織或公司之外的開發人員擁有，並按照他們自己的時間表部署。
 
-> [^1]: `https://www.martinfowler.com/articles/continuousIntegration.html`.
+> [^e1]: `https://www.martinfowler.com/articles/continuousIntegration.html`.
+>
+> [^c1]: `https://www.martinfowler.com/articles/continuousIntegration.html`.
 
 So, perhaps a better definition for CI in today’s world, particularly when developing at scale, is the following:
 
@@ -47,17 +49,17 @@ For example, which tests do we run on presubmit, which do we save for post-submi
 
 例如，我們在預提交上執行哪些測試，在提交後儲存哪些測試，哪些甚至要儲存到我們的臨時部署？因此，我們如何在這些點上表示SUT？正如你所想象的，預提交SUT的需求可能與測試中的部署環境的需求有很大的不同。例如，從預提交的待審程式碼建構的應用程式與真正的生產後端對話可能是危險的（考慮安全和配額漏洞），而這對於臨時環境來說通常是可以接受的。
 
-And *why* should we try to optimize this often-delicate balance of testing “the right things” at “the right times” with CI? Plenty of prior work has already established the benefits of CI to the engineering organization and the overall business alike.[^2] These outcomes are driven by a powerful guarantee: verifiable—and timely—proof that the application is good to progress to the next stage. We don’t need to just hope that all contributors are very careful, responsible, and thorough; we can instead guarantee the working state of our application at various points from build throughout release, thereby improving confidence and quality in our products and productivity of our teams.
+And *why* should we try to optimize this often-delicate balance of testing “the right things” at “the right times” with CI? Plenty of prior work has already established the benefits of CI to the engineering organization and the overall business alike.[^e2] These outcomes are driven by a powerful guarantee: verifiable—and timely—proof that the application is good to progress to the next stage. We don’t need to just hope that all contributors are very careful, responsible, and thorough; we can instead guarantee the working state of our application at various points from build throughout release, thereby improving confidence and quality in our products and productivity of our teams.
 
-為什麼我們要嘗試用 CI 來最佳化在 "正確的時間"測試"正確的事情"的這種往往很微妙的平衡？這些結果是由一個強有力的保證所驅動的：可驗證的、及時的、可證明應用程式可以進入下一階段的證明。我們不需要僅僅希望所有的貢獻者都非常謹慎、負責和閉環；相反，我們可以保證我們的應用程式在從建構到釋出的各個階段的工作狀態，從而提高對我們產品的信心和品質以及我們團隊的生產力。
+為什麼我們要嘗試用 CI 來最佳化在 "正確的時間"測試"正確的事情"的這種往往很微妙的平衡？[^c2]這些結果是由一個強有力的保證所驅動的：可驗證的、及時的、可證明應用程式可以進入下一階段的證明。我們不需要僅僅希望所有的貢獻者都非常謹慎、負責和閉環；相反，我們可以保證我們的應用程式在從建構到釋出的各個階段的工作狀態，從而提高對我們產品的信心和品質以及我們團隊的生產力。
 
 In the rest of this chapter, we’ll introduce some key CI concepts, best practices and challenges, before looking at how we manage CI at Google with an introduction to our continuous build tool, TAP, and an in-depth study of one application’s CI transformation.
 
 在本章的其餘部分中，我們將介紹一些關鍵CI概念、最佳實踐和挑戰，然後介紹我們如何在Google管理CI，並介紹我們的持續建構工具TAP，以及對某個應用程式的CI轉換的深入研究。
 
-> [^2]: Forsgren, Nicole, et al. (2018). Accelerate: The Science of Lean Software and DevOps: Building and Scaling High Performing Technology Organizations. IT Revolution.
+> [^e2]: Forsgren, Nicole, et al. (2018). Accelerate: The Science of Lean Software and DevOps: Building and Scaling High Performing Technology Organizations. IT Revolution.
 >
-> 2   Forsgren，Nicole等人（2018年）。加速：精益軟體科學和DevOps：建立和擴充高效能技術組織。這是一場革命。
+> [^c2]: Forsgren，Nicole等人（2018年）。加速：精益軟體科學和DevOps：建立和擴充高效能技術組織。這是一場革命。
 
 ## CI Concepts CI概念
 
@@ -87,7 +89,7 @@ In general, as issues progress to the “right” in our diagram, they become co
 - 這些問題需要程式碼修改者做更多的工作來回憶和調查這些修改。
 - 它們會對其他人產生負面影響，無論是工作中的工程師還是最終的終端使用者。
 
-To minimize the cost of bugs, CI encourages us to use *fast feedback loops.*[^3] Each time we integrate a code (or other) change into a testing scenario and observe the results, we get a new *feedback loop*. Feedback can take many forms; following are some common ones (in order of fastest to slowest):
+To minimize the cost of bugs, CI encourages us to use *fast feedback loops.*[^e3] Each time we integrate a code (or other) change into a testing scenario and observe the results, we get a new *feedback loop*. Feedback can take many forms; following are some common ones (in order of fastest to slowest):
 
 - The edit-compile-debug loop of local development
 - Automated test results to a code change author on presubmit
@@ -96,7 +98,7 @@ To minimize the cost of bugs, CI encourages us to use *fast feedback loops.*[^3]
 - Bug reports by internal users who are opted in to a feature before external users
 - Bug or outage reports by external users or the press
 
-為了使bug的代價最小化，CI鼓勵我們使用*快速反饋環*。每次我們將程式碼（或其他）變化整合到測試場景中並觀察結果時，我們就會得到一個新的*反饋迴路*。反饋可以有很多形式；下面是一些常見的形式（按從快到慢的順序）:
+為了使bug的代價最小化，CI鼓勵我們使用*快速反饋環*。[^c3]每次我們將程式碼（或其他）變化整合到測試場景中並觀察結果時，我們就會得到一個新的*反饋迴路*。反饋可以有很多形式；下面是一些常見的形式（按從快到慢的順序）:
 
 - 本地開發的編輯-編譯-除錯迴路
 - 在提交前向程式碼修改者提供自動測試結果
@@ -105,9 +107,9 @@ To minimize the cost of bugs, CI encourages us to use *fast feedback loops.*[^3]
 - 在外部使用者之前使用功能的內部使用者的錯誤報告
 - 外部使用者或媒體的錯誤或故障報告
 
-> [^3]: This is also sometimes called “shifting left on testing.”
+> [^e3]: This is also sometimes called “shifting left on testing.”
 >
-> 3 這有時也被稱為 "測試左移"。
+> [^c3]: 這有時也被稱為 "測試左移"。
 
 *Canarying*—or deploying to a small percentage of production first—can help minimize issues that do make it to production, with a subset-of-production initial feedback loop preceding all-of-production. However, canarying can cause problems, too, particularly around compatibility between deployments when multiple versions are deployed at once. This is sometimes known as *version skew*, a state of a distributed system in which it contains multiple incompatible versions of code, data, and/or configuration. Like many issues we look at in this book, version skew is another example of a challenging problem that can arise when trying to develop and manage software over time.
 
@@ -147,9 +149,9 @@ CI, specifically, automates the *build* and *release* processes, with a Continuo
 
 #### Continuous Build 連續建構
 
-The *Continuous Build* (CB) integrates the latest code changes at head[^4] and runs an automated build and test. Because the CB runs tests as well as building code, “breaking the build” or “failing the build” includes breaking tests as well as breaking compilation.
+The *Continuous Build* (CB) integrates the latest code changes at head[^e4] and runs an automated build and test. Because the CB runs tests as well as building code, “breaking the build” or “failing the build” includes breaking tests as well as breaking compilation.
 
-持續建構（CB）集成了最新的程式碼修改，並執行自動建構和測試。因為CB在執行測試的同時也在建構程式碼，"破壞建構 "或 "建構失敗 "包括破壞測試和破壞編譯。
+持續建構（CB）集成了最新的程式碼修改，[^c4]並執行自動建構和測試。因為CB在執行測試的同時也在建構程式碼，"破壞建構 "或 "建構失敗 "包括破壞測試和破壞編譯。
 
 After a change is submitted, the CB should run all relevant tests. If a change passes all tests, the CB marks it passing or “green,” as it is often displayed in user interfaces (UIs). This process effectively introduces two different versions of head in the repository: *true head*, or the latest change that was committed, and *green head,* or the latest change the CB has verified. Engineers are able to sync to either version in their local development. It’s common to sync against green head to work with a stable environment, verified by the CB, while coding a change but have a process that requires changes to be synced to true head before submission.
 
@@ -161,13 +163,13 @@ The first step in Continuous Delivery (CD; discussed more fully in Chapter 24) i
 
 持續交付（CD；在第24章中詳細討論）的第一步是釋出自動化，它不斷地將最新的程式碼和配置從head組裝成候選釋出版本。在谷歌，大多數團隊都是在綠色（而不是真正的）head進行切割。
 
-*Release candidate* (RC): A cohesive, deployable unit created by an automated process,[^5] assembled of code, configuration, and other dependencies that have passed the continuous build.
+*Release candidate* (RC): A cohesive, deployable unit created by an automated process,[^e5] assembled of code, configuration, and other dependencies that have passed the continuous build.
 
-*候選版本*（RC）:由自動化流程建立的內聚、可部署單元，由透過持續建構的程式碼、配置和其他依賴關係組成。
+*候選版本*（RC）:由自動化流程[^c5]建立的內聚、可部署單元，由透過持續建構的程式碼、配置和其他依賴關係組成。
 
-Note that we include configuration in release candidates—this is extremely important, even though it can slightly vary between environments as the candidate is promoted. We’re not necessarily advocating you compile configuration into your binaries—actually, we would recommend dynamic configuration, such as experiments or feature flags, for many scenarios.[^6]
+Note that we include configuration in release candidates—this is extremely important, even though it can slightly vary between environments as the candidate is promoted. We’re not necessarily advocating you compile configuration into your binaries—actually, we would recommend dynamic configuration, such as experiments or feature flags, for many scenarios.[^e6]
 
-請注意，我們在候選版本中包含了配置--這一點極為重要，儘管在候選版本的推廣過程中，不同環境下的配置會略有不同。我們不一定提倡你把配置編譯到你的二進位制檔案中--事實上，我們建議在許多情況下使用動態配置，如實驗或特徵標誌。
+請注意，我們在候選版本中包含了配置--這一點極為重要，儘管在候選版本的推廣過程中，不同環境下的配置會略有不同。我們不一定提倡你把配置編譯到你的二進位制檔案中--事實上，我們建議在許多情況下使用動態配置，如實驗或特徵標誌。[^c6]
 
 Rather, we are saying that any static configuration you *do* have should be promoted as part of the release candidate so that it can undergo testing along with its corresponding code. Remember, a large percentage of production bugs are caused by “silly” configuration problems, so it’s just as important to test your configuration as it is your code (and to test it along *with* the same code that will use it). Version skew is often caught in this release-candidate-promotion process. This assumes, of course, that your static configuration is in version control—at Google, static configuration is in version control along with the code, and hence goes through the same code review process.
 
@@ -185,29 +187,29 @@ The promotion and deployment process often depends on the team. We’ll show how
 
 升級和部署過程通常取決於團隊。我們將展示我們的案例研究如何引導這一過程。
 
-For teams at Google that want continuous feedback from new changes in production (e.g., Continuous Deployment), it’s usually infeasible to continuously push entire binaries, which are often quite large, on green. For that reason, doing a *selective* Continuous Deployment, through experiments or feature flags, is a common strategy.[^7]
+For teams at Google that want continuous feedback from new changes in production (e.g., Continuous Deployment), it’s usually infeasible to continuously push entire binaries, which are often quite large, on green. For that reason, doing a *selective* Continuous Deployment, through experiments or feature flags, is a common strategy.[^e7]
 
-對於谷歌的團隊來說，他們希望從生產中的新變化（例如，持續部署）中獲得持續的反饋，通常不可能持續地將整個二進位制檔案（通常相當大）推到綠色上。因此，透過實驗或特性標誌進行選擇性連續部署是一種常見的策略。
+對於谷歌的團隊來說，他們希望從生產中的新變化（例如，持續部署）中獲得持續的反饋，通常不可能持續地將整個二進位制檔案（通常相當大）推到綠色上。因此，透過實驗或特性標誌進行選擇性連續部署是一種常見的策略。[^c7]
 
 As an RC progresses through environments, its artifacts (e.g., binaries, containers) ideally should not be recompiled or rebuilt. Using containers such as Docker helps enforce consistency of an RC between environments, from local development onward. Similarly, using orchestration tools like Kubernetes (or in our case, usually [Borg](https://oreil.ly/89yPv)), helps enforce consistency between deployments. By enforcing consistency of our release and deployment between environments, we achieve higher-fidelity earlier testing and fewer surprises in production.
 
 當一個RC在各種環境中發展，它的建構（如二進位制檔案、容器）最好不要被重新編譯或重建。使用像Docker這樣的容器有助於在不同的環境中強制執行RC的一致性，從本地開發開始。同樣，使用像Kubernetes這樣的協調工具（或者在我們的例子中，通常是[Borg](https://oreil.ly/89yPv)），有助於強制執行部署之間的一致性。透過強制執行在不同環境間的釋出和部署的一致性，我們實現了更高的保真度、更早的測試和更少的生產意外。
 
-> [4^]: Head is the latest versioned code in our monorepo. In other workflows, this is also referred to as master, mainline, or trunk. Correspondingly, integrating at head is also known as trunk-based development.
+> [^e4]: Head is the latest versioned code in our monorepo. In other workflows, this is also referred to as master, mainline, or trunk. Correspondingly, integrating at head is also known as trunk-based development.
 >
-> 4 Head是我們monorepo中最新版本的程式碼。在其他工作流程中，這也被稱為主幹、主線或主幹。相應地，在head整合也被稱為基於主幹的開發。
+> [^c4]: Head是我們monorepo中最新版本的程式碼。在其他工作流程中，這也被稱為主幹、主線或主幹。相應地，在head整合也被稱為基於主幹的開發。
 >
-> [5^]: At Google, release automation is managed by a separate system from TAP. We won’t focus on how release automation assembles RCs, but if you’re interested, we do refer you to Site Reliability Engineering (O’Reilly) in which our release automation technology (a system called Rapid) is discussed in detail./
+> [^e5]: At Google, release automation is managed by a separate system from TAP. We won’t focus on how release automation assembles RCs, but if you’re interested, we do refer you to Site Reliability Engineering (O’Reilly) in which our release automation technology (a system called Rapid) is discussed in detail./
 >
-> 5 在谷歌，釋出自動化是由一個獨立於TAP的系統管理的。我們不會專注於釋出自動化是如何組裝RC的，但如果你有興趣，我們會向你推薦《網站可靠性工程》（O'Reilly），其中詳細討論了我們的釋出自動化技術（一個叫做Rapid的系統）。
+> [^c5]:  在谷歌，釋出自動化是由一個獨立於TAP的系統管理的。我們不會專注於釋出自動化是如何組裝RC的，但如果你有興趣，我們會向你推薦《網站可靠性工程》（O'Reilly），其中詳細討論了我們的釋出自動化技術（一個叫做Rapid的系統）。
 >
-> [6^]: CD with experiments and feature flags is discussed further in Chapter 24.
+> [^e6]: CD with experiments and feature flags is discussed further in Chapter 24.
 >
-> 6 第24章進一步討論了帶有實驗和特徵標誌的CD。
+> [^c6]: 第24章進一步討論了帶有實驗和特徵標誌的CD。
 >
-> [7^]: We call these “mid-air collisions” because the probability of it occurring is extremely low; however, when this does happen, the results can be quite surprising.
+> [^e7]: We call these “mid-air collisions” because the probability of it occurring is extremely low; however, when this does happen, the results can be quite surprising.
 >
-> 7 我們稱這些為 "空中碰撞"，因為它發生的機率極低；然而，當這種情況發生時，其結果可能是相當令人驚訝的。
+> [^c7]: 我們稱這些為 "空中碰撞"，因為它發生的機率極低；然而，當這種情況發生時，其結果可能是相當令人驚訝的。
 
 ### Continuous Testing 持續測試
 
@@ -251,13 +253,13 @@ We don’t want to waste valuable engineer productivity by waiting too long for 
 
 我們不想因為等待太長時間的緩慢測試或太多測試而浪費寶貴的工程師生產力--我們通常將預提交的測試限制在發生變化的專案上。我們還同時執行測試，所以也要考慮資源決定。最後，我們不希望在預提交時執行不可靠的測試，因為讓許多工程師受其影響，除錯與他們的程式碼變更無關的同一個問題的成本太高。
 
-Most teams at Google run their small tests (like unit tests) on presubmit[^8]—these are the obvious ones to run as they tend to be the fastest and most reliable. Whether and how to run larger-scoped tests on presubmit is the more interesting question, and this varies by team. For teams that do want to run them, hermetic testing is a proven approach to reducing their inherent instability. Another option is to allow large- scoped tests to be unreliable on presubmit but disable them aggressively when they start failing.
+Most teams at Google run their small tests (like unit tests) on presubmit[^e8]—these are the obvious ones to run as they tend to be the fastest and most reliable. Whether and how to run larger-scoped tests on presubmit is the more interesting question, and this varies by team. For teams that do want to run them, hermetic testing is a proven approach to reducing their inherent instability. Another option is to allow large- scoped tests to be unreliable on presubmit but disable them aggressively when they start failing.
 
-谷歌的大多數團隊都在預提交上執行他們的小型測試（如單元測試）--這些是明顯要執行的，因為它們往往是最快和最可靠的。是否以及如何在提交前執行更大範圍的測試是個更有趣的問題，這因團隊而異。對於想要執行這些測試的團隊來說，封閉測試是一種行之有效的方法來減少其固有的不穩定性。另一個選擇是允許大範圍的測試在預提交時不可靠，但當它們開始失敗時，要主動禁用它們。
+谷歌的大多數團隊都在預提交上執行他們的小型測試（如單元測試）[^c8]--這些是明顯要執行的，因為它們往往是最快和最可靠的。是否以及如何在提交前執行更大範圍的測試是個更有趣的問題，這因團隊而異。對於想要執行這些測試的團隊來說，封閉測試是一種行之有效的方法來減少其固有的不穩定性。另一個選擇是允許大範圍的測試在預提交時不可靠，但當它們開始失敗時，要主動禁用它們。
 
-> [^8]: Each team at Google configures a subset of its project’s tests to run on presubmit (versus post-submit). In reality, our continuous build actually optimizes some presubmit tests to be saved for post-submit, behind the scenes. We’ll further discuss this later on in this chapter.
+> [^e8]: Each team at Google configures a subset of its project’s tests to run on presubmit (versus post-submit). In reality, our continuous build actually optimizes some presubmit tests to be saved for post-submit, behind the scenes. We’ll further discuss this later on in this chapter.
 >
-> 8 谷歌的每個團隊都將其專案的測試的一個子集配置為在預提交執行（相對於提交後）。實際上，我們的持續建構實際上在幕後優化了一些預提交的測試，以儲存到提交後。我們將在本章的後面進一步討論這個問題。
+> [^c8]: 谷歌的每個團隊都將其專案的測試的一個子集配置為在預提交執行（相對於提交後）。實際上，我們的持續建構實際上在幕後優化了一些預提交的測試，以儲存到提交後。我們將在本章的後面進一步討論這個問題。
 
 #### Release candidate testing 候選版本測試
 
@@ -336,31 +338,31 @@ Cause-based alerts and brittle tests can still have value; they just aren’t th
 
 基於原因的告警和脆性測試仍然有價值；它們只是在告警場景中不是識別潛在問題的理想方式。在實際發生故障的情況下，有更多的除錯細節可以使用。當SRE正在除錯一個故障時，有這樣的資訊是很有用的："一小時前，使用者開始遇到更多的失敗請求。大約在同一時間，重試的數量開始上升。讓我們開始調查。" 同樣地，脆弱的測試仍然可以提供額外的除錯資訊。"影象渲染管道開始吐出垃圾。其中一個單元測試表明，我們從JPEG壓縮器那裡得到了不同的位元組。讓我們開始調查吧。"
 
-Although monitoring and alerting are considered a part of the SRE/production management domain, where the insight of “Error Budgets” is well understood,[^9] CI comes from a perspective that still tends to be focused on absolutes. Framing CI as the “left shift” of alerting starts to suggest ways to reason about those policies and propose better best practices:
+Although monitoring and alerting are considered a part of the SRE/production management domain, where the insight of “Error Budgets” is well understood,[^e9] CI comes from a perspective that still tends to be focused on absolutes. Framing CI as the “left shift” of alerting starts to suggest ways to reason about those policies and propose better best practices:
 
 - Having a 100% green rate on CI, just like having 100% uptime for a production service, is awfully expensive. If that is *actually* your goal, one of the biggest problems is going to be a race condition between testing and submission.
 - Treating every alert as an equal cause for alarm is not generally the correct approach. If an alert fires in production but the service isn’t actually impacted, silencing the alert is the correct choice. The same is true for test failures: until our CI systems learn how to say, “This test is known to be failing for irrelevant reasons,” we should probably be more liberal in accepting changes that disable a failed test. Not all test failures are indicative of upcoming production issues.
 - Policies that say, “Nobody can commit if our latest CI results aren’t green” are probably misguided. If CI reports an issue, such failures should definitely be *investigated* before letting people commit or compound the issue. But if the root cause is well understood and clearly would not affect production, blocking commits is unreasonable.
 
-儘管監控和告警被認為是SRE/生產管理領域的一部分，其中 "錯誤成本 "的洞察力被很好地理解，CI來自一個仍然傾向於關注絕對性的視角。將CI定義為告警的 "左移"，開始建議如何推理這些策略並提出更好的最佳實踐：
+儘管監控和告警被認為是SRE/生產管理領域的一部分，其中 "錯誤成本 "的洞察力被很好地理解，[^c9]CI來自一個仍然傾向於關注絕對性的視角。將CI定義為告警的 "左移"，開始建議如何推理這些策略並提出更好的最佳實踐：
 
 - 在CI上實現100%的綠色率，就像在生產服務中實現100%的正常執行時間一樣，是非常昂貴的。如果這確實是你的目標，那麼最大的問題之一就是測試和提交之間的競爭條件。
 - 把每一個告警都當作一個相同原因來處理，一般來說不是正確的方法。如果一個告警在生產中被觸發，但服務實際上並沒有受到影響，讓告警沉默是正確的選擇。對於測試失敗也是如此：在我們的CI系統學會如何說“已知此測試因無關原因而失敗”之前，我們可能應該更自由地接受禁用失敗測試的更改。並非所有測試失敗都表明即將出現生產問題。
 - 那些說 "如果我們最新的CI結果不是綠色的，任何人都不能提交 "的策略可能是錯誤的。如果 CI 報告了一個問題，在讓人們提交或使問題複雜化之前，肯定要對這種失敗進行調查。但如果根本原因已被充分理解，並且顯然不會影響生產，那麼阻止提交是不合理的。
 
-This “CI is alerting” insight is new, and we’re still figuring out how to fully draw parallels. Given the higher stakes involved, it’s unsurprising that SRE has put a lot of thought into best practices surrounding monitoring and alerting, whereas CI has been viewed as more of a luxury feature.[^10] For the next few years, the task in software engineering will be to see where existing SRE practice can be reconceptualized in a CI context to help reformulate the testing and CI landscape—and perhaps where best practices in testing can help clarify goals and policies on monitoring and alerting.
+This “CI is alerting” insight is new, and we’re still figuring out how to fully draw parallels. Given the higher stakes involved, it’s unsurprising that SRE has put a lot of thought into best practices surrounding monitoring and alerting, whereas CI has been viewed as more of a luxury feature.[^e10] For the next few years, the task in software engineering will be to see where existing SRE practice can be reconceptualized in a CI context to help reformulate the testing and CI landscape—and perhaps where best practices in testing can help clarify goals and policies on monitoring and alerting.
 
-這種 "CI就是警報 "的見解是新的，我們仍在摸索如何充分地得出相似之處。鑑於所涉及的風險較高，SRE對圍繞監控和警報的最佳實踐進行了大量的思考，而CI則被視為一種奢侈的功能，這一點並不奇怪。在未來幾年，軟體工程的任務將是看看現有的SRE實踐可以在CI背景下重新概念化，以幫助重新制定測試和CI景觀，也許測試的最佳實踐可以幫助澄清監控和警報的目標和策略。
+這種 "CI就是警報 "的見解是新的，我們仍在摸索如何充分地得出相似之處。鑑於所涉及的風險較高，SRE對圍繞監控和警報的最佳實踐進行了大量的思考，而CI則被視為一種奢侈的功能，這一點並不奇怪。[^c10]在未來幾年，軟體工程的任務將是看看現有的SRE實踐可以在CI背景下重新概念化，以幫助重新制定測試和CI景觀，也許測試的最佳實踐可以幫助澄清監控和警報的目標和策略。
 
 ----
 
-> [9^]: Aiming for 100% uptime is the wrong target. Pick something like 99.9% or 99.999% as a business or product trade-off, define and monitor your actual uptime, and use that “budget” as an input to how aggressively you’re willing to push risky releases.
+> [^e9]: Aiming for 100% uptime is the wrong target. Pick something like 99.9% or 99.999% as a business or product trade-off, define and monitor your actual uptime, and use that “budget” as an input to how aggressively you’re willing to push risky releases.
 >
-> 9 以100%的正常執行時間為目標是錯誤的。選擇像99.9%或99.999%這樣的目標作為業務或產品的權衡，定義並監控你的實際正常執行時間，並使用該 "成本預算 "作為你願意多積極地推動風險釋出的輸入。
+> [^c9]: 以100%的正常執行時間為目標是錯誤的。選擇像99.9%或99.999%這樣的目標作為業務或產品的權衡，定義並監控你的實際正常執行時間，並使用該 "成本預算 "作為你願意多積極地推動風險釋出的輸入。
 >
-> [10^]: We believe CI is actually critical to the software engineering ecosystem: a must-have, not a luxury. But that is not universally understood yet.
+> [^e10]: We believe CI is actually critical to the software engineering ecosystem: a must-have, not a luxury. But that is not universally understood yet.
 >
-> 10 我們相信CI實際上對軟體工程生態系統至關重要：它是必需品，而不是奢侈品。但這一點尚未得到普遍理解。
+> [^c10]: 我們相信CI實際上對軟體工程生態系統至關重要：它是必需品，而不是奢侈品。但這一點尚未得到普遍理解。
 
 ### CI Challenges
 
@@ -428,9 +430,9 @@ One type of hermetic backend is a fake. As discussed in Chapter 13, these can be
 
 一種封閉式的後端是模擬的。正如在第13章中所討論的，這些可能比執行一個真正的後端更廉價，但它們需要花費精力去維護，而且模擬度有限。
 
-The cleanest option to achieve a presubmit-worthy integration test is with a fully hermetic setup—that is, starting up the entire stack sandboxed[^11]—and Google provides out-of-the-box sandbox configurations for popular components, like databases, to make it easier. This is more feasible for smaller applications with fewer components, but there are exceptions at Google, even one (by DisplayAds) that starts about four hundred servers from scratch on every presubmit as well as continuously on post- submit. Since the time that system was created, though, record/replay has emerged as a more popular paradigm for larger systems and tends to be cheaper than starting up a large sandboxed stack.
+The cleanest option to achieve a presubmit-worthy integration test is with a fully hermetic setup—that is, starting up the entire stack sandboxed[^e11]—and Google provides out-of-the-box sandbox configurations for popular components, like databases, to make it easier. This is more feasible for smaller applications with fewer components, but there are exceptions at Google, even one (by DisplayAds) that starts about four hundred servers from scratch on every presubmit as well as continuously on post- submit. Since the time that system was created, though, record/replay has emerged as a more popular paradigm for larger systems and tends to be cheaper than starting up a large sandboxed stack.
 
-實現具有預提交價值的整合測試的最乾淨的選擇是使用一個完全精細的設定--即啟動整個堆疊沙盒--谷歌為流行元件（如資料庫）提供開箱即用的沙盒配置，以使其更簡單。這對於元件較少的小型應用程式更為可行，但谷歌也有例外，即使是一個（由DisplayAds提供）在每次提交前以及提交後從零開始啟動大約400台伺服器的應用程式。但是，自建立該系統以來，錄製/重播已成為大型系統的一種更受歡迎的範例，並且往往比啟動大型沙盒堆疊更便宜。
+實現具有預提交價值的整合測試的最乾淨的選擇是使用一個完全精細的設定--即啟動整個堆疊沙盒[^c11]--谷歌為流行元件（如資料庫）提供開箱即用的沙盒配置，以使其更簡單。這對於元件較少的小型應用程式更為可行，但谷歌也有例外，即使是一個（由DisplayAds提供）在每次提交前以及提交後從零開始啟動大約400台伺服器的應用程式。但是，自建立該系統以來，錄製/重播已成為大型系統的一種更受歡迎的範例，並且往往比啟動大型沙盒堆疊更便宜。
 
 Record/replay (see Chapter 14) systems record live backend responses, cache them, and replay them in a hermetic test environment. Record/replay is a powerful tool for reducing test instability, but one downside is that it leads to brittle tests: it’s difficult to strike a balance between the following:
 
@@ -452,9 +454,9 @@ Ideally, a record/replay system should detect only problematic changes and cache
 
 理想情況下，記錄/重放系統應該只檢測有問題的更改，並且只有在請求以有意義的方式更改時才檢測快取未命中。如果該更改導致問題，程式碼修改者會用更新的響應重新執行測試，檢視測試是否仍然失敗，並因此收到問題警報。在實踐中，在一個大型且不斷變化的系統中，知道請求何時以有意義的方式發生了更改可能非常困難。
 
-> [^11]: In practice, it’s often difficult to make a completely sandboxed test environment, but the desired stability can be achieved by minimizing outside dependencies.
+> [^e11]: In practice, it’s often difficult to make a completely sandboxed test environment, but the desired stability can be achieved by minimizing outside dependencies.
 >
-> 11 在實踐中，通常很難做出一個完全沙盒化的測試環境，但可以透過儘量減少外部的依賴性來實現所需的穩定性。
+> [^c11]: 在實踐中，通常很難做出一個完全沙盒化的測試環境，但可以透過儘量減少外部的依賴性來實現所需的穩定性。
 
 -----
 
@@ -552,17 +554,17 @@ After a breaking change has been isolated, it is important to fix it as quickly 
 
 在隔離破壞性變更後，儘快修復該變更非常重要。失敗測試的存在可能會很快開始侵蝕測試套件的信心。如前所述，修復損壞的建構是Build Cop的責任。Build Cop最有效的工具是*回滾*。
 
-Rolling a change back is often the fastest and safest route to fix a build because it quickly restores the system to a known good state.[^12] In fact, TAP has recently been upgraded to automatically roll back changes when it has high confidence that they are the culprit.
+Rolling a change back is often the fastest and safest route to fix a build because it quickly restores the system to a known good state.[^e12] In fact, TAP has recently been upgraded to automatically roll back changes when it has high confidence that they are the culprit.
 
-回滾更改通常是修復產生的最快和最安全的方法，因為它可以快速將系統恢復到已知的良好狀態。事實上，TAP最近已升級為自動回滾更改，當它高度確信更改是罪魁禍首時。
+回滾更改通常是修復產生的最快和最安全的方法，因為它可以快速將系統恢復到已知的良好狀態。[^c12]事實上，TAP最近已升級為自動回滾更改，當它高度確信更改是罪魁禍首時。
 
 Fast rollbacks work hand in hand with a test suite to ensure continued productivity. Tests give us confidence to change, rollbacks give us confidence to undo. Without tests, rollbacks can’t be done safely. Without rollbacks, broken tests can’t be fixed quickly, thereby reducing confidence in the system.
 
 快速回滾與測試套件攜手並進，以確保持續的生產力。測試給了我們改變的信心，回滾給了我們撤銷的信心。沒有測試，回滾就不能安全進行。沒有回滾，破損的測試就不能被快速修復，從而降低了對系統的信心。
 
-> [12^]: Any change to Google’s codebase can be rolled back with two clicks!
+> [^e12]: Any change to Google’s codebase can be rolled back with two clicks!
 >
-> 12 對谷歌程式碼庫的任何改動都可以透過兩次點選來回滾。
+> [^c12]: 對谷歌程式碼庫的任何改動都可以透過兩次點選來回滾。
 
 #### Resource constraints 資源限制
 

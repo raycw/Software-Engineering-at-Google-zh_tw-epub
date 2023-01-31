@@ -91,17 +91,17 @@ Unit tests cover code within a given binary. But that binary is typically not co
 
 單元測試涵蓋了給定二進位制中的程式碼。但該二進位制檔案在如何執行方面通常不是完全自洽的。通常情況下，二進位制檔案有某種部署配置或啟動指令碼。此外，真正為終端使用者服務的生產例項有它們自己的配置檔案或配置資料庫。
 
-If there are issues with these files or the compatibility between the state defined by these stores and the binary in question, these can lead to major user issues. Unit tests alone cannot verify this compatibility.[^1] Incidentally, this is a good reason to ensure that your configuration is in version control as well as your code, because then, changes to configuration can be identified as the source of bugs as opposed to introducing random external flakiness and can be built in to large tests.
+If there are issues with these files or the compatibility between the state defined by these stores and the binary in question, these can lead to major user issues. Unit tests alone cannot verify this compatibility.[^e1] Incidentally, this is a good reason to ensure that your configuration is in version control as well as your code, because then, changes to configuration can be identified as the source of bugs as opposed to introducing random external flakiness and can be built in to large tests.
 
-如果這些檔案存在問題，或者這些儲存定義的狀態與有問題的二進位制檔案之間存在相容性問題，則可能會導致重大的使用者故障。單元測試不能驗證這種相容性。順便說一下，這是一個很好的理由，確保你的配置和你的程式碼一樣在版本控制中，因為這樣，配置的變更可以被識別為bug的來源，而不是引入隨機的外部碎片，並且可以在大型測試中建構。
+如果這些檔案存在問題，或者這些儲存定義的狀態與有問題的二進位制檔案之間存在相容性問題，則可能會導致重大的使用者故障。單元測試不能驗證這種相容性。[^c1]順便說一下，這是一個很好的理由，確保你的配置和你的程式碼一樣在版本控制中，因為這樣，配置的變更可以被識別為bug的來源，而不是引入隨機的外部碎片，並且可以在大型測試中建構。
 
 At Google, configuration changes are the number one reason for our major outages. This is an area in which we have underperformed and has led to some of our most embarrassing bugs. For example, there was a global Google outage back in 2013 due to a bad network configuration push that was never tested. Configurations tend to be written in configuration languages, not production code languages. They also often have faster production rollout cycles than binaries, and they can be more difficult to test. All of these lead to a higher likelihood of failure. But at least in this case (and others), configuration was version controlled, and we could quickly identify the culprit and mitigate the issue.
 
 在谷歌，配置變更是我們重大故障的頭號原因。這是一個我們表現不佳的領域，並導致了我們一些最尷尬的錯誤。例如，2013年，由於一次從未測試過的糟糕網路配置推送，谷歌出現了一次全球停機。它們通常也比二進位制檔案具有更快的生產部署週期，而且它們可能更難測試。所有這些都會導致更高的失敗可能性。但至少在這種情況下（和其他情況下），配置是由版本控制的，我們可以快速識別故障並緩解問題。
 
-> [^1]:	See “Continuous Delivery” on page 483 and Chapter 25 for more information.
+> [^e1]: See “Continuous Delivery” on page 483 and Chapter 25 for more information.
 >
-> 1   有關更多資訊，請參見第483頁和第25章的“連續交付”。
+> [^c1]: 有關更多資訊，請參見第483頁和第25章的“連續交付”。
 
 #### Issues that arise under load 高負載導致的問題
 
@@ -611,17 +611,17 @@ Tests of these type have the following characteristics:
 - 資料：生產或已知測試範圍
 - 核查：手動
 
-Exploratory testing[^2] is a form of manual testing that focuses not on looking for behavioral regressions by repeating known test flows, but on looking for questionable behavior by trying out new user scenarios. Trained users/testers interact with a product through its public APIs, looking for new paths through the system and for which behavior deviates from either expected or intuitive behavior, or if there are security vulnerabilities.
+Exploratory testing[^e2] is a form of manual testing that focuses not on looking for behavioral regressions by repeating known test flows, but on looking for questionable behavior by trying out new user scenarios. Trained users/testers interact with a product through its public APIs, looking for new paths through the system and for which behavior deviates from either expected or intuitive behavior, or if there are security vulnerabilities.
 
-探索性測試是一種手動測試，它的重點不是透過重複已知的測試流程來尋找已知行為的迴歸測試，而是透過嘗試新的使用者場景來尋找有問題的行為。訓練有素的使用者/測試人員透過產品的公共API與產品互動，在系統中尋找新的路徑，尋找行為偏離預期或直觀行為的路徑，或者是否存在安全漏洞。
+探索性測試[^c2]是一種手動測試，它的重點不是透過重複已知的測試流程來尋找已知行為的迴歸測試，而是透過嘗試新的使用者場景來尋找有問題的行為。訓練有素的使用者/測試人員透過產品的公共API與產品互動，在系統中尋找新的路徑，尋找行為偏離預期或直觀行為的路徑，或者是否存在安全漏洞。
 
 Exploratory testing is useful for both new and launched systems to uncover unanticipated behaviors and side effects. By having testers follow different reachable paths through the system, we can increase the system coverage and, when these testers identify bugs, capture new automated functional tests. In a sense, this is a bit like a manual “fuzz testing” version of functional integration testing.
 
 探索性測試對於新系統和已釋出系統都很有用，可以發現意外行為和副作用。透過讓測試人員在系統中遵循不同的可到達路徑，我們可以增加系統覆蓋率，並且當這些測試人員發現bug時，可以捕獲新的自動化功能測試。在某種意義上，這有點像功能整合測試的手動“模糊測試”版本。
 
->[^2]: James A. Whittaker, Exploratory Software Testing: Tips, Tricks, Tours, and Techniques to Guide Test Design(New York: Addison-Wesley Professional, 2009).
+> [^e2]: James A. Whittaker, Exploratory Software Testing: Tips, Tricks, Tours, and Techniques to Guide Test Design(New York: Addison-Wesley Professional, 2009).
 >
-> 2     詹姆斯·惠塔克，探索性軟體測試： 提示， 詭計， 旅行，和技巧到指導測驗設計（紐約：Addison-Wesley Professional，2009年）。
+> [^c2]: 詹姆斯·惠塔克，探索性軟體測試： 提示， 詭計， 旅行，和技巧到指導測驗設計（紐約：Addison-Wesley Professional，2009年）。
 
 #### Limitations 侷限性
 
@@ -774,9 +774,9 @@ These test how well your systems will react to unexpected changes or failures.
 這些測試將測試系統對意外更改或故障的反應。
 
 For years, Google has run an annual war game called [DiRT 
-](https://oreil.ly/17ffL)(Disaster Recovery Testing) during which faults are injected into our infrastructure at a nearly planetary scale. We simulate everything from datacenter fires to malicious attacks. In one memorable case, we simulated an earthquake that completely isolated our headquarters in Mountain View, California, from the rest of the company. Doing so exposed not only technical shortcomings but also revealed the challenge of running a company when all the key decision makers were unreachable.[^3]
+](https://oreil.ly/17ffL)(Disaster Recovery Testing) during which faults are injected into our infrastructure at a nearly planetary scale. We simulate everything from datacenter fires to malicious attacks. In one memorable case, we simulated an earthquake that completely isolated our headquarters in Mountain View, California, from the rest of the company. Doing so exposed not only technical shortcomings but also revealed the challenge of running a company when all the key decision makers were unreachable.[^e3]
 
-多年來，谷歌每年都會舉辦一場名為“災難恢復測試”[DiRT](https://oreil.ly/17ffL)(Disaster Recovery Testing)的演練，在這場演練中，故障幾乎以全球規模注入我們的基礎設施。我們模擬了從資料中心火災到惡意攻擊的一切。在一個令人難忘的案例中，我們模擬了一場地震，將我們位於加州山景城的總部與公司其他部門完全隔離。這樣做不僅暴露了技術上的缺陷，也揭示了在所有關鍵決策者都無法聯絡到的情況下，管理公司的挑戰。
+多年來，谷歌每年都會舉辦一場名為“災難恢復測試”[DiRT](https://oreil.ly/17ffL)(Disaster Recovery Testing)的演練，在這場演練中，故障幾乎以全球規模注入我們的基礎設施。我們模擬了從資料中心火災到惡意攻擊的一切。在一個令人難忘的案例中，我們模擬了一場地震，將我們位於加州山景城的總部與公司其他部門完全隔離。這樣做不僅暴露了技術上的缺陷，也揭示了在所有關鍵決策者都無法聯絡到的情況下，管理公司的挑戰。[^c3]
 
 The impacts of DiRT tests require a lot of coordination across the company; by contrast, chaos engineering is more of a “continuous testing” for your technical infrastructure. [Made popular by Netflix](https://oreil.ly/BCwdM), chaos engineering involves writing programs that continuously introduce a background level of faults into your systems and seeing what happens. Some of the faults can be quite large, but in most cases, chaos testing tools are designed to restore functionality before things get out of hand. The goal of chaos engineering is to help teams break assumptions of stability and reliability and help them grapple with the challenges of building resiliency in. Today, teams at Google perform thousands of chaos tests each week using our own home-grown system called Catzilla.
 
@@ -786,9 +786,9 @@ These kinds of fault and negative tests make sense for live production systems t
 
 這些型別的故障和負面測試對於具有足夠理論容錯能力的即時生產系統是有意義的，並且測試本身的成本和風險是可以承受的。
 
-> [^3]:	During this test, almost no one could get anything done, so many people gave up on work and went to one of our many cafes, and in doing so, we ended up creating a DDoS attack on our cafe teams!
+> [^e3]: During this test, almost no one could get anything done, so many people gave up on work and went to one of our many cafes, and in doing so, we ended up creating a DDoS attack on our cafe teams!
 >
-> 3   在這次測試中，幾乎沒有人能完成任何事情，所以很多人放棄了工作，去了我們眾多咖啡館中的一家，在這樣做的過程中，我們最終對我們的咖啡館團隊發起了DDoS攻擊！
+> [^c3]: 在這次測試中，幾乎沒有人能完成任何事情，所以很多人放棄了工作，去了我們眾多咖啡館中的一家，在這樣做的過程中，我們最終對我們的咖啡館團隊發起了DDoS攻擊！
 
 #### Limitations 侷限性
 

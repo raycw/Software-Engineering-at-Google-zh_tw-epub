@@ -125,9 +125,9 @@ For years, thousands of Google engineers have worked on the general problem of m
 
 多年以來，數以千計的工程師為提升搜尋結果頁的“品質”做了很多最佳化。結果發現對內容品質的追求也有兩面性：它逐漸使產品變得緩慢。很久以前 Google 的搜尋頁每頁只有不到10個藍色的連結，每個連結代表一個相關網頁。再過去的十年間，上千個關於“品質”的微小的變化導致搜尋結果變成了一個前所未有的複雜的結果：圖片、影片、有維基百科結果的文字框、甚至還有可互動的 UI 元件。這意味著伺服器需要做更多的工作來產生這些資訊：在網路上傳輸更多的資料；客戶端（通常是手機）需要渲染更復雜的 HTML 和內容。儘管網路和計算機在近十年都有了飛速的提升，搜尋結果頁速度還是越來越慢了：延遲增加了。這看上去沒什麼大不了，但這直接影響著使用者粘性。即使將網頁渲染時間增加 10ms 都有影響。延遲總是一點點地增加。這並不是某一個工程團隊的問題，而是一個跨團隊的，長期的慢性毒藥。從某些方面看，網頁的總延遲將會一直增加，直到它帶來的副作用能夠抵消掉品質最佳化為使用者粘性帶來的收益。
 
-A number of leaders struggled with this issue over the years but failed to address the problem systematically. The blinders everyone wore assumed that the only way to deal with latency was to declare a latency “code yellow”[^1] every two or three years, during which everyone dropped everything to optimize code and speed up the product. Although this strategy would work temporarily, the latency would begin creeping up again just a month or two later, and soon return to its prior levels.
+A number of leaders struggled with this issue over the years but failed to address the problem systematically. The blinders everyone wore assumed that the only way to deal with latency was to declare a latency “code yellow”[^e1] every two or three years, during which everyone dropped everything to optimize code and speed up the product. Although this strategy would work temporarily, the latency would begin creeping up again just a month or two later, and soon return to its prior levels.
 
-多年裡，多位領導都嘗試過系統性地解決這個問題然而最終都以失敗告終。每個專家都是隻有一個解法，那就是制定一個延遲的“黃線”，每一到兩年就檢查一次，如果延遲到達了“黃色代號”，每個人都停下來最高優先順序最佳化程式碼來給產品提速。儘管這個策略會短時間的生效，但是僅僅一兩個月後，延遲就又會慢慢增加，然後很快就又回到之前的水平。
+多年裡，多位領導都嘗試過系統性地解決這個問題然而最終都以失敗告終。每個專家都是隻有一個解法，那就是制定一個延遲的“黃線”，[^c1]每一到兩年就檢查一次，如果延遲到達了“黃色代號”，每個人都停下來最高優先順序最佳化程式碼來給產品提速。儘管這個策略會短時間的生效，但是僅僅一兩個月後，延遲就又會慢慢增加，然後很快就又回到之前的水平。
 
 So what changed? At some point, we took a step back, identified the blinders, and did a full reevaluation of the trade-offs. It turns out that the pursuit of “quality” has not one, but two different costs. The first cost is to the user: more quality usually means more data being sent out, which means more latency. The second cost is to Google: more quality means doing more work to generate the data, which costs more CPU time in our servers—what we call “serving capacity.” Although leadership had often trodden carefully around the trade-off between quality and capacity, it had never treated latency as a full citizen in the calculus. As the old joke goes, “Good, Fast, Cheap—pick two.” A simple way to depict the trade-offs is to draw a triangle of tension between Good (Quality), Fast (Latency), and Cheap (Capacity), as illustrated in Figure 6-1.
 
@@ -146,9 +146,9 @@ The main point here is that this insight—a better understanding of all the tra
 
 -----
 
-> [^1]: “Code yellow” is Google’s term for “emergency hackathon to fix a critical problem.” Affected teams are expected to suspend all work and focus 100% attention on the problem until the state of emergency is declared over.
+> [^e1]: “Code yellow” is Google’s term for “emergency hackathon to fix a critical problem.” Affected teams are expected to suspend all work and focus 100% attention on the problem until the state of emergency is declared over.
 >
-> 1 "Code yellow"是谷歌的術語，指的是 "緊急駭客馬拉松，以修復一個關鍵問題"。受影響的團隊被要求暫停所有工作，並將100%的注意力集中在這個問題上，直到緊急狀態被宣佈結束。
+> [^c1]: "Code yellow"是谷歌的術語，指的是 "緊急駭客馬拉松，以修復一個關鍵問題"。受影響的團隊被要求暫停所有工作，並將100%的注意力集中在這個問題上，直到緊急狀態被宣佈結束。
 
 ## Always Be Leaving  始終保持離開
 
@@ -218,9 +218,9 @@ Before answering, note that you have actually liberated yourself—you now have 
 
 在回答這個問題之前，請注意實際上你已經解放了你自己--現在你有"始終保持離開"的自由了。你可以自由地選擇去解決一個新的問題，甚至你可以去到一個全新的部門解決新的問題，來為你培養的其他領導者騰出一些上升空間。這是避免職業生涯倦怠的很好的方法。
 
-The simple answer to “what now?” is to direct this machine and keep it healthy. But unless there’s a crisis, you should use a gentle touch. The book Debugging Teams[^2] has a parable about making mindful adjustments:
+The simple answer to “what now?” is to direct this machine and keep it healthy. But unless there’s a crisis, you should use a gentle touch. The book Debugging Teams[^e2] has a parable about making mindful adjustments:
 
-“現在怎麼辦？”這個問題的一個簡單的回答是引導你的團隊然後讓它持續保持健康。但是除非有很難解決的危機，你就不應該過多地去插手管理團隊了。《進化:從孤膽極客到高效團隊》這本書對於如何做有意義的調整有一個比較好的隱喻：
+“現在怎麼辦？”這個問題的一個簡單的回答是引導你的團隊然後讓它持續保持健康。但是除非有很難解決的危機，你就不應該過多地去插手管理團隊了。《進化:從孤膽極客到高效團隊》[^c2]這本書對於如何做有意義的調整有一個比較好的隱喻：
 
     There’s a story about a Master of all things mechanical who had long since retired. His former company was having a problem that no one could fix, so they called in the Master to see if he could help find the problem. The Master examined the machine, listened to it, and eventually pulled out a worn piece of chalk and made a small X on the side of the machine. He informed the technician that there was a loose wire that needed repair at that very spot. The technician opened the machine and tightened the loose wire, thus fixing the problem. When the Master’s invoice arrived for $10,000, the irate CEO wrote back demanding a breakdown for this ridiculously high charge for a simple chalk mark! The Master responded with another invoice, showing a $1 cost for the chalk to make the mark, and $9,999 for knowing where to put it.
 
@@ -234,9 +234,9 @@ This is what good management is about: 95% observation and listening, and 5% mak
 
 這個故事說明了好的管理的意義：95% 是觀察和傾聽，5% 是在適當的位置做關鍵的調整。傾聽你的團隊和跳過彙報。和你的客戶聊聊，而且這些客戶經常並不是外部的終端客戶（尤其是當你的團隊是在建構工程化的基礎設施時），而是你的同事。要想讓客戶滿意，就得像認真看報告那樣，認真傾聽你的客戶。什麼有效，什麼無效呢？這個自驅的飛艇的航線正確嗎？你的指引需要是反覆迭代的，但是需要是經過深思熟慮地，透過最小的調整來修正航線。如果你退行到了去過度細節，你需要警惕你可能又成為了單點瓶頸！“始終保持離開”是說要進行宏觀管理。
 
-> [^2]: Brian W. Fitzpatrick and Ben Collins-Sussman, Debugging Teams: Better Productivity through Collaboration(Boston: O’Reilly, 2016).
+> [^e2]: Brian W. Fitzpatrick and Ben Collins-Sussman, Debugging Teams: Better Productivity through Collaboration(Boston: O’Reilly, 2016).
 >
-> 2 Brian W. Fitzpatrick和Ben Collins-Sussman，《進化:從孤膽極客到高效團隊》(Boston: O'Reilly, 2016)。
+> [^c2]: Brian W. Fitzpatrick和Ben Collins-Sussman，《進化:從孤膽極客到高效團隊》(Boston: O'Reilly, 2016)。
 
 #### Take care in anchoring a team’s identity   謹慎地確定團隊的定位
 
@@ -261,7 +261,7 @@ When a team tackles a difficult problem, there’s a standard pattern that emerg
 - *Analysis*  
     First, you receive the problem and start to wrestle with it. You identify the blinders, find all the trade-offs, and build consensus about how to manage them.
 - *Struggle*  
-    You start moving on the work, whether or not your team thinks it’s ready. You prepare for failures, retries, and iteration. At this point, your job is mostly about herding cats. Encourage your leaders and experts on the ground to form opinions and then listen carefully and devise an overall strategy, even if you have to “fake it” at first.[^3]
+    You start moving on the work, whether or not your team thinks it’s ready. You prepare for failures, retries, and iteration. At this point, your job is mostly about herding cats. Encourage your leaders and experts on the ground to form opinions and then listen carefully and devise an overall strategy, even if you have to “fake it” at first.[^e3]
 - *Traction*  
     Eventually your team begins to figure things out. You’re making smarter decisions, and real progress is made. Morale improves. You’re iterating on trade-offs, and the organization is beginning to drive itself around the problem. Nice job!
 - *Reward*  
@@ -272,7 +272,7 @@ When a team tackles a difficult problem, there’s a standard pattern that emerg
 - *分析*  
     首先，你收到一個問題，然後開始嘗試解決它。你找出了相關的盲點，找到所有權衡點，然後為如何解決他們在團隊內達成共識。
 - *掙扎*  
-    你開始著手工作，無論你的團隊是否已經準備好。你準備好了迎接失敗、重試和反覆迭代。從這點上來講，你的工作就像養貓。鼓勵你手下的團隊和專家們坐下來整理觀點，然後仔細傾聽，制定全域戰略，哪怕最開始你不得不“編造一個戰略”。
+    你開始著手工作，無論你的團隊是否已經準備好。你準備好了迎接失敗、重試和反覆迭代。從這點上來講，你的工作就像養貓。鼓勵你手下的團隊和專家們坐下來整理觀點，然後仔細傾聽，制定全域戰略，哪怕最開始你不得不“編造一個戰略”。[^c3]
 - *前進*  
     終於你的團隊開始把事情搞清楚了，你做的決策越來越明智，問題也有了實質性的進展。士氣得到了鼓舞。你開始反覆迭代權衡，組織開始自驅地解決這個問題。幹得漂亮！
 - *獎勵*  
@@ -293,9 +293,9 @@ The spiral of success is a conundrum—it’s something that’s difficult to ma
 
 成功的螺旋確實是個難題--這是難以管理的，而且這是擴充團隊的團隊的核心正規化。壓縮問題的行為不只是關於找出使團隊效率最大化的方法，而且是關於如何擴充你自己的時間和注意力來應對新的責任。
 
-> [^3]: It’s easy for imposter syndrome to kick in at this point. One technique for fighting the feeling that you don’t know what you’re doing is to simply pretend that some expert out there knows exactly what to do, and that they’re simply on vacation and you’re temporarily subbing in for them. It’s a great way to remove the personal stakes and give yourself permission to fail and learn.
+> [^e3]: It’s easy for imposter syndrome to kick in at this point. One technique for fighting the feeling that you don’t know what you’re doing is to simply pretend that some expert out there knows exactly what to do, and that they’re simply on vacation and you’re temporarily subbing in for them. It’s a great way to remove the personal stakes and give yourself permission to fail and learn.
 >
->3  在這一點上，冒名頂替綜合症很容易發作。克服這種感覺的一種技巧是，你不知道自己在做什麼，只需假裝某位專家確切知道該做什麼，他們只是在度假，而你只是暫時代替他們。這是一個很好的方法，可以消除個人利害關係，允許自己失敗和學習。
+> [^c3]:  在這一點上，冒名頂替綜合症很容易發作。克服這種感覺的一種技巧是，你不知道自己在做什麼，只需假裝某位專家確切知道該做什麼，他們只是在度假，而你只是暫時代替他們。這是一個很好的方法，可以消除個人利害關係，允許自己失敗和學習。
 
 ### Important Versus Urgent   重要和緊急
 
@@ -384,26 +384,26 @@ Part of the answer is that over time, as you grow older, your overall stamina bu
 The other key part of the answer is that leaders gradually learn to manage their energy more intelligently. It’s something they learn to pay constant attention to. Typically, this means being aware of how much energy you have at any given moment,and making deliberate choices to “recharge” yourself at specific moments, in specific ways. Here are some great examples of mindful energy management:
 
 - *Take real vacations*  
-    A weekend is not a vacation. It takes at least three days to “forget” about your work; it takes at least a week to actually feel refreshed. But if you check your work email or chats, you ruin the recharge. A flood of worry comes back into your mind, and all of the benefit of psychological distancing dissipates. The vacation recharges only if you are truly disciplined about disconnecting.[^4] And, of course, this is possible only if you’ve built a self-driving organization.
+    A weekend is not a vacation. It takes at least three days to “forget” about your work; it takes at least a week to actually feel refreshed. But if you check your work email or chats, you ruin the recharge. A flood of worry comes back into your mind, and all of the benefit of psychological distancing dissipates. The vacation recharges only if you are truly disciplined about disconnecting.[^e4] And, of course, this is possible only if you’ve built a self-driving organization.
 - *Make it trivial to disconnect*  
     When you disconnect, leave your work laptop at the office. If you have work communications on your phone, remove them. For example, if your company uses G Suite (Gmail, Google Calendar, etc.), a great trick is to install these apps in a “work profile” on your phone. This causes a second set of work-badged apps to appear on your phone. For example, you’ll now have two Gmail apps: one for personal email, one for work email. On an Android phone, you can then press a single button to disable the entire work profile at once. All the work apps gray out, as if they were uninstalled, and you can’t “accidentally” check work messages until you re-enable the work profile.
 - *Take real weekends, too*  
     A weekend isn’t as effective as a vacation, but it still has some rejuvenating power. Again, this recharge works only if you disconnect from work communications. Try truly signing out on Friday night, spend the weekend doing things you love, and then sign in again on Monday morning when you’re back in the office.
 - *Take breaks during the day*  
-    Your brain operates in natural 90-minute cycles.[^5]Use the opportunity to get up and walk around the office, or spend 10 minutes walking outside. Tiny breaks like this are only tiny recharges, but they can make a tremendous difference in your stress levels and how you feel over the next two hours of work.
+    Your brain operates in natural 90-minute cycles.[^e5]Use the opportunity to get up and walk around the office, or spend 10 minutes walking outside. Tiny breaks like this are only tiny recharges, but they can make a tremendous difference in your stress levels and how you feel over the next two hours of work.
 - *Give yourself permission to take a mental health day*  
     Sometimes, for no reason, you just have a bad day. You might have slept well, eaten well, exercised—and yet you are still in a terrible mood anyway. If you’re a leader, this is an awful thing. Your bad mood sets the tone for everyone around you, and it can lead to terrible decisions (emails you shouldn’t have sent, overly harsh judgements, etc.). If you find yourself in this situation, just turn around and go home, declaring a sick day. Better to get nothing done that day than to do active damage.
 
 這個答案的另一部分是領導者漸漸學會更智慧的管理他們的精力。這是他們持續學習投入的結果。通常，這意味著他們能夠意識到自己還剩多少精力，然後決定在某個特定的時刻透過自己的方式給自己“充能”。以下是一些很好的細心管理能量方式：
 
 - *給自己真正放個假*  
-    一個週末並不算一個真正的假期。你需要至少三天來“忘記”你的工作；至少需要一週來讓你重新感覺充滿能量。但是如果你檢查你的郵箱或工作聊天，你就破壞了這個充電過程。洪水般的焦慮充滿你的腦袋，物理上遠離工作的好處消散殆盡。只有在你真的斷開與工作的連線時，你的假期才能使你真正重新充能。當然，這一切建立在你已經建立了一個自我驅型組織的前提下。
+    一個週末並不算一個真正的假期。你需要至少三天來“忘記”你的工作；至少需要一週來讓你重新感覺充滿能量。但是如果你檢查你的郵箱或工作聊天，你就破壞了這個充電過程。洪水般的焦慮充滿你的腦袋，物理上遠離工作的好處消散殆盡。只有在你真的斷開與工作的連線時，你的假期才能使你真正重新充能。[^c4]當然，這一切建立在你已經建立了一個自我驅型組織的前提下。
 - *讓失聯的代價微不足道(主要指訊息模式切換)*  
     當你失聯時，將你的工作筆記本留在辦公室。如果你有工作的通訊工具留在你的手機上，將它們移除掉。比如，如果你的公司用 Google 的 G 套件(Gmail, Google Calendar 等)，一個很方便的技巧是在手機上安裝一個叫“工作資料” 的軟體。這將花費你幾秒鐘的時間來把軟體標記為是否是工作軟體。例如，你將有兩個 Gmail 應用：一個為個人郵件，一個為工作郵件。在安卓手機上，你能夠一鍵切換工作模式。所有工作應用軟體將變灰，就像它們未安裝。你也不可能“不小心”查看了工作資訊直到你重新啟用工作資料。
 - *也要享受真正的週末*  
     一個週末並不像假期一樣有效，但它仍有讓你振奮起來的能力。再強調一次，這樣的充能只有在你斷開工作聯絡的時候才有用。試著在週五晚上徹底退出工作狀態，把週末的時間花在你喜歡的事情上，然後在週一早晨回到辦公室時再重新進入工作狀態。
 - *在一天之中偶爾小休一下*  
-    人的大腦每90分鐘會有一個自然的迴圈。利用這個機會站起來在辦公室走一走，或者花10分鐘出去走一走。像這種微小的休息只能獲得很小的充能，但是這能給你的緊張度和下一個小時的工作上帶來巨大的影響。
+    人的大腦每90分鐘會有一個自然的迴圈。[^c5]利用這個機會站起來在辦公室走一走，或者花10分鐘出去走一走。像這種微小的休息只能獲得很小的充能，但是這能給你的緊張度和下一個小時的工作上帶來巨大的影響。
 - *給自己一個心理健康日的許可*  
     有時候，沒有任何理由，你度過了糟糕的一天。你睡的很好，吃的很好，也進行了運動，但還是在很糟糕的情緒裡。如果你是個領導，那這將是很悲催的一件事。你的壞情緒影響了你周圍所有人的情緒，而且這將會導致很糟糕的決定（發出去不該發的郵件，給別人下達了過於殘酷的評價等）。如果你發現你在這個狀態下，你應該請個病假，轉身回家。什麼都不幹也比干破壞性的事強。
 
@@ -411,13 +411,13 @@ In the end, managing your energy is just as important as managing your time. If 
 
 最後，管理你的精力和管理你的時間一樣重要。如果你學會掌握這些東西，你就會準備好應對擴大責任範圍和建立一個自給自足的團隊這一更廣泛的迴圈。
 
-> [^4]: You need to plan ahead and build around the assumption that your work simply won’t get done during vacation. Working hard (or smart) just before and after your vacation mitigates this issue.
+> [^e4]: You need to plan ahead and build around the assumption that your work simply won’t get done during vacation. Working hard (or smart) just before and after your vacation mitigates this issue.
 >
-> 4 你需要提前計劃，並在假設你的工作在休假期間根本無法完成的情況下進行建設。在休假前後努力工作（或聰明地工作）可以緩解這一問題。
+> [^c4]: 你需要提前計劃，並在假設你的工作在休假期間根本無法完成的情況下進行建設。在休假前後努力工作（或聰明地工作）可以緩解這一問題。
 >
-> [^5]: You can read more about BRAC at https://en.wikipedia.org/wiki/Basic_rest-activity_cycle.
+> [^e5]: You can read more about BRAC at https://en.wikipedia.org/wiki/Basic_rest-activity_cycle.
 >
-> 5 你可以在 https://en.wikipedia.org/wiki/Basic_rest-activity_cycle，瞭解更多關於BRAC的資訊。
+> [^c5]: 你可以在 https://en.wikipedia.org/wiki/Basic_rest-activity_cycle，瞭解更多關於BRAC的資訊。
 
 ## Conclusion  總結
 
