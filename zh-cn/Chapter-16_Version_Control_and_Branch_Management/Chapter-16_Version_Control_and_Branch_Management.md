@@ -148,7 +148,7 @@ In our workflow, centrality and in-the-cloud storage for the codebase seem to be
 >
 > [^e6]: Monotonically increasing version numbers, rather than commit hashes, are particularly troublesome. Many systems and scripts have grown up in the Google developer ecosystem that assume that the numeric ordering of commits is the same as the temporal order—undoing those hidden dependencies is difficult.
 >
-> [^c6] 單調增加的版本號，而不是提交雜湊值，是特別麻煩的。許多系統和指令碼已經在谷歌開發者生態系統中成長起來，它們假定提交的數字順序與時間順序相同--消除這些隱藏的依賴關係是很困難的。
+> [^c6]: 單調增加的版本號，而不是提交雜湊值，是特別麻煩的。許多系統和指令碼已經在谷歌開發者生態系統中成長起來，它們假定提交的數字順序與時間順序相同--消除這些隱藏的依賴關係是很困難的。
 >
 > [^e7]: For that matter, as of the publication of the Monorepo paper, the repository itself had something like 86 TB of data and metadata, ignoring release branches. Fitting that onto a developer workstation directly would be… challenging.
 >
