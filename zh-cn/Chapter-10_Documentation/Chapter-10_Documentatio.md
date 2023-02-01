@@ -1,9 +1,4 @@
-
-**CHAPTER 10**
-
-# Documentation
-
-# 第十章 文件
+# Documentation 第十章 文件
 
 **Written by Tom Manshreck**
 
@@ -517,7 +512,8 @@ Importantly, if documentation is tied into the engineering workflow, it will oft
 
 重要的是，如果文件與工程工作流程聯絡在一起，它往往會隨著時間的推移而改進。現在，谷歌的大多數文件都隱含地經過受眾審查，因為在某個時候，他們的讀者會使用這些文件，並希望在它們不起作用時（透過bug或其他形式的反饋）讓你知道。
 
----
+-----
+
 **Case Study: The Developer Guide Library 案例研究：開發者指南庫**
 As mentioned earlier, there were problems associated with having most (almost all) engineering documentation contained within a shared wiki: little ownership of important documentation, competing documentation, obsolete information, and difficulty in filing bugs or issues with documentation. But this problem was not seen in some documents: the Google C++ style guide was owned by a select group of senior engineers (style arbiters) who managed it. The document was kept in good shape because certain people cared about it. They implicitly owned that document. The document was also canonical: there was only one C++ style guide.
 
@@ -539,7 +535,7 @@ The introduction of go/links (see Chapter 3) allowed most documents to, in effec
 
 引入go/links（見第3章）後，大多數檔案實際上可以更容易地建立自己在任何特定主題上的規範性。例如，我們的《C++開發指南》就建立在 "go/cpp "上。有了更好的內部搜尋、go/links，以及將多個文件整合到一個共同的文件集，隨著時間的推移，這樣的規範文件集變得更加權威和強大。
 
----
+-----
 
 ## Documentation Philosophy 寫文件秘訣
 

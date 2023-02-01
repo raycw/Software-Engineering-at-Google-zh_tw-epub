@@ -1,9 +1,4 @@
-
-**CHAPTER 19**
-
-# Critique: Google’s Code Review Tool
-
-# 第十九章 體驗：google的程式碼審查工具
+# Critique: Google’s Code Review Tool 第十九章 體驗：google的程式碼審查工具
 
 **Written by Caitlin Sadowski, Ilham Kurnia, and Ben Rohlfs**
 

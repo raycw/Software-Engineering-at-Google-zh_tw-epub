@@ -1,9 +1,4 @@
-
-**CHAPTER 9**
-
-# Code Review
-
-# 第九章 程式碼審查
+# Code Review 第九章 程式碼審查
 
 **Written by Tom Manshreck**
 
@@ -15,7 +10,7 @@ Code review is a process in which code is reviewed by someone other than the aut
 
 Code reviews generally require a combination of a process and a tool supporting that process. At Google, we use a custom code review tool, Critique, to support our process.[^e1] Critique is an important enough tool at Google to warrant its own chapter in this book. This chapter focuses on the process of code review as it is practiced at Google rather than the specific tool, both because these foundations are older than the tool and because most of these insights can be adapted to whatever tool you might use for code review.
 
-程式碼審查通常需要一個流程和一個支援該流程的工具的組合。在Google，我們使用一個客製的程式碼審查工具Critique來支援我們的流程。[^e1] Critique在Google是一個非常重要的工具，足以讓它在本書中佔有一章。本章重點介紹Google實施的程式碼審查流程，而不是具體的工具，這是因為這些基礎比工具更古老，而且這些見解大多可以適應你可能用於程式碼審查的任何工具。
+程式碼審查通常需要一個流程和一個支援該流程的工具的組合。在Google，我們使用一個客製的程式碼審查工具Critique來支援我們的流程。[^c1] Critique在Google是一個非常重要的工具，足以讓它在本書中佔有一章。本章重點介紹Google實施的程式碼審查流程，而不是具體的工具，這是因為這些基礎比工具更古老，而且這些見解大多可以適應你可能用於程式碼審查的任何工具。
 
 Some of the benefits of code review, such as detecting bugs in code before they enter a codebase, are well established[^e2] and somewhat obvious (if imprecisely measured). Other benefits, however, are more subtle. Because the code review process at Google is so ubiquitous and extensive, we’ve noticed many of these more subtle effects, including psychological ones, which provide many benefits to an organization over time and scale.
 
@@ -23,7 +18,7 @@ Some of the benefits of code review, such as detecting bugs in code before they 
 
 > [^e1]: We also use Gerrit to review Git code, primarily for our open source projects. However, Critique is the primary tool of a typical software engineer at Google.
 >
-> [^1]: 我們也使用Gerrit來審查Git程式碼，主要用於我們的開源專案。然而，Critique是谷歌公司典型的軟體工程師的主要工具。
+> [^c1]: 我們也使用Gerrit來審查Git程式碼，主要用於我們的開源專案。然而，Critique是谷歌公司典型的軟體工程師的主要工具。
 >
 > [^e2]: Steve McConnell, Code Complete (Redmond: Microsoft Press, 2004).
 >

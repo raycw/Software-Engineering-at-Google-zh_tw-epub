@@ -1,9 +1,4 @@
-
-**CHAPTER 21**
-
-# Dependency Management
-
-# 第二十一章 依賴管理
+# Dependency Management 第二十一章 依賴管理
 
 **Written by Titus Winters**
 

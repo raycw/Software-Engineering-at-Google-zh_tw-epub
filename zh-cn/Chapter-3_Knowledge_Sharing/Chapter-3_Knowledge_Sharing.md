@@ -1,9 +1,4 @@
-
-**CHAPTER  3**
-
-# Knowledge Sharing 
-
-# 第三章 知識共享
+# Knowledge Sharing 第三章 知識共享
 
 **Written by Nina Chen and Mark Barolak**
 

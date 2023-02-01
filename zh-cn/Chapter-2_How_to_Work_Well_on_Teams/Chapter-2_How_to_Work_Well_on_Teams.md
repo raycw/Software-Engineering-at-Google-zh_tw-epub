@@ -1,9 +1,4 @@
-
-**CHAPTER 2**
-
-# How to Work Well on Teams
-
-# 第二章 如何融入團隊
+# How to Work Well on Teams 第二章 如何融入團隊
 
 **Written by Brian Fitzpatrick**
 

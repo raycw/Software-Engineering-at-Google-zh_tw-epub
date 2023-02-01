@@ -1,9 +1,4 @@
-
-**CHAPTER 5**
-
-# How to Lead a Team
-
-# 第五章 如何領導團隊
+# How to Lead a Team 第五章 如何領導團隊
 
 **Written by Brian Fitzpatrick**
 

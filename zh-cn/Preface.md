@@ -1,4 +1,4 @@
-## Preface 序言
+# Preface 序言
 
 This book is titled *Software Engineering at Google*. What precisely do we mean by software engineering? What distinguishes “software engineering” from “programming” or “computer science”? And why would Google have a unique perspective to add to the corpus of previous software engineering literature written over the past 50 years?
 
@@ -16,7 +16,7 @@ Unlike those more established engineering professions, current software engineer
 
 與那些更成熟的工程專業不同，目前的軟體工程理論或實踐還沒有那麼嚴格。航空工程師必須遵循嚴格的準則和實踐，因為他們的計算錯誤會造成真正的損失；而程式設計，總體來說，傳統上沒有遵循這樣嚴格的實踐。但是，隨著軟體越來越多地融入我們的生活，我們必須採用並依賴更嚴格的工程方法。我們希望這本書能幫助其他人看到一條通往更可靠的軟體實踐的道路。
 
-### Programming Over Time 隨時間變化的程式設計
+## Programming Over Time 隨時間變化的程式設計
 
 We propose that “software engineering” encompasses not just the act of writing code, but all of the tools and processes an organization uses to build and maintain that code over time. What practices can a software organization introduce that will best keep its code valuable over the long term? How can engineers make a codebase more sustainable and the software engineering discipline itself more rigorous? We don’t have fundamental answers to these questions, but we hope that Google’s collective experience over the past two decades illuminates possible paths toward finding those answers.
 
@@ -46,7 +46,7 @@ Throughout the chapters, we have tried to tie back to these themes and point out
 
 在整個章節中，我們都嘗試與這些主題聯絡起來，並指出這些原則如何影響工程實踐並使其可持續。(見[第1章](#_bookmark3)的全面討論)。
 
-### Google’s Perspective 谷歌的視角
+## Google’s Perspective 谷歌的視角
 
 Google has a unique perspective on the growth and evolution of a sustainable soft‐ ware ecosystem, stemming from our scale and longevity. We hope that the lessons we have learned will be useful as your organization evolves and embraces more sustainable practices.
 
@@ -82,13 +82,13 @@ Neither is this book intended to be a sermon. Google itself still imperfectly ap
 
 本書也不打算成為一本佈道書。谷歌自身仍在不完善地應用這些書中的許多理念。我們從失敗中吸收了教訓：我們仍然會犯錯誤，實施不完美的解決方案，還需要迭代改進。然而，谷歌工程組織的龐大規模確定了每個問題都有多樣化的解決方案。我們希望這本書包含了這群人中最好的方案。
 
-### What This Book Isn’t 本書不適用於哪些
+## What This Book Isn’t 本書不適用於哪些
 
 This book is not meant to cover software design, a discipline that requires its own book (and for which much content already exists). Although there is some code in this book for illustrative purposes, the principles are language neutral, and there is little actual “programming” advice within these chapters. As a result, this text doesn’t cover many important issues in software development: project management, API design, security hardening, internationalization, user interface frameworks, or other language-specific concerns. Their omission in this book does not imply their lack of importance. Instead, we choose not to cover them here knowing that we could not provide the treatment they deserve. We have tried to make the discussions in this book more about engineering and less about programming.
 
 本書並不是要涵蓋軟體設計，這門學科有自己的書（而且已經有很多型別的書）。雖然書中有一些程式碼用於說明問題，但原則是語言無關的，而且這些章節中幾乎沒有實際的 "程式設計 "建議。因此，本書沒有涉及軟體開發中的許多重要問題：專案管理、API設計、安全加固、國際化、使用者介面框架或其他特定程式語言問題。本書對這些問題的忽略並不意味著它們不重要。相反，我們選擇不在這裡涉及它們，因為我們知道我們無法提供它們應有的內容。我們試圖使本書的討論更多的關於工程領域，而不是關於程式設計領域。
 
-### Parting Remarks 臨別贈言
+## Parting Remarks 臨別贈言
 
 This text has been a labor of love on behalf of all who have contributed, and we hope that you receive it as it is given: as a window into how a large software engineering organization builds its products. We also hope that it is one of many voices that helps move our industry to adopt more forward-thinking and sustainable practices. Most important, we further hope that you enjoy reading it and can adopt some of its lessons to your own concerns.
 

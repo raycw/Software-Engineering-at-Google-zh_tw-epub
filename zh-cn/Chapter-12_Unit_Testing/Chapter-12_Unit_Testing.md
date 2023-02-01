@@ -1,9 +1,4 @@
-
-**CHAPTER 12**
-
-# Unit Testing
-
-# 第十二章 單元測試
+# Unit Testing 第十二章 單元測試
 
 **Written by Erik Kuefler**
 
@@ -573,7 +568,7 @@ There’s not much logic here: really just one string concatenation. But if we s
 public void shouldNavigateToPhotosPage() {
     Navigator nav = new Navigator("http://photos.google.com/");
     nav.goToPhotosPage();
-    assertThat(nav.getCurrentUrl())).isEqualTo("http://photos.google.com//albums"); // Oops!
+    assertThat(nav.getCurrentUrl()).isEqualTo("http://photos.google.com//albums"); // Oops!
 }
 ```
 

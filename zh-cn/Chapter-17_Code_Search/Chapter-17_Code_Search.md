@@ -1,9 +1,4 @@
-
-**CHAPTER 17**
-
-# Code Search
-
-# 第十七章 程式碼搜尋
+# Code Search 第十七章 程式碼搜尋
 
 **Written by Alexander Neubeck and Ben St. John**
 
@@ -474,7 +469,7 @@ If a substring index is available, it’s easy to extend it to allow regular exp
 >
 > [^c17]: 還有其他的類似方式，如建立字首/字尾索引，但一般來說，它們在搜尋查詢中提供的表達能力較低，同時仍有較高的複雜性和索引成本。
 >
-> [^18]: Russ Cox, “Regular Expression Matching with a Trigram Index or How Google Code Search Worked.”
+> [^e18]: Russ Cox, “Regular Expression Matching with a Trigram Index or How Google Code Search Worked.”
 >
 > [^c18]: Russ Cox，"用三元索引進行正則表示式匹配或谷歌程式碼搜尋的工作原理"。
 

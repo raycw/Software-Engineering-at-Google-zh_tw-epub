@@ -1,9 +1,4 @@
-
-**CHAPTER 13**
-
-# Test Doubles
-
-# 第十三章 測試替代
+# Test Doubles 第十三章 測試替代
 
 **Written by Andrew Trenk and Dillon Bly**
 

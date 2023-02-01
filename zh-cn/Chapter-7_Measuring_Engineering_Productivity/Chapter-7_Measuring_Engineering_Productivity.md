@@ -1,9 +1,4 @@
-
-**CHAPTER 7**
-
-# Measuring Engineering Productivity
-
-# 第七章  度量工程效率
+# Measuring Engineering Productivity 第七章  度量工程效率
 
 **Written by  Ciera Jaspan**
 

@@ -1,10 +1,4 @@
-
-
-**CHAPTER 11**
-
-# Testing Overview
-
-# 第十一章 測試概述
+# Testing Overview 第十一章 測試概述
 
 **Written by Adam Bender**
 

@@ -1,9 +1,4 @@
-
-**CHAPTER 6**
-
-# Leading at Scale
-
-# 第六章 規模優先
+# Leading at Scale 第六章 規模優先
 
 In Chapter 5, we talked about what it means to go from being an “individual contributor” to being an explicit leader of a team. It’s a natural progression to go from leading one team to leading a set of related teams, and this chapter talks about how to be effective as you continue along the path of engineering leadership.
 

@@ -1,8 +1,4 @@
-**CHAPTER 8**
-
-# Style Guides and Rules
-
-# 第八章 風格指導和規則
+# Style Guides and Rules 第八章 風格指導和規則
 
 **Written by Shaindel Schwartz**
 
@@ -335,7 +331,7 @@ Our style guides also include limitations on new and not-yet-well-understood lan
 >
 > [^c10]: 查閱 `https://google.github.io/styleguide/cppguide.html#Comments`, `http://google.github.io/styleguide/pyguide#38-comments-and-docstrings`, 以及 `https://google.github.io/styleguide/javaguide.html#s7-javadoc`, 其中多種語言定義了一般的評論規則。
 
----
+-----
 
 #### Case Study: Introducing std::unique_ptr  案例分析：介紹 std::unique_ptr
 
@@ -347,7 +343,7 @@ Time passed. Engineers had a chance to adjust to the implications of move semant
 
 時間飛逝。工程師有機會適應move語義的語義，我們也越來越相信使用std::unique_ptr直接符合我們的風格指南的目標。在函式呼叫處上，std::unique_ptr所提供的關於物件所有權的資訊使讀者更容易理解該程式碼。引入這種新型別所增加的複雜性，以及隨之而來的新的move語義，仍然是一個值得關注的問題，但是程式碼庫長期整體狀態的顯著改善使得采用std::unique_ptr是一個值得的權衡。
 
----
+-----
 
 #### Building in consistency  建構一致性
 
@@ -379,7 +375,7 @@ Documenting the reasoning behind a given decision gives us the advantage of bein
 
 記錄給定決策背後的原因，使我們能夠識別何時需要更改。考慮到時間的流逝和環境的變化，以前做出的好決定可能不是現在的最佳決定。明確地指出影響因素後，我們就能夠確定何時與一個或多個因素相關的更改需要重新評估規則。
 
----
+-----
 
 #### Case Study:CamelCase Naming 案例分析：駝峰命名法
 
@@ -399,7 +395,7 @@ Presented with these arguments, after discussing both the costs (losing consiste
 
 提出這些論點後，討論了成本(失去與其他谷歌程式碼的一致性，對習慣於我們的 Python 風格的 Google 員工進行再教育)和好處(獲得與大多數其他Python程式碼的一致性，允許已經洩露到第三方庫的內容)，Python風格指南的風格仲裁者決定改變規則。有了它被應用為檔案範圍的選擇的限制，現有程式碼的例外，以及專案決定什麼最適合他們的自由度，谷歌Python風格指南已更新為允許 snake_case 命名。
 
----
+-----
 
 ### The Process  過程
 
@@ -540,7 +536,7 @@ We enforce use of these formatters with presubmit checks: before code can be sub
 >
 > 13 當你考慮到至少需要兩名工程師進行討論，並將其乘以這種對話可能在30,000多名工程師的集合中發生的次數時，事實證明，"多少個字元 "可能成為一個成本非常高的問題。
 
----
+-----
 
 #### Case Study: gofmt  案例分析：go格式化工具
 

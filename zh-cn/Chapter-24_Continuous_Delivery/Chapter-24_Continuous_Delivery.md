@@ -1,9 +1,4 @@
-
-**CHAPTER 24**
-
-# Continuous Delivery
-
-# 第二十四章 持續交付
+# Continuous Delivery 第二十四章 持續交付
 
 **Written by adha Narayan, Bobbi Jones, Sheri Shipe, and David Owens**
 

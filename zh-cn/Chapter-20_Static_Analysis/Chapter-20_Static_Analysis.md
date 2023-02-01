@@ -1,8 +1,4 @@
-
-**CHAPTER 20**
-
-# Static Analysis
-# 第二十章 靜態分析
+# Static Analysis 第二十章 靜態分析
         
 **Written by Caitlin Sadowski**
 

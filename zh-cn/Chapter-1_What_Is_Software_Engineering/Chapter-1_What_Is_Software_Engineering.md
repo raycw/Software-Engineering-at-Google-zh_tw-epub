@@ -1,9 +1,4 @@
-
-**CHAPTER 1**
-
-# What Is Software Engineering?
-
-# 第一章 軟體工程是什麼？
+# What Is Software Engineering? 第一章 軟體工程是什麼？
 
 **Written by Titus Winters**
 

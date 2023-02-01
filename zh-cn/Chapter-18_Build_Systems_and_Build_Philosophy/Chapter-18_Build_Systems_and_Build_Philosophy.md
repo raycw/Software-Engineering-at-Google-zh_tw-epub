@@ -1,9 +1,4 @@
-
-**CHAPTER 18**
-
-# Build Systems and Build Philosophy
-
-# 第十八章 建構系統，建構理念
+# Build Systems and Build Philosophy 第十八章 建構系統，建構理念
 
 **Written by  Erik Kuefler**
 

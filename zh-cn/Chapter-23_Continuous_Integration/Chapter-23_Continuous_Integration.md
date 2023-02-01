@@ -1,8 +1,4 @@
-
-**CHAPTER 23**
-
-# Continuous Integration
-# 第二十三章 持續整合
+# Continuous Integration 第二十三章 持續整合
 
 **Written by Rachel Tannenbaum**
 **Edited by Lisa Carey**

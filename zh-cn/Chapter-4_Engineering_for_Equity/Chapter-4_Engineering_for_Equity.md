@@ -1,9 +1,4 @@
-
-**CHAPTER 4**
-
-# Engineering for Equity
-
-# 第四章 公平工程
+# Engineering for Equity 第四章 公平工程
 
 **Written by Demma Rodriguez**
 

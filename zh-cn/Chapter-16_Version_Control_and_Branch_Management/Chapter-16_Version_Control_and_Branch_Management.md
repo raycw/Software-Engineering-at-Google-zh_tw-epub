@@ -1,9 +1,4 @@
-
-**CHAPTER 16**
-
-# Version Control and Branch Management
-
-# 第十六章 版本控制和分支管理
+# Version Control and Branch Management 第十六章 版本控制和分支管理
 
 **Written by Titus Winters**
 

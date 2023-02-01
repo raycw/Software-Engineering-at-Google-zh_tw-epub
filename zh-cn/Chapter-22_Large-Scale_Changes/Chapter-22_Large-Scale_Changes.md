@@ -1,9 +1,4 @@
-
-**CHAPTER 22**
-
-# Large-Scale Changes
-
-# 第二十二章 大規模變更
+# Large-Scale Changes 第二十二章 大規模變更
 
 **Written by Hyrum Wright**
 

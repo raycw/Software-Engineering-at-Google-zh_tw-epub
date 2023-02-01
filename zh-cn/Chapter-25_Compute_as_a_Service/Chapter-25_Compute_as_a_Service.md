@@ -1,10 +1,4 @@
-
-
-**CHAPTER** **25
-
-# Compute as a Service
-
-# 第二十五章 計算即服務
+# Compute as a Service 第二十五章 計算即服務
 
 **Written by Onufry Wojtaszczyk**
 

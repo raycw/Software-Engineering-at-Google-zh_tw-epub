@@ -1,9 +1,4 @@
-
-**CHAPTER 14**
-
-# Larger Testing
-
-# 第十四章 大型測試
+# Larger Testing 第十四章 大型測試
 
 **Written by  Written by Joseph Graves**
 

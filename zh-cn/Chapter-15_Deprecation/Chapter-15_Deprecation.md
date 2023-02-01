@@ -1,8 +1,4 @@
-**CHAPTER 15**
-
-# Deprecation
-
-# 第十五章 棄用
+# Deprecation 第十五章 棄用
 
 **Written by Hirum Wright**
 
